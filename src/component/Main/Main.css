@@ -1,0 +1,184 @@
+.Main_container {
+  display: flex;
+}
+.Main_SideBar {
+  width: 200px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  height: auto;
+  transition: all 0.4s;
+}
+.Main_SideBar_LogoBar {
+  padding-top: 20px;
+  padding-left: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.LogoBar_Logo {
+  width: 50px;
+  height: auto;
+}
+.LogoBar_NameApp {
+  color: var(--Main-color);
+  font-size: 3rem;
+  font-family: "Manrope";
+  padding-left: 10px;
+}
+.Icon {
+  width: 100%;
+  font-size: 3rem;
+  color: var(--Main-color);
+}
+.LogoBar_Icon {
+  width: 50px;
+  cursor: pointer;
+}
+.Main_SideBar_NameSchool {
+  width: 100%;
+  padding: 10px;
+}
+.Main_SideBar_Options {
+  display: flex;
+  flex-direction: column;
+}
+.SideBar_Item_content {
+  padding: 10px 5px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: #000;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.SideBar_Item_content:hover {
+  background-color: var(--Main-color);
+  border-radius: 5px;
+  padding-left: 10px;
+  transition: all 0.4s;
+  color: #fff;
+}
+.ActiveItem {
+  background-color: transparent !important;
+}
+.Item_content {
+  padding-left: 10px;
+}
+.SideBar_MenuChild {
+  padding-left: 10px;
+  padding-top: 10px;
+  color: #000;
+  display: none;
+}
+.SideBar_MenuChild_item {
+  margin-top: 5px;
+  font-size: 1.4rem;
+}
+.SideBar_MenuChild_item:hover {
+  color: var(--Main-color);
+}
+/* Active */
+.ActiveItem {
+  color: var(--Main-color) !important;
+  transition: all 0.4s;
+  position: relative;
+  margin: 10px 0px;
+}
+.ActiveItem + .SideBar_MenuChild {
+  display: block;
+}
+.HiddenSideBar .SideBar_MenuChild {
+  display: none !important;
+}
+.HiddenSideBar .Main_SideBar_LogoBar {
+  padding: 20px 0px;
+}
+.ActiveItem::after {
+  position: absolute;
+  content: "";
+  display: block;
+  height: 150%;
+  border: 1px solid var(--Main-color);
+  top: -25%;
+  left: -5%;
+  width: 200px;
+  background-color: #fff;
+  z-index: -1;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px #ccc;
+}
+.HiddenSideBar .Item_content,
+.HiddenSideBar .LogoBar_Logo,
+.HiddenSideBar .Main_SideBar_NameSchool,
+.HiddenSideBar .LogoBar_NameApp {
+  display: none;
+}
+
+.HiddenSideBar {
+  width: auto;
+}
+
+.HiddenSideBar .SideBar_Item_content {
+  justify-content: center;
+}
+
+/* Content */
+.Main_Content {
+  flex: 1;
+  transition: all 0.4s;
+}
+.Main_Content_container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.Main_Content_Header {
+  width: 100%;
+  background-color: var(--Main-color);
+  height: 150px;
+  border-radius: 0px 0px 20px 20px;
+  display: flex;
+  color: #fff;
+
+  align-content: center;
+  padding: 20px 0px;
+}
+.Main_Content_Header_Title {
+  width: 70%;
+  color: #fff;
+  padding-left: 10px;
+}
+.Header_title {
+  color: inherit;
+  font-size: 1.6rem;
+}
+.Header_subtitle {
+  font-size: 1.4rem;
+  padding-top: 10px;
+}
+.Header_user_container {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.Main_Content_Header_user {
+  flex: 1;
+  padding: 0px 40px;
+  font-size: 1.4rem;
+  text-decoration: underline;
+}
+.AvatarUser {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  margin-left: 10px;
+}
+.Main_Content_context {
+  width: 98%;
+  background-color: #fff;
+  transform: translateY(-50px);
+  min-height: 500px;
+  border-radius: 20px 20px 0px 0px;
+  border: 1px solid #ccc;
+}
