@@ -95,6 +95,15 @@
   margin-top: 30px;
   cursor: pointer;
 }
+.Login_Message {
+  font-size: 1.4rem;
+  padding: 5px;
+  font-style: italic;
+  color: green;
+}
+.errorMessage {
+  color: red;
+}
 /* Tablet */
 @media (max-width: 63.9375em) {
   .LoginMain_content_banner {

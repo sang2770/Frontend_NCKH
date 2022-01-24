@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useContext, useRef } from "react";
 import Logo from "../../media/Image/Logo.jpg";
 import Banner from "../../media/Image/BannerLogin.jpg";
 import "./Login.css";
+import { AuthContext } from "../../authContext/AuthContext";
+import login from "../../authContext/CallApi";
+import clsx from "clsx";
 function Login() {
+  const { isFetching, dispatch, err } = useContext(AuthContext);
+  const TenDangNhap = useRef();
+  const Password = useRef();
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // console.log([TenDangNhap.current.value, Password.current.value]);
+    login(
+      {
+        TenDangNhap: TenDangNhap.current.value,
+        password: Password.current.value,
+      },
+      dispatch
+    );
+  };
   return (
     <React.Fragment>
       <div className="LoginContainer">
@@ -24,9 +41,11 @@ function Login() {
                 Tên đăng nhập
               </label>
               <input
+                ref={TenDangNhap}
                 type="text"
                 id="NameLogin"
                 className="LoginMain_content_form_Name"
+                name="TenDangNhap"
                 required
               />
               <label className="Label" htmlFor="PasswordLogin">
@@ -36,15 +55,26 @@ function Login() {
                 type="password"
                 id="PasswordLogin"
                 className="LoginMain_content_form_Name"
+                name="password"
+                ref={Password}
                 required
               />
               <div className="SaveLogin">
                 <input type="checkbox" id="checkSave" />
                 <label className="Label LabelSave" htmlFor="checkSave">
-                  Lưu đăng nhập
+                  Nhớ mật khẩu
                 </label>
               </div>
-              <button className="btn btn-Submit">Đăng nhập</button>
+              <h2 className={clsx("Login_Message", err && "errorMessage")}>
+                {err}
+              </h2>
+              <button
+                className="btn btn-Submit"
+                onClick={handleLogin}
+                disabled={isFetching}
+              >
+                Đăng nhập
+              </button>
             </form>
           </div>
         </div>

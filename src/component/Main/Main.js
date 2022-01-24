@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Logo from "../../media/Image/Logo.jpg";
+import Avatar from "../../media/Image/avatar.jpg";
 import NameSchool from "../../media/Image/NameSchool.png";
-import { Link } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import {
   AiOutlineMenu,
   AiOutlineMessage,
@@ -17,10 +18,16 @@ import { HiOutlineDocument } from "react-icons/hi";
 import { RiUserSettingsFill } from "react-icons/ri";
 import clsx from "clsx";
 import "./Main.css";
+import { AuthContext } from "../../authContext/AuthContext";
+import ListStudent from "../../pages/StudentManage/ListStudent";
+import AddStudent from "../../pages/StudentManage/AddStudent";
+import UpdateStudent from "../../pages/StudentManage/UpdateStudent";
+import { Logout } from "../../authContext/AuthAction";
 
 function Main() {
   const [clickMenu, setclickMenu] = useState(false);
   const [ActiveSub, setActiveSub] = useState(1);
+  const [MenuSubItem, setMenuSubItem] = useState(3);
   const ChangeMenu = () => {
     const check = clickMenu;
     setclickMenu(!check);
@@ -28,6 +35,11 @@ function Main() {
   const ChangeSubMenu = (id) => {
     setActiveSub(id);
   };
+  const ChangeMenuSubItem = (id) => {
+    setMenuSubItem(id);
+  };
+
+  const { user, dispatch } = useContext(AuthContext);
   return (
     <React.Fragment>
       <div className="Main_container">
@@ -61,19 +73,49 @@ function Main() {
                 <span className="Item_content">Thông tin sinh viên</span>
               </p>
               <ul className="SideBar_MenuChild">
-                <li className="SideBar_MenuChild_item">
-                  <Link to="/" className="SideBar_Item_content">
+                <li
+                  className={clsx(
+                    "SideBar_MenuChild_item",
+                    MenuSubItem === 1 && "ActiveSubMenuItem"
+                  )}
+                  onClick={() => {
+                    ChangeMenuSubItem(1);
+                  }}
+                >
+                  <Link
+                    to="StudentManager-AddStudent"
+                    className="SideBar_Item_content"
+                  >
                     <BsPersonPlusFill />
                     <span className="Item_content">Thêm sinh viên</span>
                   </Link>
                 </li>
-                <li className="SideBar_MenuChild_item">
-                  <Link to="/" className="SideBar_Item_content">
+                <li
+                  className={clsx(
+                    "SideBar_MenuChild_item",
+                    MenuSubItem === 2 && "ActiveSubMenuItem"
+                  )}
+                  onClick={() => {
+                    ChangeMenuSubItem(2);
+                  }}
+                >
+                  <Link
+                    to="StudentManager-UpdateStudent"
+                    className="SideBar_Item_content"
+                  >
                     <RiUserSettingsFill />
                     <span className="Item_content">Sửa sinh viên</span>
                   </Link>
                 </li>
-                <li className="SideBar_MenuChild_item">
+                <li
+                  className={clsx(
+                    "SideBar_MenuChild_item",
+                    MenuSubItem === 3 && "ActiveSubMenuItem"
+                  )}
+                  onClick={() => {
+                    ChangeMenuSubItem(3);
+                  }}
+                >
                   <Link to="/" className="SideBar_Item_content">
                     <BsFillPeopleFill />
                     <span className="Item_content">Danh sách sinh viên</span>
@@ -83,7 +125,6 @@ function Main() {
             </li>
             <li
               className="SideBar_Item"
-              clsx
               onClick={() => {
                 ChangeSubMenu(2);
               }}
@@ -101,7 +142,6 @@ function Main() {
             </li>
             <li
               className="SideBar_Item"
-              clsx
               onClick={() => {
                 ChangeSubMenu(3);
               }}
@@ -116,13 +156,29 @@ function Main() {
                 <span className="Item_content">Nghĩa vụ quân sự</span>
               </p>
               <ul className="SideBar_MenuChild">
-                <li className="SideBar_MenuChild_item">
+                <li
+                  className={clsx(
+                    "SideBar_MenuChild_item",
+                    MenuSubItem === 1 && "ActiveSubMenuItem"
+                  )}
+                  onClick={() => {
+                    ChangeMenuSubItem(1);
+                  }}
+                >
                   <Link to="/" className="SideBar_Item_content">
                     <BsPersonPlusFill />
                     <span className="Item_content">Giấy nghĩa vụ quân sự</span>
                   </Link>
                 </li>
-                <li className="SideBar_MenuChild_item">
+                <li
+                  className={clsx(
+                    "SideBar_MenuChild_item",
+                    MenuSubItem === 2 && "ActiveSubMenuItem"
+                  )}
+                  onClick={() => {
+                    ChangeMenuSubItem(2);
+                  }}
+                >
                   <Link to="/" className="SideBar_Item_content">
                     <RiUserSettingsFill />
                     <span className="Item_content">
@@ -130,7 +186,15 @@ function Main() {
                     </span>
                   </Link>
                 </li>
-                <li className="SideBar_MenuChild_item">
+                <li
+                  className={clsx(
+                    "SideBar_MenuChild_item",
+                    MenuSubItem === 3 && "ActiveSubMenuItem"
+                  )}
+                  onClick={() => {
+                    ChangeMenuSubItem(3);
+                  }}
+                >
                   <Link to="/" className="SideBar_Item_content">
                     <BsFillPeopleFill />
                     <span className="Item_content">Giấy xác nhận</span>
@@ -140,7 +204,6 @@ function Main() {
             </li>
             <li
               className="SideBar_Item"
-              clsx
               onClick={() => {
                 ChangeSubMenu(4);
               }}
@@ -158,7 +221,6 @@ function Main() {
             </li>
             <li
               className="SideBar_Item"
-              clsx
               onClick={() => {
                 ChangeSubMenu(5);
               }}
@@ -187,12 +249,35 @@ function Main() {
               </div>
               <div className="Main_Content_Header_user">
                 <div className="Header_user_container">
-                  Nguyễn Sang
-                  <img src={Logo} alt="Avatar" className="AvatarUser" />
+                  <div className="user_container_context">
+                    {user.TenDangNhap}
+                    <p
+                      className="Header_logout"
+                      onClick={() => {
+                        console.log(user);
+                        dispatch(Logout());
+                      }}
+                    >
+                      Logout
+                    </p>
+                  </div>
+                  <img src={Avatar} alt="Avatar" className="AvatarUser" />
                 </div>
               </div>
             </div>
-            <div className="Main_Content_context"></div>
+            <div className="Main_Content_context">
+              <Routes>
+                <Route path="/" element={<ListStudent />} />
+                <Route
+                  path="StudentManager-AddStudent"
+                  element={<AddStudent />}
+                />
+                <Route
+                  path="StudentManager-UpdateStudent"
+                  element={<UpdateStudent />}
+                />
+              </Routes>
+            </div>
           </div>
         </div>
       </div>
