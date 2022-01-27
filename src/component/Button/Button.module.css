@@ -1,0 +1,14 @@
+.Btn {
+  padding: 10px 30px;
+  border: 1px solid #ccc;
+  background-color: var(--Main-color);
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff;
+  box-shadow: 2px 2px 4px #ccc;
+  transition: all 0.4s;
+  width: fit-content;
+}
+.Btn:hover {
+  opacity: 0.9;
+}

@@ -27,3 +27,6 @@ ul {
   text-decoration: none;
   list-style: none;
 }
+.App {
+  position: relative;
+}

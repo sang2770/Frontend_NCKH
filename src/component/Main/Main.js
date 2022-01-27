@@ -19,9 +19,9 @@ import { RiUserSettingsFill } from "react-icons/ri";
 import clsx from "clsx";
 import "./Main.css";
 import { AuthContext } from "../../authContext/AuthContext";
-import ListStudent from "../../pages/StudentManage/ListStudent";
-import AddStudent from "../../pages/StudentManage/AddStudent";
-import UpdateStudent from "../../pages/StudentManage/UpdateStudent";
+import ListStudent from "../../pages/StudentManage/ListStudent/ListStudent";
+import AddStudent from "../../pages/StudentManage/AddStudent/AddStudent";
+import UpdateStudent from "../../pages/StudentManage/UpdateStudent/UpdateStudent";
 import { Logout } from "../../authContext/AuthAction";
 
 function Main() {
@@ -40,6 +40,9 @@ function Main() {
   };
 
   const { user, dispatch } = useContext(AuthContext);
+  const Out = () => {
+    dispatch(Logout());
+  };
   return (
     <React.Fragment>
       <div className="Main_container">
@@ -251,13 +254,7 @@ function Main() {
                 <div className="Header_user_container">
                   <div className="user_container_context">
                     {user.TenDangNhap}
-                    <p
-                      className="Header_logout"
-                      onClick={() => {
-                        console.log(user);
-                        dispatch(Logout());
-                      }}
-                    >
+                    <p className="Header_logout" onClick={Out}>
                       Logout
                     </p>
                   </div>

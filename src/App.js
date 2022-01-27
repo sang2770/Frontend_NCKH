@@ -4,10 +4,12 @@ import Login from "./pages/Login/Login";
 import React, { useContext } from "react";
 import { AuthContext } from "./authContext/AuthContext";
 import Main from "./component/Main/Main";
+import Loading from "./component/Loading/Loading";
 function App() {
-  const { user } = useContext(AuthContext);
+  const { user, isFetching } = useContext(AuthContext);
   return (
     <div className="App">
+      {isFetching && <Loading />}
       <BrowserRouter>
         <Routes>
           <Route

@@ -1,0 +1,15 @@
+.Title_Container {
+  display: flex;
+  padding: 15px 10px;
+  font-size: 1.8rem;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+.Title_Icon {
+}
+.Title_content {
+  font-weight: 600;
+  margin: 0px 10px;
+}
+.Title_Icon_content {
+}

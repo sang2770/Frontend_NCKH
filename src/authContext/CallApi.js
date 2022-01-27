@@ -1,10 +1,13 @@
 import axios from "axios";
 
-import { LoginStart, LoginSuccess, LoginFailure } from "./AuthAction";
-const login = async (user, dispatch) => {
+import { LoginStart, LoginSuccess, LoginFailure, Logout } from "./AuthAction";
+const Client = axios.create({
+  baseURL: "http://127.0.0.1:8000/api/",
+});
+export const login = async (user, dispatch) => {
   dispatch(LoginStart());
   try {
-    const result = await axios.post("auth/admin/login", user);
+    const result = await Client.post("auth/admin/login", user);
     console.log(result.data);
     if (result.data.status === "Failed") {
       dispatch(LoginFailure(result.data.Err_Message));
@@ -16,4 +19,6 @@ const login = async (user, dispatch) => {
     dispatch(LoginFailure(error.message));
   }
 };
-export default login;
+export const logout = async (dispatch) => {
+  dispatch(Logout);
+};

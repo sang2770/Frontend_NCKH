@@ -1,12 +1,11 @@
 .Main_container {
   display: flex;
-  height: 100vh;
 }
 .Main_SideBar {
+  min-height: 100%;
   width: 200px;
   border: 1px solid #ccc;
   overflow: hidden;
-  height: auto;
   transition: all 0.4s;
 }
 .Main_SideBar_LogoBar {
@@ -165,9 +164,9 @@
 }
 .Header_user_container {
   display: flex;
-  align-items: center;
   justify-content: end;
   text-decoration: underline;
+  height: 100%;
 }
 .Main_Content_Header_user {
   width: 30%;
@@ -184,8 +183,8 @@
 .Main_Content_context {
   width: 98%;
   background-color: #fff;
-  transform: translateY(-60px);
-  height: calc(100vh - 150px + 50px);
+  margin-top: -60px;
+  min-height: calc(100vh - 150px + 60px);
   border-radius: 20px 20px 0px 0px;
   border: 1px solid #ccc;
 }
@@ -205,7 +204,7 @@
     font-size: 1.2rem;
   }
   .Main_Content_context {
-    transform: translateY(-40px);
+    margin-top: -40px;
   }
   .Main_Content_context {
     height: calc(100vh - 150px + 40px);
@@ -217,7 +216,11 @@
   .Header_user_container {
     margin-top: 10px;
     flex-direction: row-reverse;
-    justify-content: flex-end;
+    justify-content: center;
+  }
+  .Main_Content_Header_Title {
+    width: 100%;
+    text-align: center;
   }
   .Main_Content_Header_user {
     width: 100%;

@@ -3,7 +3,7 @@ import Logo from "../../media/Image/Logo.jpg";
 import Banner from "../../media/Image/BannerLogin.jpg";
 import "./Login.css";
 import { AuthContext } from "../../authContext/AuthContext";
-import login from "../../authContext/CallApi";
+import { login } from "../../authContext/CallApi";
 import clsx from "clsx";
 function Login() {
   const { isFetching, dispatch, err } = useContext(AuthContext);
