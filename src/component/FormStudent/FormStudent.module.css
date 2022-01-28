@@ -1,8 +1,10 @@
 .FormStudent_Container {
+  /* justify-content: space-between; */
+}
+.InputGroup {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
-  /* justify-content: space-between; */
 }
 .Infor_Group {
   width: calc(30%);

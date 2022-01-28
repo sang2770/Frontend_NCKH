@@ -207,7 +207,7 @@
     margin-top: -40px;
   }
   .Main_Content_context {
-    height: calc(100vh - 150px + 40px);
+    min-height: calc(100vh - 150px + 40px);
   }
   .Main_Content_Header {
     flex-direction: column;

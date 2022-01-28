@@ -5,7 +5,7 @@ const Initial_State = {
   isFetching: false,
   err: false,
 };
-
+// console.log(Initial_State);
 export const AuthContext = createContext(Initial_State);
 
 export const AuthContextProvider = ({ children }) => {

@@ -8,12 +8,12 @@ import Button from "../../../component/Button/Button";
 import Table from "../../../component/Table/Table";
 import TableContent from "../../../component/Table/TableContent";
 import Pagination from "../../../component/Pagination/Pagination";
-import Client from "../../../Helper/API";
 import queryString from "query-string";
-import { AuthContext } from "../../../authContext/AuthContext";
-import { logout } from "../../../authContext/CallApi";
+import { DataContext } from "../../../DataContext/DataContext";
+import useAxios from "../../../Helper/API";
 const tableHeaders = ["Mã sinh viên", "Họ và tên", "Lớp", "Khoa"];
 function ListStudent() {
+  const Client = useAxios();
   const [ListStudent, setListStudent] = useState([]);
   const [paginations, setPaginations] = useState({
     limit: 1,
@@ -25,44 +25,7 @@ function ListStudent() {
     page: 1,
   });
   const [Err, setErr] = useState(null);
-
-  const DataFilter = useRef({
-    Khoa: [],
-    Lop: [],
-  });
-  const { dispatch } = useContext(AuthContext);
-  useEffect(() => {
-    Client.get("/student-management/majors")
-      .then((response) => {
-        const ListKhoa = response.data;
-        if (ListKhoa.status === "Success") {
-          DataFilter.current.Khoa = ListKhoa.data;
-        }
-      })
-      .catch((err) => {
-        if (err.Auth) {
-          logout(dispatch);
-        }
-        setErr(true);
-      });
-  }, []);
-  useEffect(() => {
-    Client.get("/student-management/class")
-      .then((response) => {
-        const ListClass = response.data;
-        console.log(ListClass);
-        if (ListClass.status === "Success") {
-          DataFilter.current.Lop = ListClass.data;
-          console.log(DataFilter.current.Lop);
-        }
-      })
-      .catch((err) => {
-        if (err.Auth) {
-          logout(dispatch);
-        }
-        setErr(true);
-      });
-  }, []);
+  const { Lop, Khoa } = useContext(DataContext);
   useEffect(() => {
     const params = queryString.stringify(filter);
     Client.get("/student-management/users?" + params)
@@ -74,9 +37,6 @@ function ListStudent() {
         }
       })
       .catch((err) => {
-        if (err.Auth) {
-          logout(dispatch);
-        }
         setErr(true);
       });
   }, [filter]);
@@ -122,9 +82,9 @@ function ListStudent() {
         alert("Đã xuất file");
       })
       .catch((err) => {
-        if (err.Auth) {
-          logout(dispatch);
-        }
+        // if (err.Auth) {
+        //   logout(dispatch);
+        // }
         setErr(true);
       });
   };
@@ -144,27 +104,16 @@ function ListStudent() {
           <TextBox title="Họ và tên" subtitle="HoTen" Change={ChangeFilter} />
         </div>
         <div className={style.ListStudent_Filter_Item}>
-          <ComboBox
-            id="Lop"
-            title="Lớp"
-            items={DataFilter.current.Lop}
-            Change={ChangeFilter}
-          />
+          <ComboBox id="Lop" title="Lớp" items={Lop} Change={ChangeFilter} />
         </div>
         <div className={style.ListStudent_Filter_Item}>
-          <ComboBox
-            title="Khoa"
-            id="Khoa"
-            items={DataFilter.current.Khoa}
-            Change={ChangeFilter}
-          />
+          <ComboBox title="Khoa" id="Khoa" items={Khoa} Change={ChangeFilter} />
         </div>
       </div>
       <div className={style.DataList}>
         <Table
           headers={tableHeaders}
-          minCellWidth={120}
-          Content={<TableContent data={ListStudent} />}
+          Content={<TableContent data={ListStudent} ReadForm={true} />}
         />
       </div>
       <Pagination
