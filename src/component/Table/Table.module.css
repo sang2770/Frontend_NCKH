@@ -6,6 +6,13 @@
   height: 400px;
   overflow-y: scroll;
 }
+
+/* ẩn thanh scroll */
+.Table_wrapper::-webkit-scrollbar { 
+  width: 0 !important;
+  display: none; 
+}
+
 .TableTemplate {
   width: 100%;
 }

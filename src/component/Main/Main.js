@@ -23,6 +23,10 @@ import ListStudent from "../../pages/StudentManage/ListStudent/ListStudent";
 import AddStudent from "../../pages/StudentManage/AddStudent/AddStudent";
 import UpdateStudent from "../../pages/StudentManage/UpdateStudent/UpdateStudent";
 import { Logout } from "../../authContext/AuthAction";
+import RegisterMilitary from "../../pages/MilitaryManage/RegisterMilitary/RegisterMilitary"
+import MoveMilitary from "../../pages/MilitaryManage/MoveMilitary/MoveMilitary"
+import ConfirmMilitary from "../../pages/MilitaryManage/ConfirmMilitary/ConfirmMilitary"
+
 
 function Main() {
   const [clickMenu, setclickMenu] = useState(false);
@@ -168,7 +172,7 @@ function Main() {
                     ChangeMenuSubItem(1);
                   }}
                 >
-                  <Link to="/" className="SideBar_Item_content">
+                  <Link to="/Military-RegisterMilitary" className="SideBar_Item_content">
                     <BsPersonPlusFill />
                     <span className="Item_content">Giấy nghĩa vụ quân sự</span>
                   </Link>
@@ -182,7 +186,7 @@ function Main() {
                     ChangeMenuSubItem(2);
                   }}
                 >
-                  <Link to="/" className="SideBar_Item_content">
+                  <Link to="/Military-MoveMilitary" className="SideBar_Item_content">
                     <RiUserSettingsFill />
                     <span className="Item_content">
                       Giấy di chuyển từ trường
@@ -198,7 +202,7 @@ function Main() {
                     ChangeMenuSubItem(3);
                   }}
                 >
-                  <Link to="/" className="SideBar_Item_content">
+                  <Link to="/Military-ConfirmMilitary" className="SideBar_Item_content">
                     <BsFillPeopleFill />
                     <span className="Item_content">Giấy xác nhận</span>
                   </Link>
@@ -272,6 +276,18 @@ function Main() {
                 <Route
                   path="StudentManager-UpdateStudent"
                   element={<UpdateStudent />}
+                />
+                <Route
+                  path="Military-RegisterMilitary"
+                  element={<RegisterMilitary/>}
+                />
+                <Route
+                  path="Military-MoveMilitary"
+                  element={<MoveMilitary/>}
+                />
+                <Route
+                  path="Military-ConfirmMilitary"
+                  element={<ConfirmMilitary/>}
                 />
               </Routes>
             </div>
