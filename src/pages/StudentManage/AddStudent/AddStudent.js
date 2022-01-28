@@ -14,6 +14,7 @@ function AddStudent() {
   const [ErrAdd, setErrAdd] = useState();
   const Client = useAxios();
   const Submit = async (form, ResetForm) => {
+    console.log(form);
     try {
       const result = await Client.post("/student-management/user", form, {
         headers: {

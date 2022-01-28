@@ -13,13 +13,15 @@ function UpdateStudent() {
   const Filter = useRef("");
   const [Err, setErr] = useState();
   const [Open, setOpen] = useState(false);
-  const Search = (id) => {
+  const Search = () => {
     // console.log(Filter.current);
     Client.get("/student-management/user/" + Filter.current.value)
       .then((res) => {
+        console.log(res);
         if (res.data.status === "Success") {
           // console.log("ok");
           setData(res.data.data);
+          setErr(false);
         } else {
           setErr(res.data.Err_Message);
         }
@@ -35,7 +37,9 @@ function UpdateStudent() {
   // console.log(data);
   return (
     <div className={style.UpdateStudent_container}>
-      {Open && <FormUpdate Open={OpenForm} />}
+      {Open && (
+        <FormUpdate Open={OpenForm} setData={setData} DataStudent={data} />
+      )}
       <HeaderTitle Title="Cập nhật sinh viên" Icon={<RiUserSettingsFill />} />
       <div className={style.Update_Filter}>
         <div className={style.Update_Filter_Tilte}>
@@ -59,7 +63,7 @@ function UpdateStudent() {
         <div className={style.ResultSearch}>
           <h2 className={style.ResultSearch_Tilte}> Kết quả tìm kiếm</h2>
           {Err && <h3 className={style.NotFound}>{Err}</h3>}
-          {data && (
+          {data && !Err && (
             <div className={style.ResultInf}>
               <table className={style.ResultTable}>
                 <thead>

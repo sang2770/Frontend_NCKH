@@ -3,10 +3,33 @@ import style from "./FormUpdate.module.css";
 import FormStudent from "../FormStudent/FormStudent";
 import { BiExit } from "react-icons/bi";
 import clsx from "clsx";
-function FormUpdate({ Open }) {
+import useAxios from "../../Helper/API";
+function FormUpdate({ Open, setData, DataStudent }) {
   const [Tab, setTab] = useState(1);
   const ChangeTab = (id) => {
     setTab(id);
+  };
+  const Client = useAxios();
+  const SumitUpdate = (form, ResetForm) => {
+    form.append("_method", "PATCH");
+    console.log(form.get("TonGiao"));
+    Client.post("/student-management/user/" + DataStudent.MaSinhVien, form, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.status === "Success") {
+          alert("Bạn đã cập nhật thành công!");
+          setData(res.data.data);
+        } else {
+          alert("Bạn chưa cập nhật thành công!");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className={style.FormUpdate}>
@@ -35,7 +58,11 @@ function FormUpdate({ Open }) {
         </ul>
         <div className={style.Content}>
           {Tab === 1 ? (
-            <FormStudent contentBtn="Cập nhật" />
+            <FormStudent
+              contentBtn="Cập nhật"
+              data={DataStudent}
+              Submit={SumitUpdate}
+            />
           ) : (
             <div>Lịch sử</div>
           )}

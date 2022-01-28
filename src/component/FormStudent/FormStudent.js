@@ -21,10 +21,10 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
   const SubmitForm = (e) => {
     e.preventDefault();
     Form.current = e.target;
-    const form = new FormData(e.target);
+    const form = new FormData(Form.current);
     // form.set("NgaySinh", ChangeDateFormat(form.get("NgaySinh")));
     // form.set("NgayCapCMTND", ChangeDateFormat(form.get("NgayCapCMTND")));
-    // console.log(form.get("NgaySinh"));
+    console.log(form.get("NgaySinh"));
     Submit(form, ResetForm);
   };
   const ResetForm = () => {
@@ -32,7 +32,11 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
   };
   const { Lop } = useContext(DataContext);
   return (
-    <form className={style.FormStudent_Container} onSubmit={SubmitForm}>
+    <form
+      className={style.FormStudent_Container}
+      onSubmit={SubmitForm}
+      ref={Form}
+    >
       <div className={style.InputGroup}>
         <div className={style.Infor_Group}>
           <TextBox
