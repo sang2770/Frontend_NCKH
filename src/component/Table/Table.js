@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
 import style from "./Table.module.css";
-function Table({ headers, minCellWidth, Content }) {
+function Table({ headers, Content }) {
   const TableElement = useRef(null);
   return (
     <div className={style.Table_wrapper}>

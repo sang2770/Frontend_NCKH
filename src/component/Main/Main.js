@@ -23,10 +23,7 @@ import ListStudent from "../../pages/StudentManage/ListStudent/ListStudent";
 import AddStudent from "../../pages/StudentManage/AddStudent/AddStudent";
 import UpdateStudent from "../../pages/StudentManage/UpdateStudent/UpdateStudent";
 import { Logout } from "../../authContext/AuthAction";
-import RegisterMilitary from "../../pages/MilitaryManage/RegisterMilitary/RegisterMilitary"
-import MoveMilitary from "../../pages/MilitaryManage/MoveMilitary/MoveMilitary"
-import ConfirmMilitary from "../../pages/MilitaryManage/ConfirmMilitary/ConfirmMilitary"
-
+import { DataContextProvider } from "../../DataContext/DataContext";
 
 function Main() {
   const [clickMenu, setclickMenu] = useState(false);
@@ -266,31 +263,21 @@ function Main() {
                 </div>
               </div>
             </div>
-            <div className="Main_Content_context">
-              <Routes>
-                <Route path="/" element={<ListStudent />} />
-                <Route
-                  path="StudentManager-AddStudent"
-                  element={<AddStudent />}
-                />
-                <Route
-                  path="StudentManager-UpdateStudent"
-                  element={<UpdateStudent />}
-                />
-                <Route
-                  path="Military-RegisterMilitary"
-                  element={<RegisterMilitary/>}
-                />
-                <Route
-                  path="Military-MoveMilitary"
-                  element={<MoveMilitary/>}
-                />
-                <Route
-                  path="Military-ConfirmMilitary"
-                  element={<ConfirmMilitary/>}
-                />
-              </Routes>
-            </div>
+            <DataContextProvider>
+              <div className="Main_Content_context">
+                <Routes>
+                  <Route path="/" element={<ListStudent />} />
+                  <Route
+                    path="StudentManager-AddStudent"
+                    element={<AddStudent />}
+                  />
+                  <Route
+                    path="StudentManager-UpdateStudent"
+                    element={<UpdateStudent />}
+                  />
+                </Routes>
+              </div>
+            </DataContextProvider>
           </div>
         </div>
       </div>

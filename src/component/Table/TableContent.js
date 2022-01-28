@@ -3,7 +3,7 @@ import style from "./Table.module.css";
 import { IoIosArrowDown } from "react-icons/io";
 import FormStudent from "../FormStudent/FormStudent";
 import clsx from "clsx";
-const TableContent = ({ data }) => {
+const TableContent = ({ data, ReadForm, contentBtn, contentReset, Submit }) => {
   const [DropDown, setDropDown] = useState(-1);
   const ChangeDropDown = (id) => {
     setDropDown(id);
@@ -48,7 +48,12 @@ const TableContent = ({ data }) => {
                 )}
               >
                 <div className={style.InfoDetail_title}>Thông tin thêm</div>
-                <FormStudent Read={true} data={item} />
+                <FormStudent
+                  Read={ReadForm}
+                  data={item}
+                  contentBtn={contentBtn}
+                  Submit={Submit}
+                />
               </div>
             </td>
           </tr>

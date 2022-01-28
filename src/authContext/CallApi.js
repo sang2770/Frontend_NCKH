@@ -20,5 +20,6 @@ export const login = async (user, dispatch) => {
   }
 };
 export const logout = async (dispatch) => {
-  dispatch(Logout);
+  console.log("Logout");
+  dispatch(Logout());
 };
