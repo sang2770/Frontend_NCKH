@@ -1,0 +1,58 @@
+.FileTemplate_Container {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgb(204, 204, 204, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+.File_Content {
+  background-color: #fff;
+  width: 60vw;
+  height: 80vh;
+  overflow-y: scroll;
+  position: relative;
+}
+.Btn_Exit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+.FileGroup {
+  display: flex;
+  padding: 10px;
+  justify-content: space-around;
+  font-size: 1.6rem;
+  border-bottom: 1px solid #ccc;
+  flex-wrap: wrap;
+  min-height: 200px;
+}
+.ItemFile {
+}
+.FileImage {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px #ccc;
+  cursor: pointer;
+}
+.FileHeader {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0px;
+  text-decoration: underline;
+  color: var(--Main-color);
+}
+.File_Add {
+  margin: 20px 10px;
+  display: flex;
+  justify-content: center;
+}

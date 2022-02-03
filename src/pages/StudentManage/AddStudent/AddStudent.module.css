@@ -52,3 +52,9 @@
   padding: 0px 10px;
   color: red;
 }
+.FileTemplate {
+  font-size: 1.6rem;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}

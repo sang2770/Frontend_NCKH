@@ -6,6 +6,7 @@ import clsx from "clsx";
 import FormStudent from "../../../component/FormStudent/FormStudent";
 import Button from "../../../component/Button/Button";
 import useAxios from "../../../Helper/API";
+import FileTemplate from "../../../component/FileTemplate/FileTemplate";
 function AddStudent() {
   const [Tab, setTab] = useState(1);
   const ChangeTab = (id) => {
@@ -58,8 +59,16 @@ function AddStudent() {
       console.log(error);
     }
   };
+  const [openFileTemplate, setOpenFileTemplate] = useState(false);
   return (
     <div className={style.AddStudent_container}>
+      {openFileTemplate && (
+        <FileTemplate
+          Open={() => {
+            setOpenFileTemplate(!openFileTemplate);
+          }}
+        />
+      )}
       <HeaderTitle Title="Thêm mới sinh viên" Icon={<BsPersonPlusFill />} />
       <ul className={style.AddStudent_Tab}>
         <li
@@ -105,6 +114,16 @@ function AddStudent() {
           </React.Fragment>
         ) : (
           <React.Fragment>
+            <div className={style.FileTemplate}>
+              <h3>Chọn File mẫu</h3>
+              <Button
+                content="Chọn File"
+                styles={{ marginLeft: "10px", backgroundColor: "#2980b9" }}
+                onClick={() => {
+                  setOpenFileTemplate(!openFileTemplate);
+                }}
+              />
+            </div>
             <form className={style.FormImport} onSubmit={ImportFile}>
               <input type="file" name="file" required />
               <Button content="Import" styles={{ marginTop: "10px" }} />

@@ -4,7 +4,7 @@ import FormStudent from "../FormStudent/FormStudent";
 import { BiExit } from "react-icons/bi";
 import clsx from "clsx";
 import useAxios from "../../Helper/API";
-function FormUpdate({ Open, setData, DataStudent }) {
+function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
   const [Tab, setTab] = useState(1);
   const ChangeTab = (id) => {
     setTab(id);
@@ -31,6 +31,37 @@ function FormUpdate({ Open, setData, DataStudent }) {
         console.log(err);
       });
   };
+  // console.log(History);
+  const GetDate = (date) => {
+    date = new Date(date);
+    return (
+      date.getHours() +
+      ":" +
+      date.getMinutes() +
+      ":" +
+      date.getSeconds() +
+      "-" +
+      date.getDate() +
+      "/" +
+      date.getMonth() +
+      1 +
+      "/" +
+      date.getFullYear()
+    );
+  };
+  const getContent = (Content) => {
+    let NoiDung;
+    NoiDung += <p> Người sửa: {Content.TenDangNhap} </p>;
+    NoiDung += (
+      <p>
+        Nội dung:
+        {Object.keys(Content.NoiDung).map(
+          (item) => Content.NoiDung[item] + ","
+        )}
+      </p>
+    );
+    return NoiDung;
+  };
   return (
     <div className={style.FormUpdate}>
       <div className={style.InfoUpdate}>
@@ -51,6 +82,7 @@ function FormUpdate({ Open, setData, DataStudent }) {
             className={clsx(style.TabItem, Tab === 2 && style.Active)}
             onClick={() => {
               ChangeTab(2);
+              FindHistory();
             }}
           >
             Lịch sử cập nhật
@@ -64,7 +96,36 @@ function FormUpdate({ Open, setData, DataStudent }) {
               Submit={SumitUpdate}
             />
           ) : (
-            <div>Lịch sử</div>
+            <React.Fragment>
+              <div>Lịch sử</div>
+              <table border={1} className={style.TableHistory}>
+                <thead>
+                  <tr>
+                    <th>Thời gian</th>
+                    <th>Người sửa</th>
+                    <th>Nội dung</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {History.map((item, index) => {
+                    const day = new Date(item.ThoiGian);
+                    return (
+                      <tr>
+                        <td>{GetDate(item.ThoiGian)}</td>
+                        <td>{item.TenDangNhap}</td>
+                        <td>
+                          {Object.keys(item.NoiDung).map((key) => (
+                            <p>
+                              {key} : {item.NoiDung[key]}
+                            </p>
+                          ))}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </React.Fragment>
           )}
         </div>
       </div>

@@ -11,8 +11,11 @@ function UpdateStudent() {
   const [data, setData] = useState();
   const Client = useAxios();
   const Filter = useRef("");
-  const [Err, setErr] = useState();
+  const [Err, setErr] = useState([]);
   const [Open, setOpen] = useState(false);
+
+  const [History, setHistory] = useState([]);
+
   const Search = () => {
     // console.log(Filter.current);
     Client.get("/student-management/user/" + Filter.current.value)
@@ -28,17 +31,34 @@ function UpdateStudent() {
       })
       .catch((err) => {
         // console.log(err);
-        setErr("Not Found!");
+        setErr(["Not Found!"]);
+      });
+  };
+  const FindHistory = () => {
+    Client.get("student-management/user-history/" + Filter.current.value)
+      .then((res) => {
+        console.log(res);
+        if (res.data.status === "Success") {
+          setHistory(res.data.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
   const OpenForm = () => {
     setOpen(!Open);
   };
-  // console.log(data);
   return (
     <div className={style.UpdateStudent_container}>
       {Open && (
-        <FormUpdate Open={OpenForm} setData={setData} DataStudent={data} />
+        <FormUpdate
+          Open={OpenForm}
+          setData={setData}
+          DataStudent={data}
+          FindHistory={FindHistory}
+          History={History}
+        />
       )}
       <HeaderTitle Title="Cập nhật sinh viên" Icon={<RiUserSettingsFill />} />
       <div className={style.Update_Filter}>
@@ -62,7 +82,7 @@ function UpdateStudent() {
         />
         <div className={style.ResultSearch}>
           <h2 className={style.ResultSearch_Tilte}> Kết quả tìm kiếm</h2>
-          {Err && <h3 className={style.NotFound}>{Err}</h3>}
+          {Err && <h3 className={style.NotFound}></h3>}
           {data && !Err && (
             <div className={style.ResultInf}>
               <table className={style.ResultTable}>

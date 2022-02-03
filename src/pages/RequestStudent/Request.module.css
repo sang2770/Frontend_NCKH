@@ -1,0 +1,39 @@
+.Request_Student_Container {
+}
+.ListConfirmed {
+  padding: 10px;
+  font-size: 1.6rem;
+}
+.ListHeader {
+  display: flex;
+  color: var(--Main-color);
+  font-weight: bold;
+}
+.ListHeader_content {
+  margin-left: 10px;
+}
+.Filter {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 10px;
+}
+.Filter_Item {
+  width: calc(100% / 4 - 20px);
+  margin: 0px 5px;
+}
+.DataList {
+  width: 100%;
+  padding: 5px;
+  margin-top: 10px;
+}
+.GroupOption {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.CheckboxGroup {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}

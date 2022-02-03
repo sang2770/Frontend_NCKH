@@ -24,6 +24,7 @@ import AddStudent from "../../pages/StudentManage/AddStudent/AddStudent";
 import UpdateStudent from "../../pages/StudentManage/UpdateStudent/UpdateStudent";
 import { Logout } from "../../authContext/AuthAction";
 import { DataContextProvider } from "../../DataContext/DataContext";
+import RequestStudent from "../../pages/RequestStudent/RequestStudent";
 
 function Main() {
   const [clickMenu, setclickMenu] = useState(false);
@@ -134,7 +135,7 @@ function Main() {
               }}
             >
               <Link
-                to="/"
+                to="/Request-Student"
                 className={clsx(
                   "SideBar_Item_content",
                   ActiveSub === 2 && "ActiveItem"
@@ -274,6 +275,10 @@ function Main() {
                   <Route
                     path="StudentManager-UpdateStudent"
                     element={<UpdateStudent />}
+                  />
+                  <Route
+                    path="//Request-Student"
+                    element={<RequestStudent />}
                   />
                 </Routes>
               </div>

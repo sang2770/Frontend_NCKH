@@ -52,3 +52,9 @@
   cursor: pointer;
   color: var(--Main-color);
 }
+.TableHistory {
+  width: 100%;
+}
+.TableHistory td {
+  padding: 10px;
+}

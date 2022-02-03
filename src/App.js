@@ -5,6 +5,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "./authContext/AuthContext";
 import Main from "./component/Main/Main";
 import Loading from "./component/Loading/Loading";
+import RequestStudent from "./pages/RequestStudent/RequestStudent";
 function App() {
   const { user, isFetching } = useContext(AuthContext);
   console.log(user);
