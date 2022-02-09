@@ -1,26 +1,13 @@
 import React, {useState, useRef} from "react";
 import style from "./TableMilitary.module.css";
-import useAxios from "../../Helper/API";
 import FormUpdateRegister from "../FormUpdateRegisterMilitary/FormUpdateRegister";
 import clsx from "clsx";
-import Button from "../ButtonMiliNoti/Button";
-import ElementForm from "../ElementMiliFrom/ElementForm";
-
+import { TiDeleteOutline } from "react-icons/ti";
 
 const titleForm = ["Họ và tên", "Mã sinh viên", "Số giới thiệu", "Ban chỉ huy", "Ngày cấp", "Ngày hết hạn", "Nơi ở hiện tại", "Nơi chuyển đến"];
 const subtitles = ["HoTen", "MaSinhVien", "SoGioiThieu", "BanChiHuy", "NgayCap", "NgayHH", "NoiOHienTai", "NoiChuyenDen"];
 
 const TableMoveLocalData = ({ data }) => {
-
-  const Client = useAxios();
-  
-  const [Err, setErr] = useState(null);
-
-  const [MSV, setMSV] = useState();
-
-  const changeMSV = (msv) => {
-    setMSV(msv);
-  }
 
   // show hide
   const [DropDown, setDropDown] = useState(-1);
@@ -83,13 +70,21 @@ const TableMoveLocalData = ({ data }) => {
                   DropDown === index && style.Active_Form
                 )}
               >
-                <div className={style.InfoDetail_title}>Thông tin giấy giới thiệu di chuyển từ địa phương</div>
+                <div className={style.InfoDetail}>
+                  <label className={style.InfoDetail_label} onClick={ChangeDropDownHide}>
+                    <TiDeleteOutline/>
+                  </label>
+                  <label className={style.InfoDetail_title}>
+                    Thông tin giấy giới thiệu di chuyển từ địa phương
+                  </label>
+                </div>
                 <FormUpdateRegister 
-                  MSV = {item.MaSinhVien}
+                  MaGiayDC_DK={item.MaGiayDC_DP}
                   titles={titleForm} 
                   subtitles = {subtitles}
                   data = {item}
                   onClickBack = {ChangeDropDownHide}
+                  Tab = "false"
                 />
                 <hr></hr>
               </div>

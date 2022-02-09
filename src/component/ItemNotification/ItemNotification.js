@@ -17,7 +17,7 @@ function ItemNotification({ data, onClickSent }){
         setDropDown(-1);
     }
 
-    const Client = useAxios();
+    const { Client } = useAxios();
 
     const [Err, setErr] = useState(null);
 

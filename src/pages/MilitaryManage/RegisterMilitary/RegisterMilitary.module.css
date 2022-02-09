@@ -67,9 +67,8 @@
     width: 100%;
 }
 .Search_input{
-    float: left;
+    float: right;
     padding-left: 40px;
-    margin-top: 30px;
 }
 
 .Search_input input{

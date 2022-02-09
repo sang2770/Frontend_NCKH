@@ -47,6 +47,14 @@
 .ContentNoti_main_search{
     margin-bottom: 30px;
     padding-bottom: 30px;
+    display: block;
+}
+.cmbSent{
+    display: flex;
+    margin-bottom: 20px;
+}
+.cmbLop{
+    margin-top: 20px;
 }
 .button{
     margin-top: 3%;

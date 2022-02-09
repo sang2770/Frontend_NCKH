@@ -15,7 +15,7 @@ import TableConfirmData from "../../../component/TableMilitary/TableConfirmData"
 const tableHeaders = ["Họ và tên", "MSV", "Ngày sinh", "Lớp", "Khoa", "Khóa", "Trạng thái", "Xác nhận"];
 
 function ConfirmMilitary() {
-  const Client = useAxios();
+  const { Client } = useAxios();
   
   const [Err, setErr] = useState(null);
 

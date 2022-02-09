@@ -5,7 +5,7 @@ import Button from "../../../component/ButtonMiliNoti/Button";
 
 function UpdateNotification({data, idTB, status}){
 
-    const Client = useAxios();
+    const { Client } = useAxios();
 
       ////update form
     const FilterTieuDeTB = useRef("");

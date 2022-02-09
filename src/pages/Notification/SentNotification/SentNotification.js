@@ -25,9 +25,13 @@ function SentNotification({ onClickHide } ){
                                     <label>Chọn thông tin sinh viên cần gửi thông báo!</label>
                                 </div>
                                 <div className={style.ContentNoti_main_search}>
-                                    <ComboBox title="Khoa" items={Khoa}/>
-                                    <ComboBox title="Khóa" items={Khoas}/>
-                                    <ComboBox title="Lớp" items={Lop}/>
+                                    <div className={style.cmbSent}>
+                                        <ComboBox title="Khoa" items={Khoa}/>
+                                        <ComboBox title="Khóa" items={Khoas}/>
+                                    </div>
+                                    <div className={style.cmbLop}>
+                                        <ComboBox title="Lớp" items={Lop}/>
+                                    </div>
                                 </div>
                                 <div className={style.checkNoti}>
                                     <label>Sinh viên chưa nộp giấy nghĩa vụ quân sự</label>

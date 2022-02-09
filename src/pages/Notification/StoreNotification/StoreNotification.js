@@ -7,7 +7,7 @@ import useAxios from "../../../Helper/API";
 
 function StoreNotification(){
 
-    const Client = useAxios();
+    const { Client } = useAxios();
   
     //// show hide
     const [Noti, setNoti] = React.useState(false)

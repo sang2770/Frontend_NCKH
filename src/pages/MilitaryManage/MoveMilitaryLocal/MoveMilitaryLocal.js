@@ -21,7 +21,7 @@ const subtitles = ["HoTen", "MaSinhVien", "SoGioiThieu", "BanChiHuy", "NgayCap",
 
 function MoveMilitaryLocal() {
 
-  const Client = useAxios();
+  const { Client } = useAxios();
   
   const [Err, setErr] = useState(null);
 
@@ -290,14 +290,14 @@ function MoveMilitaryLocal() {
                 <ComboBox id = {FilterKhoa} title="Khoa" items={Khoa} Change = {changeKhoa}/>
                 <ComboBox id = {FilterKhoas} title="Khóa" items={Khoas} Change = {changeKhoas}/>
                 <ComboBox id = {FilterLop} title="Lớp" items={Lop} Change = {changeLop}/>
-              </div>
 
-              <div className={Style.Search_input}>
-                <input placeholder="Nhập vào mã sinh viên" ref={FilterMSV}></input>
-                <button
-                  className={Style.icon_search}
-                  onClick={Search}
-                ><BsSearch/></button>
+                <div className={Style.Search_input}>
+                  <input placeholder="Nhập vào mã sinh viên" ref={FilterMSV}></input>
+                  <button
+                    className={Style.icon_search}
+                    onClick={Search}
+                  ><BsSearch/></button>
+                </div>
               </div>
             </div>
             <div className={Style.Result_search}>

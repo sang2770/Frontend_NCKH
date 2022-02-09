@@ -238,7 +238,7 @@ function Main() {
                 </li>
                 <li
                   className={clsx(
-                    "SideBar_MenuChild_item",
+                    "SideBar_Item_content",
                     MenuSubItem === 4 && "ActiveSubMenuItem"
                   )}
                   onClick={() => {

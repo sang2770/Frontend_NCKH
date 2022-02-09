@@ -7,10 +7,10 @@ import { DataContext } from "../../../DataContext/DataContext";
 import {BiHealth} from "react-icons/bi";
 import useAxios from "../../../Helper/API";
 import Style from "../UpdateNotification/UpdateNotification.module.css";
-
+import { TiDeleteOutline } from "react-icons/ti";
 
 const ShowNotification = ({data, onClickHide, idTB}) => {
-    const Client = useAxios();
+    const { Client } = useAxios();
     const { Lop, Khoa, Khoas } = useContext(DataContext);
 
     // Show Hide
@@ -123,6 +123,9 @@ const ShowNotification = ({data, onClickHide, idTB}) => {
             <div>
                 {data.map((item) => (
                 <div className={style.MainNoti}>
+                    <div className={style.iconX} onClick = {onClickHide}>
+                        <TiDeleteOutline/>
+                    </div>
                     {contentStore ? (
                     <div className={style.Content}>
                         {/* Main Content Notification */}
@@ -255,12 +258,6 @@ const ShowNotification = ({data, onClickHide, idTB}) => {
                                     changeID(item.MaThongBaoChinh);
                                     deleteNoti();
                                 }} 
-                            />
-                            <Button 
-                                content="Ẩn" 
-                                onClick={
-                                    onClickHide
-                                }
                             />
                         </div>
                     ): null}

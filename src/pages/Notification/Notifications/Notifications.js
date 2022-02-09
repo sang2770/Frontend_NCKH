@@ -10,7 +10,7 @@ import SentNotification from "../SentNotification/SentNotification";
 
 function Notification(){
 
-    const Client = useAxios();
+    const { Client } = useAxios();
   
     const [Err, setErr] = useState(null);
 
@@ -53,7 +53,6 @@ function Notification(){
     };
 
     const [Noti, setNoti] = React.useState(true)
-    const [SentNoti, setSentNoti] = React.useState(false)
     const [StoreNoti, setStoreNoti] = React.useState(false)
 
     const onClickStore = () => 
@@ -62,17 +61,11 @@ function Notification(){
         setNoti(false);
     }
 
-    const onClickSent = () => 
-    {
-        setSentNoti(true);
-        setNoti(false);
-    }
-
     return (
         <React.Fragment>
             <div>
             { StoreNoti ? <StoreNotification /> : null }
-            { SentNoti ? <SentNotification data={TieuDe}/> : null }
+            {/* { SentNoti ? <SentNotification data={TieuDe}/> : null } */}
             { Noti ? (
                 <div className={style.MainNoti}>
                     <h1 className={style.Hearder_text}>THÔNG BÁO</h1>
@@ -81,7 +74,6 @@ function Notification(){
                             {/* Danh sach tieu de thong bao */}
                             <ItemNotification 
                                 data = {TieuDe}
-                                onClickSent = {onClickSent}
                             />
                         </div>
                         <div className={style.PaginationNoti}>

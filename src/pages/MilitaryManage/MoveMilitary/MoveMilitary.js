@@ -15,7 +15,7 @@ import TableMoveData from "../../../component/TableMilitary/TableMoveData";
 const tableHeaders = ["Họ và tên", "MSV", "Ngày sinh", "Lớp", "Khoa", "Khóa", "Trạng thái", "Số QĐ", "Ngày quyết định", "Xác nhận"];
 
 function MoveMilitary() {
-  const Client = useAxios();
+  const { Client } = useAxios();
   
   const [Err, setErr] = useState(null);
 
@@ -135,7 +135,7 @@ function MoveMilitary() {
               <ComboBox id = {FilterKhoa} title="Khoa" items={Khoa} Change = {changeKhoa}/>
               <ComboBox id = {FilterKhoas} title="Khóa" items={Khoas} Change = {changeKhoas}/>
               <ComboBox id = {FilterLop} title="Lớp" items={Lop} Change = {changeLop}/>
-              <ComboBox id = {FilterTrangThai} title="Trạng thái sv" items={TrangThai} Change = {changeTrangThai}/>
+              <ComboBox id = {FilterTrangThai} title="Trạng thái" items={TrangThai} Change = {changeTrangThai}/>
             </div>
             <Search onClickSearch = {onSearch} Ref={FilterMSV}/>
             <div className={style.Result_search}>

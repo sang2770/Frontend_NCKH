@@ -13,7 +13,7 @@ function ComboBox({ id, items, title, data, Change }) {
         onChange={Change}
         defaultValue={data ? data[id] : ""}
       >
-        <option value="">----{title}----</option>
+        <option value="">---{title}---</option>
         {items.map((item, index) => (
             <option value={item} key={index}>
             {item}

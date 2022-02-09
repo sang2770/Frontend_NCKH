@@ -3,13 +3,14 @@ import style from "./TableMilitary.module.css";
 import useAxios from "../../Helper/API";
 import FormUpdateRegister from "../FormUpdateRegisterMilitary/FormUpdateRegister";
 import clsx from "clsx";
+import { TiDeleteOutline } from "react-icons/ti";
 
 const titleForm = ["Họ và tên", "Mã sinh viên", "Ngày sinh", "Ngày đăng ký", "Số đăng ký", "Nơi đăng ký", "Địa chỉ thường trú", "Ngày nộp"];
 const subtitles = ["HoTen", "MaSinhVien", "NgaySinh", "NgayDangKy", "SoDangKy", "NoiDangKy", "DiaChiThuongTru", "NgayNop"];
 
 const TableRegisterData = ({ data }) => {
 
-  const Client = useAxios();
+  const { Client } = useAxios();
   
   const [Err, setErr] = useState(null);
 
@@ -83,13 +84,21 @@ const TableRegisterData = ({ data }) => {
                     DropDown === index && style.Active_Form
                   )}
                 >
-                  <div className={style.InfoDetail_title}>Thông tin giấy chứng nhận nghĩa vụ quân sự</div>
+                  <div className={style.InfoDetail}>
+                    <label className={style.InfoDetail_label} onClick={ChangeDropDownHide}>
+                      <TiDeleteOutline/>
+                    </label>
+                    <label className={style.InfoDetail_title}>
+                      Thông tin giấy chứng nhận nghĩa vụ quân sự
+                    </label>
+                  </div>
                   <FormUpdateRegister 
                     MSV = {item.MaSinhVien}
                     titles={titleForm} 
                     subtitles = {subtitles}
                     data = {item}
                     onClickBack = {ChangeDropDownHide}
+                    Tab = "true"
                   />
                   <hr></hr>
                 </div>

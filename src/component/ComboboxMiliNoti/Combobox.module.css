@@ -8,10 +8,12 @@
 }
 
 .Search_combobox select{
-    padding: 5px 15px;
+    width: 120px;
+    padding: 5px 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
     resize: vertical;
     outline: #ccc;
-    margin-left: 5px;
+    text-align: center;
+    /* margin-left: 5px; */
 }
