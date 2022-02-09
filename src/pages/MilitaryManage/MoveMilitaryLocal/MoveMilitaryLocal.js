@@ -3,23 +3,24 @@ import HeaderTitle from "../../../component/HeaderTitle/HeaderTitle";
 import ComboBox from "../../../component/ComboboxMiliNoti/Combobox";
 import { BsSearch, BsPersonPlusFill } from "react-icons/bs";
 import TableMilitary from "../../../component/TableMilitary/TableMilitary";
-import TableRegisterData from "../../../component/TableMilitary/TableRegisterData";
+import TableMoveLocalData from "../../../component/TableMilitary/TableMoveLocalData";
 import Pagination from "../../../component/Pagination/Pagination";
 import useAxios from "../../../Helper/API";
 import queryString from "query-string";
 import { DataContext } from "../../../DataContext/DataContext";
-import Style from "./RegisterMilitary.module.css";
+import Style from "./MoveMilitaryLocal.module.css";
 import style from "../../StudentManage/ListStudent/ListStudent";
 import Button from "../../../component/ButtonMiliNoti/Button";
 import clsx from "clsx";
 import FormMilitary from "../../../component/FormMilitary/FormMilitary";
 import ErrorImport from "../../../component/ErrImport/ErrorImport";
 
-const tableHeaders = ["Họ và tên", "MSV", "Ngày sinh", "Lớp", "Khoa", "Khóa", "Ngày đăng ký", "Nơi đăng ký", "Ngày nộp", "Chọn"];
-const titleForm = ["Họ và tên", "Mã sinh viên", "Ngày sinh", "Ngày đăng ký", "Số đăng ký", "Nơi đăng ký", "Địa chỉ thường trú", "Ngày nộp"];
-const subtitles = ["HoTen", "MaSinhVien", "NgaySinh", "NgayDangKy", "SoDangKy", "NoiDangKy", "DiaChiThuongTru", "NgayNop"];
+const tableHeaders = ["Họ và tên", "MSV", "Ngày sinh", "Lớp", "Khoa", "Khóa", "Số giới thiệu", "Ban CHQS", "Chọn"];
+const titleForm = ["Họ và tên", "Mã sinh viên", "Số giới thiệu", "Ban chỉ huy", "Ngày cấp", "Ngày hết hạn", "Nơi ở hiện tại", "Nơi chuyển đến"];
+const subtitles = ["HoTen", "MaSinhVien", "SoGioiThieu", "BanChiHuy", "NgayCap", "NgayHH", "NoiOHienTai", "NoiChuyenDen"];
 
-function RegisterMilitary() {
+function MoveMilitaryLocal() {
+
   const Client = useAxios();
   
   const [Err, setErr] = useState(null);
@@ -36,56 +37,52 @@ function RegisterMilitary() {
     page: 1,
   });
 
-  // Search 
-  const [FilterKhoa, setFilterKhoa] = useState("");
-  const [FilterKhoas, setFilterKhoas] = useState("");
-  const [FilterLop, setFilterLop] = useState("");
-  const FilterMSV = useRef("");
-  const [RegisterMilitary, setRegisterMilitary] = useState([]);
+    // Search 
+    const [FilterKhoa, setFilterKhoa] = useState("");
+    const [FilterKhoas, setFilterKhoas] = useState("");
+    const [FilterLop, setFilterLop] = useState("");
+    const FilterMSV = useRef("");
+    const [MoveMilitaryLocal, setMoveMilitaryLocal] = useState([]);
 
-  const changeKhoa = (event) => {
-    setFilterKhoa(event.target.value)
-  }
-  const changeKhoas = (event) => {
-    setFilterKhoas(event.target.value)
-  }
-  const changeLop = (event) => {
-    setFilterLop(event.target.value)
-  }
-
-  const Search = () => {
-    if(FilterKhoa === "" && FilterKhoas === "" && FilterLop === "" && FilterMSV.current.value === "" )
-    {
-      alert("Bạn cần chọn khoa, hoặc khóa, hoặc lớp, hoặc mã sinh viên để thực hiện tìm kiếm");
+    const changeKhoa = (event) => {
+      setFilterKhoa(event.target.value)
     }
-    else{
-      Client.get("/register-military-management/filter-info-register?MaSinhVien=" + 
-        FilterMSV.current.value + "&TenLop=" + FilterLop + "&Khoas=" + FilterKhoas + "&TenKhoa=" + FilterKhoa)
-        .then((res) => {
-          if (res.data.status === "Success") {
-            setRegisterMilitary(res.data.data);
-          } else {
-            setErr(res.data.Err_Message);
-          }
-        })
-        .catch((err) => {
-          setErr("Not Found!");
-        });
+    const changeKhoas = (event) => {
+      setFilterKhoas(event.target.value)
+    }
+    const changeLop = (event) => {
+      setFilterLop(event.target.value)
+    }
+  
+    const Search = () => {
+      if(FilterKhoa === "" && FilterKhoas === "" && FilterLop === "" && FilterMSV.current.value === "" )
+      {
+        alert("Bạn cần chọn khoa, khóa, lớp, hoặc mã sinh viên để thực hiện tìm kiếm");
+      }
+      else{
+        Client.get("/register-military-management/filter-info-move-local?MaSinhVien=" + 
+          FilterMSV.current.value + "&TenLop=" + FilterLop + "&Khoas=" + FilterKhoas + "&TenKhoa=" + FilterKhoa)
+          .then((res) => {
+            if (res.data.status === "Success") {
+              setMoveMilitaryLocal(res.data.data);
+            } else {
+              setErr(res.data.Err_Message);
+            }
+          })
+          .catch((err) => {
+            setErr("Not Found!");
+          });
       };
     }
-
-    //console.log(RegisterMilitary);
-
-  // 
+  
   // useEffect(() => {
   //   const params = queryString.stringify(filter);
-  //   console.log(params);
-  //   Client.get("/register-military-management/filter-info-register?" + params)
+  //   Client.get("/register-military-management/filter-info-move-local?" + params)
   //     .then((response) => {
   //       const List = response.data;
   //       if (List.status === "Success") {
   //         setPaginations(List.pagination);
-  //         setRegisterMilitary(List.data);
+  //         setMoveMilitaryLocal(List.data);
   //       }
   //     })
   //     .catch((err) => {
@@ -104,11 +101,12 @@ function RegisterMilitary() {
     }, 300);
   };
 
+  
   ////submit form
   const [ErrAdd, setErrAdd] = useState();
   const Submit = async (form, ResetForm) => {
     try {
-      const result = await Client.post("/register-military-management/store-register-military?", form, {
+      const result = await Client.post("/move-military-local-management/store-move-military-local?", form, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -130,14 +128,14 @@ function RegisterMilitary() {
     }
   };
 
-// ImportFile 
+  // import file
   const [ErrImport, setErrImport] = useState([]);
-  const [ErrImportMSV, setErrImportMSV] = useState([]);
+  const [ErrImportMaDK, setErrImportMaDK] = useState([]);
   const ImportFile = async (e) => {
     e.preventDefault();
     const MyData = new FormData(e.target);
     try {
-      const Result = await Client.post("/register-military-management/store-register-military-file", MyData, {
+      const Result = await Client.post("/move-military-local-management/store-move-military-local-file", MyData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -145,21 +143,20 @@ function RegisterMilitary() {
       if (Result.data.status === "Success") {
         alert("Bạn đã import thành công");
         setErrImport([]);
-        setErrImportMSV([]);
+        setErrImportMaDK([]);
       } else {
         setErrImport(Result.data.err);
-        setErrImportMSV(Result.data.errMSV);
+        setErrImportMaDK(Result.data.errMaDK);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-
   // Show Hide
   const [ImportAndNew, setImportAndNew] = React.useState(true);
   const [chooseImport, setChooseImport] = React.useState(false);
-  const [Register, setRegister] = React.useState(false);
+  const [MoveLocal, setMoveLocal] = React.useState(false);
 
   const onClickImport = () => {
     setImportAndNew(false);
@@ -167,47 +164,46 @@ function RegisterMilitary() {
   }
 
   const onClickNew = () => {
-    setRegister(true);
+    setMoveLocal(true);
     setImportAndNew(false);
   }
 
   const onClickNewBack = () => {
-    setRegister(false);
+    setMoveLocal(false);
     setImportAndNew(true);
   }
 
   const onClickBackImport = () => {
+    setErr(true);
     setChooseImport(false);
     setImportAndNew(true);
   }
 
   return(
     <React.Fragment>
-      <div className="Register_military_container">
-        <div className={Style.Register_header}>
-          <HeaderTitle Title="Giấy Nghĩa Vụ Quân Sự" Icon={<BsPersonPlusFill />} /> 
+      <div className="Move_military_container">
+        <div className={Style.Move_local_header}>
+          <HeaderTitle Title="Giấy Giới Thiệu Di Chuyển Nghĩa Vụ Quân Sự" Icon={<BsPersonPlusFill />} /> 
         </div>
         {/* phần thân  */}
-        <div className={Style.Register_body}>
+        <div className={Style.Move_local_body}>
           {/* Import va tạo mới */}
           {ImportAndNew ? (
-          <div className={Style.Register_button}  id="btn_importAndNew">
-            <div className={Style.Button_register}>
-              <Button 
-                content="ImportFile" 
-                onClick={onClickImport} 
-              />
-              <Button 
-                content="Tạo mới" 
-                onClick={onClickNew} 
-              />
+            <div className={Style.Move_local_button} id = "btn_importAndNew">
+              <div className={Style.Button_move_local}>
+                <Button 
+                  content="ImportFile" 
+                  onClick={onClickImport} />
+                <Button 
+                  content="Tạo mới" 
+                  onClick={onClickNew} />
+              </div>
             </div>
-          </div>
-          ) : null }
+          ) : null}
 
           {/* Choose file and import */}
           { chooseImport ? (
-            <div className={clsx(Style.Import_choose, Style.Register_button)}>
+            <div className={clsx(Style.Import_choose, Style.Move_local_button)}>
               <form onSubmit={ImportFile}>
                 <input type="file" name="file" required></input>
                 <Button 
@@ -226,46 +222,44 @@ function RegisterMilitary() {
               </form>
             </div>
           ) : null }
+            
+          <div id="Error">
+            {ErrImport.length > 0 && (
+              <ErrorImport 
+                ErrorrImport = {ErrImport}
+                column1 = "Hàng"
+                column2 = "Nội dung"
+              />
+            )}
+            {ErrImportMaDK.length > 0 && (
+              <ErrorImport 
+                ErrorrImport = {ErrImportMaDK}
+                column1 = "Mã đăng ký"
+                column2 = "Nội dung"
+              />
+            )}
+          </div>
 
-            <div id="Error">
-              {ErrImport.length > 0 && (
-                <ErrorImport 
-                  ErrorrImport = {ErrImport}
-                  column1 = "Hàng"
-                  column2 = "Nội dung"
-                />
-              )}
-              {ErrImportMSV.length > 0 && (
-                <ErrorImport 
-                  ErrorrImport = {ErrImportMSV}
-                  column1 = "Mã sinh viên"
-                  column2 = "Nội dung"
-                />
-              )}
+          {/* giay di chuyển từ địa phương  */}
+          {MoveLocal ? (
+            <div className={Style.Form_move}>
+              <h1 className={Style.form_title}>
+                Giấy Giới Thiệu Di Chuyển Nghĩa Vụ Quân Sự
+              </h1>
+              <FormMilitary 
+                titles={titleForm} 
+                subtitles = {subtitles}
+                onClickSave = {function(){
+                  document.getElementById("ErrAdd").style.display = "block";
+                }}
+                onClickBack = {function(){
+                  onClickNewBack()
+                  document.getElementById("ErrAdd").style.display = "none";
+                }}
+                Submit={Submit}
+              />
             </div>
-
-          {/* giay chứng nhận đăng ký  */}
-          {Register ? (
-            <div className={Style.Register} id="Register">
-              <div className={Style.Form_register}>
-                <h1 className={Style.form_title}>
-                  Giấy Chứng Nhận Đăng Ký Nghĩa Vụ Quân Sự
-                </h1>
-                <FormMilitary 
-                  titles={titleForm}
-                  subtitles={subtitles}
-                  onClickSave = {function(){
-                    document.getElementById("ErrAdd").style.display = "block";
-                  }}
-                  onClickBack ={function(){
-                    onClickNewBack()
-                    document.getElementById("ErrAdd").style.display = "none";
-                  }}
-                  Submit={Submit}
-                />
-              </div>
-            </div>
-          ) : null }
+          ) : null}
 
           <div id="ErrAdd">
           {ErrAdd && (
@@ -288,9 +282,10 @@ function RegisterMilitary() {
             </div>
           )}
           </div>
+
           {/* Tìm kiếm */}
-          <div className={Style.Register_search}>
-            <div className={Style.Search_register}>
+          <div className={Style.Move_search}>
+            <div className={Style.Search_move}>
               <div className={Style.cmbSearch}>
                 <ComboBox id = {FilterKhoa} title="Khoa" items={Khoa} Change = {changeKhoa}/>
                 <ComboBox id = {FilterKhoas} title="Khóa" items={Khoas} Change = {changeKhoas}/>
@@ -302,8 +297,7 @@ function RegisterMilitary() {
                 <button
                   className={Style.icon_search}
                   onClick={Search}
-                ><BsSearch/>
-                </button>
+                ><BsSearch/></button>
               </div>
             </div>
             <div className={Style.Result_search}>
@@ -312,7 +306,7 @@ function RegisterMilitary() {
             <div className={style.DataList}>
               <TableMilitary
                 headers={tableHeaders}
-                Content={<TableRegisterData data={RegisterMilitary} />}
+                Content={<TableMoveLocalData data={MoveMilitaryLocal} />}
               />
             </div>
             <Pagination
@@ -329,4 +323,4 @@ function RegisterMilitary() {
   );
 }
 
-export default RegisterMilitary;
+export default MoveMilitaryLocal;

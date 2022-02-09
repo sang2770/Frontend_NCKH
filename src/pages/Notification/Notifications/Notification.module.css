@@ -1,0 +1,65 @@
+
+.MainNoti{
+    border: 1px solid rgb(158, 172, 250);
+    border-radius: 15px;
+    margin: 30px 30px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.Hearder_text{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.Content{
+    /* height: 300px; */
+}
+.MainContent{
+    min-height: 300px;
+}
+.button{
+    /* display: block; */
+    /* text-align: center; */
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+}
+.PaginationNoti{
+    padding-top: 30px;
+}
+/* Danh sach tieu de */
+.bodyNoti{
+    display: block;
+}
+.Noti{
+    color: rgb(92, 92, 250);
+    display: flex;
+    font-size: 14px;
+    margin: 0px 30px 10px 30px;
+}
+.LeftNoti{
+    width: 90%;
+    float: left;
+    display: flex;
+}
+
+.icon{
+    padding-right: 20px;
+}
+.Noti_label{
+    width: 90%;
+}
+
+.Noti_label label:hover{
+    cursor: pointer;
+    border-bottom: 1px solid blue;
+}
+.Noti_input{
+    padding-left: 30px;
+    float: right;
+}
+.Noti_input input:hover{
+    cursor: pointer;
+    box-shadow: 0 4px 5px 0 rgba(113, 89, 250, 0.2), 0 6px 20px 0 rgba(43, 40, 240, 0.19);
+}

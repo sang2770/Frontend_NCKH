@@ -1,0 +1,38 @@
+.Confirm_header{
+    left: 19%;
+    width: 96%;
+    margin-left: 2%;
+}
+.Hearder_tittle{
+    text-align: center;
+    text-shadow: 5px 5px 10px rgb(158, 164, 248);
+    padding-bottom: 50px;
+}
+
+.Form_main{
+    padding: 30px 30px 20px 30px;
+    margin: 10px 45px 0px 45px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid rgb(162, 167, 245);
+}
+
+.Search_button{
+    display: flex;
+}
+.Result_search{
+    display: inline-block;
+    resize: vertical;
+    outline: #ccc;
+    padding: 10px 45px;
+    margin: 20px 20px 20px 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    width: 90%;
+    font-size: 12px;
+}
+
+.btn{
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}

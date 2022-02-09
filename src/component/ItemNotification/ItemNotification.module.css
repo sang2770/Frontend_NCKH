@@ -1,0 +1,49 @@
+.bodyNoti{
+    display: block;
+}
+.Noti{
+    color: rgb(92, 92, 250);
+    display: flex;
+    font-size: 14px;
+    margin: 0px 30px 10px 30px;
+}
+.LeftNoti{
+    width: 90%;
+    float: left;
+    display: flex;
+}
+
+.icon{
+    padding-right: 20px;
+}
+.Noti_label{
+    width: 90%;
+}
+
+.Noti_label label:hover{
+    cursor: pointer;
+    border-bottom: 1px solid blue;
+}
+
+.Noti_input{
+    padding-left: 30px;
+    float: right;
+}
+.Noti_input input:hover{
+    cursor: pointer;
+    box-shadow: 0 4px 5px 0 rgba(113, 89, 250, 0.2), 0 6px 20px 0 rgba(43, 40, 240, 0.19);
+}
+.Active_Form {
+    height: auto !important;
+    font-size: 1.4rem;
+}
+.FormData {
+    height: 0;
+    overflow: hidden;
+}
+.Table_Row td:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+  }

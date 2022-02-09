@@ -1,7 +1,14 @@
   /* box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+.Import_choose{
+    text-align: center;
+}
+
+.importFile{
+    display: flex;
+}
 
 .Register_body{
-    margin-top: 80px;
+    /* margin-top: 80px; */
     margin-bottom: 40px;
 }
 .button_register{
@@ -9,57 +16,26 @@
     float: right;
 }
 .Form_register{
-    background-color: rgba(238, 238, 254, 1);
-    padding: 30px 30px 0px 30px;
+    background-color: white;
+    padding: 30px 30px 0px 50px;
     margin: 20px 45px 0px 45px;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
-    height: 250px;
+    /* height: 300px; */
     border: 1px solid rgb(134, 142, 252);
     margin-top: 20px;
 }
 .Register_header{
-  position: fixed;
-  top: 90px;
-  left: 18%;
-  width: 80%;
-  background-color: #fff;
-  border-radius: 20px 20px 0px 0px;
-  background-color: white;
+  left: 19%;
+  width: 96%;
+  /* border-radius: 20px 20px 0px 0px;
+  background-color: white; */
+  margin-left: 2%;
 }
 
-.Register_form{
-    padding: 0px 20px 0px 20px;
-}
 .form_title{
     text-align: center;
     text-shadow: 5px 5px 10px rgb(158, 164, 248);
-    padding-bottom: 30px;
-}
-.Form_label{
-    font-size: 13px;
-    padding-right: 15px;
-}
-.Form_left{
-    float: left;
-}
-.Form_left label{
-    float: left;
-}
-.Form_right{
-    float: right;
-    display: block;
-}
-.Element_form{
-    /* float: left; */
-    display: block;
-    padding-bottom: 20px;
-}
-.Element_form input{
-    outline: none;
-    border: none;
-    border-bottom: 1px solid black;
-    background-color: rgba(238, 238, 254, 1);
-    /* padding-right: 10px; */
+    padding-bottom: 50px;
 }
 
 /* button */
@@ -69,63 +45,31 @@
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
     height: auto;
     border: 1px solid rgb(162, 167, 245);
-    
-}
-.button_reg{
-    text-align: center;
-}
-.button_reg button{
-    margin: 0px 20px 10px 20px;
 }
 
-.button_main{
-    width: 85px;
-    height: 27px;
-    background-color: rgba(228, 234, 255, 1);
-    border: 1px solid rgb(197, 209, 252);
-    border-radius: 13px;
-    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2);
-    color: rgba(27, 47, 227, 1);
-    cursor: pointer;
+.Button_register{
+    text-align: center;
 }
-.button_main:hover{
-    opacity: 0.9;
-    background-color: rgb(110, 135, 223);
-    color: white;
-}
+
 /* search */
 .Register_search{
     padding: 30px 30px 20px 30px;
     margin: 10px 45px 0px 45px;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
-    height: 150px;
     border: 1px solid rgb(162, 167, 245);
-
 }
+
 .Search_register{
     display: block;
 }
-
-.Search_combobox{
-    float: left;
-    margin-left: 20px;
-}  
-
-.Search_combobox label{
-    font-size: 13px;
+.cmbSearch{
+    display: flex;
+    width: 100%;
 }
-.Search_combobox select{
-    padding: 5px 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: vertical;
-    outline: #ccc;
-    margin-left: 5px;
-}
-
 .Search_input{
-    float: right;
-    padding-right: 30px;
+    float: left;
+    padding-left: 40px;
+    margin-top: 30px;
 }
 
 .Search_input input{
@@ -156,8 +100,6 @@
 /* Result_Search */
 .Result_search{
     display: inline-block;
-    /* border: 1px solid #ccc; */
-    /* border-radius: 5px; */
     resize: vertical;
     outline: #ccc;
     padding: 10px 45px;
@@ -167,3 +109,22 @@
     width: 90%;
 }
 
+/* Error */
+.Err_container {
+    padding: 20px 45px;
+}
+.TableErr {
+    border-spacing: 0px;
+    max-width: 100%;
+    font-size: 1.5rem;
+    width: 98%;
+    margin: 10px;
+
+}
+.TableErr td {
+    padding: 5px 10px;
+}
+.ErrTitle {
+    padding: 0px 10px;
+    color: red;
+}

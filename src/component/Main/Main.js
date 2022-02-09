@@ -24,6 +24,11 @@ import AddStudent from "../../pages/StudentManage/AddStudent/AddStudent";
 import UpdateStudent from "../../pages/StudentManage/UpdateStudent/UpdateStudent";
 import { Logout } from "../../authContext/AuthAction";
 import { DataContextProvider } from "../../DataContext/DataContext";
+import RegisterMilitary from "../../pages/MilitaryManage/RegisterMilitary/RegisterMilitary"
+import MoveMilitary from "../../pages/MilitaryManage/MoveMilitary/MoveMilitary"
+import ConfirmMilitary from "../../pages/MilitaryManage/ConfirmMilitary/ConfirmMilitary"
+import MoveMilitaryLocal from "../../pages/MilitaryManage/MoveMilitaryLocal/MoveMilitaryLocal";
+import Notification from "../../pages/Notification/Notifications/Notifications";
 
 function Main() {
   const [clickMenu, setclickMenu] = useState(false);
@@ -183,10 +188,10 @@ function Main() {
                     ChangeMenuSubItem(2);
                   }}
                 >
-                  <Link to="/Military-MoveMilitary" className="SideBar_Item_content">
+                  <Link to="/Military-MoveMilitaryLocal" className="SideBar_Item_content">
                     <RiUserSettingsFill />
                     <span className="Item_content">
-                      Giấy di chuyển từ trường
+                      Giấy di chuyển từ địa phương
                     </span>
                   </Link>
                 </li>
@@ -197,6 +202,22 @@ function Main() {
                   )}
                   onClick={() => {
                     ChangeMenuSubItem(3);
+                  }}
+                >
+                  <Link to="/Military-MoveMilitary" className="SideBar_Item_content">
+                    <RiUserSettingsFill />
+                    <span className="Item_content">
+                      Giấy di chuyển từ trường
+                    </span>
+                  </Link>
+                </li>
+                <li
+                  className={clsx(
+                    "SideBar_MenuChild_item",
+                    MenuSubItem === 4 && "ActiveSubMenuItem"
+                  )}
+                  onClick={() => {
+                    ChangeMenuSubItem(4);
                   }}
                 >
                   <Link to="/Military-ConfirmMilitary" className="SideBar_Item_content">
@@ -230,7 +251,7 @@ function Main() {
               }}
             >
               <Link
-                to="/"
+                to="/Notifiaction-main"
                 className={clsx(
                   "SideBar_Item_content",
                   ActiveSub === 5 && "ActiveItem"
@@ -274,6 +295,26 @@ function Main() {
                   <Route
                     path="StudentManager-UpdateStudent"
                     element={<UpdateStudent />}
+                  />
+                  <Route
+                    path="Military-RegisterMilitary"
+                    element={<RegisterMilitary />}
+                  />
+                  <Route
+                    path="Military-MoveMilitaryLocal"
+                    element={<MoveMilitaryLocal />}
+                  />
+                  <Route
+                    path="Military-MoveMilitary"
+                    element={<MoveMilitary />}
+                  />
+                  <Route
+                    path="Military-ConfirmMilitary"
+                    element={<ConfirmMilitary />}
+                  />
+                  <Route
+                    path="Notifiaction-main"
+                    element={<Notification />}
                   />
                 </Routes>
               </div>
