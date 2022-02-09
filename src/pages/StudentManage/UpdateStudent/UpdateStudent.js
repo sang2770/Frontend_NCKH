@@ -9,7 +9,7 @@ import useAxios from "../../../Helper/API";
 import FormUpdate from "../../../component/FormUpdate/FormUpdate";
 function UpdateStudent() {
   const [data, setData] = useState();
-  const Client = useAxios();
+  const { Client } = useAxios();
   const Filter = useRef("");
   const [Err, setErr] = useState([]);
   const [Open, setOpen] = useState(false);

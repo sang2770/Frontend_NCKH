@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import Logo from "../../media/Image/Logo.jpg";
 import Avatar from "../../media/Image/avatar.jpg";
 import NameSchool from "../../media/Image/NameSchool.png";
+import CreateAccount from "../../pages/CreateAccount/CreateAccount";
 import { Link, Route, Routes } from "react-router-dom";
 import {
   AiOutlineMenu,
@@ -14,7 +15,7 @@ import {
   BsPersonPlusFill,
   BsFillPeopleFill,
 } from "react-icons/bs";
-import { HiOutlineDocument } from "react-icons/hi";
+import { HiOutlineDocument, HiUserAdd } from "react-icons/hi";
 import { RiUserSettingsFill } from "react-icons/ri";
 import clsx from "clsx";
 import "./Main.css";
@@ -25,22 +26,28 @@ import UpdateStudent from "../../pages/StudentManage/UpdateStudent/UpdateStudent
 import { Logout } from "../../authContext/AuthAction";
 import { DataContextProvider } from "../../DataContext/DataContext";
 import RequestStudent from "../../pages/RequestStudent/RequestStudent";
-
 function Main() {
   const [clickMenu, setclickMenu] = useState(false);
-  const [ActiveSub, setActiveSub] = useState(1);
-  const [MenuSubItem, setMenuSubItem] = useState(3);
+  const [ActiveSub, setActiveSub] = useState(
+    JSON.parse(localStorage.getItem("ActiveSub")) || 1
+  );
+  const [MenuSubItem, setMenuSubItem] = useState(
+    JSON.parse(localStorage.getItem("MenuSubItem")) || 3
+  );
   const ChangeMenu = () => {
     const check = clickMenu;
     setclickMenu(!check);
   };
   const ChangeSubMenu = (id) => {
     setActiveSub(id);
+    setMenuSubItem(-1);
+    localStorage.setItem("ActiveSub", JSON.stringify(id));
   };
   const ChangeMenuSubItem = (id) => {
     setMenuSubItem(id);
+    localStorage.setItem("MenuSubItem", JSON.stringify(id));
   };
-
+  console.log(MenuSubItem);
   const { user, dispatch } = useContext(AuthContext);
   const Out = () => {
     dispatch(Logout());
@@ -83,7 +90,9 @@ function Main() {
                     "SideBar_MenuChild_item",
                     MenuSubItem === 1 && "ActiveSubMenuItem"
                   )}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // console.log(e.target);
                     ChangeMenuSubItem(1);
                   }}
                 >
@@ -100,7 +109,8 @@ function Main() {
                     "SideBar_MenuChild_item",
                     MenuSubItem === 2 && "ActiveSubMenuItem"
                   )}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     ChangeMenuSubItem(2);
                   }}
                 >
@@ -117,7 +127,8 @@ function Main() {
                     "SideBar_MenuChild_item",
                     MenuSubItem === 3 && "ActiveSubMenuItem"
                   )}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     ChangeMenuSubItem(3);
                   }}
                 >
@@ -166,7 +177,8 @@ function Main() {
                     "SideBar_MenuChild_item",
                     MenuSubItem === 1 && "ActiveSubMenuItem"
                   )}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     ChangeMenuSubItem(1);
                   }}
                 >
@@ -180,7 +192,8 @@ function Main() {
                     "SideBar_MenuChild_item",
                     MenuSubItem === 2 && "ActiveSubMenuItem"
                   )}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     ChangeMenuSubItem(2);
                   }}
                 >
@@ -196,7 +209,8 @@ function Main() {
                     "SideBar_MenuChild_item",
                     MenuSubItem === 3 && "ActiveSubMenuItem"
                   )}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     ChangeMenuSubItem(3);
                   }}
                 >
@@ -241,6 +255,23 @@ function Main() {
                 <span className="Item_content">Thông báo</span>
               </Link>
             </li>
+            <li
+              className="SideBar_Item"
+              onClick={() => {
+                ChangeSubMenu(6);
+              }}
+            >
+              <Link
+                to="/CreateAccount"
+                className={clsx(
+                  "SideBar_Item_content",
+                  ActiveSub === 6 && "ActiveItem"
+                )}
+              >
+                <HiUserAdd />
+                <span className="Item_content">Tạo tài khoản mới</span>
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="Main_Content">
@@ -276,10 +307,8 @@ function Main() {
                     path="StudentManager-UpdateStudent"
                     element={<UpdateStudent />}
                   />
-                  <Route
-                    path="//Request-Student"
-                    element={<RequestStudent />}
-                  />
+                  <Route path="CreateAccount" element={<CreateAccount />} />
+                  <Route path="/Request-Student" element={<RequestStudent />} />
                 </Routes>
               </div>
             </DataContextProvider>

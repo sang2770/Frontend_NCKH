@@ -58,3 +58,11 @@
   display: flex;
   align-items: center;
 }
+.Title_Import {
+  font-size: 1.6rem;
+  padding: 10px;
+  font-weight: bold;
+}
+.Import_Content_Class_Major {
+  padding: 10px;
+}

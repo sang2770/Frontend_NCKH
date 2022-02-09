@@ -7,7 +7,7 @@ const Initial = {
 
 export const DataContext = createContext(Initial);
 export const DataContextProvider = ({ children }) => {
-  const Client = useAxios();
+  const { Client } = useAxios();
   const [Khoa, setKhoa] = useState([]);
   const [Lop, setLop] = useState([]);
   useEffect(() => {
@@ -26,7 +26,7 @@ export const DataContextProvider = ({ children }) => {
     Client.get("/student-management/class")
       .then((response) => {
         const ListClass = response.data;
-        console.log(ListClass);
+        // console.log(ListClass);
         if (ListClass.status === "Success") {
           setLop(ListClass.data);
         }

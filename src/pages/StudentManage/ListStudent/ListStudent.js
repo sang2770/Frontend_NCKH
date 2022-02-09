@@ -11,17 +11,18 @@ import Pagination from "../../../component/Pagination/Pagination";
 import queryString from "query-string";
 import { DataContext } from "../../../DataContext/DataContext";
 import useAxios from "../../../Helper/API";
+import LoadingEffect from "../../../component/Loading/Loading";
 const tableHeaders = ["Mã sinh viên", "Họ và tên", "Lớp", "Khoa"];
 function ListStudent() {
-  const Client = useAxios();
+  const { Client, Loading } = useAxios();
   const [ListStudent, setListStudent] = useState([]);
   const [paginations, setPaginations] = useState({
-    limit: 1,
+    limit: 10,
     page: 1,
     TotalPage: 1,
   });
   const [filter, setfilter] = useState({
-    limit: 1,
+    limit: 10,
     page: 1,
   });
   const [Err, setErr] = useState(null);
@@ -31,6 +32,7 @@ function ListStudent() {
     Client.get("/student-management/users?" + params)
       .then((response) => {
         const List = response.data;
+        console.log(List);
         if (List.status === "Success") {
           setPaginations(List.pagination);
           setListStudent(List.data);
@@ -49,7 +51,7 @@ function ListStudent() {
       clearTimeout(Time.current);
     }
     Time.current = setTimeout(() => {
-      setfilter({ ...filter, limit: input.value });
+      setfilter({ ...filter, limit: input.value, page: 1 });
     }, 300);
   };
 
@@ -88,7 +90,7 @@ function ListStudent() {
         setErr(true);
       });
   };
-  console.log(ListStudent);
+  // console.log(ListStudent);
   return (
     <div className={style.List_Header_container}>
       <HeaderTitle Title="Danh sách sinh viên" Icon={<BsFillPeopleFill />} />
@@ -111,6 +113,8 @@ function ListStudent() {
         </div>
       </div>
       <div className={style.DataList}>
+        {Loading && <LoadingEffect />}
+
         <Table
           headers={tableHeaders}
           Content={<TableContent data={ListStudent} ReadForm={true} />}

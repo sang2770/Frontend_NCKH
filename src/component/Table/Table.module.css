@@ -70,3 +70,8 @@ thead .Table_Header {
   padding: 10px 5px;
   font-weight: 600;
 }
+.Confirm {
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--Main-color);
+}

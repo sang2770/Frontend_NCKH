@@ -82,14 +82,28 @@
   padding: 5px;
   width: 90%;
 }
+.OptionLogin {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+.ForgotPassword {
+  color: var(--Main-color);
+  font-size: 1.6rem;
+  margin-left: 5px;
+  cursor: pointer;
+  text-decoration: underline;
+}
 .SaveLogin {
-  margin: 15px 0px;
+  padding: 0px 5px;
 }
 .LabelSave {
   margin-left: 10px;
   font-size: 1.6rem;
 }
-
+.Line {
+  font-size: 1.6rem;
+}
 .btn-Submit {
   border-radius: 10px;
   margin-top: 30px;

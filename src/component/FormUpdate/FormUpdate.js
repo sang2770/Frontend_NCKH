@@ -9,7 +9,7 @@ function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
   const ChangeTab = (id) => {
     setTab(id);
   };
-  const Client = useAxios();
+  const { Client } = useAxios();
   const SumitUpdate = (form, ResetForm) => {
     form.append("_method", "PATCH");
     console.log(form.get("TonGiao"));

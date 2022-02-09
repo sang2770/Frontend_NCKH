@@ -4,6 +4,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import clsx from "clsx";
 
 function Pagination({ title, paginations, filter, setfilter, ChangeLimit }) {
+  // console.log(paginations);
   const NextPage = () => {
     const CurrentPage = filter.page;
     if (CurrentPage < paginations.TotalPage) {

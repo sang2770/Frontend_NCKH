@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./Loading.module.css";
 function Loading() {
+  console.log("Loading");
   return (
     <div className={style.Loading_Container}>
       <div className={style.double_loading}>

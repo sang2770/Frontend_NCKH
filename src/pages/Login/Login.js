@@ -4,8 +4,10 @@ import Banner from "../../media/Image/BannerLogin.jpg";
 import "./Login.css";
 import { AuthContext } from "../../authContext/AuthContext";
 import { login } from "../../authContext/CallApi";
+import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
 function Login() {
+  const history = useNavigate();
   const { isFetching, dispatch, err } = useContext(AuthContext);
   const TenDangNhap = useRef();
   const Password = useRef();
@@ -19,6 +21,16 @@ function Login() {
       },
       dispatch
     );
+  };
+  const ShowPass = (e) => {
+    if (e.target.checked) {
+      Password.current.setAttribute("type", "text");
+    } else {
+      Password.current.setAttribute("type", "password");
+    }
+  };
+  const ForgotPass = () => {
+    history("/Forgot-password");
   };
   return (
     <React.Fragment>
@@ -59,11 +71,22 @@ function Login() {
                 ref={Password}
                 required
               />
-              <div className="SaveLogin">
-                <input type="checkbox" id="checkSave" />
-                <label className="Label LabelSave" htmlFor="checkSave">
-                  Nhớ mật khẩu
-                </label>
+              <div className="OptionLogin">
+                <div className="SaveLogin">
+                  <input
+                    type="checkbox"
+                    id="checkSave"
+                    name="SaveLogin"
+                    onChange={ShowPass}
+                  />
+                  <label className="Label LabelSave" htmlFor="checkSave">
+                    Hiện mật khẩu
+                  </label>
+                </div>
+                <div className="Line">|</div>
+                <div className="ForgotPassword" onClick={ForgotPass}>
+                  Quên mật khẩu?
+                </div>
               </div>
               <h2 className={clsx("Login_Message", err && "errorMessage")}>
                 {err}

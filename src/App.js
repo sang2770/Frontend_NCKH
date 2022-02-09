@@ -6,6 +6,7 @@ import { AuthContext } from "./authContext/AuthContext";
 import Main from "./component/Main/Main";
 import Loading from "./component/Loading/Loading";
 import RequestStudent from "./pages/RequestStudent/RequestStudent";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 function App() {
   const { user, isFetching } = useContext(AuthContext);
   console.log(user);
@@ -18,6 +19,7 @@ function App() {
             path="*"
             element={user ? <Main /> : <Navigate to="/Login" />}
           />
+          <Route path="/Forgot-password" element={<ForgotPassword />} />
           <Route
             path="/Login"
             element={user ? <Navigate to="/" /> : <Login />}

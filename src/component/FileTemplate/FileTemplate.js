@@ -8,7 +8,7 @@ import useAxios from "../../Helper/API";
 import { BiExit } from "react-icons/bi";
 function FileTemplate({ Open }) {
   const [ListNameFile, setListNameFile] = useState([]);
-  const Client = useAxios();
+  const { Client } = useAxios();
   useEffect(() => {
     Client.get("/file-management/files")
       .then((res) => {

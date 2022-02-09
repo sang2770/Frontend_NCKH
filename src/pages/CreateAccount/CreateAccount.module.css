@@ -1,0 +1,40 @@
+.CreateAccount_Container {
+}
+.CreateAccount_Content {
+  font-size: 1.6rem;
+  padding: 10px;
+}
+.Content_Title {
+  color: var(--Main-color);
+  font-weight: bold;
+}
+.Input_Group {
+  padding: 10px 0px;
+}
+.Input_Item {
+  margin: 10px 0px;
+}
+.Input_Item label {
+  min-width: 150px;
+  display: inline-block;
+}
+.Input_Item input {
+  padding: 5px;
+}
+.Btn_Create {
+  padding: 10px 20px;
+  background-color: var(--Main-color);
+  border: none;
+  outline: none;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.Btn_Create:hover {
+  opacity: 0.8;
+}
+
+.Input_Err {
+  color: red;
+}
