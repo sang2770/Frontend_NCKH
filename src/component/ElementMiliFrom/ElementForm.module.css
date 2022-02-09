@@ -1,0 +1,16 @@
+.Element_form{
+    display: block;
+    padding-bottom: 20px;
+}
+.Element_form input{
+    outline: none;
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: white;
+    color: rgb(158, 158, 245);
+    margin-top: 10px;
+}
+.Element_form label{
+    font-size: 13px;
+    padding-right: 15px;
+}

@@ -3,6 +3,7 @@ import useAxios from "../Helper/API";
 const Initial = {
   Khoa: [],
   Lop: [],
+  Khoas: [],
 };
 
 export const DataContext = createContext(Initial);
@@ -10,6 +11,9 @@ export const DataContextProvider = ({ children }) => {
   const { Client } = useAxios();
   const [Khoa, setKhoa] = useState([]);
   const [Lop, setLop] = useState([]);
+  const [Khoas, setKhoas] = useState([]);
+  
+  //khoa
   useEffect(() => {
     Client.get("/student-management/majors")
       .then((response) => {
@@ -22,6 +26,8 @@ export const DataContextProvider = ({ children }) => {
         console.log(err);
       });
   }, []);
+
+  //lop
   useEffect(() => {
     Client.get("/student-management/class")
       .then((response) => {
@@ -36,11 +42,26 @@ export const DataContextProvider = ({ children }) => {
       });
   }, []);
 
+  //khóa
+  useEffect(() => {
+    Client.get("/student-management/majors-key")
+      .then((response) => {
+        const ListKhoas = response.data;
+        if (ListKhoas.status === "Success") {
+          setKhoas(ListKhoas.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <DataContext.Provider
       value={{
         Khoa: Khoa,
         Lop: Lop,
+        Khoas: Khoas,
       }}
     >
       {children}

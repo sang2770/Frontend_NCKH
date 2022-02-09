@@ -26,6 +26,12 @@ import UpdateStudent from "../../pages/StudentManage/UpdateStudent/UpdateStudent
 import { Logout } from "../../authContext/AuthAction";
 import { DataContextProvider } from "../../DataContext/DataContext";
 import RequestStudent from "../../pages/RequestStudent/RequestStudent";
+import RegisterMilitary from "../../pages/MilitaryManage/RegisterMilitary/RegisterMilitary";
+import MoveMilitary from "../../pages/MilitaryManage/MoveMilitary/MoveMilitary";
+import ConfirmMilitary from "../../pages/MilitaryManage/ConfirmMilitary/ConfirmMilitary";
+import MoveMilitaryLocal from "../../pages/MilitaryManage/MoveMilitaryLocal/MoveMilitaryLocal";
+import Notification from "../../pages/Notification/Notifications/Notifications";
+
 function Main() {
   const [clickMenu, setclickMenu] = useState(false);
   const [ActiveSub, setActiveSub] = useState(
@@ -182,7 +188,10 @@ function Main() {
                     ChangeMenuSubItem(1);
                   }}
                 >
-                  <Link to="/" className="SideBar_Item_content">
+                  <Link
+                    to="/Military-RegisterMilitary"
+                    className="SideBar_Item_content"
+                  >
                     <BsPersonPlusFill />
                     <span className="Item_content">Giấy nghĩa vụ quân sự</span>
                   </Link>
@@ -197,10 +206,13 @@ function Main() {
                     ChangeMenuSubItem(2);
                   }}
                 >
-                  <Link to="/" className="SideBar_Item_content">
+                  <Link
+                    to="/Military-MoveMilitaryLocal"
+                    className="SideBar_Item_content"
+                  >
                     <RiUserSettingsFill />
                     <span className="Item_content">
-                      Giấy di chuyển từ trường
+                      Giấy di chuyển từ địa phương
                     </span>
                   </Link>
                 </li>
@@ -214,7 +226,29 @@ function Main() {
                     ChangeMenuSubItem(3);
                   }}
                 >
-                  <Link to="/" className="SideBar_Item_content">
+                  <Link
+                    to="/Military-MoveMilitary"
+                    className="SideBar_Item_content"
+                  >
+                    <RiUserSettingsFill />
+                    <span className="Item_content">
+                      Giấy di chuyển từ trường
+                    </span>
+                  </Link>
+                </li>
+                <li
+                  className={clsx(
+                    "SideBar_MenuChild_item",
+                    MenuSubItem === 4 && "ActiveSubMenuItem"
+                  )}
+                  onClick={() => {
+                    ChangeMenuSubItem(4);
+                  }}
+                >
+                  <Link
+                    to="/Military-ConfirmMilitary"
+                    className="SideBar_Item_content"
+                  >
                     <BsFillPeopleFill />
                     <span className="Item_content">Giấy xác nhận</span>
                   </Link>
@@ -245,7 +279,7 @@ function Main() {
               }}
             >
               <Link
-                to="/"
+                to="/Notifiaction-main"
                 className={clsx(
                   "SideBar_Item_content",
                   ActiveSub === 5 && "ActiveItem"
@@ -309,6 +343,23 @@ function Main() {
                   />
                   <Route path="CreateAccount" element={<CreateAccount />} />
                   <Route path="/Request-Student" element={<RequestStudent />} />
+                  <Route
+                    path="Military-RegisterMilitary"
+                    element={<RegisterMilitary />}
+                  />
+                  <Route
+                    path="Military-MoveMilitaryLocal"
+                    element={<MoveMilitaryLocal />}
+                  />
+                  <Route
+                    path="Military-MoveMilitary"
+                    element={<MoveMilitary />}
+                  />
+                  <Route
+                    path="Military-ConfirmMilitary"
+                    element={<ConfirmMilitary />}
+                  />
+                  <Route path="Notifiaction-main" element={<Notification />} />
                 </Routes>
               </div>
             </DataContextProvider>

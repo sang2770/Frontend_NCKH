@@ -190,7 +190,7 @@ function AddStudent() {
             </div>
             <ul className={style.AddStudent_Tab}>
               <li
-                className={clsx(style.Tab_item, Tab === 1 && style.Active_Tab)}
+                className={clsx(style.Tab_item, KhoaImport && style.Active_Tab)}
                 onClick={() => {
                   setKhoaImport(true);
                 }}
@@ -198,7 +198,10 @@ function AddStudent() {
                 Thêm danh sách khoa
               </li>
               <li
-                className={clsx(style.Tab_item, Tab === 2 && style.Active_Tab)}
+                className={clsx(
+                  style.Tab_item,
+                  !KhoaImport && style.Active_Tab
+                )}
                 onClick={() => {
                   setKhoaImport(false);
                 }}

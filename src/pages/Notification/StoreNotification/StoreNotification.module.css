@@ -1,0 +1,14 @@
+.Main_store{
+    border: 1px solid rgb(158, 172, 250);
+    border-radius: 15px;
+    margin: 30px 30px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
+}
+.Main{
+    margin: 30px 50px;
+}
+
+.Header_tittel{
+    text-align: center;
+    margin-bottom: 30px;
+}

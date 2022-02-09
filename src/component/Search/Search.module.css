@@ -1,0 +1,30 @@
+.Search_input{
+    margin-left: 5%;
+    margin-top: 3%;
+}
+
+.Search_input input{
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    outline: #ccc;
+    margin-left: 5px;
+}
+
+.icon_search{
+    font-size: large;
+    /* float: right; */
+    padding-top: 8px;
+    margin-left: 15px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    outline: #ccc;
+    padding: 2px 5px;
+}
+.icon_search:hover{
+    cursor: pointer;
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

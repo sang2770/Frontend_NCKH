@@ -1,0 +1,15 @@
+.Form_main{
+    display: block;
+}
+
+.Form_right,
+.Form_left{
+    display: flex;
+}
+
+/* button */
+.Button_register{
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 20px;
+}
