@@ -12,9 +12,8 @@ import Button from "../../component/Button/Button";
 import Pagination from "../../component/Pagination/Pagination";
 import useFilter from "../../Helper/Filter";
 import useAxios from "../../Helper/API";
-import InputYear from "../../component/InputYear/InputYear";
 import LoadingEffect from "../../component/Loading/Loading";
-
+import queryString from "query-string";
 const tableHeaders = [
   "Mã sinh viên",
   "Họ và tên",
@@ -26,7 +25,6 @@ const tableHeaders = [
 
 function RequestStudent() {
   const [Confirm, setConfirm] = useState(false);
-  const [OpenExport, setOpenExport] = useState(false);
   const MSV = useRef({
     MaSinhVien: 1,
     MaYeuCau: 1,
@@ -73,21 +71,41 @@ function RequestStudent() {
       alert("Có lỗi! Vui lòng kiểm tra lại!");
     }
   };
+  const ExportPape = () => {
+    const stringify = queryString.stringify(MSV.current);
+    Client.get("confirm-military-management/confirm-military?" + stringify, {
+      responseType: "blob",
+    })
+      .then((response) => {
+        if (!response.data.status) {
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "GXN.docx"); //or any other extension
+          document.body.appendChild(link);
+          link.click();
+          alert("Xuất thành công");
+        } else {
+          alert("Có lỗi vui lòng thử lại");
+        }
+      })
+      .catch((err) => {
+        // console.log(err);
+        alert("Có lỗi vui lòng thử lại");
+      });
+  };
   const ExportAll = () => {
     MSV.current = useConfirmed.filter;
-    setOpenExport(true);
+    ExportPape();
   };
   return (
     <div className={style.Request_Student_Container}>
-      {OpenExport && (
-        <InputYear filter={MSV.current} setOpenExport={setOpenExport} />
-      )}
       <HeaderTitle Title="Yêu cầu của sinh viên" Icon={<AiOutlineMessage />} />
 
       <div className={style.ListConfirmed}>
         <div className={style.ListHeader}>
           <HiOutlineClipboardList />
-          <p className={style.ListHeader_content}>Danh sách chờ cấp</p>
+          <p className={style.ListHeader_content}>Danh sách chờ xác nhận</p>
         </div>
         <div className={style.Filter}>
           <div className={style.Filter_Item}>
@@ -140,7 +158,7 @@ function RequestStudent() {
       <div className={style.ListConfirmed}>
         <div className={style.ListHeader}>
           <HiOutlineClipboardList />
-          <p className={style.ListHeader_content}>Danh sách chờ xác nhận</p>
+          <p className={style.ListHeader_content}>Danh sách chờ cấp</p>
         </div>
         <div className={style.Filter}>
           <div className={style.Filter_Item}>
@@ -186,7 +204,7 @@ function RequestStudent() {
                 Confirm={Confirm}
                 setConfirm={setConfirm}
                 MSV={MSV}
-                setOpenExport={setOpenExport}
+                ExportPape={ExportPape}
               />
             }
           />

@@ -14,7 +14,7 @@ const TableContent = ({
   setConfirm,
   Confirmed,
   MSV,
-  setOpenExport,
+  ExportPape,
 }) => {
   const [DropDown, setDropDown] = useState(-1);
   const ChangeDropDown = (id) => {
@@ -22,8 +22,11 @@ const TableContent = ({
   };
   // Request Student
   const { Client } = useAxios();
-  const ConfirmSingle = (id) => {
-    Client.post("/request-management/confirm/" + id)
+  const ConfirmSingle = (id, MaYeuCau) => {
+    // console.log(MaYeuCau);
+    Client.post("/request-management/confirm/" + id, {
+      MaYeuCau: MaYeuCau,
+    })
       .then((response) => {
         console.log(response.data);
         if (response.data.status === "Success") {
@@ -37,7 +40,7 @@ const TableContent = ({
   const Export = (id, idYC) => {
     MSV.current.MaSinhVien = id;
     MSV.current.MaYeuCau = idYC;
-    setOpenExport(true);
+    ExportPape();
   };
   return (
     <tbody>
@@ -80,7 +83,7 @@ const TableContent = ({
                 <td
                   className={clsx(style.Confirm, style.Table_Column)}
                   onClick={() => {
-                    ConfirmSingle(item.MaSinhVien);
+                    ConfirmSingle(item.MaSinhVien, item.MaYeuCau);
                   }}
                 >
                   Xác nhận

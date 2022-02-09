@@ -11,8 +11,9 @@ function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
   };
   const { Client } = useAxios();
   const SumitUpdate = (form, ResetForm) => {
+    form.delete("MaSinhVien");
     form.append("_method", "PATCH");
-    console.log(form.get("TonGiao"));
+    // console.log(form.get("TonGiao"));
     Client.post("/student-management/user/" + DataStudent.MaSinhVien, form, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -28,6 +29,7 @@ function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
         }
       })
       .catch((err) => {
+        alert("Bạn chưa cập nhật thành công!");
         console.log(err);
       });
   };
