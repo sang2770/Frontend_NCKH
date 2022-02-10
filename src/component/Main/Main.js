@@ -360,7 +360,6 @@ function Main() {
                     path="Military-ConfirmMilitary"
                     element={<ConfirmMilitary />}
                   />
-
                   <Route path="ExportAnalyst" element={<Analyst />} />
                   <Route path="Notifiaction-main" element={<Notification />} />
                 </Routes>
