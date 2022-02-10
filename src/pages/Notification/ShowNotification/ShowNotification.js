@@ -25,27 +25,6 @@ const ShowNotification = ({data, onClickHide, idTB}) => {
         setDropDownBtn(!DropDownBtn);
     };
     
-    // delete Thong bao
-    const [idDelete, setIdDelete] = useState(idTB);
-
-    const changeID = (id) => {
-        setIdDelete(id);
-    }
-
-    const deleteNoti = () => {
-        if( window.confirm("Bạn có muốn xóa thông báo này không?") === true){
-            idDelete && Client.delete("/notification-management/delete-notification/" + idDelete)
-            .then((response) => {
-            if (response.data.status === "Success deleted") {
-                alert("Bạn đã xóa thông báo thành công!!!");
-            }
-            })
-            .catch((err) => {
-                alert("Not Found!!!");
-            });
-        }
-    };
-
     // gui thong bao
     const [FilterKhoa, setFilterKhoa] = useState("");
     const [FilterKhoas, setFilterKhoas] = useState("");
@@ -250,13 +229,6 @@ const ShowNotification = ({data, onClickHide, idTB}) => {
                                 onClick={() => {
                                     ChangeDropDownShow();
                                     ChangeDropDownBtn();
-                                }} 
-                            />
-                            <Button 
-                                content="Xóa thông báo" 
-                                onClick={() => {
-                                    changeID(item.MaThongBaoChinh);
-                                    deleteNoti();
                                 }} 
                             />
                         </div>

@@ -26,6 +26,8 @@ function Notification(){
         page: 1,
     });
     
+    const [deleteNoti, setDeleteNoti] = useState(false);
+
     useEffect(() => {
         const params = queryString.stringify(filter);
         Client.get("/notification-management/index-header-notification?" + params)
@@ -39,7 +41,7 @@ function Notification(){
           .catch((err) => {
             setErr(true);
           });
-      }, [filter]);
+      }, [filter, deleteNoti]);
 
     const Time = useRef(null);
     const ChangeLimit = (e) => {
@@ -52,6 +54,7 @@ function Notification(){
         }, 300);
     };
 
+    // show hide
     const [Noti, setNoti] = React.useState(true)
     const [StoreNoti, setStoreNoti] = React.useState(false)
 
@@ -65,7 +68,6 @@ function Notification(){
         <React.Fragment>
             <div>
             { StoreNoti ? <StoreNotification /> : null }
-            {/* { SentNoti ? <SentNotification data={TieuDe}/> : null } */}
             { Noti ? (
                 <div className={style.MainNoti}>
                     <h1 className={style.Hearder_text}>THÔNG BÁO</h1>
@@ -74,6 +76,8 @@ function Notification(){
                             {/* Danh sach tieu de thong bao */}
                             <ItemNotification 
                                 data = {TieuDe}
+                                datadelete = {deleteNoti}
+                                setDelete = {setDeleteNoti}
                             />
                         </div>
                         <div className={style.PaginationNoti}>

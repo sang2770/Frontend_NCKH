@@ -25,13 +25,17 @@
     border-bottom: 1px solid blue;
 }
 
+/*  */
 .Noti_input{
     padding-left: 30px;
     float: right;
+    font-size: large;
 }
-.Noti_input input:hover{
+
+.Noti_input :hover{
     cursor: pointer;
-    box-shadow: 0 4px 5px 0 rgba(113, 89, 250, 0.2), 0 6px 20px 0 rgba(43, 40, 240, 0.19);
+    color: red;
+    box-shadow: 0 4px 5px 0 rgba(231, 36, 62, 0.2), 0 6px 20px 0 rgba(231, 27, 78, 0.19);
 }
 .Active_Form {
     height: auto !important;

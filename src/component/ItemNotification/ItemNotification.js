@@ -4,8 +4,10 @@ import {AiOutlineStar} from "react-icons/ai";
 import ShowNotification from "../../pages/Notification/ShowNotification/ShowNotification";
 import useAxios from "../../Helper/API";
 import clsx from "clsx";
+import { TiDeleteOutline } from "react-icons/ti";
+import { MdOutlineDeleteForever } from "react-icons/md";
 
-function ItemNotification({ data, onClickSent }){
+function ItemNotification({ data, datadelete, setDelete }){
 
     const [DropDown, setDropDown] = useState(-1);
 
@@ -35,6 +37,25 @@ function ItemNotification({ data, onClickSent }){
             });
     };
 
+// xóa thong bao
+    const deleteNoti = (idDelete) => {
+        if( window.confirm("Bạn có muốn xóa thông báo này không?") === true){
+            idDelete && Client.delete("/notification-management/delete-notification/" + idDelete)
+            .then((response) => {
+            if (response.data.status === "Success deleted") {
+                setDelete(!datadelete)
+                alert("Bạn đã xóa thông báo thành công!!!");
+            }
+            else{
+            alert("Có lỗi!!!");
+            }
+            })
+            .catch((err) => {
+                alert("Thông báo này đã gửi đến sinh viên. Bạn không thể xóa thông báo!");
+            });
+        }
+    };
+
     return (
         <tbody className={style.bodyNoti}>
             {data.map((item, index) => (
@@ -53,10 +74,12 @@ function ItemNotification({ data, onClickSent }){
                             </label>
                         </div>
                     </div>
-                    <div className={style.Noti_input}>
-                        <input 
-                            type="checkbox"
-                        />
+                    <div 
+                        className={style.Noti_input} 
+                        onClick = {() => {
+                            deleteNoti(item.MaThongBaoChinh);
+                        }}>
+                        <TiDeleteOutline/>
                     </div>
                 </div>
                 <div className={clsx(
@@ -67,7 +90,6 @@ function ItemNotification({ data, onClickSent }){
                     <ShowNotification 
                         data={ContentNoti} 
                         onClickHide = {ChangeDropDownShowNoti}
-                        idTB = {item.MaThongBaoChinh}
                     />
                 </div>
             </React.Fragment>
