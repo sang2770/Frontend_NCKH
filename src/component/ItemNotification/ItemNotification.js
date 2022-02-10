@@ -5,7 +5,6 @@ import ShowNotification from "../../pages/Notification/ShowNotification/ShowNoti
 import useAxios from "../../Helper/API";
 import clsx from "clsx";
 import { TiDeleteOutline } from "react-icons/ti";
-import { MdOutlineDeleteForever } from "react-icons/md";
 
 function ItemNotification({ data, datadelete, setDelete }){
 
