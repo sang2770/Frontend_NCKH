@@ -225,7 +225,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           )}
         </div>
       </div>
-      <Button content={contentBtn} styles={{ marginTop: "10px" }} />
+      {!Read && <Button content={contentBtn} styles={{ marginTop: "10px" }} />}
     </form>
   );
 }

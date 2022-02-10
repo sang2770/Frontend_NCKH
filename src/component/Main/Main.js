@@ -31,6 +31,7 @@ import MoveMilitary from "../../pages/MilitaryManage/MoveMilitary/MoveMilitary";
 import ConfirmMilitary from "../../pages/MilitaryManage/ConfirmMilitary/ConfirmMilitary";
 import MoveMilitaryLocal from "../../pages/MilitaryManage/MoveMilitaryLocal/MoveMilitaryLocal";
 import Notification from "../../pages/Notification/Notifications/Notifications";
+import Analyst from "../../pages/Analyst/Analyst";
 
 function Main() {
   const [clickMenu, setclickMenu] = useState(false);
@@ -262,7 +263,7 @@ function Main() {
               }}
             >
               <Link
-                to="/"
+                to="/ExportAnalyst"
                 className={clsx(
                   "SideBar_Item_content",
                   ActiveSub === 4 && "ActiveItem"
@@ -359,6 +360,8 @@ function Main() {
                     path="Military-ConfirmMilitary"
                     element={<ConfirmMilitary />}
                   />
+
+                  <Route path="ExportAnalyst" element={<Analyst />} />
                   <Route path="Notifiaction-main" element={<Notification />} />
                 </Routes>
               </div>
