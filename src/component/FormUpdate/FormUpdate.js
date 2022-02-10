@@ -9,6 +9,8 @@ function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
   const ChangeTab = (id) => {
     setTab(id);
   };
+  const [ErrUpdate, setErrUpdate] = useState();
+  const [ErrTitle, setErrTitle] = useState();
   const { Client } = useAxios();
   const SumitUpdate = (form, ResetForm) => {
     form.delete("MaSinhVien");
@@ -23,14 +25,19 @@ function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
         console.log(res);
         if (res.data.status === "Success") {
           alert("Bạn đã cập nhật thành công!");
+          setErrUpdate(null);
+          setErrTitle(null);
           setData(res.data.data);
         } else {
+          setErrTitle(res.data.Err_Message);
           alert("Bạn chưa cập nhật thành công!");
         }
       })
       .catch((err) => {
-        alert("Bạn chưa cập nhật thành công!");
         console.log(err);
+        setErrUpdate(err.data.info);
+        setErrTitle(err.data.Err_Message);
+        alert("Bạn chưa cập nhật thành công!");
       });
   };
   // console.log(History);
@@ -51,19 +58,20 @@ function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
       date.getFullYear()
     );
   };
-  const getContent = (Content) => {
-    let NoiDung;
-    NoiDung += <p> Người sửa: {Content.TenDangNhap} </p>;
-    NoiDung += (
-      <p>
-        Nội dung:
-        {Object.keys(Content.NoiDung).map(
-          (item) => Content.NoiDung[item] + ","
-        )}
-      </p>
-    );
-    return NoiDung;
-  };
+
+  // const getContent = (Content) => {
+  //   let NoiDung;
+  //   NoiDung += <p> Người sửa: {Content.TenDangNhap} </p>;
+  //   NoiDung += (
+  //     <p>
+  //       Nội dung:
+  //       {Object.keys(Content.NoiDung).map(
+  //         (item) => Content.NoiDung[item] + ","
+  //       )}
+  //     </p>
+  //   );
+  //   return NoiDung;
+  // };
   return (
     <div className={style.FormUpdate}>
       <div className={style.InfoUpdate}>
@@ -92,11 +100,33 @@ function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
         </ul>
         <div className={style.Content}>
           {Tab === 1 ? (
-            <FormStudent
-              contentBtn="Cập nhật"
-              data={DataStudent}
-              Submit={SumitUpdate}
-            />
+            <React.Fragment>
+              <FormStudent
+                contentBtn="Cập nhật"
+                data={DataStudent}
+                Submit={SumitUpdate}
+              />
+              {ErrTitle && <div className={style.ErrTitleMess}>{ErrTitle}</div>}
+              {ErrUpdate && (
+                <div className={style.Err_container}>
+                  <h2 className={style.ErrTitle}>Có Lỗi!!!</h2>
+                  <div className={style.ResultImport}>
+                    <table className={style.TableErr} border={1}>
+                      <thead>
+                        <tr>
+                          <th>Nội dung</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {ErrUpdate.map((item, index) => (
+                          <tr key={index}>{item}</tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </React.Fragment>
           ) : (
             <React.Fragment>
               <div>Lịch sử</div>

@@ -242,7 +242,8 @@ function Main() {
                     "SideBar_Item_content",
                     MenuSubItem === 4 && "ActiveSubMenuItem"
                   )}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     ChangeMenuSubItem(4);
                   }}
                 >
