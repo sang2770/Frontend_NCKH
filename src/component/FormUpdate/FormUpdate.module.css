@@ -58,3 +58,24 @@
 .TableHistory td {
   padding: 10px;
 }
+.Err_container {
+  padding: 10px;
+}
+.TableErr {
+  border-spacing: 0px;
+  width: 500px;
+  max-width: 100%;
+  font-size: 1.5rem;
+  margin: 10px;
+}
+.TableErr td {
+  padding: 5px 10px;
+}
+.ErrTitle,
+.ErrTitleMess {
+  padding: 0px 10px;
+  color: red;
+}
+.ErrTitleMess {
+  margin-top: 10px;
+}
