@@ -4,6 +4,7 @@ import FormStudent from "../FormStudent/FormStudent";
 import { BiExit } from "react-icons/bi";
 import clsx from "clsx";
 import useAxios from "../../Helper/API";
+import LoadingEffect from "../Loading/Loading";
 function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
   const [Tab, setTab] = useState(1);
   const ChangeTab = (id) => {
@@ -11,7 +12,7 @@ function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
   };
   const [ErrUpdate, setErrUpdate] = useState();
   const [ErrTitle, setErrTitle] = useState();
-  const { Client } = useAxios();
+  const { Client, Loading } = useAxios();
   const SumitUpdate = (form, ResetForm) => {
     form.delete("MaSinhVien");
     form.append("_method", "PATCH");
@@ -58,22 +59,9 @@ function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
       date.getFullYear()
     );
   };
-
-  // const getContent = (Content) => {
-  //   let NoiDung;
-  //   NoiDung += <p> Người sửa: {Content.TenDangNhap} </p>;
-  //   NoiDung += (
-  //     <p>
-  //       Nội dung:
-  //       {Object.keys(Content.NoiDung).map(
-  //         (item) => Content.NoiDung[item] + ","
-  //       )}
-  //     </p>
-  //   );
-  //   return NoiDung;
-  // };
   return (
     <div className={style.FormUpdate}>
+      {Loading && <LoadingEffect />}
       <div className={style.InfoUpdate}>
         <div className={style.Btn_Exit} onClick={Open}>
           <BiExit />

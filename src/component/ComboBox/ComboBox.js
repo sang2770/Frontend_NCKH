@@ -3,7 +3,7 @@ import style from "./ComboBox.module.css";
 function ComboBox({ id, items, title, data, Change }) {
   // console.log(items);
   return (
-    <div className="GroupBox_Container">
+    <div className={style.GroupBox_Container}>
       <label className={style.LabelFilter} htmlFor={id}>
         {title}:
       </label>

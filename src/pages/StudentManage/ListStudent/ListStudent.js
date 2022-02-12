@@ -26,7 +26,7 @@ function ListStudent() {
     page: 1,
   });
   const [Err, setErr] = useState(null);
-  const { Lop, Khoa } = useContext(DataContext);
+  const { Lop, Khoa, Khoas } = useContext(DataContext);
   useEffect(() => {
     const params = queryString.stringify(filter);
     Client.get("/student-management/users?" + params)
@@ -110,6 +110,14 @@ function ListStudent() {
         </div>
         <div className={style.ListStudent_Filter_Item}>
           <ComboBox title="Khoa" id="Khoa" items={Khoa} Change={ChangeFilter} />
+        </div>
+        <div className={style.ListStudent_Filter_Item}>
+          <ComboBox
+            title="Khóa"
+            id="Khoas"
+            items={Khoas}
+            Change={ChangeFilter}
+          />
         </div>
       </div>
       <div className={style.DataList}>

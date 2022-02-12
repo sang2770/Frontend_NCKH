@@ -2,7 +2,7 @@ import React from "react";
 import style from "./TextBox.module.css";
 function TextBox({ title, subtitle, Read, Change, data, date, Ref }) {
   return (
-    <div className="TextBox_Group">
+    <div className={style.TextBox_Group}>
       <label htmlFor={subtitle} className={style.LabelFilter}>
         {title}:
       </label>

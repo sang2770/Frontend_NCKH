@@ -7,13 +7,14 @@ import FormStudent from "../../../component/FormStudent/FormStudent";
 import Button from "../../../component/Button/Button";
 import useAxios from "../../../Helper/API";
 import FileTemplate from "../../../component/FileTemplate/FileTemplate";
+import LoadingEffect from "../../../component/Loading/Loading";
 function AddStudent() {
   const [Tab, setTab] = useState(1);
   const ChangeTab = (id) => {
     setTab(id);
   };
   const [ErrAdd, setErrAdd] = useState();
-  const { Client } = useAxios();
+  const { Client, Loading } = useAxios();
   const Submit = async (form, ResetForm) => {
     console.log(form);
     try {
@@ -76,6 +77,7 @@ function AddStudent() {
   const [KhoaImport, setKhoaImport] = useState(true);
   return (
     <div className={style.AddStudent_container}>
+      {Loading && <LoadingEffect />}
       {openFileTemplate && (
         <FileTemplate
           Open={() => {
@@ -134,7 +136,7 @@ function AddStudent() {
               </div>
             )}
           </React.Fragment>
-        ) : Tab == 2 ? (
+        ) : Tab === 2 ? (
           <React.Fragment>
             <div className={style.FileTemplate}>
               <h3>Chọn File mẫu</h3>

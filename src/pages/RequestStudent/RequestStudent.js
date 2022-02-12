@@ -44,7 +44,7 @@ function RequestStudent() {
     "/request-management/confirm?",
     Confirm
   );
-  const { Lop, Khoa } = useContext(DataContext);
+  const { Lop, Khoa, Khoas } = useContext(DataContext);
   const { Client } = useAxios();
 
   const ConfirmAll = async () => {
@@ -129,6 +129,14 @@ function RequestStudent() {
               Change={ChangeFilter}
             />
           </div>
+          <div className={style.Filter_Item}>
+            <ComboBox
+              title="Khóa"
+              id="Khoas"
+              items={Khoas}
+              Change={ChangeFilter}
+            />
+          </div>
         </div>
         <div className={style.DataList}>
           {Loading && <LoadingEffect />}
@@ -189,6 +197,14 @@ function RequestStudent() {
               id="Khoa"
               items={Khoa}
               Change={useConfirmed.ChangeFilter}
+            />
+          </div>
+          <div className={style.Filter_Item}>
+            <ComboBox
+              title="Khóa"
+              id="Khoas"
+              items={Khoas}
+              Change={ChangeFilter}
             />
           </div>
         </div>

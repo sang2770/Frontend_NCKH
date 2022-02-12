@@ -49,18 +49,20 @@ const TableContent = ({
           <React.Fragment key={index}>
             <tr className={style.Table_Row}>
               <td className={style.Table_Column}>
-                {!Check && (
-                  <p
-                    className={style.IconDropDown}
-                    onDoubleClick={() => {
-                      setDropDown(-1);
-                    }}
-                    onClick={() => ChangeDropDown(index)}
-                  >
-                    <IoIosArrowDown />
-                  </p>
-                )}
-                <span>{index + 1}</span>
+                <div className={style.Dropdown}>
+                  {!Check && (
+                    <p
+                      className={style.IconDropDown}
+                      onDoubleClick={() => {
+                        setDropDown(-1);
+                      }}
+                      onClick={() => ChangeDropDown(index)}
+                    >
+                      <IoIosArrowDown />
+                    </p>
+                  )}
+                  <span>{index + 1}</span>
+                </div>
               </td>
               <td className={style.Table_Column}>
                 <span>{item.MaSinhVien}</span>
