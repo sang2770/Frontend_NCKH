@@ -58,7 +58,6 @@ const ShowNotification = ({data, onClickHide}) => {
         }
     };
 
-      
     ////update form
     const [store, setStore] = useState(false);
     const [contentStore, setContentStore] = useState(true);
