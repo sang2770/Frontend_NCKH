@@ -27,7 +27,6 @@ function FormStoreNoti({onClickBack, Submit}){
                         id="TieuDeTB"
                         type="text"
                         name="TieuDeTB"
-                        onChange=""
                         required
                     />
                 </div>
@@ -40,7 +39,6 @@ function FormStoreNoti({onClickBack, Submit}){
                         id="NoiDungTB"
                         type="text"
                         name="NoiDungTB"
-                        onChange=""
                         required
                     />
                 </div>
