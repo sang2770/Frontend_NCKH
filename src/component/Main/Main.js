@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Logo from "../../media/Image/Logo.jpg";
 import Avatar from "../../media/Image/avatar.jpg";
 import NameSchool from "../../media/Image/NameSchool.png";
@@ -59,6 +59,17 @@ function Main() {
   const Out = () => {
     dispatch(Logout());
   };
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      const width = document.documentElement.clientWidth;
+      if (width < 600) {
+        setclickMenu(true);
+      } else {
+        setclickMenu(false);
+      }
+    });
+  }, []);
+
   return (
     <React.Fragment>
       <div className="Main_container">

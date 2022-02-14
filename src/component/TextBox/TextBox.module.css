@@ -1,9 +1,14 @@
+.TextBox_Group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
 .TextBox {
   width: 100%;
   padding: 12px;
   outline: #ccc;
   border: 1px solid #ccc;
-  resize: vertical;
   border-radius: 5px;
 }
 .LabelFilter {

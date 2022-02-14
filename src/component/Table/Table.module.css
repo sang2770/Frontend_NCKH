@@ -8,9 +8,9 @@
 }
 
 /* ẩn thanh scroll */
-.Table_wrapper::-webkit-scrollbar { 
+.Table_wrapper::-webkit-scrollbar {
   width: 0 !important;
-  display: none; 
+  display: none;
 }
 
 .TableTemplate {
@@ -43,16 +43,18 @@ thead .Table_Header {
   border-bottom: 1px solid #ccc;
   padding: 10px;
   font-size: 1.5rem;
-  word-break: break-all;
+  word-wrap: break-word;
 }
 .STT {
   width: 100px;
 }
 .Table_Row td:first-child {
+  text-align: center;
+}
+.Dropdown {
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 100px;
+  align-items: center;
 }
 .IconDropDown {
   padding-right: 5px;

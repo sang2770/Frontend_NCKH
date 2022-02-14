@@ -7,9 +7,10 @@ import Button from "../../../component/Button/Button";
 import style from "./UpdateStudent.module.css";
 import useAxios from "../../../Helper/API";
 import FormUpdate from "../../../component/FormUpdate/FormUpdate";
+import LoadingEffect from "../../../component/Loading/Loading";
 function UpdateStudent() {
   const [data, setData] = useState();
-  const { Client } = useAxios();
+  const { Client, Loading } = useAxios();
   const Filter = useRef("");
   const [Err, setErr] = useState([]);
   const [Open, setOpen] = useState(false);
@@ -82,6 +83,7 @@ function UpdateStudent() {
         />
         <div className={style.ResultSearch}>
           <h2 className={style.ResultSearch_Tilte}> Kết quả tìm kiếm</h2>
+          {Loading && <LoadingEffect />}
           {Err && <h3 className={style.NotFound}></h3>}
           {data && !Err && (
             <div className={style.ResultInf}>

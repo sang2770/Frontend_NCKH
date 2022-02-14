@@ -44,22 +44,15 @@ function RequestStudent() {
     "/request-management/confirm?",
     Confirm
   );
-  const { Lop, Khoa } = useContext(DataContext);
+  const { Lop, Khoa, Khoas } = useContext(DataContext);
   const { Client } = useAxios();
 
   const ConfirmAll = async () => {
-    const form = new FormData();
-    form.append("MSV", JSON.stringify(useConfirmed.ListMSV));
+    if (!window.confirm("Bạn có muốn xác nhận tất cả yêu cầu?")) {
+      return;
+    }
     try {
-      const result = await Client.post(
-        "/request-management/confirmIndex",
-        form,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const result = await Client.post("/request-management/confirmIndex");
       console.log(result);
       if (result.data.status !== "Failed") {
         alert("Bạn đã Thao tác thành công thành công!");
@@ -129,6 +122,14 @@ function RequestStudent() {
               Change={ChangeFilter}
             />
           </div>
+          <div className={style.Filter_Item}>
+            <ComboBox
+              title="Khóa"
+              id="Khoas"
+              items={Khoas}
+              Change={ChangeFilter}
+            />
+          </div>
         </div>
         <div className={style.DataList}>
           {Loading && <LoadingEffect />}
@@ -136,7 +137,7 @@ function RequestStudent() {
             headers={tableHeaders}
             Content={
               <TableContent
-                Check={true}
+                TabelConfirm={true}
                 data={ListRequest}
                 Confirm={Confirm}
                 setConfirm={setConfirm}
@@ -191,6 +192,14 @@ function RequestStudent() {
               Change={useConfirmed.ChangeFilter}
             />
           </div>
+          <div className={style.Filter_Item}>
+            <ComboBox
+              title="Khóa"
+              id="Khoas"
+              items={Khoas}
+              Change={ChangeFilter}
+            />
+          </div>
         </div>
         <div className={style.DataList}>
           {useConfirmed.Loading && <LoadingEffect />}
@@ -199,7 +208,7 @@ function RequestStudent() {
             Content={
               <TableContent
                 data={useConfirmed.ListRequest}
-                Check={true}
+                TabelConfirm={true}
                 Confirmed={true}
                 Confirm={Confirm}
                 setConfirm={setConfirm}

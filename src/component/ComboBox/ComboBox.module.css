@@ -1,3 +1,9 @@
+.GroupBox_Container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  height: 100%;
+}
 .ComboBox_Container {
   width: 100%;
   padding: 12px;
@@ -7,8 +13,14 @@
   outline: #ccc;
 }
 .LabelFilter {
+  flex: 1;
   font-size: 1.6rem;
   display: block;
   margin-bottom: 5px;
   padding-left: 5px;
+}
+.ComboBox_Container select {
+  display: block;
+  flex-shrink: 0;
+  margin-top: auto;
 }

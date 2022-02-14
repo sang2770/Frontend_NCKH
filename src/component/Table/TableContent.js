@@ -4,12 +4,13 @@ import { IoIosArrowDown } from "react-icons/io";
 import FormStudent from "../FormStudent/FormStudent";
 import clsx from "clsx";
 import useAxios from "../../Helper/API";
+// Check--Kiểm tra xem có phải là bảng yêu cầu k
 const TableContent = ({
   data,
   ReadForm,
   contentBtn,
   Submit,
-  Check,
+  TabelConfirm,
   Confirm,
   setConfirm,
   Confirmed,
@@ -49,18 +50,20 @@ const TableContent = ({
           <React.Fragment key={index}>
             <tr className={style.Table_Row}>
               <td className={style.Table_Column}>
-                {!Check && (
-                  <p
-                    className={style.IconDropDown}
-                    onDoubleClick={() => {
-                      setDropDown(-1);
-                    }}
-                    onClick={() => ChangeDropDown(index)}
-                  >
-                    <IoIosArrowDown />
-                  </p>
-                )}
-                <span>{index + 1}</span>
+                <div className={style.Dropdown}>
+                  {!TabelConfirm && (
+                    <p
+                      className={style.IconDropDown}
+                      onDoubleClick={() => {
+                        setDropDown(-1);
+                      }}
+                      onClick={() => ChangeDropDown(index)}
+                    >
+                      <IoIosArrowDown />
+                    </p>
+                  )}
+                  <span>{index + 1}</span>
+                </div>
               </td>
               <td className={style.Table_Column}>
                 <span>{item.MaSinhVien}</span>
@@ -69,17 +72,17 @@ const TableContent = ({
                 <span>{item.HoTen}</span>
               </td>
               <td className={style.Table_Column}>
-                <span>{Check ? item.LanXinCap : item.TenLop}</span>
+                <span>{TabelConfirm ? item.LanXinCap : item.TenLop}</span>
               </td>
               <td className={style.Table_Column}>
-                <span>{Check ? item.NgayYeuCau : item.TenKhoa}</span>
+                <span>{TabelConfirm ? item.NgayYeuCau : item.TenKhoa}</span>
               </td>
-              {Check && (
+              {TabelConfirm && (
                 <td className={style.Table_Column}>
                   <span>{item.TrangThaiXuLy}</span>
                 </td>
               )}
-              {!Confirmed && Check && (
+              {!Confirmed && TabelConfirm && (
                 <td
                   className={clsx(style.Confirm, style.Table_Column)}
                   onClick={() => {

@@ -19,7 +19,7 @@
   margin-top: 10px;
 }
 .Filter_Item {
-  width: calc(100% / 4 - 20px);
+  width: calc(100% / 5 - 20px);
   margin: 0px 5px;
 }
 .DataList {
