@@ -10,9 +10,7 @@ import FileTemplate from "../../../component/FileTemplate/FileTemplate";
 import LoadingEffect from "../../../component/Loading/Loading";
 function AddStudent() {
   const [Tab, setTab] = useState(1);
-  const ChangeTab = (id) => {
-    setTab(id);
-  };
+
   const [ErrAdd, setErrAdd] = useState();
   const { Client, Loading } = useAxios();
   const Submit = async (form, ResetForm) => {
@@ -67,14 +65,22 @@ function AddStudent() {
         alert("Bạn đã import thành công");
         setErrImport();
       } else {
+        alert(Result.data.Err_Message);
         setErrImport(Result.data.infor);
       }
     } catch (error) {
+      alert("Có lỗi");
       console.log(error);
+      // setErrImport([error.message]);
     }
     e.target.reset();
   };
   const [KhoaImport, setKhoaImport] = useState(true);
+  const ChangeTab = (id) => {
+    setErrAdd(null);
+    setErrImport(null);
+    setTab(id);
+  };
   return (
     <div className={style.AddStudent_container}>
       {Loading && <LoadingEffect />}
@@ -128,7 +134,9 @@ function AddStudent() {
                     </thead>
                     <tbody>
                       {ErrAdd.map((item, index) => (
-                        <tr key={index}>{item}</tr>
+                        <tr key={index}>
+                          <td>{item}</td>
+                        </tr>
                       ))}
                     </tbody>
                   </table>

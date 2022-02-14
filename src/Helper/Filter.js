@@ -16,7 +16,6 @@ const useFilter = (TrangThai, path, Confirm) => {
     TrangThaiXuLy: TrangThai,
   });
   const [Err, setErr] = useState(null);
-  const ListMSV = useRef([]);
   useEffect(() => {
     const params = queryString.stringify(filter);
     Client.get(path + params)
@@ -26,9 +25,6 @@ const useFilter = (TrangThai, path, Confirm) => {
         if (List.status === "Success") {
           setPaginations(List.pagination);
           setListRequest(List.data);
-          List.data.forEach((element) => {
-            ListMSV.current.push(element.MaSinhVien);
-          });
         }
       })
       .catch((err) => {
@@ -59,7 +55,7 @@ const useFilter = (TrangThai, path, Confirm) => {
       setfilter({ ...filter, [name]: input.value });
     }, 300);
   };
-  // console.log(ListMSV);
+
   return {
     ListRequest,
     paginations,
@@ -68,7 +64,6 @@ const useFilter = (TrangThai, path, Confirm) => {
     Err,
     ChangeLimit,
     ChangeFilter,
-    ListMSV,
     Loading,
   };
 };

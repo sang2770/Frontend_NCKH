@@ -48,18 +48,11 @@ function RequestStudent() {
   const { Client } = useAxios();
 
   const ConfirmAll = async () => {
-    const form = new FormData();
-    form.append("MSV", JSON.stringify(useConfirmed.ListMSV));
+    if (!window.confirm("Bạn có muốn xác nhận tất cả yêu cầu?")) {
+      return;
+    }
     try {
-      const result = await Client.post(
-        "/request-management/confirmIndex",
-        form,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const result = await Client.post("/request-management/confirmIndex");
       console.log(result);
       if (result.data.status !== "Failed") {
         alert("Bạn đã Thao tác thành công thành công!");
@@ -144,7 +137,7 @@ function RequestStudent() {
             headers={tableHeaders}
             Content={
               <TableContent
-                Check={true}
+                TabelConfirm={true}
                 data={ListRequest}
                 Confirm={Confirm}
                 setConfirm={setConfirm}
@@ -215,7 +208,7 @@ function RequestStudent() {
             Content={
               <TableContent
                 data={useConfirmed.ListRequest}
-                Check={true}
+                TabelConfirm={true}
                 Confirmed={true}
                 Confirm={Confirm}
                 setConfirm={setConfirm}

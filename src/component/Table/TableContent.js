@@ -4,12 +4,13 @@ import { IoIosArrowDown } from "react-icons/io";
 import FormStudent from "../FormStudent/FormStudent";
 import clsx from "clsx";
 import useAxios from "../../Helper/API";
+// Check--Kiểm tra xem có phải là bảng yêu cầu k
 const TableContent = ({
   data,
   ReadForm,
   contentBtn,
   Submit,
-  Check,
+  TabelConfirm,
   Confirm,
   setConfirm,
   Confirmed,
@@ -50,7 +51,7 @@ const TableContent = ({
             <tr className={style.Table_Row}>
               <td className={style.Table_Column}>
                 <div className={style.Dropdown}>
-                  {!Check && (
+                  {!TabelConfirm && (
                     <p
                       className={style.IconDropDown}
                       onDoubleClick={() => {
@@ -71,17 +72,17 @@ const TableContent = ({
                 <span>{item.HoTen}</span>
               </td>
               <td className={style.Table_Column}>
-                <span>{Check ? item.LanXinCap : item.TenLop}</span>
+                <span>{TabelConfirm ? item.LanXinCap : item.TenLop}</span>
               </td>
               <td className={style.Table_Column}>
-                <span>{Check ? item.NgayYeuCau : item.TenKhoa}</span>
+                <span>{TabelConfirm ? item.NgayYeuCau : item.TenKhoa}</span>
               </td>
-              {Check && (
+              {TabelConfirm && (
                 <td className={style.Table_Column}>
                   <span>{item.TrangThaiXuLy}</span>
                 </td>
               )}
-              {!Confirmed && Check && (
+              {!Confirmed && TabelConfirm && (
                 <td
                   className={clsx(style.Confirm, style.Table_Column)}
                   onClick={() => {
