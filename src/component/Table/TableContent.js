@@ -19,7 +19,11 @@ const TableContent = ({
 }) => {
   const [DropDown, setDropDown] = useState(-1);
   const ChangeDropDown = (id) => {
-    setDropDown(id);
+    if (id === DropDown) {
+      setDropDown(-1);
+    } else {
+      setDropDown(id);
+    }
   };
   // Request Student
   const { Client } = useAxios();
