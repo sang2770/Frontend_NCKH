@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import style from "./TableMilitary.module.css";
-import useAxios from "../../Helper/API";
 import FormUpdateRegister from "../FormUpdateRegisterMilitary/FormUpdateRegister";
 import clsx from "clsx";
 import { TiDeleteOutline } from "react-icons/ti";
@@ -9,16 +8,6 @@ const titleForm = ["Họ và tên", "Mã sinh viên", "Ngày sinh", "Ngày đăn
 const subtitles = ["HoTen", "MaSinhVien", "NgaySinh", "NgayDangKy", "SoDangKy", "NoiDangKy", "DiaChiThuongTru", "NgayNop"];
 
 const TableRegisterData = ({ data }) => {
-
-  const { Client } = useAxios();
-  
-  const [Err, setErr] = useState(null);
-
-  const [MSV, setMSV] = useState();
-
-  const changeMSV = (msv) => {
-    setMSV(msv);
-  }
 
   // show hide
   const [DropDown, setDropDown] = useState(-1);

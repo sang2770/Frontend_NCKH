@@ -9,7 +9,7 @@ import useAxios from "../../../Helper/API";
 import Style from "../UpdateNotification/UpdateNotification.module.css";
 import { TiDeleteOutline } from "react-icons/ti";
 
-const ShowNotification = ({data, onClickHide, idTB}) => {
+const ShowNotification = ({data, onClickHide}) => {
     const { Client } = useAxios();
     const { Lop, Khoa, Khoas } = useContext(DataContext);
 
@@ -40,12 +40,12 @@ const ShowNotification = ({data, onClickHide, idTB}) => {
       setFilterLop(event.target.value)
     }
   
-    const SentNotification = async (e) => {
+    const SentNotification = async (idTBC) => {
         if(FilterKhoa === "" && FilterKhoas === "" && FilterLop === ""){
             alert("Bạn chưa chọn thông tin khoa khóa lớp để gửi thông báo!");
         }
         else{
-            Client.post("/notification-management/sent-notification-students?MaThongBaoChinh=" + idTB +
+            Client.post("/notification-management/sent-notification-students?MaThongBaoChinh=" + idTBC +
             "&TenLop=" + FilterLop + "&Khoas=" + FilterKhoas + "&TenKhoa=" + FilterKhoa)
             .then((response) => {
             if (response.data.status === "Success") {
@@ -58,7 +58,6 @@ const ShowNotification = ({data, onClickHide, idTB}) => {
         }
     };
 
-      
     ////update form
     const [store, setStore] = useState(false);
     const [contentStore, setContentStore] = useState(true);
@@ -70,6 +69,11 @@ const ShowNotification = ({data, onClickHide, idTB}) => {
 
     const FilterTieuDeTB = useRef("");
     const FilterNoiDungTB = useRef("");
+
+    const [idTB, setIdTB] = useState();
+    const changeIdIB = (id) => {
+        setIdTB(id);
+    }
 
     const updateNotifi = () => {
         if( window.confirm("Bạn có muốn cập nhật thông báo này không?") === true){
@@ -100,8 +104,8 @@ const ShowNotification = ({data, onClickHide, idTB}) => {
     return (
         <React.Fragment>
             <div>
-                {data.map((item) => (
-                <div className={style.MainNoti}>
+                {data.map((item, index) => (
+                <div className={style.MainNoti} key={index}>
                     <div className={style.iconX} onClick = {onClickHide}>
                         <TiDeleteOutline/>
                     </div>
@@ -143,7 +147,6 @@ const ShowNotification = ({data, onClickHide, idTB}) => {
                                                 ref={FilterTieuDeTB}
                                                 type="text"
                                                 name="TieuDeTB"
-                                                onChange=""
                                                 defaultValue={data === undefined ? "" : item.TieuDeTB}
                                                 required
                                             />
@@ -158,7 +161,6 @@ const ShowNotification = ({data, onClickHide, idTB}) => {
                                                 type="text"
                                                 ref={FilterNoiDungTB}
                                                 name="NoiDungTB"
-                                                onChange=""
                                                 defaultValue={data === undefined ? "" : item.NoiDungTB}
                                                 required
                                             />
@@ -170,7 +172,9 @@ const ShowNotification = ({data, onClickHide, idTB}) => {
                                     </div>
                                     
                                     <div className={Style.button}>
-                                        <Button content="Cập nhật"/>
+                                        <Button content="Cập nhật" onClick={() => {
+                                            changeIdIB(item.MaThongBaoChinh)
+                                        }}/>
                                         <Button content="Quay lại" onClick={showStore} />
                                     </div>
                                 </form>
@@ -202,7 +206,9 @@ const ShowNotification = ({data, onClickHide, idTB}) => {
                                 <div className={style.btn}>
                                     <Button 
                                         content = "Gửi"
-                                        onClick={SentNotification}
+                                        onClick={() => {
+                                            SentNotification(item.MaThongBaoChinh)
+                                        }}
                                     />
                                 </div>
                                 <div className={style.btn}>

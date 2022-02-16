@@ -6,7 +6,6 @@ import ItemNotification from "../../../component/ItemNotification/ItemNotificati
 import queryString from "query-string";
 import useAxios from "../../../Helper/API";
 import StoreNotification from "../StoreNotification/StoreNotification";
-import SentNotification from "../SentNotification/SentNotification";
 
 function Notification(){
 

@@ -46,7 +46,7 @@ function ItemNotification({ data, datadelete, setDelete }){
                 alert("Bạn đã xóa thông báo thành công!!!");
             }
             else{
-            alert("Có lỗi!!!");
+                alert("Thông báo này đã gửi đến sinh viên. Bạn không thể xóa thông báo!");
             }
             })
             .catch((err) => {
@@ -56,7 +56,7 @@ function ItemNotification({ data, datadelete, setDelete }){
     };
 
     return (
-        <tbody className={style.bodyNoti}>
+        <div className={style.bodyNoti}>
             {data.map((item, index) => (
             <React.Fragment key={index}>
                 <div className={clsx(style.Noti)}>
@@ -93,7 +93,7 @@ function ItemNotification({ data, datadelete, setDelete }){
                 </div>
             </React.Fragment>
             ))}
-        </tbody>
+        </div>
     )
 }
 
