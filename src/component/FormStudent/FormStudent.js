@@ -24,7 +24,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
     const form = new FormData(Form.current);
     // form.set("NgaySinh", ChangeDateFormat(form.get("NgaySinh")));
     // form.set("NgayCapCMTND", ChangeDateFormat(form.get("NgayCapCMTND")));
-    console.log(form.get("NgaySinh"));
+    // console.log(form.get("NgaySinh"));
     Submit(form, ResetForm);
   };
   const ResetForm = () => {

@@ -14,7 +14,7 @@ function AddStudent() {
   const [ErrAdd, setErrAdd] = useState();
   const { Client, Loading } = useAxios();
   const Submit = async (form, ResetForm) => {
-    console.log(form);
+    // console.log(form);
     try {
       const result = await Client.post("/student-management/user", form, {
         headers: {
@@ -29,11 +29,11 @@ function AddStudent() {
       } else {
         alert("Có lỗi");
         setErrAdd([result.data.Err_Message]);
-        console.log(result.data.Err_Message);
+        // console.log(result.data.Err_Message);
       }
     } catch (error) {
       alert("Có lỗi! Vui lòng kiểm tra lại!");
-      console.log(error);
+      // console.log(error);
       setErrAdd(Object.values(error.data.Err_Message));
     }
   };
@@ -60,7 +60,7 @@ function AddStudent() {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(Result.data);
+      // console.log(Result.data);
       if (Result.data.status === "Success") {
         alert("Bạn đã import thành công");
         setErrImport();
@@ -70,7 +70,7 @@ function AddStudent() {
       }
     } catch (error) {
       alert("Có lỗi");
-      console.log(error);
+      // console.log(error);
       // setErrImport([error.message]);
     }
     e.target.reset();

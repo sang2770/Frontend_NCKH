@@ -23,7 +23,7 @@ function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
       },
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.status === "Success") {
           alert("Bạn đã cập nhật thành công!");
           setErrUpdate(null);
@@ -35,7 +35,7 @@ function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
         }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         setErrUpdate(err.data.info);
         setErrTitle(err.data.Err_Message);
         alert("Bạn chưa cập nhật thành công!");

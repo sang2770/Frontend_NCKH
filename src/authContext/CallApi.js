@@ -8,7 +8,7 @@ export const login = async (user, dispatch) => {
   dispatch(LoginStart());
   try {
     const result = await Client.post("auth/admin/login", user);
-    console.log(result.data);
+    // console.log(result.data);
     if (result.data.status === "Failed") {
       dispatch(LoginFailure(result.data.Err_Message));
     } else {

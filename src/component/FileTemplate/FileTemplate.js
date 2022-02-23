@@ -35,7 +35,7 @@ function FileTemplate({ Open }) {
       responseType: "blob",
     })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.status) {
           alert("Không xuất được file");
           return;
@@ -49,7 +49,8 @@ function FileTemplate({ Open }) {
         alert("Đã xuất file");
       })
       .catch((err) => {
-        console.log(err);
+        alert("Có lỗi");
+        // console.log(err);
       });
   };
   return (

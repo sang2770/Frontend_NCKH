@@ -41,7 +41,7 @@ function CreateAccount() {
       return;
     }
     if (Form.get("MatKhau") !== Form.get("MatKhau_repeat")) {
-      console.log("Err");
+      // console.log("Err");
       setErr("Mật khẩu không khớp");
       return;
     }

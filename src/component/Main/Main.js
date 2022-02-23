@@ -54,7 +54,7 @@ function Main() {
     setMenuSubItem(id);
     localStorage.setItem("MenuSubItem", JSON.stringify(id));
   };
-  console.log(MenuSubItem);
+  // console.log(MenuSubItem);
   const { user, dispatch } = useContext(AuthContext);
   const Out = () => {
     dispatch(Logout());

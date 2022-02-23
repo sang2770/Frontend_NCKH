@@ -53,7 +53,7 @@ function RequestStudent() {
     }
     try {
       const result = await Client.post("/request-management/confirmIndex");
-      console.log(result);
+      // console.log(result);
       if (result.data.status !== "Failed") {
         alert("Bạn đã Thao tác thành công thành công!");
         setConfirm(!Confirm);

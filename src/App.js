@@ -9,7 +9,7 @@ import RequestStudent from "./pages/RequestStudent/RequestStudent";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 function App() {
   const { user, isFetching } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
   return (
     <div className="App">
       {isFetching && <Loading />}

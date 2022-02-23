@@ -33,13 +33,14 @@ const TableContent = ({
       MaYeuCau: MaYeuCau,
     })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data.status === "Success") {
           setConfirm(!Confirm);
         }
       })
       .catch((err) => {
-        console.log(err);
+        alert("Có lỗi");
+        // console.log(err);
       });
   };
   const Export = (id, idYC) => {

@@ -21,7 +21,7 @@ function UpdateStudent() {
     // console.log(Filter.current);
     Client.get("/student-management/user/" + Filter.current.value)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.status === "Success") {
           // console.log("ok");
           setData(res.data.data);
@@ -38,13 +38,14 @@ function UpdateStudent() {
   const FindHistory = () => {
     Client.get("student-management/user-history/" + Filter.current.value)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.status === "Success") {
           setHistory(res.data.data);
         }
       })
       .catch((err) => {
-        console.log(err);
+        alert("Có lỗi");
+        // console.log(err);
       });
   };
   const OpenForm = () => {
