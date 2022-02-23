@@ -26,20 +26,29 @@ function Notification(){
     });
     
     const [deleteNoti, setDeleteNoti] = useState(false);
-
-    useEffect(() => {
+    const CallAPI = () => {
         const params = queryString.stringify(filter);
         Client.get("/notification-management/index-header-notification?" + params)
-          .then((response) => {
+            .then((response) => {
             const List = response.data;
             if (List.status === "Success") {
-              setPaginations(List.pagination);
-              setTieuDe(List.data);
+                setPaginations(List.pagination);
+                setTieuDe(List.data);
             }
-          })
-          .catch((err) => {
+            })
+            .catch((err) => {
             setErr(true);
-          });
+            });
+    };
+    
+    useEffect(() => {
+        CallAPI();
+        const Load = setInterval(() => {
+          CallAPI();
+        }, 1000 * 60 * 5);
+        return () => {
+          clearTimeout(Load);
+        };
       }, [filter, deleteNoti]);
 
     const Time = useRef(null);

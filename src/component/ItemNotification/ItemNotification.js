@@ -89,6 +89,8 @@ function ItemNotification({ data, datadelete, setDelete }){
                     <ShowNotification 
                         data={ContentNoti} 
                         onClickHide = {ChangeDropDownShowNoti}
+                        datadelete = {datadelete}
+                        setDelete = {setDelete}
                     />
                 </div>
             </React.Fragment>

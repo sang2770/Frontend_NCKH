@@ -9,7 +9,7 @@ import useAxios from "../../../Helper/API";
 import Style from "../UpdateNotification/UpdateNotification.module.css";
 import { TiDeleteOutline } from "react-icons/ti";
 
-const ShowNotification = ({data, onClickHide}) => {
+const ShowNotification = ({data, onClickHide, datadelete, setDelete }) => {
     const { Client } = useAxios();
     const { Lop, Khoa, Khoas } = useContext(DataContext);
 
@@ -75,13 +75,19 @@ const ShowNotification = ({data, onClickHide}) => {
         setIdTB(id);
     }
 
+    const [dataNoti, setDataNoti] = useState([]);
     const updateNotifi = () => {
         if( window.confirm("Bạn có muốn cập nhật thông báo này không?") === true){
             idTB && FilterNoiDungTB && FilterTieuDeTB && Client.put("/notification-management/update-notification/" 
             + idTB + "?NoiDungTB=" + FilterNoiDungTB.current.value + "&TieuDeTB=" + FilterTieuDeTB.current.value)
             .then((response) => {
             if (response.data.status === "Success updated") {
+                console.log(response.data.data["TieuDeTB"]);
+                setDataNoti(response.data.data);
+                setDelete(!datadelete);
                 alert("Bạn đã cập nhật thông báo thành công!!!");
+            }else{
+                alert("Có lỗi!!!***")
             }
             })
             .catch((err) => {
@@ -130,9 +136,6 @@ const ShowNotification = ({data, onClickHide}) => {
                     ) : null}
 
                     {store ? (
-                        // <div>
-                        //     <UpdateNotification data = {data} idTB = {item.MaThongBaoChinh} status = "true"/>
-                        // </div>
                         <div className={Style.Main_store}>
                             <div className={Style.Main}>
                                 <form  onSubmit={SubmitForm}>

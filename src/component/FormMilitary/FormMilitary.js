@@ -9,7 +9,6 @@ function FormMilitary({titles, subtitles, Submit, onClickSave, onClickBack}){
         e.preventDefault();
         Form.current = e.target;
         const form = new FormData(e.target);
-        console.log(e.target);
         Submit(form, ResetForm);
     };
     const ResetForm = () => {

@@ -8,7 +8,6 @@ function FormStoreNoti({onClickBack, Submit}){
         e.preventDefault();
         Form.current = e.target;
         const form = new FormData(e.target);
-        console.log(e.target);
         Submit(form, ResetForm);
     };
     const ResetForm = () => {
