@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { LoginStart, LoginSuccess, LoginFailure, Logout } from "./AuthAction";
 const Client = axios.create({
-  baseURL: "http://127.0.0.1:8000/api/",
+  baseURL: process.env.REACT_APP_HOST_NAME,
 });
 export const login = async (user, dispatch) => {
   dispatch(LoginStart());

@@ -2,8 +2,8 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { AuthContext } from "../authContext/AuthContext";
 import { logout } from "../authContext/CallApi";
-
-const baseURL = "http://127.0.0.1:8000/api";
+// "http://127.0.0.1:8000/api"
+const baseURL = process.env.REACT_APP_HOST_NAME;
 const useAxios = () => {
   const [Loading, setLoading] = useState(false);
   const { dispatch } = useContext(AuthContext);
