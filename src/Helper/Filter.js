@@ -16,7 +16,7 @@ const useFilter = (TrangThai, path, Confirm) => {
     TrangThaiXuLy: TrangThai,
   });
   const [Err, setErr] = useState(null);
-  useEffect(() => {
+  const LoadAPI = () => {
     const params = queryString.stringify(filter);
     Client.get(path + params)
       .then((response) => {
@@ -30,6 +30,15 @@ const useFilter = (TrangThai, path, Confirm) => {
       .catch((err) => {
         setErr(true);
       });
+  };
+  useEffect(() => {
+    LoadAPI();
+    const Load = setInterval(() => {
+      LoadAPI();
+    }, 1000 * 60 * 5);
+    return () => {
+      clearTimeout(Load);
+    };
   }, [filter, Confirm]);
   // console.log(DataFilter);
 

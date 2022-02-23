@@ -9,7 +9,7 @@ import { BiExit } from "react-icons/bi";
 function FileTemplate({ Open }) {
   const [ListNameFile, setListNameFile] = useState([]);
   const { Client } = useAxios();
-  useEffect(() => {
+  const CallAPI = () => {
     Client.get("/file-management/files")
       .then((res) => {
         console.log(res.data);
@@ -20,6 +20,15 @@ function FileTemplate({ Open }) {
       .catch((err) => {
         console.log(err);
       });
+  };
+  useEffect(() => {
+    CallAPI();
+    const Load = setInterval(() => {
+      CallAPI();
+    }, 1000 * 60 * 5);
+    return () => {
+      clearInterval(Load);
+    };
   }, []);
   const DowFile = (Name) => {
     Client.get("/file-management/file/" + Name, {

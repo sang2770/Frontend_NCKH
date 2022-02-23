@@ -27,7 +27,7 @@ function ListStudent() {
   });
   const [Err, setErr] = useState(null);
   const { Lop, Khoa, Khoas } = useContext(DataContext);
-  useEffect(() => {
+  const CallAPI = () => {
     const params = queryString.stringify(filter);
     Client.get("/student-management/users?" + params)
       .then((response) => {
@@ -41,6 +41,15 @@ function ListStudent() {
       .catch((err) => {
         setErr(true);
       });
+  };
+  useEffect(() => {
+    CallAPI();
+    const Load = setInterval(() => {
+      CallAPI();
+    }, 1000 * 60 * 5);
+    return () => {
+      clearTimeout(Load);
+    };
   }, [filter]);
   // console.log(DataFilter);
 
