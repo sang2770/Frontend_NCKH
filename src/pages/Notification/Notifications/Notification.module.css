@@ -15,6 +15,10 @@
 .MainContent{
     min-height: 300px;
 }
+.NotiNo{
+    text-align: center;
+    font-size: 13px;
+}
 .button{
     /* display: block; */
     /* text-align: center; */
