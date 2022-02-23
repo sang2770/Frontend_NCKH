@@ -28,6 +28,7 @@ function ListStudent() {
   const [Err, setErr] = useState(null);
   const { Lop, Khoa, Khoas } = useContext(DataContext);
   const CallAPI = () => {
+    // console.log(filter);
     const params = queryString.stringify(filter);
     Client.get("/student-management/users?" + params)
       .then((response) => {
