@@ -73,11 +73,17 @@ function Notification(){
                     <div className={style.Content}>
                         <div className={style.MainContent}>
                             {/* Danh sach tieu de thong bao */}
-                            <ItemNotification 
-                                data = {TieuDe}
-                                datadelete = {deleteNoti}
-                                setDelete = {setDeleteNoti}
-                            />
+                            {TieuDe.length != 0 ? (
+                                <ItemNotification 
+                                    data = {TieuDe}
+                                    datadelete = {deleteNoti}
+                                    setDelete = {setDeleteNoti}
+                                />
+                                ) : 
+                                <div className={style.NotiNo}>
+                                    Danh sách thông báo trống!
+                                </div>
+                            }
                         </div>
                         <div className={style.PaginationNoti}>
                             <Pagination
