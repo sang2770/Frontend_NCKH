@@ -11,11 +11,12 @@ import { DataContext } from "../../../DataContext/DataContext";
 import Search from "../../../component/Search/Search";
 import TableMilitary from "../../../component/TableMilitary/TableMilitary";
 import TableConfirmData from "../../../component/TableMilitary/TableConfirmData";
+import LoadingEffect from "../../../component/Loading/Loading";
 
 const tableHeaders = ["Họ và tên", "MSV", "Ngày sinh", "Lớp", "Khoa", "Khóa", "Trạng thái", "Xác nhận"];
 
 function ConfirmMilitary() {
-  const { Client } = useAxios();
+  const { Client, Loading } = useAxios();
   
   const [Err, setErr] = useState(null);
 
@@ -142,10 +143,11 @@ function ConfirmMilitary() {
               <h2>Kết Quả Tìm Kiếm</h2>
             </div>
             <div className={style.DataList}>
-              <TableMilitary
-                headers={tableHeaders}
-                Content={<TableConfirmData data={ConfirmMilitary} />}
-              />
+              {Loading && <LoadingEffect />}
+                <TableMilitary
+                  headers={tableHeaders}
+                  Content={<TableConfirmData data={ConfirmMilitary} />}
+                />
             </div>
             <Pagination
               title="Số sinh viên / Trang"

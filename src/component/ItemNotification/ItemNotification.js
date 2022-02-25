@@ -5,6 +5,7 @@ import ShowNotification from "../../pages/Notification/ShowNotification/ShowNoti
 import useAxios from "../../Helper/API";
 import clsx from "clsx";
 import { TiDeleteOutline } from "react-icons/ti";
+import LoadingEffect from "../../component/Loading/Loading";
 
 function ItemNotification({ data, datadelete, setDelete }){
 
@@ -18,7 +19,7 @@ function ItemNotification({ data, datadelete, setDelete }){
         setDropDown(-1);
     }
 
-    const { Client } = useAxios();
+    const { Client, Loading } = useAxios();
 
     const [Err, setErr] = useState(null);
 
@@ -57,6 +58,7 @@ function ItemNotification({ data, datadelete, setDelete }){
 
     return (
         <div className={style.bodyNoti}>
+            {Loading && <LoadingEffect />}
             {data.map((item, index) => (
             <React.Fragment key={index}>
                 <div className={clsx(style.Noti)}>

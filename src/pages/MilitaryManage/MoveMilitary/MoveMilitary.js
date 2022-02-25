@@ -11,11 +11,12 @@ import { DataContext } from "../../../DataContext/DataContext";
 import Search from "../../../component/Search/Search";
 import TableMilitary from "../../../component/TableMilitary/TableMilitary";
 import TableMoveData from "../../../component/TableMilitary/TableMoveData";
+import LoadingEffect from "../../../component/Loading/Loading";
 
 const tableHeaders = ["Họ và tên", "MSV", "Ngày sinh", "Lớp", "Khoa", "Khóa", "Trạng thái", "Số QĐ", "Ngày quyết định", "Xác nhận"];
 
 function MoveMilitary() {
-  const { Client } = useAxios();
+  const { Client, Loading } = useAxios();
   
   const [Err, setErr] = useState(null);
 
@@ -142,6 +143,7 @@ function MoveMilitary() {
               <h2>Kết Quả Tìm Kiếm</h2>
             </div>
             <div className={style.DataList}>
+            {Loading && <LoadingEffect />}
               <TableMilitary
                 headers={tableHeaders}
                 Content={<TableMoveData data={MoveMilitary} />}
