@@ -14,6 +14,7 @@ import Button from "../../../component/ButtonMiliNoti/Button";
 import clsx from "clsx";
 import FormMilitary from "../../../component/FormMilitary/FormMilitary";
 import ErrorImport from "../../../component/ErrImport/ErrorImport";
+import LoadingEffect from "../../../component/Loading/Loading";
 
 const tableHeaders = ["Họ và tên", "MSV", "Ngày sinh", "Lớp", "Khoa", "Khóa", "Số giới thiệu", "Ban CHQS", "Chọn"];
 const titleForm = ["Họ và tên", "Mã sinh viên", "Số giới thiệu", "Ban chỉ huy", "Ngày cấp", "Ngày hết hạn", "Nơi ở hiện tại", "Nơi chuyển đến"];
@@ -21,7 +22,7 @@ const subtitles = ["HoTen", "MaSinhVien", "SoGioiThieu", "BanChiHuy", "NgayCap",
 
 function MoveMilitaryLocal() {
 
-  const { Client } = useAxios();
+  const { Client, Loading } = useAxios();
   
   const [Err, setErr] = useState(null);
 
@@ -112,13 +113,21 @@ function MoveMilitaryLocal() {
         },
       });
       console.log(result);
-      if (result.data.status !== "Failed") {
+      if (result.data.status == "Success") {
         alert("Bạn đã thêm thành công!");
         setErrAdd(null);
         ResetForm();
-      } else {
+      } 
+      else if(result.data.status == "Failedd")
+      {
         alert("Có lỗi");
-        setErrAdd([result.data.Err_Message]);
+        setErrAdd(["Đã tồn tại giấy di chuyển NVQS từ địa phương cho sinh viên có msv: " + result.data.Err_Message]);
+        console.log(result.data.Err_Message);
+      }
+      else if(result.data.status == "Failed")
+      {
+        alert("Có lỗi!!!");
+        setErrAdd(["Sinh viên (msv: " + result.data.Err_Message + ") chưa có giấy chứng nhận đăng ký NVQS."]);
         console.log(result.data.Err_Message);
       }
     } catch (error) {
@@ -304,6 +313,7 @@ function MoveMilitaryLocal() {
               <h2>Kết Quả Tìm Kiếm</h2>
             </div>
             <div className={style.DataList}>
+            {Loading && <LoadingEffect />}
               <TableMilitary
                 headers={tableHeaders}
                 Content={<TableMoveLocalData data={MoveMilitaryLocal} />}

@@ -6,9 +6,12 @@ import ItemNotification from "../../../component/ItemNotification/ItemNotificati
 import queryString from "query-string";
 import useAxios from "../../../Helper/API";
 import StoreNotification from "../StoreNotification/StoreNotification";
+import LoadingEffect from "../../../component/Loading/Loading";
 
 function Notification() {
   const { Client } = useAxios();
+
+  const { Client, Loading } = useAxios();
 
   const [Err, setErr] = useState(null);
 
@@ -25,6 +28,32 @@ function Notification() {
   });
 
   const [deleteNoti, setDeleteNoti] = useState(false);
+  const CallAPI = () => {
+    const params = queryString.stringify(filter);
+    Client.get("/notification-management/index-header-notification?" + params)
+      .then((response) => {
+        const List = response.data;
+        if (List.status === "Success") {
+          setPaginations(List.pagination);
+          setTieuDe(List.data);
+        } else {
+          setTieuDe([]);
+        }
+      })
+      .catch((err) => {
+        setErr(true);
+      });
+  };
+
+  useEffect(() => {
+    CallAPI();
+    const Load = setInterval(() => {
+      CallAPI();
+    }, 1000 * 60 * 5);
+    return () => {
+      clearTimeout(Load);
+    };
+  }, [filter, deleteNoti]);
 
   useEffect(() => {
     const params = queryString.stringify(filter);
@@ -63,7 +92,6 @@ function Notification() {
     setStoreNoti(true);
     setNoti(false);
   };
-
   return (
     <React.Fragment>
       <div>
@@ -72,6 +100,7 @@ function Notification() {
           <div className={style.MainNoti}>
             <h1 className={style.Hearder_text}>THÔNG BÁO</h1>
             <div className={style.Content}>
+              {Loading && <LoadingEffect />}
               <div className={style.MainContent}>
                 {/* Danh sach tieu de thong bao */}
                 {TieuDe.length != 0 ? (

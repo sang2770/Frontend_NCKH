@@ -14,13 +14,14 @@ import Button from "../../../component/ButtonMiliNoti/Button";
 import clsx from "clsx";
 import FormMilitary from "../../../component/FormMilitary/FormMilitary";
 import ErrorImport from "../../../component/ErrImport/ErrorImport";
+import LoadingEffect from "../../../component/Loading/Loading";
 
 const tableHeaders = ["Họ và tên", "MSV", "Ngày sinh", "Lớp", "Khoa", "Khóa", "Ngày đăng ký", "Nơi đăng ký", "Ngày nộp", "Chọn"];
 const titleForm = ["Họ và tên", "Mã sinh viên", "Ngày sinh", "Ngày đăng ký", "Số đăng ký", "Nơi đăng ký", "Địa chỉ thường trú", "Ngày nộp"];
 const subtitles = ["HoTen", "MaSinhVien", "NgaySinh", "NgayDangKy", "SoDangKy", "NoiDangKy", "DiaChiThuongTru", "NgayNop"];
 
 function RegisterMilitary() {
-  const { Client } = useAxios();
+  const { Client, Loading } = useAxios();
   
   const [Err, setErr] = useState(null);
 
@@ -304,15 +305,13 @@ function RegisterMilitary() {
                   ><BsSearch/>
                   </button>
                 </div>
-
               </div>
-
-              
             </div>
             <div className={Style.Result_search}>
               <h2>Kết Quả Tìm Kiếm</h2>
             </div>
             <div className={style.DataList}>
+            {Loading && <LoadingEffect />}
               <TableMilitary
                 headers={tableHeaders}
                 Content={<TableRegisterData data={RegisterMilitary} />}

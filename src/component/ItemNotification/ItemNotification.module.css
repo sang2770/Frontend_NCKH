@@ -29,11 +29,12 @@
 .Noti_input{
     padding-left: 30px;
     float: right;
-    font-size: large;
+    font-size: 20px;
 }
 
 .Noti_input :hover{
     cursor: pointer;
+    border-radius: 50%;
     color: red;
     box-shadow: 0 4px 5px 0 rgba(231, 36, 62, 0.2), 0 6px 20px 0 rgba(231, 27, 78, 0.19);
 }
