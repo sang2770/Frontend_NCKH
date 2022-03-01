@@ -6,9 +6,10 @@ import File from "../../media/Image/file.png";
 import Button from "../Button/Button";
 import useAxios from "../../Helper/API";
 import { BiExit } from "react-icons/bi";
+import LoadingEffect from "../Loading/Loading";
 function FileTemplate({ Open }) {
   const [ListNameFile, setListNameFile] = useState([]);
-  const { Client } = useAxios();
+  const { Client, Loading } = useAxios();
   const CallAPI = () => {
     Client.get("/file-management/files")
       .then((res) => {
@@ -60,24 +61,30 @@ function FileTemplate({ Open }) {
         <div className={style.Btn_Exit} onClick={Open}>
           <BiExit />
         </div>
-        <div className={style.FileGroup}>
-          {ListNameFile.map((item, index) => (
-            <div className={style.ItemFile} key={index}>
-              <img
-                src={File}
-                alt="File"
-                className={style.FileImage}
-                onClick={() => {
-                  DowFile(item);
-                }}
-              />
-              <div className={style.FileHeader}>{item}</div>
+        {Loading ? (
+          <LoadingEffect />
+        ) : (
+          <React.Fragment>
+            <div className={style.FileGroup}>
+              {ListNameFile.map((item, index) => (
+                <div className={style.ItemFile} key={index}>
+                  <img
+                    src={File}
+                    alt="File"
+                    className={style.FileImage}
+                    onClick={() => {
+                      DowFile(item);
+                    }}
+                  />
+                  <div className={style.FileHeader}>{item}</div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <div className={style.File_Add}>
-          <Button content="Thêm File" />
-        </div>
+            {/* <div className={style.File_Add}>
+              <Button content="Thêm File" />
+            </div> */}
+          </React.Fragment>
+        )}
       </div>
     </div>
   );

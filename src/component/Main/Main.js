@@ -3,7 +3,8 @@ import Logo from "../../media/Image/Logo.jpg";
 import Avatar from "../../media/Image/avatar.jpg";
 import NameSchool from "../../media/Image/NameSchool.png";
 import CreateAccount from "../../pages/CreateAccount/CreateAccount";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   AiOutlineMenu,
   AiOutlineMessage,
@@ -35,8 +36,10 @@ import Analyst from "../../pages/Analyst/Analyst";
 
 function Main() {
   const [clickMenu, setclickMenu] = useState(false);
+  const location = useLocation();
+  console.log(location);
   const [ActiveSub, setActiveSub] = useState(
-    JSON.parse(localStorage.getItem("ActiveSub")) || 1
+    JSON.parse(localStorage.getItem("ActiveSub")) || "/"
   );
   const [MenuSubItem, setMenuSubItem] = useState(
     JSON.parse(localStorage.getItem("MenuSubItem")) || 3
@@ -69,6 +72,21 @@ function Main() {
       }
     });
   }, []);
+  useEffect(() => {
+    const locate = location.pathname;
+    if (locate === "/") {
+      setActiveSub("/");
+      setMenuSubItem("/");
+    } else if (locate.includes("/StudentManager")) {
+      setActiveSub("/");
+      setMenuSubItem(locate.slice(1, locate.length));
+    } else if (locate.includes("/Military")) {
+      setActiveSub("Military");
+      setMenuSubItem(locate.slice(1, locate.length));
+    } else {
+      setActiveSub(locate.slice(1, locate.length));
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -90,13 +108,13 @@ function Main() {
             <li
               className="SideBar_Item"
               onClick={() => {
-                ChangeSubMenu(1);
+                ChangeSubMenu("/");
               }}
             >
               <p
                 className={clsx(
                   "SideBar_Item_content",
-                  ActiveSub === 1 && "ActiveItem"
+                  ActiveSub === "/" && "ActiveItem"
                 )}
               >
                 <BsPersonCircle />
@@ -106,12 +124,13 @@ function Main() {
                 <li
                   className={clsx(
                     "SideBar_MenuChild_item",
-                    MenuSubItem === 1 && "ActiveSubMenuItem"
+                    MenuSubItem === "StudentManager-AddStudent" &&
+                      "ActiveSubMenuItem"
                   )}
                   onClick={(e) => {
                     e.stopPropagation();
                     // console.log(e.target);
-                    ChangeMenuSubItem(1);
+                    ChangeMenuSubItem("StudentManager-AddStudent");
                   }}
                 >
                   <Link
@@ -125,11 +144,12 @@ function Main() {
                 <li
                   className={clsx(
                     "SideBar_MenuChild_item",
-                    MenuSubItem === 2 && "ActiveSubMenuItem"
+                    MenuSubItem === "StudentManager-UpdateStudent" &&
+                      "ActiveSubMenuItem"
                   )}
                   onClick={(e) => {
                     e.stopPropagation();
-                    ChangeMenuSubItem(2);
+                    ChangeMenuSubItem("StudentManager-UpdateStudent");
                   }}
                 >
                   <Link
@@ -143,11 +163,11 @@ function Main() {
                 <li
                   className={clsx(
                     "SideBar_MenuChild_item",
-                    MenuSubItem === 3 && "ActiveSubMenuItem"
+                    MenuSubItem === "/" && "ActiveSubMenuItem"
                   )}
                   onClick={(e) => {
                     e.stopPropagation();
-                    ChangeMenuSubItem(3);
+                    ChangeMenuSubItem("/");
                   }}
                 >
                   <Link to="/" className="SideBar_Item_content">
@@ -160,14 +180,14 @@ function Main() {
             <li
               className="SideBar_Item"
               onClick={() => {
-                ChangeSubMenu(2);
+                ChangeSubMenu("Request-Student");
               }}
             >
               <Link
                 to="/Request-Student"
                 className={clsx(
                   "SideBar_Item_content",
-                  ActiveSub === 2 && "ActiveItem"
+                  ActiveSub === "Request-Student" && "ActiveItem"
                 )}
               >
                 <AiOutlineMessage />
@@ -177,13 +197,13 @@ function Main() {
             <li
               className="SideBar_Item"
               onClick={() => {
-                ChangeSubMenu(3);
+                ChangeSubMenu("Military");
               }}
             >
               <p
                 className={clsx(
                   "SideBar_Item_content",
-                  ActiveSub === 3 && "ActiveItem"
+                  ActiveSub === "Military" && "ActiveItem"
                 )}
               >
                 <AiOutlineIdcard />
@@ -193,11 +213,12 @@ function Main() {
                 <li
                   className={clsx(
                     "SideBar_MenuChild_item",
-                    MenuSubItem === 1 && "ActiveSubMenuItem"
+                    MenuSubItem === "Military-RegisterMilitary" &&
+                      "ActiveSubMenuItem"
                   )}
                   onClick={(e) => {
                     e.stopPropagation();
-                    ChangeMenuSubItem(1);
+                    ChangeMenuSubItem("Military-RegisterMilitary");
                   }}
                 >
                   <Link
@@ -211,11 +232,12 @@ function Main() {
                 <li
                   className={clsx(
                     "SideBar_MenuChild_item",
-                    MenuSubItem === 2 && "ActiveSubMenuItem"
+                    MenuSubItem === "Military-MoveMilitaryLocal" &&
+                      "ActiveSubMenuItem"
                   )}
                   onClick={(e) => {
                     e.stopPropagation();
-                    ChangeMenuSubItem(2);
+                    ChangeMenuSubItem("Military-MoveMilitaryLocal");
                   }}
                 >
                   <Link
@@ -231,11 +253,12 @@ function Main() {
                 <li
                   className={clsx(
                     "SideBar_MenuChild_item",
-                    MenuSubItem === 3 && "ActiveSubMenuItem"
+                    MenuSubItem === "Military-MoveMilitary" &&
+                      "ActiveSubMenuItem"
                   )}
                   onClick={(e) => {
                     e.stopPropagation();
-                    ChangeMenuSubItem(3);
+                    ChangeMenuSubItem("Military-MoveMilitary");
                   }}
                 >
                   <Link
@@ -251,11 +274,12 @@ function Main() {
                 <li
                   className={clsx(
                     "SideBar_Item_content",
-                    MenuSubItem === 4 && "ActiveSubMenuItem"
+                    MenuSubItem === "Military-ConfirmMilitary" &&
+                      "ActiveSubMenuItem"
                   )}
                   onClick={(e) => {
                     e.stopPropagation();
-                    ChangeMenuSubItem(4);
+                    ChangeMenuSubItem("Military-ConfirmMilitary");
                   }}
                 >
                   <Link
@@ -271,14 +295,14 @@ function Main() {
             <li
               className="SideBar_Item"
               onClick={() => {
-                ChangeSubMenu(4);
+                ChangeSubMenu("ExportAnalyst");
               }}
             >
               <Link
                 to="/ExportAnalyst"
                 className={clsx(
                   "SideBar_Item_content",
-                  ActiveSub === 4 && "ActiveItem"
+                  ActiveSub === "ExportAnalyst" && "ActiveItem"
                 )}
               >
                 <HiOutlineDocument />
@@ -288,14 +312,14 @@ function Main() {
             <li
               className="SideBar_Item"
               onClick={() => {
-                ChangeSubMenu(5);
+                ChangeSubMenu("Notifiaction-main");
               }}
             >
               <Link
                 to="/Notifiaction-main"
                 className={clsx(
                   "SideBar_Item_content",
-                  ActiveSub === 5 && "ActiveItem"
+                  ActiveSub === "Notifiaction-main" && "ActiveItem"
                 )}
               >
                 <AiFillBell />
@@ -305,14 +329,14 @@ function Main() {
             <li
               className="SideBar_Item"
               onClick={() => {
-                ChangeSubMenu(6);
+                ChangeSubMenu("CreateAccount");
               }}
             >
               <Link
                 to="/CreateAccount"
                 className={clsx(
                   "SideBar_Item_content",
-                  ActiveSub === 6 && "ActiveItem"
+                  ActiveSub === "CreateAccount" && "ActiveItem"
                 )}
               >
                 <HiUserAdd />

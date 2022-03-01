@@ -8,6 +8,7 @@ function ComboBox({ id, items, title, data, Change }) {
         {title}:
       </label>
       <select
+        onChange={Change}
         name={id}
         className={style.ComboBox_Container}
         id={id}
