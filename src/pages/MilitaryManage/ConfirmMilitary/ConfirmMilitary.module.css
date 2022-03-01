@@ -5,11 +5,12 @@
 }
 .Hearder_tittle{
     text-align: center;
-    text-shadow: 5px 5px 10px rgb(158, 164, 248);
+    /* text-shadow: 5px 5px 10px rgb(158, 164, 248); */
     padding-bottom: 50px;
 }
 
 .Form_main{
+    position: relative;
     padding: 30px 30px 20px 30px;
     margin: 10px 45px 0px 45px;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
