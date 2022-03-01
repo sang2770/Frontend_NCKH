@@ -11,7 +11,7 @@ import { Logout } from "./authContext/AuthAction";
 import { logout } from "./authContext/CallApi";
 function App() {
   const { user, isFetching, dispatch } = useContext(AuthContext);
-  const { Client, Loading } = useAxios();
+  const { Client } = useAxios();
   const CheckSession = () => {
     Client.get("/auth/admin/me")
       .then((response) => {
