@@ -8,6 +8,9 @@ import {BiHealth} from "react-icons/bi";
 import useAxios from "../../../Helper/API";
 import Style from "../UpdateNotification/UpdateNotification.module.css";
 import { TiDeleteOutline } from "react-icons/ti";
+import { HiX } from "react-icons/hi";
+import { MdDeleteForever } from "react-icons/md";
+
 
 const ShowNotification = ({data, onClickHide, datadelete, setDelete }) => {
     const { Client } = useAxios();
@@ -70,28 +73,30 @@ const ShowNotification = ({data, onClickHide, datadelete, setDelete }) => {
     const FilterTieuDeTB = useRef("");
     const FilterNoiDungTB = useRef("");
 
+    const [name, setName] = useState("");
+    const changeName = (name) => {
+        setName(name);
+    }
     const [idTB, setIdTB] = useState();
     const changeIdIB = (id) => {
         setIdTB(id);
     }
 
-    const [dataNoti, setDataNoti] = useState([]);
     const updateNotifi = () => {
         if( window.confirm("Bạn có muốn cập nhật thông báo này không?") === true){
             idTB && FilterNoiDungTB && FilterTieuDeTB && Client.put("/notification-management/update-notification/" 
             + idTB + "?NoiDungTB=" + FilterNoiDungTB.current.value + "&TieuDeTB=" + FilterTieuDeTB.current.value)
             .then((response) => {
-            if (response.data.status === "Success updated") {
-                console.log(response.data.data["TieuDeTB"]);
-                setDataNoti(response.data.data);
-                setDelete(!datadelete);
-                alert("Bạn đã cập nhật thông báo thành công!!!");
-            }else{
-                alert("Có lỗi!!!***")
-            }
+                if (response.data.status === "Success updated") {
+                    setDelete(!datadelete);
+                    alert("Bạn đã cập nhật thông báo thành công!!!");
+                }else{
+                    alert("Có lỗi!!!***")
+                }
             })
             .catch((err) => {
                 alert("Có lỗi!!!");
+                console.log(err);
             });
         }
     };
@@ -107,13 +112,111 @@ const ShowNotification = ({data, onClickHide, datadelete, setDelete }) => {
         Form.current.reset();
     };  
 
+    // update filename sau khi delete
+    const UpdateFileName = (idDelete) => {
+        idDelete && Client.put("/notification-management/update-notification-file/" + idDelete)
+        .then((response) => {
+        if (response.data.status === "Success") {
+            // alert("Success!");
+            // console.log("Success");
+        }
+        else{
+            alert("Có lỗi!");
+        }
+        })
+        .catch((err) => {
+            alert("Có lỗi!");
+        });
+    };
+
+    // xóa file
+    const deleteFile = (idDelete) => {
+        if( window.confirm("Bạn có muốn xóa file này không?") === true){
+            idDelete && Client.delete("/notification-management/delete-notification-file/" + idDelete)
+            .then((response) => {
+            if (response.data.status === "Success") {
+                UpdateFileName(idDelete);
+                changeFileName("");
+                alert("Bạn đã xóa file thành công!!!");
+            }
+            else{
+                alert("Có lỗi!");
+            }
+            })
+            .catch((err) => {
+                alert("Có lỗi!");
+            });
+        }
+    };
+
+    const [namefile, setNamefile] = useState();
+
+    const changeFileName = (name) => {
+        setNamefile(name);
+        console.log(name);
+    }
+       //update filename sau khi upload file
+       const updateName = (id, name) => {
+        Client.put("/notification-management/update-filename/" + id + "/" + name)
+        .then((response) => {
+            if (response.data.status === "Success") {
+                // alert("Bạn đã cập nhật filename thành công!!!");
+                setDelete(!datadelete);
+                // console.log(response.data.data);
+                changeFileName(response.data.data);
+            }else{
+                alert("Có lỗi!!!***")
+            }
+        })
+        .catch((err) => {
+            alert("Có lỗi!!!");
+            // console.log(err);
+        });
+    };
+
+    const SubmitFile = async (form, ResetForm) => {
+        try {
+            const result = await Client.post("/notification-management/post-notification-file/" + idTB, form, {
+                headers: {
+                "Content-Type": "multipart/form-data",
+                },
+            });
+            if (result.data.status !== "Failed") {
+                alert("Bạn đã thêm thành công!");
+                updateName(idTB, result.data.data);
+                ChangeChoose();
+                ResetForm();
+            } else {
+                alert("Vui lòng chọn file trước khi nhấn upload!");
+            }
+        } catch (error) {
+            alert("Có lỗi! Vui lòng kiểm tra lại!");
+        }
+    };
+
+    const Formm = useRef();
+    const SubmitFormm = (e) => {
+        e.preventDefault();
+        Formm.current = e.target;
+        const form = new FormData(e.target);
+        SubmitFile(form, ResetFormm);
+    };
+    const ResetFormm = () => {
+        Formm.current.reset();
+    };
+
+    const [Choose, setChoose] = useState(false);
+    const ChangeChoose = () => {
+        setChoose(!Choose);
+    }
+
     return (
         <React.Fragment>
             <div>
                 {data.map((item, index) => (
                 <div className={style.MainNoti} key={index}>
                     <div className={style.iconX} onClick = {onClickHide}>
-                        <TiDeleteOutline/>
+                        <HiX/>
                     </div>
                     {contentStore ? (
                     <div className={style.Content}>
@@ -131,6 +234,12 @@ const ShowNotification = ({data, onClickHide, datadelete, setDelete }) => {
                             <div className={style.ContentNoti}>
                                 <label>{item.NoiDungTB}</label>
                             </div>
+                            {item.FileName == "" ? null : (
+                                <div className={style.FileNoti}>
+                                    <label>File đính kèm: </label>
+                                    <label className={style.btnfile}>{item.FileName}</label>
+                                </div>
+                            )}
                         </div>
                     </div>
                     ) : null}
@@ -168,10 +277,23 @@ const ShowNotification = ({data, onClickHide, datadelete, setDelete }) => {
                                                 required
                                             />
                                         </div>
-                                        <div className={Style.Content_file}>
-                                            <label className={Style.Content_lable}>File đính kèm</label>
-                                            <input type="file" name="file" className={Style.Content_input_file}></input>
-                                        </div>
+                                        {namefile == "" ? (
+                                            <div className={Style.StoreFile}>
+                                                <label className={style.iconStoreFile} onClick={ChangeChoose}>
+                                                    Thêm file
+                                                </label>
+                                            </div>
+                                        ) : (
+                                            <div className={style.FileNoti}>
+                                                <label>File đính kèm: </label>
+                                                <label className={style.btnfile}>{namefile}</label>
+                                                <div className={style.iconFile} onClick={() => {
+                                                    deleteFile(item.MaThongBaoChinh);
+                                                }}>
+                                                    <MdDeleteForever/>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                     
                                     <div className={Style.button}>
@@ -181,6 +303,21 @@ const ShowNotification = ({data, onClickHide, datadelete, setDelete }) => {
                                         <Button content="Quay lại" onClick={showStore} />
                                     </div>
                                 </form>
+                                {Choose ? (
+                                <form onSubmit={SubmitFormm}>
+                                    <hr></hr>
+                                    <div className={Style.Content_file}>
+                                        <label className={Style.Content_lable}>File đính kèm: </label>
+                                        <input type="file" name="file" className={style.Content_input_file}></input>
+                                        <button className={style.iconUpFile} onClick={() => {
+                                            changeIdIB(item.MaThongBaoChinh);
+                                            // item.FileName = item.FileName;
+                                        }}>
+                                            Upload file
+                                        </button>
+                                    </div>
+                                </form>
+                                ) : null}
                             </div>
                         </div>
                     ) : null}
@@ -231,7 +368,7 @@ const ShowNotification = ({data, onClickHide, datadelete, setDelete }) => {
                         <div className={style.button} id = "btn">
                             <Button 
                                 content="Sửa thông báo" 
-                                onClick={showStore}
+                                onClick={() => {showStore(); changeFileName(item.FileName);}}
                             />
                             <Button 
                                 content="Gửi thông báo" 

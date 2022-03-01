@@ -30,16 +30,18 @@ function Notification(){
     const CallAPI = () => {
         const params = queryString.stringify(filter);
         Client.get("/notification-management/index-header-notification?" + params)
-            .then((response) => {
+        .then((response) => {
             const List = response.data;
             if (List.status === "Success") {
                 setPaginations(List.pagination);
                 setTieuDe(List.data);
+            }else{
+                setTieuDe([]);
             }
-            })
-            .catch((err) => {
+        })
+        .catch((err) => {
             setErr(true);
-            });
+        });
     };
 
     useEffect(() => {

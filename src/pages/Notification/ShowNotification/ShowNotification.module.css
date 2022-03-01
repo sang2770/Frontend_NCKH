@@ -12,6 +12,58 @@
 .iconX:hover{
     cursor: pointer;
 }
+
+.iconFile{
+    float: right;
+    margin-left: 10%;
+    color: blue;
+    font-size: large;
+}
+.iconFile:hover{
+    color: red;
+    cursor: pointer;
+}
+.iconUpFile{
+    background-color: white;
+    color: blue;
+    float: left;
+    font-size: 13px;
+    padding: 5px 15px;
+    border: 1px solid blue;
+    border-radius: 5px;
+    margin-top: 20px;
+    float: right;
+}
+.iconUpFile:hover{
+    cursor: pointer;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
+    background-color: blue;
+    color: white;
+}
+.iconStoreFile{
+    background-color: white;
+    color: blue;
+    float: left;
+    font-size: 13px;
+    padding: 5px 15px;
+    border: 1px solid blue;
+    border-radius: 5px;
+}
+.iconStoreFile:hover{
+    cursor: pointer;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
+    background-color: blue;
+    color: white;
+}
+.Content_input_file{
+    margin-top: 20px;
+    margin-left: 10px;
+}
+.StoreFile{
+    width: 100%;
+    float: left;
+    border: 1px solid red;
+}
 .Hearder_text{
     text-align: center;
     margin-top: 30px;
@@ -39,7 +91,7 @@
 .button{
     display: block;
     text-align: center;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 .PaginationNoti{
     padding-top: 30px;
@@ -120,4 +172,19 @@
 .checkNoti label{
     font-size: 13px;
     margin-right: 15px;
+}
+.FileNoti{
+    margin-left: 20px;
+    margin-top: 10px;
+}
+.btnfile{
+    padding: 3px;
+    text-align: center;
+    color: blue;
+}
+.btnfile:hover{
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 3px;
+    border: 1px solid blue;
 }
