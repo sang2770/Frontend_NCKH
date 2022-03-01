@@ -1,0 +1,73 @@
+.Add_Container {
+  padding: 10px;
+  position: relative;
+}
+.AddStudent_container {
+  position: relative;
+}
+.AddStudent_Tab {
+  display: flex;
+  width: calc(100% - 20px);
+  font-size: 1.6rem;
+  margin: 0 auto;
+  border-bottom: 1px solid #ccc;
+}
+.Tab_item {
+  cursor: pointer;
+  padding: 10px;
+}
+.Tab_item:hover {
+  color: var(--Main-color);
+  border-bottom: 1px solid var(--Main-color);
+}
+
+.Tab_Content {
+  margin: 10px;
+  padding: 10px;
+}
+.Active_Tab {
+  color: var(--Main-color);
+  border-bottom: 1px solid var(--Main-color);
+}
+
+.ImportFileTitle {
+  font-size: 1.6rem;
+  padding: 10px 5px;
+}
+.FormImport {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 10px;
+}
+
+.Err_container {
+  padding: 10px;
+}
+.TableErr {
+  border-spacing: 0px;
+  width: 500px;
+  max-width: 100%;
+  font-size: 1.5rem;
+  margin: 10px;
+}
+.TableErr td {
+  padding: 5px 10px;
+}
+.ErrTitle {
+  padding: 0px 10px;
+  color: red;
+}
+.FileTemplate {
+  font-size: 1.6rem;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+.Title_Import {
+  font-size: 1.6rem;
+  padding: 10px;
+  font-weight: bold;
+}
+.Import_Content_Class_Major {
+  padding: 10px;
+}

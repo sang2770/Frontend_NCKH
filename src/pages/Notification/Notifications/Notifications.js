@@ -9,8 +9,6 @@ import StoreNotification from "../StoreNotification/StoreNotification";
 import LoadingEffect from "../../../component/Loading/Loading";
 
 function Notification() {
-  const { Client } = useAxios();
-
   const { Client, Loading } = useAxios();
 
   const [Err, setErr] = useState(null);
@@ -103,7 +101,7 @@ function Notification() {
               {Loading && <LoadingEffect />}
               <div className={style.MainContent}>
                 {/* Danh sach tieu de thong bao */}
-                {TieuDe.length != 0 ? (
+                {TieuDe.length !== 0 ? (
                   <ItemNotification
                     data={TieuDe}
                     datadelete={deleteNoti}

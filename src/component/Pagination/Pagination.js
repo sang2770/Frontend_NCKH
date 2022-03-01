@@ -13,7 +13,6 @@ function Pagination({ title, paginations, filter, setfilter, ChangeLimit }) {
   };
   const PrePage = () => {
     const CurrentPage = filter.page;
-
     if (CurrentPage >= 1) {
       setfilter({ ...filter, page: filter.page - 1 });
     }
@@ -50,6 +49,9 @@ function Pagination({ title, paginations, filter, setfilter, ChangeLimit }) {
         >
           <IoIosArrowForward />
         </div>
+      </div>
+      <div className={style.TotalPage}>
+        /Tổng số trang: {paginations.TotalPage}
       </div>
     </div>
   );

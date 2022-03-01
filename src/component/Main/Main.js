@@ -4,7 +4,6 @@ import Avatar from "../../media/Image/avatar.jpg";
 import NameSchool from "../../media/Image/NameSchool.png";
 import CreateAccount from "../../pages/CreateAccount/CreateAccount";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import {
   AiOutlineMenu,
   AiOutlineMessage,
@@ -16,7 +15,11 @@ import {
   BsPersonPlusFill,
   BsFillPeopleFill,
 } from "react-icons/bs";
-import { HiOutlineDocument, HiUserAdd } from "react-icons/hi";
+import {
+  HiOutlineDocument,
+  HiOutlineViewGridAdd,
+  HiUserAdd,
+} from "react-icons/hi";
 import { RiUserSettingsFill } from "react-icons/ri";
 import clsx from "clsx";
 import "./Main.css";
@@ -32,12 +35,15 @@ import MoveMilitary from "../../pages/MilitaryManage/MoveMilitary/MoveMilitary";
 import ConfirmMilitary from "../../pages/MilitaryManage/ConfirmMilitary/ConfirmMilitary";
 import MoveMilitaryLocal from "../../pages/MilitaryManage/MoveMilitaryLocal/MoveMilitaryLocal";
 import Notification from "../../pages/Notification/Notifications/Notifications";
-import Analyst from "../../pages/Analyst/Analyst";
+import ExportImport from "../../pages/Analyst/ExportImport/ExportImport";
+import ExportUpdate from "../../pages/Analyst/ExportUpdate/ExportUpdate";
+import ExportFluctation from "../../pages/Analyst/ExportFluctation/ExportFluctation";
+import AddInformation from "../../pages/AddInformation/AddInformation";
 
 function Main() {
   const [clickMenu, setclickMenu] = useState(false);
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const [ActiveSub, setActiveSub] = useState(
     JSON.parse(localStorage.getItem("ActiveSub")) || "/"
   );
@@ -82,6 +88,9 @@ function Main() {
       setMenuSubItem(locate.slice(1, locate.length));
     } else if (locate.includes("/Military")) {
       setActiveSub("Military");
+      setMenuSubItem(locate.slice(1, locate.length));
+    } else if (locate.includes("/ExportAnalyst")) {
+      setActiveSub("ExportAnalyst");
       setMenuSubItem(locate.slice(1, locate.length));
     } else {
       setActiveSub(locate.slice(1, locate.length));
@@ -298,8 +307,7 @@ function Main() {
                 ChangeSubMenu("ExportAnalyst");
               }}
             >
-              <Link
-                to="/ExportAnalyst"
+              <p
                 className={clsx(
                   "SideBar_Item_content",
                   ActiveSub === "ExportAnalyst" && "ActiveItem"
@@ -307,8 +315,69 @@ function Main() {
               >
                 <HiOutlineDocument />
                 <span className="Item_content">Xuất báo cáo</span>
-              </Link>
+              </p>
+              <ul className="SideBar_MenuChild">
+                <li
+                  className={clsx(
+                    "SideBar_MenuChild_item",
+                    MenuSubItem === "ExportAnalyst-Import" &&
+                      "ActiveSubMenuItem"
+                  )}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // console.log(e.target);
+                    ChangeMenuSubItem("ExportAnalyst-Import");
+                  }}
+                >
+                  <Link
+                    to="ExportAnalyst-Import"
+                    className="SideBar_Item_content"
+                  >
+                    <BsPersonPlusFill />
+                    <span className="Item_content">Báo cáo Import</span>
+                  </Link>
+                </li>
+                <li
+                  className={clsx(
+                    "SideBar_MenuChild_item",
+                    MenuSubItem === "ExportAnalyst-Update" &&
+                      "ActiveSubMenuItem"
+                  )}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    ChangeMenuSubItem("ExportAnalyst-Update");
+                  }}
+                >
+                  <Link
+                    to="ExportAnalyst-Update"
+                    className="SideBar_Item_content"
+                  >
+                    <RiUserSettingsFill />
+                    <span className="Item_content">Báo cáo cập nhật</span>
+                  </Link>
+                </li>
+                <li
+                  className={clsx(
+                    "SideBar_MenuChild_item",
+                    MenuSubItem === "ExportAnalyst-Fluctation" &&
+                      "ActiveSubMenuItem"
+                  )}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    ChangeMenuSubItem("ExportAnalyst-Fluctation");
+                  }}
+                >
+                  <Link
+                    to="ExportAnalyst-Fluctation"
+                    className="SideBar_Item_content"
+                  >
+                    <BsFillPeopleFill />
+                    <span className="Item_content">Báo cáo biến động</span>
+                  </Link>
+                </li>
+              </ul>
             </li>
+
             <li
               className="SideBar_Item"
               onClick={() => {
@@ -341,6 +410,23 @@ function Main() {
               >
                 <HiUserAdd />
                 <span className="Item_content">Tạo tài khoản mới</span>
+              </Link>
+            </li>
+            <li
+              className="SideBar_Item"
+              onClick={() => {
+                ChangeSubMenu("AddInfomation");
+              }}
+            >
+              <Link
+                to="/AddInfomation"
+                className={clsx(
+                  "SideBar_Item_content",
+                  ActiveSub === "AddInfomation" && "ActiveItem"
+                )}
+              >
+                <HiOutlineViewGridAdd />
+                <span className="Item_content">Thêm thông tin</span>
               </Link>
             </li>
           </ul>
@@ -396,7 +482,19 @@ function Main() {
                     path="Military-ConfirmMilitary"
                     element={<ConfirmMilitary />}
                   />
-                  <Route path="ExportAnalyst" element={<Analyst />} />
+                  <Route
+                    path="ExportAnalyst-Import"
+                    element={<ExportImport />}
+                  />
+                  <Route
+                    path="ExportAnalyst-Update"
+                    element={<ExportUpdate />}
+                  />
+                  <Route
+                    path="ExportAnalyst-Fluctation"
+                    element={<ExportFluctation />}
+                  />
+                  <Route path="AddInfomation" element={<AddInformation />} />
                   <Route path="Notifiaction-main" element={<Notification />} />
                 </Routes>
               </div>

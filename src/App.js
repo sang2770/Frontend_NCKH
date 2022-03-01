@@ -21,7 +21,7 @@ function App() {
         }
       })
       .catch((err) => {
-        alert("Có lỗi");
+        alert("Vui lòng đăng nhập!");
         logout(dispatch);
       });
   };

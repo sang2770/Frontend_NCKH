@@ -30,3 +30,6 @@ ul {
 .App {
   position: relative;
 }
+canvas {
+  height: 100 !important;
+}

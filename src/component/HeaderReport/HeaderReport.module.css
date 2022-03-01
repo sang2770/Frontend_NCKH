@@ -1,0 +1,11 @@
+.HeaderReport_Container {
+  display: flex;
+  padding: 10px;
+  font-size: 1.6rem;
+  color: var(--Main-color);
+}
+.HeaderReport_Icon {
+  margin-right: 10px;
+}
+.HeaderReport_Title {
+}
