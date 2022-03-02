@@ -13,11 +13,22 @@ import TableMilitary from "../../../component/TableMilitary/TableMilitary";
 import TableMoveData from "../../../component/TableMilitary/TableMoveData";
 import LoadingEffect from "../../../component/Loading/Loading";
 
-const tableHeaders = ["Họ và tên", "MSV", "Ngày sinh", "Lớp", "Khoa", "Khóa", "Trạng thái", "Số QĐ", "Ngày quyết định", "Xác nhận"];
+const tableHeaders = [
+  "Họ và tên",
+  "MSV",
+  "Ngày sinh",
+  "Lớp",
+  "Khoa",
+  "Khóa",
+  "Trạng thái",
+  "Số QĐ",
+  "Ngày quyết định",
+  "Xác nhận",
+];
 
 function MoveMilitary() {
   const { Client, Loading } = useAxios();
-  
+
   const [Err, setErr] = useState(null);
 
   const TrangThai = ["Đã tốt nghiệp", "Đã thôi học"];
@@ -33,7 +44,7 @@ function MoveMilitary() {
     page: 1,
   });
 
-  // Search 
+  // Search
   const [FilterKhoa, setFilterKhoa] = useState("");
   const [FilterKhoas, setFilterKhoas] = useState("");
   const [FilterLop, setFilterLop] = useState("");
@@ -42,26 +53,42 @@ function MoveMilitary() {
   const [MoveMilitary, setMoveMilitary] = useState([]);
 
   const changeKhoa = (event) => {
-    setFilterKhoa(event.target.value)
-  }
+    setFilterKhoa(event.target.value);
+  };
   const changeKhoas = (event) => {
-    setFilterKhoas(event.target.value)
-  }
+    setFilterKhoas(event.target.value);
+  };
   const changeLop = (event) => {
-    setFilterLop(event.target.value)
-  }
+    setFilterLop(event.target.value);
+  };
   const changeTrangThai = (event) => {
-    setFilterTrangThai(event.target.value)
-  }
+    setFilterTrangThai(event.target.value);
+  };
 
   const onSearch = () => {
-    if(FilterKhoa === "" && FilterKhoas === "" && FilterLop === "" && FilterMSV.current.value === "" && FilterTrangThai === "" )
-    {
-      alert("Bạn cần chọn khoa, khóa, lớp, trạng thái sinh viên hoặc mã sinh viên để thực hiện tìm kiếm");
-    }
-    else{
-      Client.get("/register-military-management/filter-info-move?MaSinhVien=" + FilterMSV.current.value + 
-        "&TenLop=" + FilterLop + "&Khoas=" + FilterKhoas + "&TenKhoa=" + FilterKhoa + "&TinhTrangSinhVien=" + FilterTrangThai)
+    if (
+      FilterKhoa === "" &&
+      FilterKhoas === "" &&
+      FilterLop === "" &&
+      FilterMSV.current.value === "" &&
+      FilterTrangThai === ""
+    ) {
+      alert(
+        "Bạn cần chọn khoa, khóa, lớp, trạng thái sinh viên hoặc mã sinh viên để thực hiện tìm kiếm"
+      );
+    } else {
+      Client.get(
+        "/register-military-management/filter-info-move?MaSinhVien=" +
+          FilterMSV.current.value +
+          "&TenLop=" +
+          FilterLop +
+          "&Khoas=" +
+          FilterKhoas +
+          "&TenKhoa=" +
+          FilterKhoa +
+          "&TinhTrangSinhVien=" +
+          FilterTrangThai
+      )
         .then((res) => {
           if (res.data.status === "Success") {
             setMoveMilitary(res.data.data);
@@ -72,8 +99,8 @@ function MoveMilitary() {
         .catch((err) => {
           setErr("Not Found!");
         });
-      }
-    };
+    }
+  };
 
   // useEffect(() => {
   //   const params = queryString.stringify(filter);
@@ -104,10 +131,21 @@ function MoveMilitary() {
   // Export
   const Export = async () => {
     // const params = queryString.stringify(filter);
-    Client.get("/move-military-management/move-military?MaSinhVien=" + FilterMSV.current.value + 
-    "&TenLop=" + FilterLop + "&Khoas=" + FilterKhoas + "&TenKhoa=" + FilterKhoa + "&TinhTrangSinhVien=" + FilterTrangThai, {
-      responseType: "blob",
-    })
+    Client.get(
+      "/move-military-management/move-military?MaSinhVien=" +
+        FilterMSV.current.value +
+        "&TenLop=" +
+        FilterLop +
+        "&Khoas=" +
+        FilterKhoas +
+        "&TenKhoa=" +
+        FilterKhoa +
+        "&TinhTrangSinhVien=" +
+        FilterTrangThai,
+      {
+        responseType: "blob",
+      }
+    )
       .then((response) => {
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement("a");
@@ -126,24 +164,47 @@ function MoveMilitary() {
     <React.Fragment>
       <div>
         <div className={style.Confirm_header}>
-          <HeaderTitle Title="Giấy Giới Thiệu Di Chuyển Đăng Ký Nghĩa Vụ Quân Sự" Icon={<RiUserSettingsFill />} /> 
+          <HeaderTitle
+            Title="Giấy Giới Thiệu Di Chuyển Đăng Ký Nghĩa Vụ Quân Sự"
+            Icon={<RiUserSettingsFill />}
+          />
         </div>
         <div>
-          <h1 className={style.Hearder_tittle}>Giấy Giới Thiệu Di Chuyển Đăng Ký Nghĩa Vụ Quân Sự</h1>
+          {/* <h1 className={style.Hearder_tittle}>Giấy Giới Thiệu Di Chuyển Đăng Ký Nghĩa Vụ Quân Sự</h1> */}
           {/* form tìm kiếm */}
           <div className={style.Form_main}>
             <div className={style.Search_button}>
-              <ComboBox id = {FilterKhoa} title="Khoa" items={Khoa} Change = {changeKhoa}/>
-              <ComboBox id = {FilterKhoas} title="Khóa" items={Khoas} Change = {changeKhoas}/>
-              <ComboBox id = {FilterLop} title="Lớp" items={Lop} Change = {changeLop}/>
-              <ComboBox id = {FilterTrangThai} title="Trạng thái" items={TrangThai} Change = {changeTrangThai}/>
+              <ComboBox
+                id={FilterKhoa}
+                title="Khoa"
+                items={Khoa}
+                Change={changeKhoa}
+              />
+              <ComboBox
+                id={FilterKhoas}
+                title="Khóa"
+                items={Khoas}
+                Change={changeKhoas}
+              />
+              <ComboBox
+                id={FilterLop}
+                title="Lớp"
+                items={Lop}
+                Change={changeLop}
+              />
+              <ComboBox
+                id={FilterTrangThai}
+                title="Trạng thái"
+                items={TrangThai}
+                Change={changeTrangThai}
+              />
             </div>
-            <Search onClickSearch = {onSearch} Ref={FilterMSV}/>
+            <Search onClickSearch={onSearch} Ref={FilterMSV} />
             <div className={style.Result_search}>
               <h2>Kết Quả Tìm Kiếm</h2>
             </div>
             <div className={style.DataList}>
-            {Loading && <LoadingEffect />}
+              {Loading && <LoadingEffect />}
               <TableMilitary
                 headers={tableHeaders}
                 Content={<TableMoveData data={MoveMilitary} />}
