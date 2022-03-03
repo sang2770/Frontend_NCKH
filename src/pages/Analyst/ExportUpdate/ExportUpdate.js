@@ -194,7 +194,7 @@ function ExportUpdate() {
           <React.Fragment>
             <HeaderReport title="Chi tiết" icon={<AiOutlineBarChart />} />
             <div className={style.ListDetails}>
-              <table border={1} style={{ width: "100%" }}>
+              <table className={style.TableDetails} style={{ width: "100%" }}>
                 <thead>
                   <tr>
                     <th>Thời gian</th>
