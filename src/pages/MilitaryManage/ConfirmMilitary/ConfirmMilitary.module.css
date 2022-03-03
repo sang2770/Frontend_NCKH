@@ -5,20 +5,18 @@
 }
 .Hearder_tittle{
     text-align: center;
-    /* text-shadow: 5px 5px 10px rgb(158, 164, 248); */
     padding-bottom: 50px;
 }
 
 .Form_main{
-    position: relative;
-    padding: 30px 30px 20px 30px;
     margin: 10px 45px 0px 45px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
-    border: 1px solid rgb(162, 167, 245);
 }
-
+.load{
+    position: relative;
+}
 .Search_button{
     display: flex;
+    margin-left: 5%;
 }
 .Result_search{
     display: inline-block;
@@ -33,7 +31,9 @@
 }
 
 .btn{
-    text-align: center;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    /* text-align: center; */
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: end;
+    padding: 10px 30px ;
 }

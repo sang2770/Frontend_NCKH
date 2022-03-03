@@ -24,12 +24,14 @@
     /* display: block; */
     /* text-align: center; */
     margin-bottom: 10px;
+    margin-right: 10px;
     display: flex;
     justify-content: end;
     padding: 10px;
 }
 .PaginationNoti{
     padding-top: 30px;
+    padding-right: 30px;
 }
 /* Danh sach tieu de */
 .bodyNoti{

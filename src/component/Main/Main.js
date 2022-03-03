@@ -19,8 +19,10 @@ import {
   HiOutlineDocument,
   HiOutlineViewGridAdd,
   HiUserAdd,
+  HiOutlineNewspaper,
 } from "react-icons/hi";
 import { RiUserSettingsFill } from "react-icons/ri";
+import { IoIosPaper } from "react-icons/io";
 import clsx from "clsx";
 import "./Main.css";
 import { AuthContext } from "../../authContext/AuthContext";
@@ -39,6 +41,8 @@ import ExportImport from "../../pages/Analyst/ExportImport/ExportImport";
 import ExportUpdate from "../../pages/Analyst/ExportUpdate/ExportUpdate";
 import ExportFluctation from "../../pages/Analyst/ExportFluctation/ExportFluctation";
 import AddInformation from "../../pages/AddInformation/AddInformation";
+import ExportConfirmMilitary from "../../pages/Analyst/ExportConfirmMilitary/ExportConfirmMilitary";
+import ExportMoveMilitary from "../../pages/Analyst/ExportMoveMilitary/ExportMoveMilitary";
 
 function Main() {
   const [clickMenu, setclickMenu] = useState(false);
@@ -295,7 +299,7 @@ function Main() {
                     to="/Military-ConfirmMilitary"
                     className="SideBar_Item_content"
                   >
-                    <BsFillPeopleFill />
+                    <IoIosPaper />
                     <span className="Item_content">Giấy xác nhận</span>
                   </Link>
                 </li>
@@ -373,6 +377,44 @@ function Main() {
                   >
                     <BsFillPeopleFill />
                     <span className="Item_content">Báo cáo biến động</span>
+                  </Link>
+                </li>
+                <li
+                  className={clsx(
+                    "SideBar_MenuChild_item",
+                    MenuSubItem === "ExportAnalyst-ConfirmMilitary" &&
+                      "ActiveSubMenuItem"
+                  )}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    ChangeMenuSubItem("ExportAnalyst-ConfirmMilitary");
+                  }}
+                >
+                  <Link
+                    to="ExportAnalyst-ConfirmMilitary"
+                    className="SideBar_Item_content"
+                  >
+                    <IoIosPaper />
+                    <span className="Item_content">Tình trạng cấp phát Giấy xác nhận</span>
+                  </Link>
+                </li>
+                <li
+                  className={clsx(
+                    "SideBar_MenuChild_item",
+                    MenuSubItem === "ExportAnalyst-MoveMilitary" &&
+                      "ActiveSubMenuItem"
+                  )}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    ChangeMenuSubItem("ExportAnalyst-MoveMilitary");
+                  }}
+                >
+                  <Link
+                    to="ExportAnalyst-MoveMilitary"
+                    className="SideBar_Item_content"
+                  >
+                    <HiOutlineNewspaper />
+                    <span className="Item_content">Tình trạng cấp phát Giấy giới thiệu</span>
                   </Link>
                 </li>
               </ul>
@@ -493,6 +535,14 @@ function Main() {
                   <Route
                     path="ExportAnalyst-Fluctation"
                     element={<ExportFluctation />}
+                  />
+                  <Route
+                    path="ExportAnalyst-ConfirmMilitary"
+                    element={<ExportConfirmMilitary />}
+                  />
+                  <Route
+                    path="ExportAnalyst-MoveMilitary"
+                    element={<ExportMoveMilitary />}
                   />
                   <Route path="AddInfomation" element={<AddInformation />} />
                   <Route path="Notifiaction-main" element={<Notification />} />

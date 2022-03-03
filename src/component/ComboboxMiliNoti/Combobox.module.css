@@ -1,15 +1,16 @@
 .Search_combobox{
     float: left;
-    margin-left: 5%;
+    margin-left: 3%;
 }
 
 .Search_combobox label{
-    font-size: 13px;
+    font-size: 14px;
+    margin-right: 6px;
 }
 
 .Search_combobox select{
-    width: 120px;
-    padding: 5px 8px;
+    width: 130px;
+    padding: 7px 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     resize: vertical;

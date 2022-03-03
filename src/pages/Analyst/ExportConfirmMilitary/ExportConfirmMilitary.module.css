@@ -1,0 +1,37 @@
+.Export_Update_Container {
+    padding: 0px 20px;
+    width: 100%;
+    font-size: 1.6rem;
+  }
+  
+  .Update_Filter {
+    margin-bottom: 20px;
+    display: flex;
+  }
+  .Update_Filter_Item {
+    width: calc(100% / 4);
+    padding: 0px 10px;
+  }
+  .Chart {
+    width: 100%;
+    padding: 20px;
+    height: 520px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    margin-top: 15px;
+  }
+  .Chart_Details .Sum_People {
+    padding: 5px 5px;
+  }
+  .Chart_Details{
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
+  .ReportContent{
+    margin-bottom: 20px;
+  }
+  .note{
+    font-size: 13px;
+    margin-left: 30px;
+    color: red;
+  }

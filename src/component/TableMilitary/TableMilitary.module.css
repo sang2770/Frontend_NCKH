@@ -35,14 +35,15 @@ thead .Table_Header {
   position: relative;
   text-align: center;
   padding: 8px 8px;
-  font-size: 13px;
+  font-size: 14px;
   background-color: rgb(214, 236, 248);
   border-bottom: 1px solid #ccc;
 }
 .Table_Column {
   border-bottom: 1px solid #ccc;
   padding: 9px;
-  font-size: 11px;
+  text-align: center;
+  font-size: 13px;
   /* word-break: break-all; */
 }
 
@@ -81,7 +82,7 @@ thead .Table_Header {
 .InfoDetail_label{
   float: left;
   margin-right: 5px;
-  color: red;
+  color: blue;
   font-size: large;
 }
 .InfoDetail_label:hover{

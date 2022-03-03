@@ -5,7 +5,7 @@
     color: rgb(92, 92, 250);
     display: flex;
     font-size: 14px;
-    margin: 0px 30px 10px 30px;
+    margin: 0px 30px 10px 40px;
 }
 .LeftNoti{
     width: 90%;
@@ -14,10 +14,11 @@
 }
 
 .icon{
-    padding-right: 20px;
+    padding-right: 10px;
 }
 .Noti_label{
     width: 90%;
+    font-size: 14.5px;
 }
 
 .Noti_label label:hover{
@@ -27,7 +28,7 @@
 
 /*  */
 .Noti_input{
-    padding-left: 30px;
+    padding-left: 40px;
     float: right;
     font-size: 20px;
 }

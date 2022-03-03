@@ -75,21 +75,6 @@ function MoveMilitary() {
       }
     };
 
-  // useEffect(() => {
-  //   const params = queryString.stringify(filter);
-  //   Client.get("/register-military-management/filter-info-move?" + params)
-  //     .then((response) => {
-  //       const List = response.data;
-  //       if (List.status === "Success") {
-  //         setPaginations(List.pagination);
-  //         setMoveMilitary(List.data);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       setErr(true);
-  //     });
-  // }, [filter]);
-
   const Time = useRef(null);
   const ChangeLimit = (e) => {
     const input = e.target;
@@ -124,12 +109,12 @@ function MoveMilitary() {
 
   return (
     <React.Fragment>
-      <div>
+      <div className={style.load}>
+      {Loading && <LoadingEffect />}
         <div className={style.Confirm_header}>
           <HeaderTitle Title="Giấy Giới Thiệu Di Chuyển Đăng Ký Nghĩa Vụ Quân Sự" Icon={<RiUserSettingsFill />} /> 
         </div>
         <div>
-          <h1 className={style.Hearder_tittle}>Giấy Giới Thiệu Di Chuyển Đăng Ký Nghĩa Vụ Quân Sự</h1>
           {/* form tìm kiếm */}
           <div className={style.Form_main}>
             <div className={style.Search_button}>
@@ -143,7 +128,6 @@ function MoveMilitary() {
               <h2>Kết Quả Tìm Kiếm</h2>
             </div>
             <div className={style.DataList}>
-            {Loading && <LoadingEffect />}
               <TableMilitary
                 headers={tableHeaders}
                 Content={<TableMoveData data={MoveMilitary} />}

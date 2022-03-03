@@ -16,21 +16,7 @@
   .TableTemplate {
     width: 100%;
   }
-  /* thead .Table_Header {
-    position: sticky;
-    top: 5px;
-  } */
-  /* .Table_Header::after {
-    position: absolute;
-    top: -10px;
-    left: 0;
-    content: "";
-    background-color: #fff;
-    width: 100px;
-    height: 10px;
-    width: 100%;
-    z-index: -1;
-  } */
+
   .Table_Header {
     /* position: relative; */
     text-align: center;
@@ -45,6 +31,7 @@
     padding: 9px;
     font-size: 11px;
     word-break: break-all;
+    text-align: center;
   }
 
 .btn{
@@ -54,17 +41,17 @@
   width: 60px;
   height: 20px;
   margin: 20px 20px 10px 20px;
-  background-color: rgba(228, 234, 255, 1);
-  border: 1px solid rgb(197, 209, 252);
-  border-radius: 10px;
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2);
-  color: rgba(27, 47, 227, 1);
+  background-color: white;
+  border: 1px solid blue;
+  border-radius: 5px;
+  box-shadow: 4px 4px 5px 0 rgba(49, 7, 202, 0.2);
+  color: blue;
   cursor: pointer;
 }
 
 .btn_hide:hover{
   opacity: 0.9;
-  background-color: rgb(110, 135, 223);
+  background-color: blue;
   color: white;
 }
   

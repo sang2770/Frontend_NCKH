@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import Button from "../../../component/ButtonMiliNoti/Button";
 import style from "./ConfirmMilitary.module.css";
 import HeaderTitle from "../../../component/HeaderTitle/HeaderTitle";
-import { BsFillPeopleFill } from  "react-icons/bs";
+import { IoIosPaper } from  "react-icons/io";
 import ComboBox from "../../../component/ComboboxMiliNoti/Combobox";
 import Pagination from "../../../component/Pagination/Pagination";
 import useAxios from "../../../Helper/API";
@@ -124,12 +124,12 @@ function ConfirmMilitary() {
   
   return (
     <React.Fragment>
-      <div>
+      <div className={style.load}>
+      {Loading && <LoadingEffect />}
         <div className={style.Confirm_header}>
-          <HeaderTitle Title="Giấy Xác Nhận Nghĩa Vụ Quân Sự" Icon={<BsFillPeopleFill />} /> 
+          <HeaderTitle Title="Giấy Xác Nhận Nghĩa Vụ Quân Sự" Icon={<IoIosPaper />} /> 
         </div>
         <div>
-          <h1 className={style.Hearder_tittle}>Giấy Xác Nhận Nghĩa Vụ Quân Sự</h1>
           {/* form tìm kiếm */}
           <div className={style.Form_main}>
             <div className={style.Search_button}>
@@ -143,7 +143,6 @@ function ConfirmMilitary() {
               <h2>Kết Quả Tìm Kiếm</h2>
             </div>
             <div className={style.DataList}>
-              {Loading && <LoadingEffect />}
                 <TableMilitary
                   headers={tableHeaders}
                   Content={<TableConfirmData data={ConfirmMilitary} />}

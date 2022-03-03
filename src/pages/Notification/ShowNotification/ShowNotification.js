@@ -31,7 +31,8 @@ const ShowNotification = ({ data, onClickHide, datadelete, setDelete }) => {
   const [FilterKhoa, setFilterKhoa] = useState("");
   const [FilterKhoas, setFilterKhoas] = useState("");
   const [FilterLop, setFilterLop] = useState("");
-
+  const [MagiayDK, setMaGiayDK] = useState(false);
+  const [MaDK, setMaDK] = useState("");
   const changeKhoa = (event) => {
     setFilterKhoa(event.target.value);
   };
@@ -41,11 +42,20 @@ const ShowNotification = ({ data, onClickHide, datadelete, setDelete }) => {
   const changeLop = (event) => {
     setFilterLop(event.target.value);
   };
+  const changeMaDK = () => {
+    setMaGiayDK(!MagiayDK);
+  };
 
   const SentNotification = async (idTBC) => {
+    // console.log(MagiayDK);
     if (FilterKhoa === "" && FilterKhoas === "" && FilterLop === "") {
       alert("Bạn chưa chọn thông tin khoa khóa lớp để gửi thông báo!");
     } else {
+      if(MagiayDK == true){
+        setMaDK(MagiayDK);
+      }else{
+        setMaDK("");
+      }
       Client.post(
         "/notification-management/sent-notification-students?MaThongBaoChinh=" +
           idTBC +
@@ -54,11 +64,16 @@ const ShowNotification = ({ data, onClickHide, datadelete, setDelete }) => {
           "&Khoas=" +
           FilterKhoas +
           "&TenKhoa=" +
-          FilterKhoa
+          FilterKhoa +
+          "&MaGiayDK=" +
+          MaDK
       )
         .then((response) => {
           if (response.data.status === "Success") {
+            // console.log(response.data.data);
             alert("Bạn đã gửi thông báo thành công");
+          }else{
+            alert("Gửi thông báo không thành công!\nKhông tìm được kết quả thỏa mãn điều kiện trên!");
           }
         })
         .catch((err) => {
@@ -172,7 +187,7 @@ const ShowNotification = ({ data, onClickHide, datadelete, setDelete }) => {
 
   const changeFileName = (name) => {
     setNamefile(name);
-    console.log(name);
+    // console.log(name);
   };
   //update filename sau khi upload file
   const updateName = (id, name) => {
@@ -355,7 +370,6 @@ const ShowNotification = ({ data, onClickHide, datadelete, setDelete }) => {
                           className={style.iconUpFile}
                           onClick={() => {
                             changeIdIB(item.MaThongBaoChinh);
-                            // item.FileName = item.FileName;
                           }}
                         >
                           Upload file
@@ -403,7 +417,7 @@ const ShowNotification = ({ data, onClickHide, datadelete, setDelete }) => {
                     </div>
                     <div className={style.checkNoti}>
                       <label>Sinh viên chưa nộp giấy nghĩa vụ quân sự</label>
-                      <input type="checkbox"></input>
+                      <input type="checkbox" onChange = {changeMaDK}></input>
                     </div>
                   </div>
                   <div className={style.button}>
