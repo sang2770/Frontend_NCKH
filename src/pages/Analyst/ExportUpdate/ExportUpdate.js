@@ -121,7 +121,7 @@ function ExportUpdate() {
   };
   const ExportReport = () => {
     const params = queryString.stringify(filter);
-    Client.get("/export-report/xport-student-update?" + params, {
+    Client.get("/export-report/export-student-update?" + params, {
       responseType: "blob",
     })
       .then((response) => {
