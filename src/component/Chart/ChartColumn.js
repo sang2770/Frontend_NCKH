@@ -40,12 +40,12 @@ function ChartColumn({ NameChart, labels, datas }) {
           {
             label: "Đang quản lý",
             data: datas ? datas.map((item) => item[0]) : [],
-            backgroundColor: "rgba(255, 99, 132, 0.5)",
+            backgroundColor: "rgba(53, 162, 235, 0.5)",
           },
           {
             label: "Đã rời khỏi",
             data: datas ? datas.map((item) => item[1]) : [],
-            backgroundColor: "rgba(53, 162, 235, 0.5)",
+            backgroundColor: "rgba(255, 99, 132, 0.5)",
           },
         ],
       }}

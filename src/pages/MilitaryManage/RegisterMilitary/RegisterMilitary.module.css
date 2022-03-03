@@ -1,68 +1,67 @@
-  /* box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
-.Import_choose{
-    text-align: center;
+/* box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+.Import_choose {
+  text-align: center;
 }
 
-.importFile{
-    display: flex;
+.importFile {
+  display: flex;
 }
 
-.Register_body{
-    /* margin-top: 80px; */
-    margin-bottom: 40px;
+.Register_body {
+  /* margin-top: 80px; */
+  margin-bottom: 40px;
 }
-.button_register{
-    margin: 0px;
-    float: right;
+.button_register {
+  margin: 0px;
+  float: right;
 }
-.Form_register{
-    background-color: white;
-    padding: 30px 30px 0px 50px;
-    margin: 20px 45px 0px 45px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
-    /* height: 300px; */
-    border: 1px solid rgb(134, 142, 252);
-    margin-top: 20px;
+.Form_register {
+  background-color: white;
+  padding: 30px 30px 0px 50px;
+  margin: 20px 45px 0px 45px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
+  /* height: 300px; */
+  border: 1px solid rgb(134, 142, 252);
+  margin-top: 20px;
 }
-.Register_header{
+.Register_header {
   left: 19%;
   width: 96%;
   /* border-radius: 20px 20px 0px 0px;
   background-color: white; */
   margin-left: 2%;
 }
-
 .form_title{
     text-align: center;
     /* text-shadow: 5px 5px 10px rgb(158, 164, 248); */
     padding-bottom: 50px;
 }
-
 /* button */
-.Register_button{
-    padding: 10px 30px 10px 30px;
-    margin: 10px 45px 0px 45px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
-    height: auto;
-    border: 1px solid rgb(162, 167, 245);
+.Register_button {
+  padding: 10px 30px 10px 30px;
+  margin: 10px 45px 0px 45px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
+  height: auto;
+  border: 1px solid rgb(162, 167, 245);
 }
 
-.Button_register{
-    text-align: center;
+.Button_register {
+  text-align: center;
 }
 
 /* search */
-.Register_search{
-    padding: 30px 30px 20px 30px;
-    margin: 10px 45px 0px 45px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
-    border: 1px solid rgb(162, 167, 245);
-    position: relative;
+.Register_search {
+  padding: 30px 30px 20px 30px;
+  margin: 10px 45px 0px 45px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid rgb(162, 167, 245);
+  position: relative;
 }
 
-.Search_register{
-    display: block;
+.Search_register {
+  display: block;
 }
+
 .cmbSearch{
     display: block;
     width: 100%;
@@ -109,23 +108,21 @@
     width: 90%;
     font-size: 12px;
 }
-
 /* Error */
 .Err_container {
-    padding: 20px 45px;
+  padding: 20px 45px;
 }
 .TableErr {
-    border-spacing: 0px;
-    max-width: 100%;
-    font-size: 1.5rem;
-    width: 98%;
-    margin: 10px;
-
+  border-spacing: 0px;
+  max-width: 100%;
+  font-size: 1.5rem;
+  width: 98%;
+  margin: 10px;
 }
 .TableErr td {
-    padding: 5px 10px;
+  padding: 5px 10px;
 }
 .ErrTitle {
-    padding: 0px 10px;
-    color: red;
+  padding: 0px 10px;
+  color: red;
 }

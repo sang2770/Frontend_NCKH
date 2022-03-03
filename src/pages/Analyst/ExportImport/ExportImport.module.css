@@ -22,3 +22,21 @@
 .Chart_Details .Sum_People {
   padding: 5px 5px;
 }
+.TableDetails {
+}
+.TableDetails thead {
+  background-color: rgb(71, 71, 236);
+  color: #fff;
+}
+.TableDetails th {
+  padding: 10px 5px;
+  border-radius: 3px;
+}
+.TableDetails td {
+  border-bottom: 1px solid #ccc;
+  padding: 5px;
+  text-align: center;
+}
+.TableDetails td:nth-child(3) {
+  text-align: left;
+}
