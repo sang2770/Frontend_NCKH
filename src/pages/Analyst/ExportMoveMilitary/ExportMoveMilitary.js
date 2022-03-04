@@ -82,7 +82,7 @@ function ExportMoveMilitary(){
             }
           })
           .catch((err) => {
-            alert("Có lỗi");
+            alert("Có lỗiiiii");
           });
     };
 
@@ -143,7 +143,7 @@ function ExportMoveMilitary(){
                 <div className={style.Update_Filter_Item}>
                     <ComboBox
                         title="Năm"
-                        id="Nam"
+                        id="NgayCap"
                         items={DateFilter.Year}
                         Change={ChangeFilter}
                     />
@@ -160,7 +160,7 @@ function ExportMoveMilitary(){
             </div>
             <div className={style.ReportContent}>
                 <HeaderReport title="Biểu đồ biến động" icon={<AiOutlineBarChart />} />
-                <label className={style.note}>(Chọn năm để xem tình trạng cấp phát)</label>
+                <label className={style.note}>(Chọn năm và khóa để xem tình trạng cấp phát)</label>
                 <div className={style.Chart}>
                     <LineChart
                         title='Biểu đồ thể hiện tình trạng cấp phát Giấy giới thiệu'
@@ -195,7 +195,7 @@ function ExportMoveMilitary(){
                     </p>
                     <p className={style.Sum_People}>
                         Tổng:
-                        <span>{result.Total_Out + result.Total_Learning}</span>
+                        <span>{(result.Total_Out + result.Total_Learning) ? (result.Total_Out + result.Total_Learning) : 0}</span>
                     </p>
                 </div>
                 <Button
