@@ -95,6 +95,7 @@ function ExportFluctation() {
             id="Nam"
             items={ListYear()}
             Change={ChangeFilter}
+            data={{ Nam: 2022 }}
           />
         </div>
         <div className={style.Fluctation_Filter_Item}>
