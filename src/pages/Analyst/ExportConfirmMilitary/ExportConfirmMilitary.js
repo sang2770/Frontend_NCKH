@@ -143,6 +143,7 @@ function ExportConfirmMilitary(){
                     id="NgayCap"
                     items={DateFilter.Year}
                     Change={ChangeFilter}
+                    data={{ Nam: 2022 }}
                 />
                 </div>
 
