@@ -17,8 +17,10 @@ function ExportMoveMilitary(){
     const { Khoas } = useContext(DataContext);
     const Time = useRef(null);
     const [result, setResult] = useState({});
+    var today = new Date().getFullYear();
+
     const [filter, setfilter] = useState({
-        Nam: 2022,
+        Nam: today,
         limit: 10,
         page: 1,
     });
@@ -146,7 +148,7 @@ function ExportMoveMilitary(){
                         id="NgayCap"
                         items={DateFilter.Year}
                         Change={ChangeFilter}
-                        data={{ Nam: 2022 }}
+                        data={{ Nam: today }}
                     />
                 </div>
 
