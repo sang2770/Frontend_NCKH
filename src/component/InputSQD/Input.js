@@ -1,15 +1,21 @@
-import React, { useRef } from "react";
+import React from "react";
 import Button from "../Button/Button";
 import styles from "./Input.module.css";
 import { BiExit } from "react-icons/bi";
 
 function Input({ content, submit, setOpenSKQ, FormValue }) {
-  const SoQD = useRef("");
-  const Submit = () => {
-    if (SoQD.current.value.trim().length == 0) {
+  const SubmitForm = (e) => {
+    e.preventDefault();
+    const FormQD = new FormData(e.target);
+    if (
+      FormQD.get("SoQuyetDinh").trim().length === 0 ||
+      FormQD.get("NgayQuyetDinh").trim().length === 0
+    ) {
       alert("Bạn phải nhập dữ liệu");
+      return;
     } else {
-      FormValue.append("SoQuyetDinh", SoQD.current.value.trim());
+      FormValue.append("SoQuyetDinh", FormQD.get("SoQuyetDinh"));
+      FormValue.append("NgayQuyetDinh", FormQD.get("NgayQuyetDinh"));
       submit();
       setOpenSKQ(false);
     }
@@ -26,13 +32,29 @@ function Input({ content, submit, setOpenSKQ, FormValue }) {
           <BiExit />
         </div>
         <div className={styles.Input_Content_Title}>{content}</div>
-        <input
-          type="text"
-          name="SoQuyetDinh"
-          ref={SoQD}
-          placeholder="Số quyết định"
-        />
-        <Button content="Cập nhật" onClick={Submit} />
+        <form onSubmit={SubmitForm}>
+          <div className={styles.Group_input}>
+            <label htmlFor="SQD">Số quyết định</label>
+            <input
+              id="SQD"
+              type="text"
+              name="SoQuyetDinh"
+              placeholder="Số quyết định"
+              required
+            />
+          </div>
+          <div className={styles.Group_input}>
+            <label htmlFor="NQD">Ngày quyết định</label>
+            <input
+              id="NQD"
+              type="text"
+              name="NgayQuyetDinh"
+              placeholder="YY-MM-DD"
+              required
+            />
+          </div>
+          <Button content="Cập nhật" />
+        </form>
       </div>
     </div>
   );
