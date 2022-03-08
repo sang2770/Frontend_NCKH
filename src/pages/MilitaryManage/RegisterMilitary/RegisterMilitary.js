@@ -75,24 +75,29 @@ function RegisterMilitary() {
       };
     }
 
-    //console.log(RegisterMilitary);
-
-  // 
-  // useEffect(() => {
-  //   const params = queryString.stringify(filter);
-  //   console.log(params);
-  //   Client.get("/register-military-management/filter-info-register?" + params)
-  //     .then((response) => {
-  //       const List = response.data;
-  //       if (List.status === "Success") {
-  //         setPaginations(List.pagination);
-  //         setRegisterMilitary(List.data);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       setErr(true);
-  //     });
-  // }, [filter]);
+  const CallAPI = () => {
+    const params = queryString.stringify(filter);
+    Client.get("/register-military-management/filter-info-register?" + params)
+      .then((response) => {
+        const List = response.data;
+        if (List.status === "Success") {
+          setPaginations(List.pagination);
+          setRegisterMilitary(List.data);
+        }
+      })
+      .catch((err) => {
+        setErr(true);
+      });
+  };
+  useEffect(() => {
+      CallAPI();
+      const Load = setInterval(() => {
+        CallAPI();
+      }, 1000 * 60 * 5);
+      return () => {
+        clearTimeout(Load);
+      };
+  }, [filter]);
 
   const Time = useRef(null);
   const ChangeLimit = (e) => {
