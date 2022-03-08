@@ -16,8 +16,10 @@ function ExportConfirmMilitary(){
     const { Khoas } = useContext(DataContext);
     const Time = useRef(null);
     const [result, setResult] = useState({});
+
+    var today = new Date().getFullYear();
     const [filter, setfilter] = useState({
-        Nam: 2022,
+        Nam: today,
         limit: 10,
         page: 1,
     });
@@ -140,9 +142,10 @@ function ExportConfirmMilitary(){
                 <div className={style.Update_Filter_Item}>
                 <ComboBox
                     title="Năm"
-                    id="Nam"
+                    id="NgayCap"
                     items={DateFilter.Year}
                     Change={ChangeFilter}
+                    data={{ Nam: today }}
                 />
                 </div>
 
@@ -157,7 +160,7 @@ function ExportConfirmMilitary(){
             </div>
             <div className={style.ReportContent}>
                 <HeaderReport title="Biểu đồ biến động" icon={<AiOutlineBarChart />} />
-                <label className={style.note}>(Chọn năm để xem tình trạng cấp phát)</label>
+                <label className={style.note}>(Chọn năm và khóa để xem tình trạng cấp phát)</label>
                 <div className={style.Chart}>
                     <LineChartConfirm
                         title='Biểu đồ thể hiện tình trạng cấp phát Giấy xác nhận'
