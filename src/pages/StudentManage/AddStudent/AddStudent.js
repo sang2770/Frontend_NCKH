@@ -32,7 +32,7 @@ function AddStudent() {
       }
     } catch (error) {
       alert("Có lỗi! Vui lòng kiểm tra lại!");
-      // console.log(error);
+      console.log(error);
       setErrAdd(Object.values(error.data.Err_Message));
     }
   };
