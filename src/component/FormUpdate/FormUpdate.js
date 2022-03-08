@@ -30,6 +30,7 @@ function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
           setErrTitle(null);
           setData(res.data.data);
         } else {
+          // console.log(res.data);
           setErrTitle(res.data.Err_Message);
           alert("Bạn chưa cập nhật thành công!");
         }

@@ -45,8 +45,8 @@
 .SideBar_Item_content {
   padding: 10px 5px;
   font-size: 1.6rem;
-  cursor: pointer;
   color: inherit;
+  cursor: pointer;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -74,10 +74,11 @@
 .SideBar_MenuChild_item {
   margin-top: 5px;
   font-size: 1.4rem;
+  color: #000;
 }
-.SideBar_MenuChild_item:hover {
+/* .SideBar_MenuChild_item:hover {
   color: var(--Main-color);
-}
+} */
 /* Active */
 .ActiveItem {
   color: var(--Main-color) !important;
@@ -123,9 +124,11 @@
 }
 
 .ActiveSubMenuItem {
-  background-color: var(--Main-color);
+  background-color: var(--Main-color) !important;
   border-radius: 5px;
-  color: #fff;
+}
+.ActiveSubMenuItem .SideBar_Item_content {
+  color: #fff !important;
 }
 /* Content */
 .Main_Content {

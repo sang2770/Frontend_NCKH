@@ -1,12 +1,14 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef, useContext, useState } from "react";
 import TextBox from "../TextBox/TextBox";
 import ComboBox from "../ComboBox/ComboBox";
 import style from "./FormStudent.module.css";
 import Button from "../Button/Button";
 import { DataContext } from "../../DataContext/DataContext";
+import Input from "../InputSQD/Input";
 
 function FormStudent({ Read, data, contentBtn, Submit }) {
   const Form = useRef();
+  const [OpenSKQ, setOpenSKQ] = useState(false);
   // const ChangeDateFormat = (date) => {
   //   const mydate = new Date(date);
   //   const str =
@@ -20,23 +22,33 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
   // };
   const SubmitForm = (e) => {
     e.preventDefault();
-    Form.current = e.target;
-    const form = new FormData(Form.current);
-    // form.set("NgaySinh", ChangeDateFormat(form.get("NgaySinh")));
-    // form.set("NgayCapCMTND", ChangeDateFormat(form.get("NgayCapCMTND")));
-    // console.log(form.get("NgaySinh"));
-    Submit(form, ResetForm);
+    if (data.TinhTrangSinhVien != "Đang học") {
+      alert("Sinh viên này đã không còn quản lý");
+      return;
+    }
+    Form.current = new FormData(e.target);
+    if (Form.current.get("TinhTrangSinhVien") !== "Đang học") {
+      setOpenSKQ(true);
+    } else {
+      Submit(Form.current, ResetForm);
+    }
   };
   const ResetForm = () => {
     Form.current.reset();
   };
   const { Lop } = useContext(DataContext);
   return (
-    <form
-      className={style.FormStudent_Container}
-      onSubmit={SubmitForm}
-      ref={Form}
-    >
+    <form className={style.FormStudent_Container} onSubmit={SubmitForm}>
+      {OpenSKQ && (
+        <Input
+          submit={() => {
+            Submit(Form.current, ResetForm);
+          }}
+          FormValue={Form.current}
+          setOpenSKQ={setOpenSKQ}
+          content="Bạn vừa thay đổi trạng thái sinh viên vui lòng nhập mã số quyết định"
+        />
+      )}
       <div className={style.InputGroup}>
         <div className={style.Infor_Group}>
           <TextBox
@@ -123,10 +135,10 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           )}
         </div>
         <div className={style.Infor_Group}>
-          {Read ? (
+          {Read || (data && data.TinhTrangSinhVien !== "Đang học") ? (
             <TextBox
               data={data}
-              Read={Read}
+              Read={true}
               title="Tình trạng sinh viên"
               subtitle="TinhTrangSinhVien"
             />
@@ -135,7 +147,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
               data={data}
               title="Tình trạng sinh viên"
               id="TinhTrangSinhVien"
-              items={["Đang học", "Đã tốt nghiệp"]}
+              items={["Đang học", "Đã tốt nghiệp", "Thôi học"]}
             />
           )}
         </div>

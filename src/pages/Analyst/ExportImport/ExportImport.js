@@ -165,7 +165,7 @@ function ExportImport() {
                 <tbody>
                   {result.Details.map((item, index) => {
                     return (
-                      <tr key={item}>
+                      <tr key={index}>
                         <td>{GetDate(item.ThoiGian)}</td>
                         <td>{item.TenDangNhap}</td>
                         <td>{item.NoiDung}</td>

@@ -1,0 +1,42 @@
+.Input_Container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color: rgb(204, 204, 204, 0.3);
+}
+.Input_Content {
+  background-color: #fff;
+  width: 25%;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 2px #ccc;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.Btn_Exit {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: var(--Main-color);
+  cursor: pointer;
+}
+.Input_Content_Title {
+  color: var(--Main-color);
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.Input_Content input {
+  outline: none;
+  border: 1px solid #ccc;
+  padding: 10px 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
