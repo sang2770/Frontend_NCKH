@@ -12,11 +12,9 @@ function ComboBox({ id, items, title, data, Change }) {
         name={id}
         className={style.ComboBox_Container}
         id={id}
-        defaultValue={data ? data[id] : "Default"}
+        defaultValue={data ? data[id] : ""}
       >
-        <option value={"Default"} disabled>
-          ----{title}----
-        </option>
+        <option value={""}>----{title}----</option>
         {items
           ? items.map((item, index) => (
               <option value={item} key={index}>
