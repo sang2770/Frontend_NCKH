@@ -22,15 +22,19 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
   // };
   const SubmitForm = (e) => {
     e.preventDefault();
-    if (data.TinhTrangSinhVien !== "Đang học") {
-      alert("Sinh viên này đã không còn quản lý");
-      return;
-    }
-    Form.current = new FormData(e.target);
-    if (Form.current.get("TinhTrangSinhVien") !== "Đang học") {
-      setOpenSKQ(true);
+    const FormInput = new FormData(Form.current);
+    if (data) {
+      if (data.TinhTrangSinhVien !== "Đang học") {
+        alert("Sinh viên này đã không còn quản lý");
+        return;
+      }
+      if (FormInput.get("TinhTrangSinhVien") !== "Đang học") {
+        setOpenSKQ(true);
+      } else {
+        Submit(FormInput, ResetForm);
+      }
     } else {
-      Submit(Form.current, ResetForm);
+      Submit(FormInput, ResetForm);
     }
   };
   const ResetForm = () => {
@@ -49,7 +53,11 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           content="Bạn vừa thay đổi trạng thái sinh viên vui lòng nhập mã số quyết định"
         />
       )}
-      <form className={style.FormStudent_Container} onSubmit={SubmitForm}>
+      <form
+        className={style.FormStudent_Container}
+        ref={Form}
+        onSubmit={SubmitForm}
+      >
         <div className={style.InputGroup}>
           <div className={style.Infor_Group}>
             <TextBox
