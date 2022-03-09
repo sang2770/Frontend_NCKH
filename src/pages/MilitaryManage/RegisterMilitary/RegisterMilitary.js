@@ -191,7 +191,7 @@ function RegisterMilitary() {
     <React.Fragment>
       <div className="Register_military_container">
         <div className={Style.Register_header}>
-          <HeaderTitle Title="Giấy Nghĩa Vụ Quân Sự" Icon={<BsPersonPlusFill />} /> 
+          <HeaderTitle Title="Giấy Chứng Nhận Đăng Ký Nghĩa Vụ Quân Sự" Icon={<BsPersonPlusFill />} /> 
         </div>
         {/* phần thân  */}
         <div className={Style.Register_body}>

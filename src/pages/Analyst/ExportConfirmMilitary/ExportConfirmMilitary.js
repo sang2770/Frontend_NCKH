@@ -140,27 +140,36 @@ function ExportConfirmMilitary(){
                 </div>
 
                 <div className={style.Update_Filter_Item}>
-                <ComboBox
-                    title="Năm"
-                    id="NgayCap"
-                    items={DateFilter.Year}
-                    Change={ChangeFilter}
-                    data={{ Nam: today }}
-                />
+                  <ComboBox
+                      title="Năm"
+                      id="NgayCap"
+                      items={DateFilter.Year}
+                      Change={ChangeFilter}
+                      data={{ Nam: today }}
+                  />
                 </div>
 
                 <div className={style.Update_Filter_Item}>
-                    <ComboBox
-                        title="Khóa"
-                        id="Khoas"
-                        items={Khoas}
-                        Change={ChangeFilter}
-                />
+                  <ComboBox
+                      title="Khóa"
+                      id="Khoas"
+                      items={Khoas}
+                      Change={ChangeFilter}
+                  />
                 </div>
             </div>
             <div className={style.ReportContent}>
-                <HeaderReport title="Biểu đồ biến động" icon={<AiOutlineBarChart />} />
-                <label className={style.note}>(Chọn năm và khóa để xem tình trạng cấp phát)</label>
+                <div className={style.TittelChart}>
+                  <HeaderReport title="Biểu đồ biến động" icon={<AiOutlineBarChart />} />
+                  <label className={style.note}>(Chọn năm và khóa để xem tình trạng cấp phát)</label>
+                  <div className={style.btnXBC}>
+                    <Button
+                      content="Xuất báo cáo"
+                      styles={{ marginTop: "5px"}}
+                      onClick={ExportReport}
+                    />
+                  </div>
+                </div>
                 <div className={style.Chart}>
                     <LineChartConfirm
                         title='Biểu đồ thể hiện tình trạng cấp phát Giấy xác nhận'
@@ -189,11 +198,7 @@ function ExportConfirmMilitary(){
                         <span>{result.Total_Learning ? result.Total_Learning : 0}</span>
                     </p>
                 </div>
-                <Button
-                content="Xuất báo cáo"
-                styles={{ marginTop: "5px" }}
-                onClick={ExportReport}
-                />
+                
             </div>
         </div>
     )

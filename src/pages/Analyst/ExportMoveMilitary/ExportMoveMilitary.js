@@ -162,8 +162,17 @@ function ExportMoveMilitary(){
                 </div>
             </div>
             <div className={style.ReportContent}>
-                <HeaderReport title="Biểu đồ biến động" icon={<AiOutlineBarChart />} />
-                <label className={style.note}>(Chọn năm và khóa để xem tình trạng cấp phát)</label>
+                <div className={style.TittelChart}>
+                  <HeaderReport title="Biểu đồ biến động" icon={<AiOutlineBarChart />} />
+                  <label className={style.note}>(Chọn năm và khóa để xem tình trạng cấp phát)</label>
+                  <div className={style.btnXBC}>
+                    <Button
+                      content="Xuất báo cáo"
+                      styles={{ marginTop: "5px"}}
+                      onClick={ExportReport}
+                    />
+                  </div>
+                </div>
                 <div className={style.Chart}>
                     <LineChart
                         title='Biểu đồ thể hiện tình trạng cấp phát Giấy giới thiệu'
@@ -201,11 +210,6 @@ function ExportMoveMilitary(){
                         <span>{(result.Total_Out + result.Total_Learning) ? (result.Total_Out + result.Total_Learning) : 0}</span>
                     </p>
                 </div>
-                <Button
-                content="Xuất báo cáo"
-                styles={{ marginTop: "5px" }}
-                onClick={ExportReport}
-                />
             </div>
         </div>
     )

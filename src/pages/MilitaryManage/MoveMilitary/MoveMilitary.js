@@ -21,6 +21,7 @@ const tableHeaders = [
   "Khoa",
   "Khóa",
   "Trạng thái",
+  "Trạng thái cấp",
   "Số QĐ",
   "Ngày quyết định",
   "Xác nhận",
@@ -32,6 +33,7 @@ function MoveMilitary() {
   const [Err, setErr] = useState(null);
 
   const TrangThai = ["Đã tốt nghiệp", "Đã thôi học"];
+  const TinhTrang = ["Đã cấp giấy", "Chưa cấp giấy", "Tất cả"];
   const { Lop, Khoa, Khoas } = useContext(DataContext);
 
   const [paginations, setPaginations] = useState({
@@ -49,6 +51,7 @@ function MoveMilitary() {
   const [FilterKhoas, setFilterKhoas] = useState("");
   const [FilterLop, setFilterLop] = useState("");
   const [FilterTrangThai, setFilterTrangThai] = useState("");
+  const [FilterTinhTrang, setFilterTinhTrang] = useState("");
   const FilterMSV = useRef("");
   const [MoveMilitary, setMoveMilitary] = useState([]);
 
@@ -64,6 +67,9 @@ function MoveMilitary() {
   const changeTrangThai = (event) => {
     setFilterTrangThai(event.target.value);
   };
+  const changeTinhTrang = (event) => {
+    setFilterTinhTrang(event.target.value);
+  };
 
   const onSearch = () => {
     if (
@@ -71,12 +77,23 @@ function MoveMilitary() {
       FilterKhoas === "" &&
       FilterLop === "" &&
       FilterMSV.current.value === "" &&
-      FilterTrangThai === ""
+      FilterTrangThai === "" &&
+      FilterTinhTrang === ""
     ) {
       alert(
         "Bạn cần chọn khoa, khóa, lớp, trạng thái sinh viên hoặc mã sinh viên để thực hiện tìm kiếm"
       );
     } else {
+      var reqNgayCap = "";
+      if(FilterTinhTrang == "Đã cấp giấy"){
+        reqNgayCap = "1";
+      }
+      else if(FilterTinhTrang == "Chưa cấp giấy"){
+        reqNgayCap = "0";
+      }
+      else if(FilterTinhTrang == "Tất cả"){
+        reqNgayCap = "2";
+      }
       Client.get(
         "/register-military-management/filter-info-move?MaSinhVien=" +
           FilterMSV.current.value +
@@ -87,11 +104,14 @@ function MoveMilitary() {
           "&TenKhoa=" +
           FilterKhoa +
           "&TinhTrangSinhVien=" +
-          FilterTrangThai
+          FilterTrangThai +
+          "&NgayCap=" +
+          reqNgayCap
       )
         .then((res) => {
           if (res.data.status === "Success") {
             setMoveMilitary(res.data.data);
+            console.log(res.data.data);
           } else {
             setErr(res.data.Err_Message);
           }
@@ -102,10 +122,20 @@ function MoveMilitary() {
     }
   };
 
-  
+  console.log(FilterTinhTrang);
   const CallAPI = () => {
+    var reqNgayCap = "";
+    if(FilterTinhTrang == "Đã cấp giấy"){
+      reqNgayCap = "NgayCap=1&";
+    }
+    else if(FilterTinhTrang == "Chưa cấp giấy"){
+      reqNgayCap = "NgayCap=0&";
+    }
+    else if(FilterTinhTrang == ""){
+      reqNgayCap = "";
+    }
     const params = queryString.stringify(filter);
-    Client.get("/register-military-management/filter-info-move?" + params)
+    Client.get("/register-military-management/filter-info-move?" + reqNgayCap + params)
       .then((response) => {
         const List = response.data;
         if (List.status === "Success") {
@@ -207,6 +237,12 @@ function MoveMilitary() {
                 title="Trạng thái"
                 items={TrangThai}
                 Change={changeTrangThai}
+              />
+              <ComboBox
+                id={FilterTinhTrang}
+                title="Tình trạng"
+                items={TinhTrang}
+                Change={changeTinhTrang}
               />
             </div>
             <Search onClickSearch={onSearch} Ref={FilterMSV} />
