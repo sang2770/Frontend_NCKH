@@ -62,6 +62,9 @@ const TableMoveData = ({ data, onClickExport }) => {
               <span>{item.TinhTrangSinhVien}</span>
             </td>
             <td className={style.Table_Column}>
+              <span>{item.NgayCap ? "Đã cấp giấy" : "Chưa cấp giấy"}</span>
+            </td>
+            <td className={style.Table_Column}>
               <span>{item.SoQuyetDinh}</span>
             </td>
             <td className={style.Table_Column}>
