@@ -6,7 +6,7 @@ import TableConfirmDetail from "../TableConfirmDetail/TableConfirmDetail";
 import TableConfirmDetailData from "../TableConfirmDetail/TableConfirmDetailData";
 import useAxios from "../../Helper/API";
 
-const TableConfirmData = ({ data }) => {
+const TableConfirmData = ({ data, changeData, setChangeData }) => {
   const [DropDown, setDropDown] = useState(-1);
 
   const ChangeDropDown = (id) => {
@@ -56,6 +56,7 @@ const TableConfirmData = ({ data }) => {
         document.body.appendChild(link);
         link.click();
         alert("Đã xuất file");
+        setChangeData(!changeData);
       })
       .catch((err) => {
         setErr(true);

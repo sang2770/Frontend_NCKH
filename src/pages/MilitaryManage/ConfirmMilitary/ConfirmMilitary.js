@@ -89,6 +89,7 @@ function ConfirmMilitary() {
         setErr(true);
       });
   };
+  const [changeData, setChangeData] = useState(false);
   useEffect(() => {
       CallAPI();
       const Load = setInterval(() => {
@@ -97,7 +98,7 @@ function ConfirmMilitary() {
       return () => {
         clearTimeout(Load);
       };
-  }, [filter]);
+  }, [filter, changeData]);
 
   const Time = useRef(null);
   const ChangeLimit = (e) => {
@@ -125,6 +126,7 @@ function ConfirmMilitary() {
         document.body.appendChild(link);
         link.click();
         alert("Đã xuất file");
+        setChangeData(!changeData);
       })
       .catch((err) => {
         setErr(true);
@@ -154,7 +156,13 @@ function ConfirmMilitary() {
             <div className={style.DataList}>
                 <TableMilitary
                   headers={tableHeaders}
-                  Content={<TableConfirmData data={ConfirmMilitary} />}
+                  Content={
+                    <TableConfirmData 
+                      data={ConfirmMilitary} 
+                      changeData = {changeData}
+                      setChangeData = {setChangeData}
+                    />
+                  }
                 />
             </div>
             <Pagination

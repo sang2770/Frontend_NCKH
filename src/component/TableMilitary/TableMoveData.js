@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import style from "./TableMilitary.module.css";
 import useAxios from "../../Helper/API";
 
-const TableMoveData = ({ data, onClickExport }) => {
+const TableMoveData = ({ data, changeData, setChangeData }) => {
 
   const { Client } = useAxios();
   
@@ -26,6 +26,7 @@ const TableMoveData = ({ data, onClickExport }) => {
         document.body.appendChild(link);
         link.click();
         alert("Đã xuất file");
+        setChangeData(!changeData);
       })
       .catch((err) => {
         setErr(true);
