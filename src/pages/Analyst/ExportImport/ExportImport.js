@@ -130,6 +130,11 @@ function ExportImport() {
           />
         </div>
       </div>
+      <Button
+        content="Xuất báo cáo"
+        styles={{ margin: "8px" }}
+        onClick={ExportReport}
+      />
       <div className={style.ReportContent}>
         <HeaderReport title="Biểu đồ trạng thái" icon={<AiOutlineBarChart />} />
         <div className={style.Chart}>
@@ -187,12 +192,6 @@ function ExportImport() {
         ) : (
           ""
         )}
-
-        <Button
-          content="Xuất báo cáo"
-          styles={{ marginTop: "5px" }}
-          onClick={ExportReport}
-        />
       </div>
     </div>
   );

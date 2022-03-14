@@ -113,6 +113,11 @@ function ExportFluctation() {
           />
         </div>
       </div>
+      <Button
+        content="Xuất báo cáo"
+        styles={{ margin: "8px" }}
+        onClick={ExportReport}
+      />
       <div className={style.ReportContent}>
         <HeaderReport title="Biểu đồ biến động" icon={<AiOutlineBarChart />} />
         <div className={style.Chart}>
@@ -145,11 +150,6 @@ function ExportFluctation() {
             <span>{result.Total_Out ? result.Total_Out : 0}</span>
           </p>
         </div>
-        <Button
-          content="Xuất báo cáo"
-          styles={{ marginTop: "5px" }}
-          onClick={ExportReport}
-        />
       </div>
     </div>
   );
