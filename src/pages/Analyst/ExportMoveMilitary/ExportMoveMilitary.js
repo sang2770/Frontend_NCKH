@@ -14,7 +14,7 @@ import LineChart from "../../../component/Chart/LineChart";
 
 function ExportMoveMilitary(){
     const { Client } = useAxios();
-    const { Khoas } = useContext(DataContext);
+    const { Khoa, Khoas } = useContext(DataContext);
     const Time = useRef(null);
     const [result, setResult] = useState({});
     var today = new Date().getFullYear();
@@ -28,19 +28,14 @@ function ExportMoveMilitary(){
     const [DateFilter, setDate] = useState({
         Year: [],
         Month: [],
-        Day: [],
+        // Day: [],
     });
 
     const ChangeFilter = (e) => {
         if (Time.current) {
             clearTimeout(Time.current);
         }
-        if (e.target.name === "Thang") {
-            //   var dt = new Date();
-            //   var month = dt.getMonth();
-            //   var year = dt.getFullYear();
-            //  daysInMonth = new Date(year, month, 0).getDate();
-        }
+        
         Time.current = setTimeout(() => {
             const input = e.target;
             const name = input.name;
@@ -48,17 +43,6 @@ function ExportMoveMilitary(){
         }, 300);
     };
 
-    useEffect(() => {
-        if (filter.Thang && filter.Nam) {
-          const daysInMonth = new Date(filter.Nam, filter.Thang, 0).getDate();
-          const day = [];
-          for (let i = 1; i <= daysInMonth; i++) {
-            day.push(i);
-          }
-          setDate({ ...DateFilter, Day: day });
-        }
-      }, [filter]);
-    
     useEffect(() => {
         const max = 100;
         const CurrentYear = new Date().getFullYear();
@@ -125,14 +109,17 @@ function ExportMoveMilitary(){
                 Icon={<HiOutlineNewspaper />}
             />
             <div className={style.Update_Filter}>
+                
                 <div className={style.Update_Filter_Item}>
                     <ComboBox
-                        title="Ngày"
-                        id="Ngay"
-                        items={DateFilter.Day}
+                        title="Năm"
+                        id="NgayCap"
+                        items={DateFilter.Year}
                         Change={ChangeFilter}
+                        data={{ Nam: today }}
                     />
                 </div>
+
                 <div className={style.Update_Filter_Item}>
                     <ComboBox
                         title="Tháng"
@@ -144,11 +131,10 @@ function ExportMoveMilitary(){
 
                 <div className={style.Update_Filter_Item}>
                     <ComboBox
-                        title="Năm"
-                        id="NgayCap"
-                        items={DateFilter.Year}
+                        title="Khoa"
+                        id="TenKhoa"
+                        items={Khoa}
                         Change={ChangeFilter}
-                        data={{ Nam: today }}
                     />
                 </div>
 
