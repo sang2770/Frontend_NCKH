@@ -85,13 +85,11 @@ function MoveMilitary() {
       );
     } else {
       var reqNgayCap = "";
-      if(FilterTinhTrang == "Đã cấp giấy"){
+      if (FilterTinhTrang == "Đã cấp giấy") {
         reqNgayCap = "1";
-      }
-      else if(FilterTinhTrang == "Chưa cấp giấy"){
+      } else if (FilterTinhTrang == "Chưa cấp giấy") {
         reqNgayCap = "0";
-      }
-      else if(FilterTinhTrang == "Tất cả"){
+      } else if (FilterTinhTrang == "Tất cả") {
         reqNgayCap = "2";
       }
       Client.get(
@@ -125,17 +123,17 @@ function MoveMilitary() {
   console.log(FilterTinhTrang);
   const CallAPI = () => {
     var reqNgayCap = "";
-    if(FilterTinhTrang == "Đã cấp giấy"){
+    if (FilterTinhTrang == "Đã cấp giấy") {
       reqNgayCap = "NgayCap=1&";
-    }
-    else if(FilterTinhTrang == "Chưa cấp giấy"){
+    } else if (FilterTinhTrang == "Chưa cấp giấy") {
       reqNgayCap = "NgayCap=0&";
-    }
-    else if(FilterTinhTrang == ""){
+    } else if (FilterTinhTrang == "") {
       reqNgayCap = "";
     }
     const params = queryString.stringify(filter);
-    Client.get("/register-military-management/filter-info-move?" + reqNgayCap + params)
+    Client.get(
+      "/register-military-management/filter-info-move?" + reqNgayCap + params
+    )
       .then((response) => {
         const List = response.data;
         if (List.status === "Success") {
@@ -148,13 +146,13 @@ function MoveMilitary() {
       });
   };
   useEffect(() => {
+    CallAPI();
+    const Load = setInterval(() => {
       CallAPI();
-      const Load = setInterval(() => {
-        CallAPI();
-      }, 1000 * 60 * 5);
-      return () => {
-        clearTimeout(Load);
-      };
+    }, 1000 * 60 * 5);
+    return () => {
+      clearTimeout(Load);
+    };
   }, [filter]);
 
   const Time = useRef(null);
@@ -193,7 +191,7 @@ function MoveMilitary() {
         link.setAttribute("download", "GiayDiChuyenNVQS.docx");
         document.body.appendChild(link);
         link.click();
-        alert("Đã xuất file");
+        // alert("Đã xuất file");
       })
       .catch((err) => {
         setErr(true);
@@ -203,7 +201,7 @@ function MoveMilitary() {
   return (
     <React.Fragment>
       <div className={style.load}>
-      {Loading && <LoadingEffect />}
+        {Loading && <LoadingEffect />}
         <div className={style.Confirm_header}>
           <HeaderTitle
             Title="Giấy Giới Thiệu Di Chuyển Đăng Ký Nghĩa Vụ Quân Sự"
@@ -212,7 +210,7 @@ function MoveMilitary() {
         </div>
         <div>
           {/* form tìm kiếm */}
-        <div className={style.Form_main}>
+          <div className={style.Form_main}>
             <div className={style.Search_button}>
               <ComboBox
                 id={FilterKhoa}

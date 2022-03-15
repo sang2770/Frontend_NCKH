@@ -1,7 +1,6 @@
 import React from "react";
 import style from "./ComboBox.module.css";
 function ComboBox({ id, items, title, data, Change }) {
-  // console.log(items);
   return (
     <div className={style.GroupBox_Container}>
       <label className={style.LabelFilter} htmlFor={id}>

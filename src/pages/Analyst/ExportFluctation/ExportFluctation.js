@@ -16,7 +16,7 @@ function ExportFluctation() {
   const { Client, Loading } = useAxios();
   const [result, setResult] = useState({});
   const [filter, setfilter] = useState({
-    Nam: 2022,
+    Nam: new Date().getFullYear(),
   });
   const ChangeFilter = (e) => {
     if (Time.current) {
@@ -95,7 +95,7 @@ function ExportFluctation() {
             id="Nam"
             items={ListYear()}
             Change={ChangeFilter}
-            data={{ Nam: 2022 }}
+            data={{ Nam: new Date().getFullYear() }}
           />
         </div>
         <div className={style.Fluctation_Filter_Item}>

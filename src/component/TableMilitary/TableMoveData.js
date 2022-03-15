@@ -1,35 +1,35 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import style from "./TableMilitary.module.css";
 import useAxios from "../../Helper/API";
 
 const TableMoveData = ({ data, onClickExport }) => {
-
   const { Client } = useAxios();
-  
+
   const [Err, setErr] = useState(null);
 
   const [MSV, setMSV] = useState();
 
   const changeMSV = (msv) => {
     setMSV(msv);
-  }
-   // Export
-   const Export = async () => {
-    MSV && Client.get("/move-military-management/move-military?MaSinhVien=" + MSV, {
-      responseType: "blob",
-    })
-      .then((response) => {
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "GiayDiChuyenNVQS.docx");
-        document.body.appendChild(link);
-        link.click();
-        alert("Đã xuất file");
+  };
+  // Export
+  const Export = async () => {
+    MSV &&
+      Client.get("/move-military-management/move-military?MaSinhVien=" + MSV, {
+        responseType: "blob",
       })
-      .catch((err) => {
-        setErr(true);
-      });
+        .then((response) => {
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "GiayDiChuyenNVQS.docx");
+          document.body.appendChild(link);
+          link.click();
+          alert("Đã xuất file");
+        })
+        .catch((err) => {
+          setErr(true);
+        });
   };
 
   return (
@@ -71,13 +71,15 @@ const TableMoveData = ({ data, onClickExport }) => {
               <span>{item.NgayQuyetDinh}</span>
             </td>
             <td className={style.Table_Column}>
-              <label 
-                className={style.label} 
-                onClick = {() => {
+              <label
+                className={style.label}
+                onClick={() => {
                   changeMSV(item.MaSinhVien);
                   Export();
                 }}
-              >Cấp giấy</label>
+              >
+                Cấp giấy
+              </label>
             </td>
           </tr>
         </React.Fragment>
