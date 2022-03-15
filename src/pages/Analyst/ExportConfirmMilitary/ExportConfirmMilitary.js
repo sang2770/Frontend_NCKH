@@ -13,7 +13,7 @@ import LineChartConfirm from "../../../component/Chart/LineChartConfirm";
 
 function ExportConfirmMilitary(){
     const { Client } = useAxios();
-    const { Khoas } = useContext(DataContext);
+    const { Khoa, Khoas } = useContext(DataContext);
     const Time = useRef(null);
     const [result, setResult] = useState({});
 
@@ -27,17 +27,11 @@ function ExportConfirmMilitary(){
     const [DateFilter, setDate] = useState({
         Year: [],
         Month: [],
-        Day: [],
+        // Day: [],
     });
     const ChangeFilter = (e) => {
         if (Time.current) {
             clearTimeout(Time.current);
-        }
-        if (e.target.name === "Thang") {
-            //   var dt = new Date();
-            //   var month = dt.getMonth();
-            //   var year = dt.getFullYear();
-            //  daysInMonth = new Date(year, month, 0).getDate();
         }
         Time.current = setTimeout(() => {
             const input = e.target;
@@ -46,17 +40,6 @@ function ExportConfirmMilitary(){
         }, 300);
     };
 
-    useEffect(() => {
-      if (filter.Thang && filter.Nam) {
-        const daysInMonth = new Date(filter.Nam, filter.Thang, 0).getDate();
-        const day = [];
-        for (let i = 1; i <= daysInMonth; i++) {
-          day.push(i);
-        }
-        setDate({ ...DateFilter, Day: day });
-      }
-    }, [filter]);
-  
     useEffect(() => {
         const max = 100;
         const CurrentYear = new Date().getFullYear();
@@ -123,13 +106,15 @@ function ExportConfirmMilitary(){
             />
             <div className={style.Update_Filter}>
                 <div className={style.Update_Filter_Item}>
-                <ComboBox
-                    title="Ngày"
-                    id="Ngay"
-                    items={DateFilter.Day}
-                    Change={ChangeFilter}
-                />
+                  <ComboBox
+                      title="Năm"
+                      id="NgayCap"
+                      items={DateFilter.Year}
+                      Change={ChangeFilter}
+                      data={{ Nam: today }}
+                  />
                 </div>
+
                 <div className={style.Update_Filter_Item}>
                 <ComboBox
                     title="Tháng"
@@ -138,15 +123,14 @@ function ExportConfirmMilitary(){
                     Change={ChangeFilter}
                 />
                 </div>
-
+                
                 <div className={style.Update_Filter_Item}>
-                  <ComboBox
-                      title="Năm"
-                      id="NgayCap"
-                      items={DateFilter.Year}
-                      Change={ChangeFilter}
-                      data={{ Nam: today }}
-                  />
+                    <ComboBox
+                        title="Khoa"
+                        id="TenKhoa"
+                        items={Khoa}
+                        Change={ChangeFilter}
+                    />
                 </div>
 
                 <div className={style.Update_Filter_Item}>

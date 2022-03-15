@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import style from "./TableMilitary.module.css";
 import useAxios from "../../Helper/API";
 
-const TableMoveData = ({ data, onClickExport }) => {
+const TableMoveData = ({ data, changeData, setChangeData }) => {
   const { Client } = useAxios();
 
   const [Err, setErr] = useState(null);
@@ -18,6 +18,16 @@ const TableMoveData = ({ data, onClickExport }) => {
       Client.get("/move-military-management/move-military?MaSinhVien=" + MSV, {
         responseType: "blob",
       })
+        .then((response) => {
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "GiayDiChuyenNVQS.docx");
+          document.body.appendChild(link);
+          link.click();
+          alert("Đã xuất file");
+          setChangeData(!changeData);
+        })
         .then((response) => {
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement("a");

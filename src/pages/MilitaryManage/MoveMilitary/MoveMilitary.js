@@ -85,13 +85,14 @@ function MoveMilitary() {
       );
     } else {
       var reqNgayCap = "";
-      if (FilterTinhTrang == "Đã cấp giấy") {
+      if (FilterTinhTrang == "" || FilterTinhTrang == "Tất cả") {
+        reqNgayCap = "2";
+      } else if (FilterTinhTrang == "Đã cấp giấy") {
         reqNgayCap = "1";
       } else if (FilterTinhTrang == "Chưa cấp giấy") {
         reqNgayCap = "0";
-      } else if (FilterTinhTrang == "Tất cả") {
-        reqNgayCap = "2";
       }
+
       Client.get(
         "/register-military-management/filter-info-move?MaSinhVien=" +
           FilterMSV.current.value +
@@ -109,7 +110,6 @@ function MoveMilitary() {
         .then((res) => {
           if (res.data.status === "Success") {
             setMoveMilitary(res.data.data);
-            console.log(res.data.data);
           } else {
             setErr(res.data.Err_Message);
           }
@@ -120,16 +120,16 @@ function MoveMilitary() {
     }
   };
 
-  console.log(FilterTinhTrang);
   const CallAPI = () => {
     var reqNgayCap = "";
-    if (FilterTinhTrang == "Đã cấp giấy") {
+    if (FilterTinhTrang == "" || FilterTinhTrang == "Tất cả") {
+      reqNgayCap = "NgayCap=2&";
+    } else if (FilterTinhTrang == "Đã cấp giấy") {
       reqNgayCap = "NgayCap=1&";
     } else if (FilterTinhTrang == "Chưa cấp giấy") {
       reqNgayCap = "NgayCap=0&";
-    } else if (FilterTinhTrang == "") {
-      reqNgayCap = "";
     }
+
     const params = queryString.stringify(filter);
     Client.get(
       "/register-military-management/filter-info-move?" + reqNgayCap + params
@@ -145,6 +145,7 @@ function MoveMilitary() {
         setErr(true);
       });
   };
+  const [changeData, setChangeData] = useState(false);
   useEffect(() => {
     CallAPI();
     const Load = setInterval(() => {
@@ -153,7 +154,7 @@ function MoveMilitary() {
     return () => {
       clearTimeout(Load);
     };
-  }, [filter]);
+  }, [filter, changeData]);
 
   const Time = useRef(null);
   const ChangeLimit = (e) => {
@@ -191,7 +192,8 @@ function MoveMilitary() {
         link.setAttribute("download", "GiayDiChuyenNVQS.docx");
         document.body.appendChild(link);
         link.click();
-        // alert("Đã xuất file");
+        alert("Đã xuất file");
+        setChangeData(!changeData);
       })
       .catch((err) => {
         setErr(true);
@@ -251,7 +253,13 @@ function MoveMilitary() {
               {Loading && <LoadingEffect />}
               <TableMilitary
                 headers={tableHeaders}
-                Content={<TableMoveData data={MoveMilitary} />}
+                Content={
+                  <TableMoveData
+                    data={MoveMilitary}
+                    changeData={changeData}
+                    setChangeData={setChangeData}
+                  />
+                }
               />
             </div>
             <Pagination
