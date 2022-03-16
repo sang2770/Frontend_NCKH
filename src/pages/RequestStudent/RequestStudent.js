@@ -25,6 +25,8 @@ const tableHeaders = [
 
 function RequestStudent() {
   const [Confirm, setConfirm] = useState(false);
+  const [PageExport, setPageExport] = useState(false);
+
   const MSV = useRef({
     MaSinhVien: 1,
     MaYeuCau: 1,
@@ -42,7 +44,8 @@ function RequestStudent() {
   const useConfirmed = useFilter(
     "Đã xử lý",
     "/request-management/confirm?",
-    Confirm
+    Confirm,
+    PageExport
   );
   const { Lop, Khoa, Khoas } = useContext(DataContext);
   const { Client } = useAxios();
@@ -78,6 +81,7 @@ function RequestStudent() {
           document.body.appendChild(link);
           link.click();
           alert("Xuất thành công");
+          setPageExport(!PageExport);
         } else {
           alert("Có lỗi vui lòng thử lại");
         }
@@ -197,7 +201,7 @@ function RequestStudent() {
               title="Khóa"
               id="Khoas"
               items={Khoas}
-              Change={ChangeFilter}
+              Change={useConfirmed.ChangeFilter}
             />
           </div>
         </div>

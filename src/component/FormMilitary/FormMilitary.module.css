@@ -1,15 +1,15 @@
-.Form_main{
-    display: block;
+.Form_main {
 }
-
-.Form_right,
-.Form_left{
-    display: flex;
+.Form_Container {
+  display: flex;
+  flex-wrap: wrap;
 }
-
+.FormItem {
+  width: 25%;
+}
 /* button */
-.Button_register{
-    text-align: center;
-    padding-top: 25px;
-    padding-bottom: 20px;
+.Button_register {
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 20px;
 }

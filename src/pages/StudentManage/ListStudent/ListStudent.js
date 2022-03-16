@@ -137,6 +137,14 @@ function ListStudent() {
             Change={ChangeFilter}
           />
         </div>
+        <div className={style.ListStudent_Filter_Item}>
+          <ComboBox
+            title="Giấy Đăng ký NVQS"
+            id="DangKy"
+            items={["Đã nộp", "Chưa nộp"]}
+            Change={ChangeFilter}
+          />
+        </div>
       </div>
       <div className={style.DataList}>
         {Loading && <LoadingEffect />}

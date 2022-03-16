@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import queryString from "query-string";
 import useAxios from "../Helper/API";
 
-const useFilter = (TrangThai, path, Confirm) => {
+const useFilter = (TrangThai, path, Confirm, PageExport) => {
   const { Client, Loading } = useAxios();
   const [ListRequest, setListRequest] = useState([]);
   const [paginations, setPaginations] = useState({
@@ -39,7 +39,7 @@ const useFilter = (TrangThai, path, Confirm) => {
     return () => {
       clearTimeout(Load);
     };
-  }, [filter, Confirm]);
+  }, [filter, Confirm, PageExport]);
   // console.log(DataFilter);
 
   const Time = useRef(null);

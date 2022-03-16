@@ -9,10 +9,12 @@
 .ListStudent_Filter {
   margin-bottom: 20px;
   display: flex;
+  flex-wrap: wrap;
 }
 .ListStudent_Filter_Item {
   width: calc(100% / 4);
   padding: 0px 10px;
+  margin-bottom: 10px;
 }
 
 .DataList {
