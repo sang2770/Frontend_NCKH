@@ -25,34 +25,17 @@ function LineChart({labels, datas, label1, label2, title}){
     return (
         <Line
             options = {{
-                responsive: true,
-                interaction: {
-                    mode: 'index',
-                    intersect: false,
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: 'top',
                 },
-                stacked: false,
-                plugins: {
-                    title: {
-                    display: true,
-                    text: title,
-                    },
-                },
-                scales: {
-                    y: {
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    },
-                    y1: {
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
-                    grid: {
-                        drawOnChartArea: false,
-                    },
-                    },
-                },
-            }}  
+                title: {
+                  display: true,
+                  text: 'Chart.js Line Chart',
+                }
+              }
+            }}
             data = {{
                 labels,
                 datasets: [
@@ -61,14 +44,12 @@ function LineChart({labels, datas, label1, label2, title}){
                     data: datas ? datas.map((item) => item[1]) : [],
                     borderColor: 'rgb(255, 99, 132)',
                     backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    yAxisID: 'y',
                   },
                   {
                     label: label2,
                     data: datas ? datas.map((item) => item[0]) : [],
                     borderColor: 'rgb(53, 162, 235)',
                     backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                    yAxisID: 'y1',
                   },
                 ],
             }}

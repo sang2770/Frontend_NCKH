@@ -17,6 +17,9 @@ function FormMilitary({ titles, subtitles, Submit, onClickSave, onClickBack }) {
 
   return (
     <form className={style.Form_main} onSubmit={SubmitForm}>
+      <h1 className={style.form_title}>
+        Giấy Xác Nhận Đăng Ký Nghĩa Vụ Quân Sự
+      </h1>
       <div className={style.Form_Container}>
         <div className={style.FormItem}>
           <ElementForm title={titles[0]} subtitle={subtitles[0]} />
@@ -41,6 +44,30 @@ function FormMilitary({ titles, subtitles, Submit, onClickSave, onClickBack }) {
         </div>
         <div className={style.FormItem}>
           <ElementForm title={titles[7]} subtitle={subtitles[7]} />
+        </div>
+      </div>
+      <hr/>
+      <h1 className={style.form_title}>
+        Giấy Giới Thiệu Di Chuyển Nghĩa Vụ Quân Sự
+      </h1>
+      <div className={style.Form_ContainerMove}>
+        <div className={style.FormItemMove}>
+          <ElementForm title={titles[8]} subtitle={subtitles[8]} />
+        </div>
+        <div className={style.FormItemMove}>
+          <ElementForm title={titles[9]} subtitle={subtitles[9]} />
+        </div>
+        <div className={style.FormItemMove}>
+          <ElementForm title={titles[10]} subtitle={subtitles[10]} />
+        </div>
+        <div className={style.FormItemMove}>
+          <ElementForm title={titles[11]} subtitle={subtitles[11]} />
+        </div>
+        <div className={style.FormItemMove}>
+          <ElementForm title={titles[12]} subtitle={subtitles[12]} />
+        </div>
+        <div className={style.FormItemMove}>
+          <ElementForm title={titles[13]} subtitle={subtitles[13]} />
         </div>
       </div>
       <div className={style.Button_register}>

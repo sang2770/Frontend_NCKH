@@ -36,7 +36,6 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
       });
     };
 
-
     // Export
   const [MSV, setMSV] = useState();
 
@@ -45,14 +44,14 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
   }
 
   const Export = async () => {
-    MSV && Client.get("/confirm-military-management/confirm-military?MaSinhVien=" + MSV, {
+    MSV && Client.get("/confirm-military-management/confirm-military-off?MaSinhVien=" + MSV, {
       responseType: "blob",
     })
       .then((response) => {
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", "GiayDiChuyenNVQS.docx");
+        link.setAttribute("download", "GiayXacNhanNVQS.docx");
         document.body.appendChild(link);
         link.click();
         alert("Đã xuất file");
@@ -96,9 +95,6 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
             </td>
             <td className={style.Table_Column}>
               <span>{item.Khoas}</span>
-            </td>
-            <td className={style.Table_Column}>
-              <span>{item.TrangThaiXuLy}</span>
             </td>
             <td className={style.Table_Column}>
               <label 

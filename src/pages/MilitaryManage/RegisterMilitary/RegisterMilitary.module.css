@@ -6,7 +6,25 @@
 .importFile {
   display: flex;
 }
-
+.HeaderFile{
+  /* display: flex; */
+  float: left;
+  margin-top: 10px;
+  margin-right: 20px;
+  font-size: 12px;
+}
+.HeaderInp{
+  margin-bottom: 10px;
+  text-align: left;
+}
+.iconS{
+  color: red;
+  float: left;
+  margin-right: 5px;
+}
+.FormImp{
+  margin-top: 20px;
+}
 .Register_body {
   /* margin-top: 80px; */
   margin-bottom: 40px;
@@ -17,7 +35,7 @@
 }
 .Form_register {
   background-color: white;
-  padding: 30px 30px 0px 50px;
+  padding: 0px 30px 0px 50px;
   margin: 20px 45px 0px 45px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
   /* height: 300px; */
@@ -41,6 +59,14 @@
   padding: 10px 30px 10px 30px;
   margin: 10px 45px 0px 45px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
+  height: 120px;
+  border: 1px solid rgb(162, 167, 245);
+}
+
+.Register_button_main{
+  padding: 10px 30px 10px 30px;
+  margin: 10px 45px 0px 45px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
   height: auto;
   border: 1px solid rgb(162, 167, 245);
 }
@@ -48,7 +74,9 @@
 .Button_register {
   text-align: center;
 }
-
+.Move{
+  margin-top: 20px;
+}
 /* search */
 .Register_search {
   padding: 30px 30px 20px 30px;

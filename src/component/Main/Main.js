@@ -245,27 +245,6 @@ function Main() {
                 <li
                   className={clsx(
                     "SideBar_MenuChild_item",
-                    MenuSubItem === "Military-MoveMilitaryLocal" &&
-                      "ActiveSubMenuItem"
-                  )}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    ChangeMenuSubItem("Military-MoveMilitaryLocal");
-                  }}
-                >
-                  <Link
-                    to="/Military-MoveMilitaryLocal"
-                    className="SideBar_Item_content"
-                  >
-                    <RiUserSettingsFill />
-                    <span className="Item_content">
-                      Giấy di chuyển từ địa phương
-                    </span>
-                  </Link>
-                </li>
-                <li
-                  className={clsx(
-                    "SideBar_MenuChild_item",
                     MenuSubItem === "Military-MoveMilitary" &&
                       "ActiveSubMenuItem"
                   )}
@@ -511,10 +490,6 @@ function Main() {
                   <Route
                     path="Military-RegisterMilitary"
                     element={<RegisterMilitary />}
-                  />
-                  <Route
-                    path="Military-MoveMilitaryLocal"
-                    element={<MoveMilitaryLocal />}
                   />
                   <Route
                     path="Military-MoveMilitary"
