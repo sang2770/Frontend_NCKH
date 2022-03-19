@@ -3,7 +3,14 @@ import style from "./FormMilitary.module.css";
 import ElementForm from "../ElementMiliFrom/ElementForm";
 import Button from "../ButtonMiliNoti/Button";
 
-function FormMilitary({ titles, subtitles, Submit, onClickSave, onClickBack }) {
+function FormMilitary({
+  titles,
+  subtitles,
+  Submit,
+  onClickSave,
+  onClickBack,
+  data,
+}) {
   const Form = useRef();
   const SubmitForm = (e) => {
     e.preventDefault();
@@ -22,57 +29,79 @@ function FormMilitary({ titles, subtitles, Submit, onClickSave, onClickBack }) {
       </h1>
       <div className={style.Form_Container}>
         <div className={style.FormItem}>
-          <ElementForm title={titles[0]} subtitle={subtitles[0]} />
+          <ElementForm data={data} title={titles[0]} subtitle={subtitles[0]} />
         </div>
         <div className={style.FormItem}>
-          <ElementForm title={titles[1]} subtitle={subtitles[1]} />
+          <ElementForm data={data} title={titles[1]} subtitle={subtitles[1]} />
         </div>
         <div className={style.FormItem}>
-          <ElementForm title={titles[2]} subtitle={subtitles[2]} />
+          <ElementForm data={data} title={titles[2]} subtitle={subtitles[2]} />
         </div>
         <div className={style.FormItem}>
-          <ElementForm title={titles[3]} subtitle={subtitles[3]} />
+          <ElementForm data={data} title={titles[3]} subtitle={subtitles[3]} />
         </div>
         <div className={style.FormItem}>
-          <ElementForm title={titles[4]} subtitle={subtitles[4]} />
+          <ElementForm data={data} title={titles[4]} subtitle={subtitles[4]} />
         </div>
         <div className={style.FormItem}>
-          <ElementForm title={titles[5]} subtitle={subtitles[5]} />
+          <ElementForm data={data} title={titles[5]} subtitle={subtitles[5]} />
         </div>
         <div className={style.FormItem}>
-          <ElementForm title={titles[6]} subtitle={subtitles[6]} />
+          <ElementForm data={data} title={titles[6]} subtitle={subtitles[6]} />
         </div>
         <div className={style.FormItem}>
-          <ElementForm title={titles[7]} subtitle={subtitles[7]} />
+          <ElementForm data={data} title={titles[7]} subtitle={subtitles[7]} />
         </div>
       </div>
-      <hr/>
+      <hr />
       <h1 className={style.form_title}>
         Giấy Giới Thiệu Di Chuyển Nghĩa Vụ Quân Sự
       </h1>
       <div className={style.Form_ContainerMove}>
         <div className={style.FormItemMove}>
-          <ElementForm title={titles[8]} subtitle={subtitles[8]} />
+          <ElementForm data={data} title={titles[8]} subtitle={subtitles[8]} />
         </div>
         <div className={style.FormItemMove}>
-          <ElementForm title={titles[9]} subtitle={subtitles[9]} />
+          <ElementForm data={data} title={titles[9]} subtitle={subtitles[9]} />
         </div>
         <div className={style.FormItemMove}>
-          <ElementForm title={titles[10]} subtitle={subtitles[10]} />
+          <ElementForm
+            data={data}
+            title={titles[10]}
+            subtitle={subtitles[10]}
+          />
         </div>
         <div className={style.FormItemMove}>
-          <ElementForm title={titles[11]} subtitle={subtitles[11]} />
+          <ElementForm
+            data={data}
+            title={titles[11]}
+            subtitle={subtitles[11]}
+          />
         </div>
         <div className={style.FormItemMove}>
-          <ElementForm title={titles[12]} subtitle={subtitles[12]} />
+          <ElementForm
+            data={data}
+            title={titles[12]}
+            subtitle={subtitles[12]}
+          />
         </div>
         <div className={style.FormItemMove}>
-          <ElementForm title={titles[13]} subtitle={subtitles[13]} />
+          <ElementForm
+            data={data}
+            title={titles[13]}
+            subtitle={subtitles[13]}
+          />
         </div>
       </div>
       <div className={style.Button_register}>
-        <Button content="Lưu" onClick={onClickSave} />
-        <Button content="Trở lại" onClick={onClickBack} />
+        {data ? (
+          <Button content="Cập nhật" />
+        ) : (
+          <React.Fragment>
+            <Button content="Lưu" onClick={onClickSave} />
+            <Button content="Trở lại" onClick={onClickBack} />
+          </React.Fragment>
+        )}
       </div>
     </form>
   );
