@@ -69,7 +69,7 @@ thead .Table_Header {
   overflow: hidden;
 }
 .InfoDetail {
-  padding: 10px 5px;
+  /* padding: 10px 5px; */
   padding-bottom: 20px;
 }
 .InfoDetail_title {

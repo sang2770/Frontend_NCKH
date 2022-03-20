@@ -187,7 +187,7 @@ function RegisterMilitary() {
           },
         }
       );
-      console.log(result);
+      // console.log(result);
       if (result.data.status !== "Failed") {
         alert("Bạn đã thêm thành công!");
         setErrAdd(null);
@@ -195,12 +195,12 @@ function RegisterMilitary() {
       } else {
         alert("Có lỗi");
         setErrAdd([result.data.Err_Message]);
-        console.log(result.data.Err_Message);
+        // console.log(result.data.Err_Message);
       }
     } catch (error) {
-      alert("Có lỗi! Vui lòng kiểm tra lại!");
-      console.log(error);
-      setErrAdd(Object.values(error.data.Err_Message));
+      alert("Mã sinh viên không tồn tại!\nVui lòng kiểm tra lại!");
+      // console.log(error);
+      // setErrAdd(Object.values(error.data.Err_Message));
     }
   };
 
@@ -213,8 +213,8 @@ function RegisterMilitary() {
     e.preventDefault();
     const MyData = new FormData(e.target);
     if (radioRegister == true && radioMoveLocal == false) {
-      console.log(radioMoveLocal);
-      console.log(radioRegister);
+      // console.log(radioMoveLocal);
+      // console.log(radioRegister);
       try {
         const Result = await Client.post(
           "/register-military-management/store-register-military-file",
@@ -234,7 +234,7 @@ function RegisterMilitary() {
           setErrImportMSV(Result.data.errMSV);
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     } else if (radioMoveLocal == true && radioRegister == false) {
       try {
@@ -256,7 +256,7 @@ function RegisterMilitary() {
           setErrImportMaDK(Result.data.errMaDK);
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
   };

@@ -1,30 +1,8 @@
 import React, { useState } from "react";
 import style from "./TableMilitary.module.css";
-import FormUpdateRegister from "../FormUpdateRegisterMilitary/FormUpdateRegister";
 import clsx from "clsx";
 import { TiDeleteOutline } from "react-icons/ti";
-import FormMilitary from "../FormMilitary/FormMilitary";
-
-const titleForm = [
-  "Họ và tên",
-  "Mã sinh viên",
-  "Ngày sinh",
-  "Ngày đăng ký",
-  "Số đăng ký",
-  "Nơi đăng ký",
-  "Địa chỉ thường trú",
-  "Ngày nộp",
-];
-// const subtitles = [
-//   "HoTen",
-//   "MaSinhVien",
-//   "NgaySinh",
-//   "NgayDangKy",
-//   "SoDangKy",
-//   "NoiDangKy",
-//   "DiaChiThuongTru",
-//   "NgayNop",
-// ];
+import FormMilitaryUpdate from "../FormMilitaryUpdate/FormMilitaryUpdate";
 
 const TableRegisterData = ({ data, titles, subtitles }) => {
   // show hide
@@ -93,12 +71,12 @@ const TableRegisterData = ({ data, titles, subtitles }) => {
                       <TiDeleteOutline />
                     </label>
                   </div>
-                  <FormMilitary
+                  <FormMilitaryUpdate
                     titles={titles}
                     subtitles={subtitles}
                     data={item}
+                    MSV={item.MaSinhVien}
                   />
-
                   <hr></hr>
                 </div>
               </td>
