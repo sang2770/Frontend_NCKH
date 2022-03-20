@@ -214,36 +214,46 @@ function MoveMilitary() {
           {/* form tìm kiếm */}
           <div className={style.Form_main}>
             <div className={style.Search_button}>
-              <ComboBox
-                id={FilterKhoa}
-                title="Khoa"
-                items={Khoa}
-                Change={changeKhoa}
-              />
-              <ComboBox
-                id={FilterKhoas}
-                title="Khóa"
-                items={Khoas}
-                Change={changeKhoas}
-              />
-              <ComboBox
-                id={FilterLop}
-                title="Lớp"
-                items={Lop}
-                Change={changeLop}
-              />
-              <ComboBox
-                id={FilterTrangThai}
-                title="Trạng thái"
-                items={TrangThai}
-                Change={changeTrangThai}
-              />
-              <ComboBox
-                id={FilterTinhTrang}
-                title="Tình trạng"
-                items={TinhTrang}
-                Change={changeTinhTrang}
-              />
+              <div className={style.Search_Item}>
+                <ComboBox
+                  id={FilterKhoa}
+                  title="Khoa"
+                  items={Khoa}
+                  Change={changeKhoa}
+                />
+              </div>
+              <div className={style.Search_Item}>
+                <ComboBox
+                  id={FilterKhoas}
+                  title="Khóa"
+                  items={Khoas}
+                  Change={changeKhoas}
+                />
+              </div>
+              <div className={style.Search_Item}>
+                <ComboBox
+                  id={FilterLop}
+                  title="Lớp"
+                  items={Lop}
+                  Change={changeLop}
+                />
+              </div>
+              <div className={style.Search_Item}>
+                <ComboBox
+                  id={FilterTrangThai}
+                  title="Trạng thái"
+                  items={TrangThai}
+                  Change={changeTrangThai}
+                />
+              </div>
+              <div className={style.Search_Item}>
+                <ComboBox
+                  id={FilterTinhTrang}
+                  title="Tình trạng"
+                  items={TinhTrang}
+                  Change={changeTinhTrang}
+                />
+              </div>
             </div>
             <Search onClickSearch={onSearch} Ref={FilterMSV} />
             <div className={style.Result_search}>

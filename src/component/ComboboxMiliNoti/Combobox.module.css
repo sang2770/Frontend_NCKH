@@ -1,20 +1,20 @@
-.Search_combobox{
-    float: left;
-    margin-left: 3%;
+.Search_combobox {
+  display: flex;
+  flex-direction: column;
 }
 
-.Search_combobox label{
-    font-size: 14px;
-    margin-right: 6px;
+.Search_combobox label {
+  font-size: 14px;
+  margin-right: 6px;
 }
 
-.Search_combobox select{
-    width: 130px;
-    padding: 7px 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: vertical;
-    outline: #ccc;
-    text-align: center;
-    /* margin-left: 5px; */
+.Search_combobox select {
+  width: 80%;
+  padding: 7px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+  outline: #ccc;
+  text-align: center;
+  margin-top: 5px;
 }
