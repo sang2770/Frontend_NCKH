@@ -16,7 +16,7 @@ function ExportFluctation() {
   const { Client, Loading } = useAxios();
   const [result, setResult] = useState({});
   const [filter, setfilter] = useState({
-    Nam: new Date().getFullYear(),
+    Nam: new Date().getFullYear() + "-" + (new Date().getFullYear() - 1),
   });
   const ChangeFilter = (e) => {
     if (Time.current) {
@@ -33,6 +33,8 @@ function ExportFluctation() {
   const { Lop, Khoa, Khoas } = useContext(DataContext);
   const CallAPI = () => {
     const params = queryString.stringify(filter);
+    console.log(params);
+
     Client.get("/export-report/student-fluctuations?" + params)
       .then((response) => {
         // console.log(response.data);
@@ -56,11 +58,11 @@ function ExportFluctation() {
     };
   }, [filter]);
   const ListYear = () => {
-    const max = 100;
+    const max = 50;
     const CurrentYear = new Date().getFullYear();
     const result = [];
     for (let i = 0; i < max; i++) {
-      result.push(CurrentYear - i);
+      result.push(CurrentYear - i + "-" + (CurrentYear - i - 1));
     }
     return result;
   };
@@ -91,11 +93,14 @@ function ExportFluctation() {
       <div className={style.Fluctation_Filter}>
         <div className={style.Fluctation_Filter_Item}>
           <ComboBox
-            title="Năm"
+            title="Năm học"
             id="Nam"
             items={ListYear()}
             Change={ChangeFilter}
-            data={{ Nam: new Date().getFullYear() }}
+            data={{
+              Nam:
+                new Date().getFullYear() + "-" + (new Date().getFullYear() - 1),
+            }}
           />
         </div>
         <div className={style.Fluctation_Filter_Item}>
