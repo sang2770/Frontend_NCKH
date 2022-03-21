@@ -5,17 +5,16 @@
   flex-wrap: wrap;
   padding-bottom: 40px;
 }
-.Form_ContainerMove{
+.Form_ContainerMove {
   display: flex;
   flex-wrap: wrap;
   padding-bottom: 30px;
   margin-left: 8%;
-
 }
 .FormItem {
   width: 25%;
 }
-.FormItemMove{
+.FormItemMove {
   width: 32%;
 }
 /* button */
@@ -24,14 +23,12 @@
   padding-top: 25px;
   padding-bottom: 20px;
 }
-.form_title{
-  padding-top: 30px;
+.form_title {
   text-align: center;
   /* text-shadow: 5px 5px 10px rgb(158, 164, 248); */
-  padding-bottom: 50px;
+  padding: 40px 10px;
   font-size: 20px;
 }
-
 
 /*  ElementForm*/
 .Element_form {
