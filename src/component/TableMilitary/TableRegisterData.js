@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import style from "./TableMilitary.module.css";
-import clsx from "clsx";
-import { TiDeleteOutline } from "react-icons/ti";
-import FormMilitaryUpdate from "../FormMilitaryUpdate/FormMilitaryUpdate";
-import FormUpdateRegister from "../FormUpdateRegister/FormUpdateRegister";
+import FormUpdateRegister from "../FormUpdateRegisterMilitary/FormUpdateRegister";
 
 const TableRegisterData = ({ data, titles, subtitles }) => {
   // show hide
