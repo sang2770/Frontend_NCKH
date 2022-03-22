@@ -3,6 +3,7 @@ import style from "./TableMilitary.module.css";
 import clsx from "clsx";
 import { TiDeleteOutline } from "react-icons/ti";
 import FormMilitaryUpdate from "../FormMilitaryUpdate/FormMilitaryUpdate";
+import FormUpdateRegister from "../FormUpdateRegister/FormUpdateRegister";
 
 const TableRegisterData = ({ data, titles, subtitles }) => {
   // show hide
@@ -18,6 +19,16 @@ const TableRegisterData = ({ data, titles, subtitles }) => {
 
   return (
     <tbody className={style.tbodyMiti}>
+      {DropDown > -1 && (
+        <FormUpdateRegister
+          data={data[DropDown]}
+          titles={titles}
+          subtitles={subtitles}
+          exit={() => {
+            ChangeDropDown(-1);
+          }}
+        />
+      )}
       {data &&
         data.map((item, index) => (
           <React.Fragment key={index}>
@@ -52,33 +63,6 @@ const TableRegisterData = ({ data, titles, subtitles }) => {
                 >
                   Sửa
                 </label>
-              </td>
-            </tr>
-            <tr className={style.Table_Row}>
-              <td></td>
-              <td colSpan={20}>
-                <div
-                  className={clsx(
-                    style.FormData,
-                    DropDown === index && style.Active_Form
-                  )}
-                >
-                  <div className={style.InfoDetail}>
-                    <label
-                      className={style.InfoDetail_label}
-                      onClick={ChangeDropDownHide}
-                    >
-                      <TiDeleteOutline />
-                    </label>
-                  </div>
-                  <FormMilitaryUpdate
-                    titles={titles}
-                    subtitles={subtitles}
-                    data={item}
-                    MSV={item.MaSinhVien}
-                  />
-                  <hr></hr>
-                </div>
               </td>
             </tr>
           </React.Fragment>

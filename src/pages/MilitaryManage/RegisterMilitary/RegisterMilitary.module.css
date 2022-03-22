@@ -6,23 +6,23 @@
 .importFile {
   display: flex;
 }
-.HeaderFile{
+.HeaderFile {
   /* display: flex; */
   float: left;
   margin-top: 10px;
   margin-right: 20px;
   font-size: 12px;
 }
-.HeaderInp{
+.HeaderInp {
   margin-bottom: 10px;
   text-align: left;
 }
-.iconS{
+.iconS {
   color: red;
   float: left;
   margin-right: 5px;
 }
-.FormImp{
+.FormImp {
   margin-top: 20px;
 }
 .Register_body {
@@ -49,10 +49,10 @@
   background-color: white; */
   margin-left: 2%;
 }
-.form_title{
-    text-align: center;
-    /* text-shadow: 5px 5px 10px rgb(158, 164, 248); */
-    padding-bottom: 50px;
+.form_title {
+  text-align: center;
+  /* text-shadow: 5px 5px 10px rgb(158, 164, 248); */
+  padding-bottom: 50px;
 }
 /* button */
 .Register_button {
@@ -63,7 +63,7 @@
   border: 1px solid rgb(162, 167, 245);
 }
 
-.Register_button_main{
+.Register_button_main {
   padding: 10px 30px 10px 30px;
   margin: 10px 45px 0px 45px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
@@ -74,7 +74,7 @@
 .Button_register {
   text-align: center;
 }
-.Move{
+.Move {
   margin-top: 20px;
 }
 /* search */
@@ -90,51 +90,55 @@
   display: block;
 }
 
-.cmbSearch{
-    display: block;
-    width: 100%;
+.cmbSearch {
+  display: flex;
+  width: 100%;
 }
-.Search_input{
-    float: right;
-    padding-right: 3%;
+.cmbSearch_Item {
+  width: calc(100% / 4);
 }
 
-.Search_input input{
-    padding: 7px 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: vertical;
-    outline: #ccc;
-    margin-left: 5px;
+.Search_input {
+  display: flex;
+  align-items: flex-end;
 }
-.icon_search{
-    font-size: large;
-    float: right;
-    padding-top: 8px;
-    margin-left: 15px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: vertical;
-    outline: #ccc;
-    padding: 2px 5px;
+
+.Search_input input {
+  padding: 7px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+  outline: #ccc;
+  margin-left: 5px;
 }
-.icon_search:hover{
-    cursor: pointer;
-    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.icon_search {
+  font-size: large;
+  float: right;
+  padding-top: 8px;
+  margin-left: 15px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+  outline: #ccc;
+  padding: 2px 5px;
+}
+.icon_search:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* Result_Search */
-.Result_search{
-    display: inline-block;
-    resize: vertical;
-    outline: #ccc;
-    padding: 10px 45px;
-    margin: 20px 20px 20px 20px;
-    text-align: center;
-    margin-bottom: 30px;
-    width: 90%;
-    font-size: 12px;
+.Result_search {
+  display: inline-block;
+  resize: vertical;
+  outline: #ccc;
+  padding: 10px 45px;
+  margin: 20px 20px 20px 20px;
+  text-align: center;
+  margin-bottom: 30px;
+  width: 90%;
+  font-size: 12px;
 }
 /* Error */
 .Err_container {

@@ -1,39 +1,56 @@
-.Confirm_header{
-    left: 19%;
-    width: 96%;
-    margin-left: 2%;
+.Confirm_header {
+  left: 19%;
+  width: 96%;
+  margin-left: 2%;
 }
-.Hearder_tittle{
-    text-align: center;
-    padding-bottom: 50px;
-}
-
-.Form_main{
-    margin: 10px 45px 0px 45px;
-}
-.load{
-    position: relative;
-}
-.Search_button{
-    display: flex;
-    margin-left: 5%;
-}
-.Result_search{
-    display: inline-block;
-    resize: vertical;
-    outline: #ccc;
-    padding: 10px 45px;
-    margin: 20px 20px 20px 20px;
-    text-align: center;
-    margin-bottom: 20px;
-    width: 90%;
-    font-size: 12px;
+.Hearder_tittle {
+  text-align: center;
+  padding-bottom: 50px;
 }
 
-.btn{
-    /* text-align: center; */
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: end;
-    padding: 10px 30px ;
+.Form_main {
+  margin: 10px 45px 0px 45px;
+}
+.load {
+  position: relative;
+}
+.Search_button {
+  display: flex;
+  margin-left: 5%;
+}
+.Result_search {
+  display: inline-block;
+  resize: vertical;
+  outline: #ccc;
+  padding: 10px 45px;
+  margin: 20px 20px 20px 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  width: 90%;
+  font-size: 12px;
+}
+
+.btn {
+  /* text-align: center; */
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: end;
+  padding: 10px 30px;
+}
+.cmbSearch {
+  display: flex;
+  align-items: flex-end;
+}
+.cmbSearch_Item {
+  width: calc(100% / 4);
+}
+.Search_input {
+  display: flex;
+  align-items: center;
+}
+.Search_input input {
+  padding: 7px 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  border-radius: 5px;
 }

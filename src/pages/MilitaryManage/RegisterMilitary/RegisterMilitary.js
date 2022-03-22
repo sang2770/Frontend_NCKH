@@ -16,6 +16,7 @@ import clsx from "clsx";
 import FormMilitary from "../../../component/FormMilitary/FormMilitary";
 import ErrorImport from "../../../component/ErrImport/ErrorImport";
 import LoadingEffect from "../../../component/Loading/Loading";
+import ComponentSearch from "../../../component/Search/Search";
 
 const tableHeaders = [
   "Họ và tên",
@@ -422,34 +423,31 @@ function RegisterMilitary() {
           <div className={Style.Register_search}>
             <div className={Style.Search_register}>
               <div className={Style.cmbSearch}>
-                <ComboBox
-                  id={FilterKhoa}
-                  title="Khoa"
-                  items={Khoa}
-                  Change={changeKhoa}
-                />
-                <ComboBox
-                  id={FilterKhoas}
-                  title="Khóa"
-                  items={Khoas}
-                  Change={changeKhoas}
-                />
-                <ComboBox
-                  id={FilterLop}
-                  title="Lớp"
-                  items={Lop}
-                  Change={changeLop}
-                />
-
-                <div className={Style.Search_input}>
-                  <input
-                    placeholder="Nhập vào mã sinh viên"
-                    ref={FilterMSV}
-                  ></input>
-                  <button className={Style.icon_search} onClick={Search}>
-                    <BsSearch />
-                  </button>
+                <div className={Style.cmbSearch_Item}>
+                  <ComboBox
+                    id={FilterKhoa}
+                    title="Khoa"
+                    items={Khoa}
+                    Change={changeKhoa}
+                  />
                 </div>
+                <div className={Style.cmbSearch_Item}>
+                  <ComboBox
+                    id={FilterKhoas}
+                    title="Khóa"
+                    items={Khoas}
+                    Change={changeKhoas}
+                  />
+                </div>
+                <div className={Style.cmbSearch_Item}>
+                  <ComboBox
+                    id={FilterLop}
+                    title="Lớp"
+                    items={Lop}
+                    Change={changeLop}
+                  />
+                </div>
+                <ComponentSearch onClickSearch={Search} Ref={FilterMSV} />
               </div>
             </div>
             <div className={Style.Result_search}>
