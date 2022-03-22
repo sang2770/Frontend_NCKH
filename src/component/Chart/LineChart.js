@@ -32,7 +32,7 @@ function LineChart({labels, datas, label1, label2, title}){
                 },
                 title: {
                   display: true,
-                  text: 'Chart.js Line Chart',
+                  text: title,
                 }
               }
             }}

@@ -9,7 +9,7 @@ import HeaderReport from "../../../component/HeaderReport/HeaderReport";
 import Button from "../../../component/Button/Button";
 import useAxios from "../../../Helper/API";
 import { DataContext } from "../../../DataContext/DataContext";
-import LineChart from "../../../component/Chart/LineChart";
+import LineChartConfirm from "../../../component/Chart/LineChartConfirm";
 
 function ExportConfirmMilitary(){
     const { Client } = useAxios();
@@ -155,7 +155,7 @@ function ExportConfirmMilitary(){
                   </div>
                 </div>
                 <div className={style.Chart}>
-                    <LineChart
+                    <LineChartConfirm
                         title='Biểu đồ thể hiện tình trạng cấp phát Giấy xác nhận'
                         datas={result.Chart}
                         NameChart="Biểu đồ biến động sinh viên"

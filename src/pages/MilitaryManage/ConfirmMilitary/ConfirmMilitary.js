@@ -72,7 +72,7 @@ function ConfirmMilitary() {
       }
   };
 
-  console.log(ConfirmMilitary);
+  // console.log(ConfirmMilitary);
   const CallAPI = () => {
     const params = queryString.stringify(filter);
     Client.get("/register-military-management/filter-info-student-registerMili?" + params)
