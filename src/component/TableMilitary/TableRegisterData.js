@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import style from "./TableMilitary.module.css";
-import FormUpdateRegister from "../FormUpdateRegisterMilitary/FormUpdateRegister";
+import FormUpdateRegister from "../FormUpdateRegister/FormUpdateRegister";
 
 const TableRegisterData = ({ data, titles, subtitles }) => {
   // show hide

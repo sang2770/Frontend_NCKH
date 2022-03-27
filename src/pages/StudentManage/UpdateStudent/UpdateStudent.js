@@ -34,6 +34,9 @@ function UpdateStudent() {
         // console.log(res);
         if (res.data.status === "Success") {
           // console.log("ok");
+          if (!res.data.data.TinhTrangSinhVien.includes("Đang học")) {
+            res.data.data.TenLop = "";
+          }
           setData(res.data.data);
           setErr(false);
         } else {
@@ -166,6 +169,7 @@ function UpdateStudent() {
                           <th>Họ và tên</th>
                           <th>Tên lớp</th>
                           <th>Tên Khoa</th>
+                          <th>Tình trạng sinh viên</th>
                           <th>Lựa chọn</th>
                         </tr>
                       </thead>
@@ -175,6 +179,7 @@ function UpdateStudent() {
                           <td>{data.HoTen}</td>
                           <td>{data.TenLop}</td>
                           <td>{data.TenKhoa}</td>
+                          <td>{data.TinhTrangSinhVien}</td>
                           <td className={style.OptionGroup}>
                             <div
                               className={style.OptionUpdate}

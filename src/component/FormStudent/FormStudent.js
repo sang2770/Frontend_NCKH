@@ -9,22 +9,11 @@ import Input from "../InputSQD/Input";
 function FormStudent({ Read, data, contentBtn, Submit }) {
   const Form = useRef();
   const [OpenSKQ, setOpenSKQ] = useState(false);
-  // const ChangeDateFormat = (date) => {
-  //   const mydate = new Date(date);
-  //   const str =
-  //     mydate.getFullYear() +
-  //     "/" +
-  //     mydate.getMonth() +
-  //     1 +
-  //     "/" +
-  //     mydate.getDate();
-  //   return str;
-  // };
   const SubmitForm = (e) => {
     e.preventDefault();
     const FormInput = new FormData(Form.current);
     if (data) {
-      if (data.TinhTrangSinhVien !== "Đang học") {
+      if (!data.TinhTrangSinhVien.includes("Đang học")) {
         alert("Sinh viên này đã không còn quản lý");
         return;
       }
@@ -45,8 +34,11 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
     <React.Fragment>
       {OpenSKQ && (
         <Input
-          submit={() => {
-            Submit(Form.current, ResetForm);
+          submit={(SoQuyetDinh, NgayQuyetDinh) => {
+            const FormInput = new FormData(Form.current);
+            FormInput.append("SoQuyetDinh", SoQuyetDinh);
+            FormInput.append("NgayQuyetDinh", NgayQuyetDinh);
+            Submit(FormInput, ResetForm);
           }}
           FormValue={Form.current}
           setOpenSKQ={setOpenSKQ}
@@ -154,21 +146,12 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
             )}
           </div>
           <div className={style.Infor_Group}>
-            {Read || (data && data.TinhTrangSinhVien !== "Đang học") ? (
-              <TextBox
-                data={data}
-                Read={true}
-                title="Tình trạng sinh viên"
-                subtitle="TinhTrangSinhVien"
-              />
-            ) : (
-              <ComboBox
-                data={data}
-                title="Tình trạng sinh viên"
-                id="TinhTrangSinhVien"
-                items={["Đang học", "Đã tốt nghiệp", "Thôi học"]}
-              />
-            )}
+            <ComboBox
+              data={data}
+              title="Tình trạng sinh viên"
+              id="TinhTrangSinhVien"
+              items={["Đang học", "Đã tốt nghiệp", "Thôi học", "Bảo lưu"]}
+            />
           </div>
           <div className={style.Infor_Group}>
             <TextBox
