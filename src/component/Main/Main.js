@@ -21,6 +21,8 @@ import {
   HiUserAdd,
   HiOutlineNewspaper,
 } from "react-icons/hi";
+import { TiUserAddOutline } from "react-icons/ti";
+import { BiCommentAdd } from "react-icons/bi";
 import { RiUserSettingsFill } from "react-icons/ri";
 import { IoIosPaper } from "react-icons/io";
 import clsx from "clsx";
@@ -43,11 +45,11 @@ import ExportFluctation from "../../pages/Analyst/ExportFluctation/ExportFluctat
 import AddInformation from "../../pages/AddInformation/AddInformation";
 import ExportConfirmMilitary from "../../pages/Analyst/ExportConfirmMilitary/ExportConfirmMilitary";
 import ExportMoveMilitary from "../../pages/Analyst/ExportMoveMilitary/ExportMoveMilitary";
+import AddInfomationCommander from "../../pages/AddInformation/AddInfomationCommander";
 
 function Main() {
   const [clickMenu, setclickMenu] = useState(false);
   const location = useLocation();
-  // console.log(location);
   const [ActiveSub, setActiveSub] = useState(
     JSON.parse(localStorage.getItem("ActiveSub")) || "/"
   );
@@ -67,7 +69,6 @@ function Main() {
     setMenuSubItem(id);
     localStorage.setItem("MenuSubItem", JSON.stringify(id));
   };
-  // console.log(MenuSubItem);
   const { user, dispatch } = useContext(AuthContext);
   const Out = () => {
     dispatch(Logout());
@@ -95,6 +96,9 @@ function Main() {
       setMenuSubItem(locate.slice(1, locate.length));
     } else if (locate.includes("/ExportAnalyst")) {
       setActiveSub("ExportAnalyst");
+      setMenuSubItem(locate.slice(1, locate.length));
+    } else if (locate.includes("/AddInfomation")) {
+      setActiveSub("AddInfomation");
       setMenuSubItem(locate.slice(1, locate.length));
     } else {
       setActiveSub(locate.slice(1, locate.length));
@@ -374,7 +378,9 @@ function Main() {
                     className="SideBar_Item_content"
                   >
                     <IoIosPaper />
-                    <span className="Item_content">Tình trạng cấp phát Giấy xác nhận</span>
+                    <span className="Item_content">
+                      Tình trạng cấp phát Giấy xác nhận
+                    </span>
                   </Link>
                 </li>
                 <li
@@ -393,12 +399,13 @@ function Main() {
                     className="SideBar_Item_content"
                   >
                     <HiOutlineNewspaper />
-                    <span className="Item_content">Tình trạng cấp phát Giấy giới thiệu</span>
+                    <span className="Item_content">
+                      Tình trạng cấp phát Giấy giới thiệu
+                    </span>
                   </Link>
                 </li>
               </ul>
             </li>
-
             <li
               className="SideBar_Item"
               onClick={() => {
@@ -439,16 +446,51 @@ function Main() {
                 ChangeSubMenu("AddInfomation");
               }}
             >
-              <Link
-                to="/AddInfomation"
+              <p
                 className={clsx(
                   "SideBar_Item_content",
                   ActiveSub === "AddInfomation" && "ActiveItem"
                 )}
               >
-                <HiOutlineViewGridAdd />
+                <BsPersonCircle />
                 <span className="Item_content">Thêm thông tin</span>
-              </Link>
+              </p>
+              <ul className="SideBar_MenuChild">
+                <li
+                  className={clsx(
+                    "SideBar_MenuChild_item",
+                    MenuSubItem === "AddInfomation-Edu" && "ActiveSubMenuItem"
+                  )}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    ChangeMenuSubItem("AddInfomation-Edu");
+                  }}
+                >
+                  <Link to="AddInfomation-Edu" className="SideBar_Item_content">
+                    <BiCommentAdd />
+                    <span className="Item_content">Thông tin </span>
+                  </Link>
+                </li>
+                <li
+                  className={clsx(
+                    "SideBar_MenuChild_item",
+                    MenuSubItem === "AddInfomation-commander" &&
+                      "ActiveSubMenuItem"
+                  )}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    ChangeMenuSubItem("AddInfomation-commander");
+                  }}
+                >
+                  <Link
+                    to="AddInfomation-commander"
+                    className="SideBar_Item_content"
+                  >
+                    <TiUserAddOutline />
+                    <span className="Item_content">Thông tin chỉ huy</span>
+                  </Link>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>
@@ -518,6 +560,14 @@ function Main() {
                   <Route
                     path="ExportAnalyst-MoveMilitary"
                     element={<ExportMoveMilitary />}
+                  />
+                  <Route
+                    path="AddInfomation-Edu"
+                    element={<AddInformation />}
+                  />
+                  <Route
+                    path="AddInfomation-commander"
+                    element={<AddInfomationCommander />}
                   />
                   <Route path="AddInfomation" element={<AddInformation />} />
                   <Route path="Notifiaction-main" element={<Notification />} />
