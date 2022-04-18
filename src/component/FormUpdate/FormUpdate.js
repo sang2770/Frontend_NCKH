@@ -16,14 +16,13 @@ function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
   const SumitUpdate = (form, ResetForm) => {
     form.delete("MaSinhVien");
     form.append("_method", "PATCH");
-    // console.log(form.get("TonGiao"));
     Client.post("/student-management/user/" + DataStudent.MaSinhVien, form, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     })
       .then((res) => {
-        // console.log(res);
+        console.log(res.data);
         if (res.data.status === "Success") {
           alert("Bạn đã cập nhật thành công!");
           setErrUpdate(null);

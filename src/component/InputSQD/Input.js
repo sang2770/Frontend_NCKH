@@ -14,9 +14,7 @@ function Input({ content, submit, setOpenSKQ, FormValue }) {
       alert("Bạn phải nhập dữ liệu");
       return;
     } else {
-      FormValue.append("SoQuyetDinh", FormQD.get("SoQuyetDinh"));
-      FormValue.append("NgayQuyetDinh", FormQD.get("NgayQuyetDinh"));
-      submit();
+      submit(FormQD.get("SoQuyetDinh"), FormQD.get("NgayQuyetDinh"));
       setOpenSKQ(false);
     }
   };

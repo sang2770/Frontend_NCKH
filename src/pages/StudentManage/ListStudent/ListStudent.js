@@ -52,7 +52,7 @@ function ListStudent() {
       clearTimeout(Load);
     };
   }, [filter]);
-  // console.log(DataFilter);
+  console.log(paginations);
 
   const Time = useRef(null);
   const ChangeLimit = (e) => {
@@ -74,7 +74,7 @@ function ListStudent() {
       const name = input.name;
       // console.log(input.name);
 
-      setfilter({ ...filter, [name]: input.value });
+      setfilter({ ...filter, [name]: input.value, page: 1 });
     }, 300);
   };
   // console.log(filter);
