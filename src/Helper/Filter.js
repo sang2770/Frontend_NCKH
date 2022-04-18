@@ -49,7 +49,7 @@ const useFilter = (TrangThai, path, Confirm, PageExport) => {
       clearTimeout(Time.current);
     }
     Time.current = setTimeout(() => {
-      setfilter({ ...filter, limit: input.value });
+      setfilter({ ...filter, limit: input.value, page: 1 });
     }, 300);
   };
   const ChangeFilter = (e) => {
@@ -61,7 +61,7 @@ const useFilter = (TrangThai, path, Confirm, PageExport) => {
       const name = input.name;
       console.log(input.name);
 
-      setfilter({ ...filter, [name]: input.value });
+      setfilter({ ...filter, [name]: input.value, page: 1 });
     }, 300);
   };
 
