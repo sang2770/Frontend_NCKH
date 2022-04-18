@@ -1,0 +1,48 @@
+.FormUpdate {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(204, 204, 204, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.InfoUpdate {
+  padding: 30px;
+  width: 60vw;
+
+  background-color: #fff;
+  box-shadow: 2px 2px 5px #ccc;
+  border-radius: 10px;
+  font-size: 1.6rem;
+  position: relative;
+  animation: show 0.6s ease-in-out;
+}
+.FormUpdate_Container {
+  height: 80vh;
+  overflow-y: scroll;
+  position: relative;
+}
+.Btn_Exit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 2rem;
+}
+.Btn_Exit:hover {
+  cursor: pointer;
+  color: var(--Main-color);
+}
