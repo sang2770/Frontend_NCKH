@@ -1,6 +1,6 @@
 import React, { useState, useContext, useRef } from "react";
 import Button from "../../../component/ButtonMiliNoti/Button";
-import ComboBox from "../../../component/ComboboxMiliNoti/Combobox";
+import ComboBox from "../../../component/ComboboxMiliNoti/ComboboxSentNoti";
 import style from "./ShowNotification.module.css";
 import { MdOutlineDoubleArrow } from "react-icons/md";
 import { DataContext } from "../../../DataContext/DataContext";

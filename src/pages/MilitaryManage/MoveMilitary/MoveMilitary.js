@@ -32,7 +32,7 @@ function MoveMilitary() {
 
   const [Err, setErr] = useState(null);
 
-  const TrangThai = ["Đã tốt nghiệp", "Đã thôi học"];
+  const TrangThai = ["Đã tốt nghiệp", "Đã thôi học", "Bảo lưu"];
   const TinhTrang = ["Đã cấp giấy", "Chưa cấp giấy", "Tất cả"];
   const { Lop, Khoa, Khoas } = useContext(DataContext);
 
