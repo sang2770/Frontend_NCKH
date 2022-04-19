@@ -18,7 +18,7 @@
   display: flex;
 }
 .Search_Item {
-  width: calc(100% / 5);
+  width: calc(100% / 4);
 }
 .Result_search {
   outline: #ccc;

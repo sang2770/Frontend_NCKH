@@ -12,6 +12,7 @@ import Search from "../../../component/Search/Search";
 import TableMilitary from "../../../component/TableMilitary/TableMilitary";
 import TableMoveData from "../../../component/TableMilitary/TableMoveData";
 import LoadingEffect from "../../../component/Loading/Loading";
+import FormExportMove from "../../../component/FormExportMove/FormExportMove";
 
 const tableHeaders = [
   "Họ và tên",
@@ -21,7 +22,6 @@ const tableHeaders = [
   "Khoa",
   "Khóa",
   "Trạng thái",
-  "Trạng thái cấp",
   "Số QĐ",
   "Ngày quyết định",
   "Xác nhận",
@@ -33,7 +33,6 @@ function MoveMilitary() {
   const [Err, setErr] = useState(null);
 
   const TrangThai = ["Đã tốt nghiệp", "Đã thôi học", "Bảo lưu"];
-  const TinhTrang = ["Đã cấp giấy", "Chưa cấp giấy", "Tất cả"];
   const { Lop, Khoa, Khoas } = useContext(DataContext);
 
   const [paginations, setPaginations] = useState({
@@ -77,22 +76,12 @@ function MoveMilitary() {
       FilterKhoas === "" &&
       FilterLop === "" &&
       FilterMSV.current.value === "" &&
-      FilterTrangThai === "" &&
-      FilterTinhTrang === ""
+      FilterTrangThai === ""
     ) {
       alert(
         "Bạn cần chọn khoa, khóa, lớp, trạng thái sinh viên hoặc mã sinh viên để thực hiện tìm kiếm"
       );
     } else {
-      var reqNgayCap = "";
-      if (FilterTinhTrang == "" || FilterTinhTrang == "Tất cả") {
-        reqNgayCap = "2";
-      } else if (FilterTinhTrang == "Đã cấp giấy") {
-        reqNgayCap = "1";
-      } else if (FilterTinhTrang == "Chưa cấp giấy") {
-        reqNgayCap = "0";
-      }
-
       Client.get(
         "/register-military-management/filter-info-move?MaSinhVien=" +
           FilterMSV.current.value +
@@ -103,36 +92,25 @@ function MoveMilitary() {
           "&TenKhoa=" +
           FilterKhoa +
           "&TinhTrangSinhVien=" +
-          FilterTrangThai +
-          "&NgayCap=" +
-          reqNgayCap
+          FilterTrangThai,
       )
-        .then((res) => {
-          if (res.data.status === "Success") {
-            setMoveMilitary(res.data.data);
-          } else {
-            setErr(res.data.Err_Message);
-          }
-        })
-        .catch((err) => {
-          setErr("Not Found!");
-        });
+      .then((res) => {
+        if (res.data.status === "Success") {
+          setMoveMilitary(res.data.data);
+        } else {
+          setErr(res.data.Err_Message);
+        }
+      })
+      .catch((err) => {
+        setErr("Not Found!");
+      });
     }
   };
 
   const CallAPI = () => {
-    var reqNgayCap = "";
-    if (FilterTinhTrang == "" || FilterTinhTrang == "Tất cả") {
-      reqNgayCap = "NgayCap=2&";
-    } else if (FilterTinhTrang == "Đã cấp giấy") {
-      reqNgayCap = "NgayCap=1&";
-    } else if (FilterTinhTrang == "Chưa cấp giấy") {
-      reqNgayCap = "NgayCap=0&";
-    }
-
     const params = queryString.stringify(filter);
     Client.get(
-      "/register-military-management/filter-info-move?" + reqNgayCap + params
+      "/register-military-management/filter-info-move?" + params
     )
       .then((response) => {
         const List = response.data;
@@ -167,41 +145,35 @@ function MoveMilitary() {
     }, 300);
   };
 
-  // Export
-  const Export = async () => {
-    // const params = queryString.stringify(filter);
-    Client.get(
-      "/move-military-management/move-military?MaSinhVien=" +
-        FilterMSV.current.value +
-        "&TenLop=" +
-        FilterLop +
-        "&Khoas=" +
-        FilterKhoas +
-        "&TenKhoa=" +
-        FilterKhoa +
-        "&TinhTrangSinhVien=" +
-        FilterTrangThai,
-      {
-        responseType: "blob",
-      }
-    )
-      .then((response) => {
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "GiayDiChuyenNVQS.docx");
-        document.body.appendChild(link);
-        link.click();
-        alert("Đã xuất file");
-        setChangeData(!changeData);
-      })
-      .catch((err) => {
-        setErr(true);
-      });
+  const url = "/move-military-management/move-military?MaSinhVien=" +
+    FilterMSV.current.value +
+    "&TenLop=" +
+    FilterLop +
+    "&Khoas=" +
+    FilterKhoas +
+    "&TenKhoa=" +
+    FilterKhoa +
+    "&TinhTrangSinhVien=" +
+    FilterTrangThai;
+
+  const [DropDown, setDropDown] = useState(-1);
+  const ChangeDropDown = (id) => {
+    setDropDown(id);
   };
 
   return (
     <React.Fragment>
+      {DropDown > -1 && (
+        <FormExportMove
+         FilterLop = {FilterLop}
+          url = {url}
+          changeData={changeData}
+          setChangeData={setChangeData}
+          exit={() => {
+            ChangeDropDown(-1);
+          }}
+        />
+      )}
       <div className={style.load}>
         {Loading && <LoadingEffect />}
         <div className={style.Confirm_header}>
@@ -246,14 +218,6 @@ function MoveMilitary() {
                   Change={changeTrangThai}
                 />
               </div>
-              <div className={style.Search_Item}>
-                <ComboBox
-                  id={FilterTinhTrang}
-                  title="Tình trạng"
-                  items={TinhTrang}
-                  Change={changeTinhTrang}
-                />
-              </div>
             </div>
             <Search onClickSearch={onSearch} Ref={FilterMSV} />
             <div className={style.Result_search}>
@@ -282,7 +246,7 @@ function MoveMilitary() {
           </div>
           {/* button cập giấy */}
           <div className={style.btn}>
-            <Button content="Cấp giấy" onClick={Export} />
+            <Button content="Cấp giấy" onClick={() => {ChangeDropDown(0)}} />
           </div>
         </div>
       </div>

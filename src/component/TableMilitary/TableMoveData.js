@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { IoIosArrowDown } from "react-icons/io";
 import style from "./TableMilitary.module.css";
+import FormExportMove from "../FormExportMove/FormExportMove";
+import TableMoveDetail from "../TableMoveDetail/TableMoveDetail";
+import TableMoveDetailData from "../TableMoveDetail/TableMoveDetailData";
 import useAxios from "../../Helper/API";
+import clsx from "clsx";
 
 const TableMoveData = ({ data, changeData, setChangeData }) => {
   const { Client } = useAxios();
-
+  
   const [Err, setErr] = useState(null);
 
   const [MSV, setMSV] = useState();
@@ -12,42 +17,63 @@ const TableMoveData = ({ data, changeData, setChangeData }) => {
   const changeMSV = (msv) => {
     setMSV(msv);
   };
-  // Export
-  const Export = async () => {
-    MSV &&
-      Client.get("/move-military-management/move-military?MaSinhVien=" + MSV, {
-        responseType: "blob",
-      })
-        .then((response) => {
-          const url = window.URL.createObjectURL(new Blob([response.data]));
-          const link = document.createElement("a");
-          link.href = url;
-          link.setAttribute("download", "GiayDiChuyenNVQS.docx");
-          document.body.appendChild(link);
-          link.click();
-          alert("Đã xuất file");
-          setChangeData(!changeData);
-        })
-        .then((response) => {
-          const url = window.URL.createObjectURL(new Blob([response.data]));
-          const link = document.createElement("a");
-          link.href = url;
-          link.setAttribute("download", "GiayDiChuyenNVQS.docx");
-          document.body.appendChild(link);
-          link.click();
-          alert("Đã xuất file");
-        })
-        .catch((err) => {
-          setErr(true);
-        });
+  
+  const [DropDown, setDropDown] = useState(-1);
+  const ChangeDropDown = (id) => {
+    setDropDown(id);
   };
+
+  ///hien thi danh sach cac lan cap giay
+  const [DropDownShow, setDropDownShow] = useState(-3);
+
+  const ChangeDropDownShow = (id) => {
+    setDropDownShow(id);
+  };
+
+  const ChangeDropDownHide = () => {
+    setDropDownShow(-3);
+  };
+
+  const [ListNgaycap, setListNgaycap] = useState([]);
+
+  const list = (itemMSV) => {
+    Client.get("move-military-management/move-military-detail/" + itemMSV)//viet api
+      .then((response) => {
+        const List = response.data;
+        if (List.status === "Success") {
+          setListNgaycap(List.data);
+        }
+      })
+      .catch((err) => {
+        setErr(true);
+      });
+    };
 
   return (
     <tbody>
-      {data.map((item, index) => (
+      {DropDown > -1 && (
+        <FormExportMove
+          msv={MSV}
+          changeData={changeData}
+          setChangeData={setChangeData}
+          exit={() => {
+            ChangeDropDown(-1);
+          }}
+        />
+      )}
+      {data && data.map((item, index) => (
         <React.Fragment key={index}>
           <tr className={style.Table_Row}>
-            <td className={style.Table_Column}>
+            <td className={clsx(style.Table_Column, style.stt)}>
+              <p
+                className={style.IconDropDown}
+                onClick={() => {
+                  ChangeDropDownShow(index)
+                  list(item.MaSinhVien)
+                }}
+              >
+                <IoIosArrowDown />
+              </p>
               <span>{index + 1}</span>
             </td>
             <td className={style.Table_Column}>
@@ -72,9 +98,6 @@ const TableMoveData = ({ data, changeData, setChangeData }) => {
               <span>{item.TinhTrangSinhVien}</span>
             </td>
             <td className={style.Table_Column}>
-              <span>{item.NgayCap ? "Đã cấp giấy" : "Chưa cấp giấy"}</span>
-            </td>
-            <td className={style.Table_Column}>
               <span>{item.SoQuyetDinh}</span>
             </td>
             <td className={style.Table_Column}>
@@ -85,11 +108,28 @@ const TableMoveData = ({ data, changeData, setChangeData }) => {
                 className={style.label}
                 onClick={() => {
                   changeMSV(item.MaSinhVien);
-                  Export();
+                  ChangeDropDown(index);
                 }}
               >
                 Cấp giấy
               </label>
+            </td>
+          </tr>
+          <tr className={style.Table_Row}>
+            <td></td>
+            <td colSpan={20}>
+              <div
+                className={clsx(
+                  style.FormData,
+                  DropDownShow === index && style.Active_Form
+                )}
+              >
+                <div className={style.InfoDetail_title}>Thông tin các lần cấp giấy xác nhận</div>
+                <TableMoveDetail
+                  Content={<TableMoveDetailData data={ListNgaycap} />}
+                  onClickHide = {ChangeDropDownHide}
+                />
+              </div>
             </td>
           </tr>
         </React.Fragment>

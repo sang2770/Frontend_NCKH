@@ -13,8 +13,9 @@ import LineChart from "../../../component/Chart/LineChart";
 
 function ExportMoveMilitary() {
   const { Client } = useAxios();
-  const { Khoas } = useContext(DataContext);
+  const { Khoa, Khoas } = useContext(DataContext);
   const Time = useRef(null);
+  var today = new Date().getFullYear();
   const [result, setResult] = useState({});
   const [filter, setfilter] = useState({
     Nam: new Date().getFullYear(),
@@ -27,17 +28,12 @@ function ExportMoveMilitary() {
     Month: [],
     Day: [],
   });
-
+  
   const ChangeFilter = (e) => {
     if (Time.current) {
       clearTimeout(Time.current);
     }
-    if (e.target.name === "Thang") {
-      //   var dt = new Date();
-      //   var month = dt.getMonth();
-      //   var year = dt.getFullYear();
-      //  daysInMonth = new Date(year, month, 0).getDate();
-    }
+
     Time.current = setTimeout(() => {
       const input = e.target;
       const name = input.name;
@@ -46,26 +42,15 @@ function ExportMoveMilitary() {
   };
 
   useEffect(() => {
-    if (filter.Thang && filter.Nam) {
-      const daysInMonth = new Date(filter.Nam, filter.Thang, 0).getDate();
-      const day = [];
-      for (let i = 1; i <= daysInMonth; i++) {
-        day.push(i);
-      }
-      setDate({ ...DateFilter, Day: day });
-    }
-  }, [filter]);
-
-  useEffect(() => {
     const max = 100;
     const CurrentYear = new Date().getFullYear();
     const year = [];
     for (let i = 0; i < max; i++) {
-      year.push(CurrentYear - i);
+    year.push(CurrentYear - i);
     }
     const month = [];
     for (let i = 0; i < 12; i++) {
-      month.push(i + 1);
+    month.push(i + 1);
     }
     setDate({ ...DateFilter, Month: month, Year: year });
   }, []);
@@ -114,15 +99,7 @@ function ExportMoveMilitary() {
         alert("Tạm thời không thể xuất báo cáo");
       });
   };
-  // const ListYear = () => {
-  //   const max = 100;
-  //   const CurrentYear = new Date().getFullYear();
-  //   const result = [];
-  //   for (let i = 0; i < max; i++) {
-  //     result.push(CurrentYear - i);
-  //   }
-  //   return result;
-  // };
+
   return (
     <div className={style.Export_Update_Container}>
       <HeaderTitle
@@ -132,9 +109,9 @@ function ExportMoveMilitary() {
       <div className={style.Update_Filter}>
         <div className={style.Update_Filter_Item}>
           <ComboBox
-            title="Ngày"
-            id="Ngay"
-            items={DateFilter.Day}
+            title="Năm"
+            id="NgayCap"
+            items={DateFilter.Year}
             Change={ChangeFilter}
           />
         </div>
@@ -149,11 +126,10 @@ function ExportMoveMilitary() {
 
         <div className={style.Update_Filter_Item}>
           <ComboBox
-            title="Năm"
-            id="NgayCap"
-            items={DateFilter.Year}
+            title="Khoa"
+            id="TenKhoa"
+            items={Khoa}
             Change={ChangeFilter}
-            data={{ NgayCap: new Date().getFullYear() }}
           />
         </div>
 
