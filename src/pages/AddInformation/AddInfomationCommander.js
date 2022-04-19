@@ -229,6 +229,7 @@ function AddInfomationCommander() {
                 <div className={style.td}>
                   <input
                     type="text"
+                    name="ThoiGianKetThuc"
                     defaultValue={
                       item.ThoiGianKetThuc
                         ? GetDate(item.ThoiGianKetThuc)
@@ -315,7 +316,14 @@ function AddInfomationCommander() {
                     className={style.Input}
                   />
                 </div>
-                <div className={style.td}></div>
+                <div className={style.td}>
+                  <input
+                    placeholder="yy-mm-dd"
+                    type="text"
+                    name="ThoiGianKetThuc"
+                    className={style.Input}
+                  />
+                </div>
                 <div className={clsx(style.Option_Commander, style.td)}>
                   <div className={style.Item}>
                     <div className={style.Item_Option}>
