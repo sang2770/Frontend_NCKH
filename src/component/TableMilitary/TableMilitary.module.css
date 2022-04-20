@@ -42,7 +42,6 @@ thead .Table_Header {
 .Table_Column {
   border-bottom: 1px solid #ccc;
   padding: 9px;
-  text-align: center;
   font-size: 13px;
   /* word-break: break-all; */
 }

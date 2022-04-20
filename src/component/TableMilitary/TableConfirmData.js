@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import style from "./TableMilitary.module.css";
-import clsx from "clsx";
 import TableConfirmDetail from "../TableConfirmDetail/TableConfirmDetail";
 import TableConfirmDetailData from "../TableConfirmDetail/TableConfirmDetailData";
 import useAxios from "../../Helper/API";
+import clsx from "clsx";
 
 const TableConfirmData = ({ data, changeData, setChangeData }) => {
   const [DropDown, setDropDown] = useState(-1);
