@@ -5,7 +5,7 @@ import ComboBox from "../../component/ComboBox/ComboBox";
 import useAxios from "../../Helper/API";
 import Button from "../ButtonMiliNoti/Button";
 
-function FormExportMove({ msv, changeData, setChangeData, exit, url }) {
+function FormExportMove({ nameSV, msv, changeData, setChangeData, exit, url }) {
     const { Client } = useAxios();
     const [Err, setErr] = useState(null);
 
@@ -66,34 +66,27 @@ function FormExportMove({ msv, changeData, setChangeData, exit, url }) {
         }
         else{
             if(msv){
+                nameSV = nameSV;
                 url =  "/move-military-management/move-military?MaSinhVien=" + msv + "&NgayHH=" + filter.NgayHH + "&NamHH=" + filter.NamHH + "&ThangHH=" + filter.ThangHH;
             }else if(url){
                 url = url + "&NgayHH=" + filter.NgayHH + "&NamHH=" + filter.NamHH + "&ThangHH=" + filter.ThangHH;
+                nameSV = "DanhSachGiayDiChuyenNVQS";
             }
             Client.get(url, {
                 responseType: "blob",
             })
             .then((response) => {
-            const url = window.URL.createObjectURL(new Blob([response.data]));
-            const link = document.createElement("a");
-            link.href = url;
-            link.setAttribute("download", "GiayDiChuyenNVQS.docx");
-            document.body.appendChild(link);
-            link.click();
-            alert("Đã xuất file");
-            setChangeData(!changeData);
-            })
-            .then((response) => {
-            const url = window.URL.createObjectURL(new Blob([response.data]));
-            const link = document.createElement("a");
-            link.href = url;
-            link.setAttribute("download", "GiayDiChuyenNVQS.docx");
-            document.body.appendChild(link);
-            link.click();
-            alert("Đã xuất file");
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement("a");
+                link.href = url;
+                link.setAttribute("download", nameSV + ".docx");
+                document.body.appendChild(link);
+                link.click();
+                alert("Đã xuất file");
+                setChangeData(!changeData);
             })
             .catch((err) => {
-            setErr(true);
+                setErr(true);
             });
         }
     };

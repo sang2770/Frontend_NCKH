@@ -49,10 +49,27 @@ const TableMoveData = ({ data, changeData, setChangeData }) => {
       });
   };
 
+  //ten sv
+  const [Name, setName] = useState();
+  const name = (itemMSV) => {
+      Client.get(
+        "/confirm-military-management/confirm-military-info/" + itemMSV
+      )
+      .then((response) => {
+      if (response.data.status === "Success") {
+          setName(response.data.data);
+      }
+      })
+      .catch((err) => {
+      setErr(true);
+      });
+  };
+  
   return (
     <tbody>
       {DropDown > -1 && (
         <FormExportMove
+          nameSV={Name}
           msv={MSV}
           changeData={changeData}
           setChangeData={setChangeData}
@@ -111,6 +128,7 @@ const TableMoveData = ({ data, changeData, setChangeData }) => {
                   className={style.label}
                   onClick={() => {
                     changeMSV(item.MaSinhVien);
+                    name(item.MaSinhVien);
                     ChangeDropDown(index);
                   }}
                 >

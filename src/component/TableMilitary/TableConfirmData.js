@@ -45,7 +45,6 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
     )
       .then((response) => {
         if (response.data.status === "Success") {
-          console.log(response.data.data);
           setName(response.data.data);
         }
       })
