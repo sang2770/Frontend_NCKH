@@ -19,7 +19,7 @@ function ExportUpdate() {
       date.getMinutes() +
       ":" +
       date.getSeconds() +
-      "-" +
+      " - " +
       date.getDate() +
       "/" +
       date.getMonth() +
@@ -77,6 +77,7 @@ function ExportUpdate() {
     const params = queryString.stringify(filter);
     Client.get("/export-report/student-update?" + params)
       .then((response) => {
+        console.log(response);
         if (response.data.status === "Success") {
           setResult(response.data.data);
           setPaginations(response.data.pagination);
@@ -128,7 +129,10 @@ function ExportUpdate() {
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", "Report.docx"); //or any other extension
+        link.setAttribute(
+          "download",
+          `BaoCaoCapNhatSinhVien_${filter.MaSinhVien}_${filter.Nam}.docx`
+        ); //or any other extension
         document.body.appendChild(link);
         link.click();
         alert("Đã xuất file");

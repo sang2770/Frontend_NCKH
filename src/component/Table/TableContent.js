@@ -43,9 +43,10 @@ const TableContent = ({
         // console.log(err);
       });
   };
-  const Export = (id, idYC) => {
+  const Export = (id, Hoten, idYC) => {
     MSV.current.MaSinhVien = id;
     MSV.current.MaYeuCau = idYC;
+    MSV.current.HoTen = Hoten;
     ExportPape();
   };
   return (
@@ -102,7 +103,7 @@ const TableContent = ({
                   className={clsx(style.Confirm, style.Table_Column)}
                   onClick={() => {
                     // console.log(item.MaSinhVien);
-                    Export(item.MaSinhVien, item.MaYeuCau);
+                    Export(item.MaSinhVien, item.HoTen, item.MaYeuCau);
                   }}
                 >
                   Cấp Giấy

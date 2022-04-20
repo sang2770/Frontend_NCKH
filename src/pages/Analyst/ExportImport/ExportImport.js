@@ -56,7 +56,7 @@ function ExportImport() {
     const params = queryString.stringify(filter);
     Client.get("/export-report/student-import?" + params)
       .then((response) => {
-        // console.log(response.data);
+        console.log(response.data);
         if (response.data.status === "Success") {
           setResult(response.data.data);
           setPaginations(response.data.pagination);
@@ -104,7 +104,7 @@ function ExportImport() {
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", "Report.docx"); //or any other extension
+        link.setAttribute("download", `BaoCaoImport${filter.Nam}.docx`); //or any other extension
         document.body.appendChild(link);
         link.click();
         alert("Đã xuất file");
