@@ -250,7 +250,7 @@ const ShowNotification = ({ data, onClickHide, datadelete, setDelete }) => {
 
   return (
     <React.Fragment>
-      <div>
+      <div className={style.mainShowNoti}>
         {data.map((item, index) => (
           <div className={style.MainNoti} key={index}>
             <div className={style.iconX} onClick={onClickHide}>
@@ -259,9 +259,9 @@ const ShowNotification = ({ data, onClickHide, datadelete, setDelete }) => {
             {contentStore ? (
               <div className={style.Content}>
                 {/* Main Content Notification */}
-                <h4 className={style.ContentNoti_main_h1}>
+                <h3 className={style.ContentNoti_main_h1}>
                   NỘI DUNG THÔNG BÁO
-                </h4>
+                </h3>
                 <div className={style.Main_ShowNoti}>
                   <div className={style.header}>
                     <div className={style.IconNoti}>
@@ -384,9 +384,9 @@ const ShowNotification = ({ data, onClickHide, datadelete, setDelete }) => {
             {/* Gui thong bao */}
             {DropDown ? (
               <div className={style.ContentNoti_main}>
-                <h4 className={style.ContentNoti_main_h1}>
+                <h3 className={style.ContentNoti_main_h1}>
                   THÔNG BÁO ĐẾN SINH VIÊN
-                </h4>
+                </h3>
                 <div className={style.SentNoti}>
                   <div className={style.ContentNoti_search}>
                     <div className={style.ContentNoti_main_lable}>

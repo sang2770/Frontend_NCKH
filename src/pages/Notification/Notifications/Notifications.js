@@ -113,7 +113,7 @@ function Notification() {
               </div>
               <div className={style.PaginationNoti}>
                 <Pagination
-                  title="Số sinh viên / Trang"
+                  title="Số thông báo / Trang"
                   paginations={paginations}
                   filter={filter}
                   setfilter={setfilter}

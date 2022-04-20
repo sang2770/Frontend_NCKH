@@ -124,7 +124,7 @@ const TableMoveData = ({ data, changeData, setChangeData }) => {
                   DropDownShow === index && style.Active_Form
                 )}
               >
-                <div className={style.InfoDetail_title}>Thông tin các lần cấp giấy xác nhận</div>
+                <div className={style.InfoDetail_title}>Thông tin các lần cấp giấy xác nhận di chuyển</div>
                 <TableMoveDetail
                   Content={<TableMoveDetailData data={ListNgaycap} />}
                   onClickHide = {ChangeDropDownHide}

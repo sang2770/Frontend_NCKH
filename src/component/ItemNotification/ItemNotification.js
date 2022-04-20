@@ -58,7 +58,14 @@ function ItemNotification({ data, datadelete, setDelete }){
 
     return (
         <div className={style.bodyNoti}>
-            {Loading && <LoadingEffect />}
+            {DropDown > -1 && (
+                <ShowNotification 
+                data={ContentNoti} 
+                onClickHide = {ChangeDropDownShowNoti}
+                datadelete = {datadelete}
+                setDelete = {setDelete}
+                />
+            )}
             {data.map((item, index) => (
             <React.Fragment key={index}>
                 <div className={clsx(style.Noti)}>
@@ -82,18 +89,6 @@ function ItemNotification({ data, datadelete, setDelete }){
                         }}>
                         <TiDeleteOutline/>
                     </div>
-                </div>
-                <div className={clsx(
-                    style.FormData,
-                    DropDown === index && style.Active_Form
-                    )}
-                >
-                    <ShowNotification 
-                        data={ContentNoti} 
-                        onClickHide = {ChangeDropDownShowNoti}
-                        datadelete = {datadelete}
-                        setDelete = {setDelete}
-                    />
                 </div>
             </React.Fragment>
             ))}
