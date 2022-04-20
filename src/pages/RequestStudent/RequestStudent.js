@@ -3,6 +3,7 @@ import HeaderTitle from "../../component/HeaderTitle/HeaderTitle";
 import style from "./Request.module.css";
 import { AiOutlineMessage } from "react-icons/ai";
 import { HiOutlineClipboardList } from "react-icons/hi";
+import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 import { DataContext } from "../../DataContext/DataContext";
 import TextBox from "../../component/TextBox/TextBox";
 import ComboBox from "../../component/ComboBox/ComboBox";
@@ -14,6 +15,7 @@ import useFilter from "../../Helper/Filter";
 import useAxios from "../../Helper/API";
 import LoadingEffect from "../../component/Loading/Loading";
 import queryString from "query-string";
+import clsx from "clsx";
 const tableHeaders = [
   "Mã sinh viên",
   "Họ và tên",
@@ -101,6 +103,10 @@ function RequestStudent() {
     MSV.current = useConfirmed.filter;
     ExportPape();
   };
+  const [ScaleHeight, setScaleHeight] = useState(false);
+  const ScaleForm = () => {
+    setScaleHeight(!ScaleHeight);
+  };
   return (
     <div className={style.Request_Student_Container}>
       <HeaderTitle Title="Yêu cầu của sinh viên" Icon={<AiOutlineMessage />} />
@@ -141,10 +147,11 @@ function RequestStudent() {
             />
           </div>
         </div>
-        <div className={style.DataList}>
+        <div className={clsx(style.DataList)}>
           {Loading && <LoadingEffect />}
           <Table
             headers={tableHeaders}
+            ScaleHeight={ScaleHeight}
             Content={
               <TableContent
                 TabelConfirm={true}
@@ -154,6 +161,17 @@ function RequestStudent() {
               />
             }
           />
+        </div>
+        <div className={style.ArrowShow}>
+          {!ScaleHeight ? (
+            <span onClick={ScaleForm}>
+              <RiArrowUpSLine />
+            </span>
+          ) : (
+            <span onClick={ScaleForm}>
+              <RiArrowDownSLine />
+            </span>
+          )}
         </div>
         <div className={style.GroupOption}>
           <Button content="Xác nhận tất cả" onClick={ConfirmAll} />
