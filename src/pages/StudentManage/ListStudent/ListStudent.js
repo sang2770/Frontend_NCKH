@@ -113,6 +113,20 @@ function ListStudent() {
           />
         </div>
         <div className={style.ListStudent_Filter_Item}>
+          <TextBox
+            title="Số đăng ký"
+            subtitle="SoDangKy"
+            Change={ChangeFilter}
+          />
+        </div>
+        <div className={style.ListStudent_Filter_Item}>
+          <TextBox
+            title="Ngày sinh (yy-mm-dd)"
+            subtitle="NgaySinh"
+            Change={ChangeFilter}
+          />
+        </div>
+        <div className={style.ListStudent_Filter_Item}>
           <TextBox title="Họ và tên" subtitle="HoTen" Change={ChangeFilter} />
         </div>
         <div className={style.ListStudent_Filter_Item}>
