@@ -66,7 +66,7 @@ function FormExportMove({ nameSV, msv, changeData, setChangeData, exit, url }) {
         }
         else{
             if(msv){
-                nameSV = nameSV;
+                nameSV = nameSV + "_" + msv;
                 url =  "/move-military-management/move-military?MaSinhVien=" + msv + "&NgayHH=" + filter.NgayHH + "&NamHH=" + filter.NamHH + "&ThangHH=" + filter.ThangHH;
             }else if(url){
                 url = url + "&NgayHH=" + filter.NgayHH + "&NamHH=" + filter.NamHH + "&ThangHH=" + filter.ThangHH;
