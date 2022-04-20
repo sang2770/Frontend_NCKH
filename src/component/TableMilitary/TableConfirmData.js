@@ -18,13 +18,15 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
   };
 
   const { Client } = useAxios();
-  
+
   const [Err, setErr] = useState(null);
 
   const [ListNgaycap, setListNgaycap] = useState([]);
 
   const list = (itemMSV) => {
-    Client.get("/move-military-local-management/show-time-move-military-local/" + itemMSV)//viet api
+    Client.get(
+      "/move-military-local-management/show-time-move-military-local/" + itemMSV
+    ) //viet api
       .then((response) => {
         const List = response.data;
         if (List.status === "Success") {
@@ -34,32 +36,36 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
       .catch((err) => {
         setErr(true);
       });
-    };
+  };
 
-    // Export
+  // Export
   const [MSV, setMSV] = useState();
 
   const changeMSV = (msv) => {
     setMSV(msv);
-  }
+  };
 
   const Export = async () => {
-    MSV && Client.get("/confirm-military-management/confirm-military-off?MaSinhVien=" + MSV, {
-      responseType: "blob",
-    })
-      .then((response) => {
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "GiayXacNhanNVQS.docx");
-        document.body.appendChild(link);
-        link.click();
-        alert("Đã xuất file");
-        setChangeData(!changeData);
-      })
-      .catch((err) => {
-        setErr(true);
-      });
+    MSV &&
+      Client.get(
+        "/confirm-military-management/confirm-military-off?MaSinhVien=" + MSV,
+        {
+          responseType: "blob",
+        }
+      )
+        .then((response) => {
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "GiayXacNhanNVQS.docx");
+          document.body.appendChild(link);
+          link.click();
+          alert("Đã xuất file");
+          setChangeData(!changeData);
+        })
+        .catch((err) => {
+          setErr(true);
+        });
   };
   return (
     <tbody>
@@ -67,16 +73,18 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
         <React.Fragment key={index}>
           <tr className={style.Table_Row}>
             <td className={clsx(style.Table_Column, style.stt)}>
-              <p
-                className={style.IconDropDown}
-                onClick={() => {
-                  ChangeDropDown(index)
-                  list(item.MaSinhVien)
-                }}
-              >
-                <IoIosArrowDown />
-              </p>
-              <span>{index + 1}</span>
+              <h3 className={style.Td_First}>
+                <p
+                  className={style.IconDropDown}
+                  onClick={() => {
+                    ChangeDropDown(index);
+                    list(item.MaSinhVien);
+                  }}
+                >
+                  <IoIosArrowDown />
+                </p>
+                <span>{index + 1}</span>
+              </h3>
             </td>
             <td className={style.Table_Column}>
               <span>{item.HoTen}</span>
@@ -97,13 +105,15 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
               <span>{item.Khoas}</span>
             </td>
             <td className={style.Table_Column}>
-              <label 
-                className={style.label} 
-                onClick = {() => {
+              <label
+                className={style.label}
+                onClick={() => {
                   changeMSV(item.MaSinhVien);
                   Export();
                 }}
-              >Cấp giấy</label>
+              >
+                Cấp giấy
+              </label>
             </td>
           </tr>
           <tr className={style.Table_Row}>
@@ -115,10 +125,12 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
                   DropDown === index && style.Active_Form
                 )}
               >
-                <div className={style.InfoDetail_title}>Thông tin các lần cấp giấy xác nhận</div>
+                <div className={style.InfoDetail_title}>
+                  Thông tin các lần cấp giấy xác nhận
+                </div>
                 <TableConfirmDetail
                   Content={<TableConfirmDetailData data={ListNgaycap} />}
-                  onClickHide = {ChangeDropDownHide}
+                  onClickHide={ChangeDropDownHide}
                 />
               </div>
             </td>

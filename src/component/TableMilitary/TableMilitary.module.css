@@ -8,9 +8,9 @@
 }
 
 /* ẩn thanh scroll */
-.Table_wrapper::-webkit-scrollbar { 
+.Table_wrapper::-webkit-scrollbar {
   width: 0 !important;
-  display: none; 
+  display: none;
 }
 
 .TableTemplate {
@@ -47,8 +47,10 @@ thead .Table_Header {
   /* word-break: break-all; */
 }
 
-.stt{
+.Td_First {
   display: flex;
+  font-weight: normal;
+  font-size: 1.3rem;
 }
 
 .IconDropDown {
@@ -79,51 +81,51 @@ thead .Table_Header {
   font-weight: 600;
   padding-bottom: 20px;
 }
-.InfoDetail_label{
+.InfoDetail_label {
   float: left;
   margin-right: 5px;
   color: blue;
   font-size: large;
 }
-.InfoDetail_label:hover{
+.InfoDetail_label:hover {
   cursor: pointer;
 }
 
-.label{
+.label {
   color: rgb(48, 48, 241);
   border-bottom: 1px solid blue;
 }
 
-.label:hover{
+.label:hover {
   color: rgb(48, 48, 241);
   border-bottom: 1px solid blue;
   cursor: pointer;
 }
 
 /* form update */
-.Form_main{
+.Form_main {
   display: block;
   font-size: 10px;
 }
 
 .Form_right,
-.Form_left{
+.Form_left {
   display: flex;
 }
 
 /* button */
-.Button_register{
+.Button_register {
   text-align: center;
   padding-top: 25px;
   padding-bottom: 20px;
 }
 
 /*  ElementForm*/
-.Element_form{
+.Element_form {
   display: block;
   padding-bottom: 20px;
 }
-.Element_form input{
+.Element_form input {
   outline: none;
   border: none;
   border-bottom: 1px solid black;
@@ -131,8 +133,7 @@ thead .Table_Header {
   color: rgb(158, 158, 245);
   margin-top: 10px;
 }
-.Element_form label{
+.Element_form label {
   font-size: 13px;
   padding-right: 15px;
 }
-
