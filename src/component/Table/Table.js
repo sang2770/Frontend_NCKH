@@ -1,10 +1,12 @@
 import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
 import style from "./Table.module.css";
-function Table({ headers, Content }) {
+function Table({ headers, Content, ScaleHeight }) {
   const TableElement = useRef(null);
   return (
-    <div className={style.Table_wrapper}>
+    <div
+      className={clsx(style.Table_wrapper, ScaleHeight && style.ScaleHeight)}
+    >
       <table className={style.TableTemplate} ref={TableElement}>
         <thead>
           <tr className={style.Table_Row}>

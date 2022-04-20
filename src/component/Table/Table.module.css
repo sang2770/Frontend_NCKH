@@ -6,7 +6,9 @@
   height: 400px;
   overflow-y: scroll;
 }
-
+.ScaleHeight {
+  height: 100px !important ;
+}
 /* ẩn thanh scroll */
 .Table_wrapper::-webkit-scrollbar {
   width: 0 !important;

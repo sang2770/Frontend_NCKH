@@ -38,3 +38,27 @@
   display: flex;
   align-items: center;
 }
+
+.ArrowShow {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 3rem;
+  position: relative;
+}
+.ArrowShow span {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: move 2s infinite;
+  cursor: pointer;
+}
+
+@keyframes move {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
