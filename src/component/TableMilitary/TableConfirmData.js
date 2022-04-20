@@ -38,6 +38,23 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
       });
   };
 
+  const [Name, setName] = useState();
+  const name = (itemMSV) => {
+    Client.get(
+      "/confirm-military-management/confirm-military-info/" + itemMSV
+    )
+      .then((response) => {
+        if (response.data.status === "Success") {
+          console.log(response.data.data);
+          setName(response.data.data);
+        }
+      })
+      .catch((err) => {
+        setErr(true);
+      });
+  };
+
+
   // Export
   const [MSV, setMSV] = useState();
 
@@ -57,7 +74,7 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement("a");
           link.href = url;
-          link.setAttribute("download", "GiayXacNhanNVQS.docx");
+          link.setAttribute("download", Name + "_" + MSV + ".docx");
           document.body.appendChild(link);
           link.click();
           alert("Đã xuất file");
@@ -109,6 +126,7 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
                 className={style.label}
                 onClick={() => {
                   changeMSV(item.MaSinhVien);
+                  name(item.MaSinhVien);
                   Export();
                 }}
               >
