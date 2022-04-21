@@ -22,13 +22,11 @@ function FormMilitaryUpdate({
   // update MoveLocal
     const FilterSoGT = useRef("");
     const FilterNgayCap = useRef("");
-    const FilterNgayHH = useRef("");
     const FilterNoiOHT = useRef("");
     const FilterNoiChuyenDen = useRef("");
     const FilterBanChiHuy = useRef("");
 
     const updateRegister = () => {
-    console.log(MSV);
 
       if( window.confirm("Bạn có muốn cập nhật giấy chứng nhận này không?") === true){
           Client.put("/move-military-local-management/update-move-military-local/" + MSV
@@ -36,7 +34,7 @@ function FormMilitaryUpdate({
           + "&NgayDangKy=" + FilterNgayDK.current.value + "&DiaChiThuongTru=" + FilterDiaChi.current.value 
           + "&NgayNop=" + FilterNgayNop.current.value + "&SoGioiThieu=" + FilterSoGT.current.value 
           + "&NgayCap=" + FilterNgayCap.current.value 
-          + "&NgayHH=" + FilterNgayHH.current.value + "&NoiOHienTai=" + FilterNoiOHT.current.value 
+          + "&NoiOHienTai=" + FilterNoiOHT.current.value 
           + "&NoiChuyenDen=" + FilterNoiChuyenDen.current.value + "&BanChiHuy=" + FilterBanChiHuy.current.value)
           .then((response) => {
           if (response.data.status === "Success updated") {
@@ -142,13 +140,10 @@ function FormMilitaryUpdate({
           <ElementForm data={data} title={titles[10]} subtitle={subtitles[10]} Ref={FilterNgayCap}/>
         </div>
         <div className={style.FormItemMove}>
-          <ElementForm data={data} title={titles[11]} subtitle={subtitles[11]} Ref={FilterNgayHH}/>
+          <ElementForm data={data} title={titles[11]} subtitle={subtitles[11]} Ref={FilterNoiOHT}/>
         </div>
         <div className={style.FormItemMove}>
-          <ElementForm data={data} title={titles[12]} subtitle={subtitles[12]} Ref={FilterNoiOHT}/>
-        </div>
-        <div className={style.FormItemMove}>
-          <ElementForm data={data} title={titles[13]} subtitle={subtitles[13]} Ref={FilterNoiChuyenDen}/>
+          <ElementForm data={data} title={titles[12]} subtitle={subtitles[12]} Ref={FilterNoiChuyenDen}/>
         </div>
       </div>
       <div className={style.Button_register}>

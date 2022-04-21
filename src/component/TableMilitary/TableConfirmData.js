@@ -53,7 +53,6 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
       });
   };
 
-
   // Export
   const [MSV, setMSV] = useState();
 

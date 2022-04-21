@@ -39,7 +39,6 @@ const titleForm = [
   "Số giới thiệu",
   "Ban chỉ huy",
   "Ngày cấp",
-  "Ngày hết hạn",
   "Nơi ở hiện tại",
   "Nơi chuyển đến",
 ];
@@ -55,7 +54,6 @@ const subtitles = [
   "SoGioiThieu",
   "BanChiHuy",
   "NgayCap",
-  "NgayHH",
   "NoiOHienTai",
   "NoiChuyenDen",
 ];
@@ -200,7 +198,7 @@ function RegisterMilitary() {
       }
     } catch (error) {
       alert("Mã sinh viên không tồn tại!\nVui lòng kiểm tra lại!");
-      // console.log(error);
+      console.log(error);
       // setErrAdd(Object.values(error.data.Err_Message));
     }
   };

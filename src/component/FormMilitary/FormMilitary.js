@@ -72,9 +72,6 @@ function FormMilitary({
         <div className={style.FormItemMove}>
           <ElementForm title={titles[12]} subtitle={subtitles[12]} />
         </div>
-        <div className={style.FormItemMove}>
-          <ElementForm title={titles[13]} subtitle={subtitles[13]} />
-        </div>
       </div>
       <div className={style.Button_register}>
         <Button content="Lưu" onClick={onClickSave} />
