@@ -1,0 +1,83 @@
+.ResetContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(204, 204, 204, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  font-size: 1.6rem;
+}
+
+.Content {
+  position: relative;
+  border-radius: 5px;
+  background-color: #fff;
+  width: 500px;
+  min-height: 300px;
+  max-width: 100%;
+  box-shadow: 2px 2px 2px #ccc;
+  padding: 10px;
+  animation: Show 0.4s ease-in;
+}
+@keyframes Show {
+  from {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.Content_Title {
+  color: var(--Main-color);
+  font-weight: bold;
+  margin-top: 20px;
+}
+.Input_Group {
+  padding: 10px 0px;
+}
+.Input_Item {
+  margin: 10px 0px;
+}
+.Input_Item label {
+  min-width: 150px;
+  display: inline-block;
+}
+.Input_Item input {
+  padding: 5px;
+}
+.Btn_Create {
+  padding: 10px 20px;
+  background-color: var(--Main-color);
+  border: none;
+  outline: none;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.Btn_Create:hover {
+  opacity: 0.8;
+}
+
+.Input_Err {
+  color: red;
+}
+.exitIcon {
+  border: 1px solid var(--Main-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 20px;
+  color: var(--Main-color);
+  top: 20px;
+  border-radius: 100%;
+  padding: 5px;
+  cursor: pointer;
+}

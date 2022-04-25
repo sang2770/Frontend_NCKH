@@ -198,7 +198,15 @@
   width: 0 !important;
   display: none;
 }
-
+.User_Option {
+  display: flex;
+}
+.Line_User_Option {
+  margin: 0px 5px;
+}
+.Header_changePass {
+  cursor: pointer;
+}
 .Header_logout {
   text-align: right;
   cursor: pointer;

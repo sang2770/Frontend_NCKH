@@ -17,13 +17,12 @@ import {
 } from "react-icons/bs";
 import {
   HiOutlineDocument,
-  HiOutlineViewGridAdd,
   HiUserAdd,
   HiOutlineNewspaper,
 } from "react-icons/hi";
+import { RiMenuAddLine, RiUserSettingsFill } from "react-icons/ri";
 import { TiUserAddOutline } from "react-icons/ti";
 import { BiCommentAdd } from "react-icons/bi";
-import { RiUserSettingsFill } from "react-icons/ri";
 import { IoIosPaper } from "react-icons/io";
 import clsx from "clsx";
 import "./Main.css";
@@ -46,6 +45,7 @@ import AddInformation from "../../pages/AddInformation/AddInformation";
 import ExportConfirmMilitary from "../../pages/Analyst/ExportConfirmMilitary/ExportConfirmMilitary";
 import ExportMoveMilitary from "../../pages/Analyst/ExportMoveMilitary/ExportMoveMilitary";
 import AddInfomationCommander from "../../pages/AddInformation/AddInfomationCommander";
+import ResetPass from "../ResetPass/ResetPass";
 
 function Main() {
   const [clickMenu, setclickMenu] = useState(false);
@@ -104,10 +104,11 @@ function Main() {
       setActiveSub(locate.slice(1, locate.length));
     }
   }, []);
-
+  const [OpenReset, setOpenReset] = useState(false);
   return (
     <React.Fragment>
       <div className="Main_container">
+        {OpenReset && <ResetPass setOpenReset={setOpenReset} />}
         <div className={clsx("Main_SideBar", clickMenu && "HiddenSideBar")}>
           <div className="Main_SideBar_LogoBar">
             <img src={Logo} alt="Logobar" className="LogoBar_Logo" />
@@ -452,7 +453,7 @@ function Main() {
                   ActiveSub === "AddInfomation" && "ActiveItem"
                 )}
               >
-                <BsPersonCircle />
+                <RiMenuAddLine />
                 <span className="Item_content">Thêm thông tin</span>
               </p>
               <ul className="SideBar_MenuChild">
@@ -507,9 +508,20 @@ function Main() {
                 <div className="Header_user_container">
                   <div className="user_container_context">
                     {user.TenDangNhap}
-                    <p className="Header_logout" onClick={Out}>
-                      Logout
-                    </p>
+                    <div className="User_Option">
+                      <p
+                        className="Header_changePass"
+                        onClick={() => {
+                          setOpenReset(!OpenReset);
+                        }}
+                      >
+                        Đổi mật khẩu
+                      </p>
+                      <p className="Line_User_Option">|</p>
+                      <p className="Header_logout" onClick={Out}>
+                        Logout
+                      </p>
+                    </div>
                   </div>
                   <img src={Avatar} alt="Avatar" className="AvatarUser" />
                 </div>
