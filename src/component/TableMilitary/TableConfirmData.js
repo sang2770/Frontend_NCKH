@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import style from "./TableMilitary.module.css";
 import TableConfirmDetail from "../TableConfirmDetail/TableConfirmDetail";
@@ -38,32 +38,16 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
       });
   };
 
-  const [Name, setName] = useState();
-  const name = (itemMSV) => {
-    Client.get(
-      "/confirm-military-management/confirm-military-info/" + itemMSV
-    )
-      .then((response) => {
-        if (response.data.status === "Success") {
-          setName(response.data.data);
-        }
-      })
-      .catch((err) => {
-        setErr(true);
-      });
-  };
-
+  const Info = useRef({
+    MaSinhVien: null,
+    HoTen: null,
+  });
   // Export
-  const [MSV, setMSV] = useState();
-
-  const changeMSV = (msv) => {
-    setMSV(msv);
-  };
-
   const Export = async () => {
-    MSV &&
+    Info.current.MaSinhVien &&
       Client.get(
-        "/confirm-military-management/confirm-military-off?MaSinhVien=" + MSV,
+        "/confirm-military-management/confirm-military-off?MaSinhVien=" +
+          Info.current.MaSinhVien,
         {
           responseType: "blob",
         }
@@ -72,7 +56,10 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement("a");
           link.href = url;
-          link.setAttribute("download", Name + "_" + MSV + ".docx");
+          link.setAttribute(
+            "download",
+            Info.current.HoTen + "_" + Info.current.MaSinhVien + ".docx"
+          );
           document.body.appendChild(link);
           link.click();
           alert("Đã xuất file");
@@ -123,8 +110,8 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
               <label
                 className={style.label}
                 onClick={() => {
-                  changeMSV(item.MaSinhVien);
-                  name(item.MaSinhVien);
+                  Info.current.MaSinhVien = item.MaSinhVien;
+                  Info.current.HoTen = item.HoTen;
                   Export();
                 }}
               >
