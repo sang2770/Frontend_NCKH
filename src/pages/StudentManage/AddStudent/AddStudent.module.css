@@ -1,5 +1,6 @@
 .AddStudent_container {
   position: relative;
+  height: 100%;
 }
 .AddStudent_Tab {
   display: flex;

@@ -91,7 +91,7 @@ function ListStudent() {
         link.setAttribute("download", `DanhSachSinhVien.xlsx`); //or any other extension
         document.body.appendChild(link);
         link.click();
-        alert("Đã xuất file");
+        // alert("Đã xuất file");
       })
       .catch((err) => {
         // if (err.Auth) {
