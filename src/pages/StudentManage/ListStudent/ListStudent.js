@@ -12,6 +12,7 @@ import queryString from "query-string";
 import { DataContext } from "../../../DataContext/DataContext";
 import useAxios from "../../../Helper/API";
 import LoadingEffect from "../../../component/Loading/Loading";
+import { FormatDate, FormatInput } from "../../../Helper/Date";
 const tableHeaders = ["Mã sinh viên", "Họ và tên", "Lớp", "Khoa"];
 function ListStudent() {
   const { Client, Loading } = useAxios();
@@ -74,7 +75,11 @@ function ListStudent() {
       const name = input.name;
       // console.log(input.name);
 
-      setfilter({ ...filter, [name]: input.value, page: 1 });
+      setfilter({
+        ...filter,
+        [name]: name === "NgaySinh" ? FormatInput(input.value) : input.value,
+        page: 1,
+      });
     }, 300);
   };
   // console.log(filter);
@@ -94,9 +99,6 @@ function ListStudent() {
         // alert("Đã xuất file");
       })
       .catch((err) => {
-        // if (err.Auth) {
-        //   logout(dispatch);
-        // }
         setErr(true);
       });
   };
@@ -121,7 +123,7 @@ function ListStudent() {
         </div>
         <div className={style.ListStudent_Filter_Item}>
           <TextBox
-            title="Ngày sinh (yy-mm-dd)"
+            title="Ngày sinh (dd-mm-yy)"
             subtitle="NgaySinh"
             Change={ChangeFilter}
           />

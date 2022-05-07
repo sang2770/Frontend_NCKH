@@ -5,6 +5,7 @@ import { BiExit } from "react-icons/bi";
 import clsx from "clsx";
 import useAxios from "../../Helper/API";
 import LoadingEffect from "../Loading/Loading";
+import { FormatInput } from "../../Helper/Date";
 function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
   const [Tab, setTab] = useState(1);
   const ChangeTab = (id) => {
@@ -16,6 +17,8 @@ function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
   const SumitUpdate = (form, ResetForm) => {
     form.delete("MaSinhVien");
     form.append("_method", "PATCH");
+    form.set("NgaySinh", FormatInput(form.get("NgaySinh")));
+    form.set("NgayCapCMTND", FormatInput(form.get("NgayCapCMTND")));
     Client.post("/student-management/user/" + DataStudent.MaSinhVien, form, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -48,13 +51,10 @@ function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
       date.getHours() +
       ":" +
       date.getMinutes() +
-      ":" +
-      date.getSeconds() +
-      "-" +
+      " " +
       date.getDate() +
       "/" +
-      date.getMonth() +
-      1 +
+      (date.getMonth() + 1) +
       "/" +
       date.getFullYear()
     );

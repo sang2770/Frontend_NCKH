@@ -2,8 +2,10 @@ import React from "react";
 import Button from "../Button/Button";
 import styles from "./Input.module.css";
 import { BiExit } from "react-icons/bi";
+import ComboBox from "../ComboBox/ComboBox";
+import { FormatInput } from "../../Helper/Date";
 
-function Input({ content, submit, setOpenSKQ, FormValue }) {
+function Input({ content, submit, setOpenSKQ, FormValue, status, Lop }) {
   const SubmitForm = (e) => {
     e.preventDefault();
     const FormQD = new FormData(e.target);
@@ -14,7 +16,11 @@ function Input({ content, submit, setOpenSKQ, FormValue }) {
       alert("Bạn phải nhập dữ liệu");
       return;
     } else {
-      submit(FormQD.get("SoQuyetDinh"), FormQD.get("NgayQuyetDinh"));
+      submit(
+        FormQD.get("SoQuyetDinh"),
+        FormatInput(FormQD.get("NgayQuyetDinh")),
+        FormQD.get("TenLop")
+      );
       setOpenSKQ(false);
     }
   };
@@ -47,11 +53,12 @@ function Input({ content, submit, setOpenSKQ, FormValue }) {
               id="NQD"
               type="text"
               name="NgayQuyetDinh"
-              placeholder="YY-MM-DD"
+              placeholder="dd-mm-yy"
               required
             />
           </div>
-          <Button content="Cập nhật" />
+          {status ? <ComboBox title="Tên lớp" id="TenLop" items={Lop} /> : ""}
+          <Button content="Cập nhật" styles={{ marginTop: "10px" }} />
         </form>
       </div>
     </div>
