@@ -17,8 +17,15 @@
 .Search_button {
   display: flex;
 }
+.Search_button2 {
+  display: flex;
+  margin-top: 20px;
+}
 .Search_Item {
   width: calc(100% / 4);
+}
+.Search_ItemInput{
+  width: calc(100% / 5);
 }
 .Result_search {
   outline: #ccc;

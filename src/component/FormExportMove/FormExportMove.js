@@ -35,7 +35,7 @@ function FormExportMove({ nameSV, msv, changeData, setChangeData, exit, url }) {
     };
 
     useEffect(() => {
-        const max = 100;
+        const max = 5;
         const CurrentYear = new Date().getFullYear();
         const year = [];
         for (let i = 0; i < max; i++) {

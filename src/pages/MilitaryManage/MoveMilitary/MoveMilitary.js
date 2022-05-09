@@ -8,11 +8,11 @@ import Pagination from "../../../component/Pagination/Pagination";
 import useAxios from "../../../Helper/API";
 import queryString from "query-string";
 import { DataContext } from "../../../DataContext/DataContext";
-import Search from "../../../component/Search/Search";
 import TableMilitary from "../../../component/TableMilitary/TableMilitary";
 import TableMoveData from "../../../component/TableMilitary/TableMoveData";
 import LoadingEffect from "../../../component/Loading/Loading";
 import FormExportMove from "../../../component/FormExportMove/FormExportMove";
+import ComponentSearch from "../../../component/Search/Search";
 
 const tableHeaders = [
   "Họ và tên",
@@ -32,7 +32,7 @@ function MoveMilitary() {
 
   const [Err, setErr] = useState(null);
 
-  const TrangThai = ["Đã tốt nghiệp", "Đã thôi học", "Bảo lưu"];
+  const TrangThai = ["Đã tốt nghiệp", "Thôi học", "Bảo lưu"];
   const { Lop, Khoa, Khoas } = useContext(DataContext);
 
   const [paginations, setPaginations] = useState({
@@ -45,67 +45,36 @@ function MoveMilitary() {
     page: 1,
   });
 
-  // Search
-  const [FilterKhoa, setFilterKhoa] = useState("");
-  const [FilterKhoas, setFilterKhoas] = useState("");
-  const [FilterLop, setFilterLop] = useState("");
-  const [FilterTrangThai, setFilterTrangThai] = useState("");
-  const [FilterTinhTrang, setFilterTinhTrang] = useState("");
-  const FilterMSV = useRef("");
-  const [MoveMilitary, setMoveMilitary] = useState([]);
+  const [DateFilter, setDate] = useState({
+    Year: [],
+  });
 
-  const changeKhoa = (event) => {
-    setFilterKhoa(event.target.value);
-  };
-  const changeKhoas = (event) => {
-    setFilterKhoas(event.target.value);
-  };
-  const changeLop = (event) => {
-    setFilterLop(event.target.value);
-  };
-  const changeTrangThai = (event) => {
-    setFilterTrangThai(event.target.value);
-  };
-  const changeTinhTrang = (event) => {
-    setFilterTinhTrang(event.target.value);
-  };
+  useEffect(() => {
+    const max = 5;
+    const CurrentYear = new Date().getFullYear();
+    const year = [];
+    for (let i = 0; i < max; i++) {
+      year.push(CurrentYear - i);
+    }
+    setDate({ ...DateFilter, Year: year });
+  }, []);
 
-  const onSearch = () => {
-    if (
-      FilterKhoa === "" &&
-      FilterKhoas === "" &&
-      FilterLop === "" &&
-      FilterMSV.current.value === "" &&
-      FilterTrangThai === ""
-    ) {
-      alert(
-        "Bạn cần chọn khoa, khóa, lớp, trạng thái sinh viên hoặc mã sinh viên để thực hiện tìm kiếm"
-      );
-    } else {
-      Client.get(
-        "/register-military-management/filter-info-move?MaSinhVien=" +
-          FilterMSV.current.value +
-          "&TenLop=" +
-          FilterLop +
-          "&Khoas=" +
-          FilterKhoas +
-          "&TenKhoa=" +
-          FilterKhoa +
-          "&TinhTrangSinhVien=" +
-          FilterTrangThai,
-      )
-      .then((res) => {
-        if (res.data.status === "Success") {
-          setMoveMilitary(res.data.data);
-        } else {
-          setErr(res.data.Err_Message);
+  const [SoQuyetDinh, setSoQuyetDinh] = useState([]);
+
+  useEffect(() => {
+    Client.get("/move-military-management/list-decision-number")
+      .then((response) => {
+        const listSQD = response.data;
+        if (listSQD.status === "Success") {
+          setSoQuyetDinh(listSQD.data);
         }
       })
       .catch((err) => {
-        setErr("Not Found!");
+        console.log(err);
       });
-    }
-  };
+  }, []);
+
+  const [MoveMilitary, setMoveMilitary] = useState([]);
 
   const CallAPI = () => {
     const params = queryString.stringify(filter);
@@ -123,6 +92,7 @@ function MoveMilitary() {
         setErr(true);
       });
   };
+
   const [changeData, setChangeData] = useState(false);
   useEffect(() => {
     CallAPI();
@@ -145,16 +115,19 @@ function MoveMilitary() {
     }, 300);
   };
 
-  const url = "/move-military-management/move-military?MaSinhVien=" +
-    FilterMSV.current.value +
-    "&TenLop=" +
-    FilterLop +
-    "&Khoas=" +
-    FilterKhoas +
-    "&TenKhoa=" +
-    FilterKhoa +
-    "&TinhTrangSinhVien=" +
-    FilterTrangThai;
+  const ChangeFilter = (e) => {
+    if (Time.current) {
+      clearTimeout(Time.current);
+    }
+    Time.current = setTimeout(() => {
+      const input = e.target;
+      const name = input.name;
+      setfilter({ ...filter, [name]: input.value, page: 1 });
+    }, 300);
+  };
+
+  const params = queryString.stringify(filter); 
+  const url = "/move-military-management/move-military?" + params;
 
   const [DropDown, setDropDown] = useState(-1);
   const ChangeDropDown = (id) => {
@@ -165,7 +138,6 @@ function MoveMilitary() {
     <React.Fragment>
       {DropDown > -1 && (
         <FormExportMove
-         FilterLop = {FilterLop}
           url = {url}
           changeData={changeData}
           setChangeData={setChangeData}
@@ -188,38 +160,62 @@ function MoveMilitary() {
             <div className={style.Search_button}>
               <div className={style.Search_Item}>
                 <ComboBox
-                  id={FilterKhoa}
+                  id="NgayQuyetDinh"
+                  title="Năm"
+                  items={DateFilter.Year}
+                  Change={ChangeFilter}
+                />
+              </div>
+              <div className={style.Search_Item}>
+                <ComboBox
+                  id="TenKhoa"
                   title="Khoa"
                   items={Khoa}
-                  Change={changeKhoa}
+                  Change={ChangeFilter}
                 />
               </div>
               <div className={style.Search_Item}>
                 <ComboBox
-                  id={FilterKhoas}
+                  id="Khoas"
                   title="Khóa"
                   items={Khoas}
-                  Change={changeKhoas}
+                  Change={ChangeFilter}
                 />
               </div>
               <div className={style.Search_Item}>
                 <ComboBox
-                  id={FilterLop}
+                  id="TenLop"
                   title="Lớp"
                   items={Lop}
-                  Change={changeLop}
-                />
-              </div>
-              <div className={style.Search_Item}>
-                <ComboBox
-                  id={FilterTrangThai}
-                  title="Trạng thái"
-                  items={TrangThai}
-                  Change={changeTrangThai}
+                  Change={ChangeFilter}
                 />
               </div>
             </div>
-            <Search onClickSearch={onSearch} Ref={FilterMSV} />
+            <div className={style.Search_button2}>
+              <div className={style.Search_Item}>
+                <ComboBox
+                  id="SoQuyetDinh"
+                  title="Số quyết định"
+                  items={SoQuyetDinh}
+                  Change={ChangeFilter}
+                />
+              </div>
+              <div className={style.Search_Item}>
+                <ComboBox
+                  id="TinhTrangSinhVien"
+                  title="Trạng thái"
+                  items={TrangThai}
+                  Change={ChangeFilter}
+                />
+              </div>
+              <div className={style.Search_ItemInput}>
+                <ComponentSearch
+                  subtitle="MaSinhVien" 
+                  Change={ChangeFilter} 
+                  title="Mã sinh viên"
+                />
+              </div>
+            </div>
             <div className={style.Result_search}>
               <h2>Kết Quả Tìm Kiếm</h2>
             </div>
