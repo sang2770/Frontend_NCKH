@@ -11,7 +11,9 @@ function ComboBox({ id, items, title, data, Change }) {
         name={id}
         className={style.ComboBox_Container}
         id={id}
-        defaultValue={data ? data[id] : ""}
+        defaultValue={
+          data ? data[id] : id === "TinhTrangSinhVien" ? "Đang học" : ""
+        }
       >
         <option value={""}>----{title}----</option>
         {items

@@ -25,7 +25,7 @@ function FormUpdate({ Open, setData, DataStudent, FindHistory, History }) {
       },
     })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.status === "Success") {
           alert("Bạn đã cập nhật thành công!");
           setErrUpdate(null);

@@ -6,6 +6,7 @@ import ComboBox from "../ComboBox/ComboBox";
 import { FormatInput } from "../../Helper/Date";
 
 function Input({ content, submit, setOpenSKQ, FormValue, status, Lop }) {
+  // console.log(status);
   const SubmitForm = (e) => {
     e.preventDefault();
     const FormQD = new FormData(e.target);

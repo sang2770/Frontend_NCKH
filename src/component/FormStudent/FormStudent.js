@@ -22,22 +22,14 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
         alert("Sinh viên này đã không còn quản lý");
         return;
       }
-      console.log(FormInput.get("TinhTrangSinhVien"));
-      console.log(data.TinhTrangSinhVien);
-      if (
-        FormInput.get("TinhTrangSinhVien") !== "Đang học" ||
-        (data.TinhTrangSinhVien === "Bảo lưu" &&
-          FormInput.get("TinhTrangSinhVien") === "Đang học")
-      ) {
-        if (
-          data.TinhTrangSinhVien.toUpperCase() === "Bảo lưu".toLocaleUpperCase()
-        ) {
-          Status.current = true;
-        }
+      if (FormInput.get("TinhTrangSinhVien") !== "Đang học") {
         setOpenSKQ(true);
-      } else {
-        // Status.current = false;
-        // Submit(FormInput, ResetForm);
+      } else if (
+        data.TinhTrangSinhVien === "Bảo lưu" &&
+        FormInput.get("TinhTrangSinhVien") === "Đang học"
+      ) {
+        Status.current = true;
+        setOpenSKQ(true);
       }
     } else {
       Submit(FormInput, ResetForm);
