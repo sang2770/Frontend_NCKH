@@ -7,13 +7,15 @@ import FormStudent from "../../../component/FormStudent/FormStudent";
 import Button from "../../../component/Button/Button";
 import useAxios from "../../../Helper/API";
 import FileTemplate from "../../../component/FileTemplate/FileTemplate";
+import { FormatInput } from "../../../Helper/Date";
 import LoadingEffect from "../../../component/Loading/Loading";
 function AddStudent() {
   const [Tab, setTab] = useState(1);
   const [ErrAdd, setErrAdd] = useState();
   const { Client, Loading } = useAxios();
   const Submit = async (form, ResetForm) => {
-    // console.log(form);
+    form.set("NgaySinh", FormatInput(form.get("NgaySinh")));
+    form.set("NgayCapCMTND", FormatInput(form.get("NgayCapCMTND")));
     try {
       const result = await Client.post("/student-management/user", form, {
         headers: {
@@ -63,8 +65,6 @@ function AddStudent() {
       }
     } catch (error) {
       alert("Có lỗi");
-      // console.log(error);
-      // setErrImport([error.message]);
     }
     e.target.reset();
   };

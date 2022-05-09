@@ -8,19 +8,36 @@ import Input from "../InputSQD/Input";
 
 function FormStudent({ Read, data, contentBtn, Submit }) {
   const Form = useRef();
+  const Status = useRef();
   const [OpenSKQ, setOpenSKQ] = useState(false);
   const SubmitForm = (e) => {
     e.preventDefault();
     const FormInput = new FormData(Form.current);
     if (data) {
-      if (!data.TinhTrangSinhVien.includes("Đang học")) {
+      if (
+        data.TinhTrangSinhVien.toUpperCase() ===
+          "Đã tốt nghiệp".toUpperCase() ||
+        data.TinhTrangSinhVien.toUpperCase() === "Thôi học".toUpperCase()
+      ) {
         alert("Sinh viên này đã không còn quản lý");
         return;
       }
-      if (FormInput.get("TinhTrangSinhVien") !== "Đang học") {
+      console.log(FormInput.get("TinhTrangSinhVien"));
+      console.log(data.TinhTrangSinhVien);
+      if (
+        FormInput.get("TinhTrangSinhVien") !== "Đang học" ||
+        (data.TinhTrangSinhVien === "Bảo lưu" &&
+          FormInput.get("TinhTrangSinhVien") === "Đang học")
+      ) {
+        if (
+          data.TinhTrangSinhVien.toUpperCase() === "Bảo lưu".toLocaleUpperCase()
+        ) {
+          Status.current = true;
+        }
         setOpenSKQ(true);
       } else {
-        Submit(FormInput, ResetForm);
+        // Status.current = false;
+        // Submit(FormInput, ResetForm);
       }
     } else {
       Submit(FormInput, ResetForm);
@@ -34,15 +51,20 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
     <React.Fragment>
       {OpenSKQ && (
         <Input
-          submit={(SoQuyetDinh, NgayQuyetDinh) => {
+          submit={(SoQuyetDinh, NgayQuyetDinh, TenLop) => {
             const FormInput = new FormData(Form.current);
             FormInput.append("SoQuyetDinh", SoQuyetDinh);
             FormInput.append("NgayQuyetDinh", NgayQuyetDinh);
+            if (TenLop) {
+              FormInput.set("TenLop", TenLop);
+            }
             Submit(FormInput, ResetForm);
           }}
           FormValue={Form.current}
           setOpenSKQ={setOpenSKQ}
           content="Bạn vừa thay đổi trạng thái sinh viên vui lòng nhập mã số quyết định"
+          status={Status.current}
+          Lop={Lop}
         />
       )}
       <form
