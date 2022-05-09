@@ -75,6 +75,20 @@ function RegisterMilitary() {
     page: 1,
   });
 
+  const [DateFilter, setDate] = useState({
+    Year: [],
+  });
+
+  useEffect(() => {
+    const max = 5;
+    const CurrentYear = new Date().getFullYear();
+    const year = [];
+    for (let i = 0; i < max; i++) {
+      year.push(CurrentYear - i);
+    }
+    setDate({ ...DateFilter, Year: year });
+  }, []);
+
   const [radioRegister, setRadioRegister] = useState(true);
   const [radioMoveLocal, setRadioMoveLocal] = useState(false);
 
@@ -87,56 +101,7 @@ function RegisterMilitary() {
     setRadioMoveLocal(true);
   };
 
-  // Search
-  const [FilterKhoa, setFilterKhoa] = useState("");
-  const [FilterKhoas, setFilterKhoas] = useState("");
-  const [FilterLop, setFilterLop] = useState("");
-  const FilterMSV = useRef("");
   const [RegisterMilitary, setRegisterMilitary] = useState([]);
-
-  const changeKhoa = (event) => {
-    setFilterKhoa(event.target.value);
-  };
-  const changeKhoas = (event) => {
-    setFilterKhoas(event.target.value);
-  };
-  const changeLop = (event) => {
-    setFilterLop(event.target.value);
-  };
-
-  const Search = () => {
-    if (
-      FilterKhoa === "" &&
-      FilterKhoas === "" &&
-      FilterLop === "" &&
-      FilterMSV.current.value === ""
-    ) {
-      alert(
-        "Bạn cần chọn khoa, hoặc khóa, hoặc lớp, hoặc mã sinh viên để thực hiện tìm kiếm"
-      );
-    } else {
-      Client.get(
-        "/register-military-management/filter-info-register?MaSinhVien=" +
-          FilterMSV.current.value +
-          "&TenLop=" +
-          FilterLop +
-          "&Khoas=" +
-          FilterKhoas +
-          "&TenKhoa=" +
-          FilterKhoa
-      )
-        .then((res) => {
-          if (res.data.status === "Success") {
-            setRegisterMilitary(res.data.data);
-          } else {
-            setErr(res.data.Err_Message);
-          }
-        })
-        .catch((err) => {
-          setErr("Not Found!");
-        });
-    }
-  };
 
   const CallAPI = () => {
     const params = queryString.stringify(filter);
@@ -152,6 +117,7 @@ function RegisterMilitary() {
         setErr(true);
       });
   };
+
   useEffect(() => {
     CallAPI();
     const Load = setInterval(() => {
@@ -170,6 +136,17 @@ function RegisterMilitary() {
     }
     Time.current = setTimeout(() => {
       setfilter({ ...filter, limit: input.value });
+    }, 300);
+  };
+
+  const ChangeFilter = (e) => {
+    if (Time.current) {
+      clearTimeout(Time.current);
+    }
+    Time.current = setTimeout(() => {
+      const input = e.target;
+      const name = input.name;
+      setfilter({ ...filter, [name]: input.value, page: 1 });
     }, 300);
   };
 
@@ -423,29 +400,41 @@ function RegisterMilitary() {
               <div className={Style.cmbSearch}>
                 <div className={Style.cmbSearch_Item}>
                   <ComboBox
-                    id={FilterKhoa}
+                    id="NgayNop"
+                    title="Năm"
+                    items={DateFilter.Year}
+                    Change={ChangeFilter}
+                  />
+                </div>
+                <div className={Style.cmbSearch_Item}>
+                  <ComboBox
+                    id="TenKhoa"
                     title="Khoa"
                     items={Khoa}
-                    Change={changeKhoa}
+                    Change={ChangeFilter}
                   />
                 </div>
                 <div className={Style.cmbSearch_Item}>
                   <ComboBox
-                    id={FilterKhoas}
+                    id="Khoas"
                     title="Khóa"
                     items={Khoas}
-                    Change={changeKhoas}
+                    Change={ChangeFilter}
                   />
                 </div>
                 <div className={Style.cmbSearch_Item}>
                   <ComboBox
-                    id={FilterLop}
+                    id="TenLop"
                     title="Lớp"
                     items={Lop}
-                    Change={changeLop}
+                    Change={ChangeFilter}
                   />
                 </div>
-                <ComponentSearch onClickSearch={Search} Ref={FilterMSV} />
+                <ComponentSearch 
+                  subtitle="MaSinhVien" 
+                  Change={ChangeFilter} 
+                  title="Mã sinh viên"
+                />
               </div>
             </div>
             <div className={Style.Result_search}>

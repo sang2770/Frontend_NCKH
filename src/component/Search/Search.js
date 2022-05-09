@@ -1,16 +1,22 @@
 import React from "react";
 import style from "./Search.module.css";
-import { BsSearch } from  "react-icons/bs";
 
-function Search({ onClickSearch, Ref }) {
+function Search({ subtitle, Read, Change, title }) {
   return (
     <div className={style.Search_input}>
-        <input placeholder="Nhập vào mã sinh viên" ref={Ref}></input>
-        <button
-            className={style.icon_search}
-            onClick={onClickSearch}
-        ><BsSearch/>
-        </button>
+        <label>
+          {title}:
+        </label>
+        <input 
+          placeholder="Nhập vào mã sinh viên" 
+          readOnly={Read}
+          id={subtitle}
+          type="text"
+          name={subtitle}
+          onChange={Change}
+          required
+        >
+        </input>
     </div>
   );
 }

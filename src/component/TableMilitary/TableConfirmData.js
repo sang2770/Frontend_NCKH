@@ -67,6 +67,7 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
         })
         .catch((err) => {
           setErr(true);
+          alert("Vui lòng thêm thông tin của chỉ huy trưởng!");
         });
   };
   return (
