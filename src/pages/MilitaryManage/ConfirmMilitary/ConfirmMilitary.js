@@ -22,6 +22,7 @@ const tableHeaders = [
   "Lớp",
   "Khoa",
   "Khóa",
+  "SL",
   "Xác nhận",
 ];
 
@@ -109,26 +110,23 @@ function ConfirmMilitary() {
   // Export
   const Export = async () => {
     const params = queryString.stringify(filter);
-    Client.get(
-      "/confirm-military-management/confirm-military-off?" + params,
-      {
-        responseType: "blob",
-      }
-    )
-    .then((response) => {
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "DanhSachGiayXacNhanNVQS.docx");
-      document.body.appendChild(link);
-      link.click();
-      alert("Đã xuất file");
-      setChangeData(!changeData);
+    Client.get("/confirm-military-management/confirm-military-off?" + params, {
+      responseType: "blob",
     })
-    .catch((err) => {
-      setErr(true);
-      alert("Vui lòng thêm thông tin Chỉ huy trưởng!");
-    });
+      .then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "DanhSachGiayXacNhanNVQS.docx");
+        document.body.appendChild(link);
+        link.click();
+        alert("Đã xuất file");
+        setChangeData(!changeData);
+      })
+      .catch((err) => {
+        setErr(true);
+        alert("Vui lòng thêm thông tin Chỉ huy trưởng!");
+      });
   };
 
   return (
@@ -178,9 +176,9 @@ function ConfirmMilitary() {
                     Change={ChangeFilter}
                   />
                 </div>
-                <ComponentSearch 
-                  subtitle="MaSinhVien" 
-                  Change={ChangeFilter} 
+                <ComponentSearch
+                  subtitle="MaSinhVien"
+                  Change={ChangeFilter}
                   title="Mã sinh viên"
                 />
               </div>

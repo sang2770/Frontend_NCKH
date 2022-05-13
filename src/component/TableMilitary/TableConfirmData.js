@@ -108,6 +108,9 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
               <span>{item.Khoas}</span>
             </td>
             <td className={style.Table_Column}>
+              <span>{item.total}</span>
+            </td>
+            <td className={style.Table_Column}>
               <label
                 className={style.label}
                 onClick={() => {
