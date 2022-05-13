@@ -24,6 +24,7 @@ const tableHeaders = [
   "Trạng thái",
   "Số QĐ",
   "Ngày quyết định",
+  "Số lần cấp",
   "Xác nhận",
 ];
 

@@ -125,6 +125,9 @@ const TableMoveData = ({ data, changeData, setChangeData }) => {
                 <span>{FormatInput(item.NgayQuyetDinh)}</span>
               </td>
               <td className={style.Table_Column}>
+                <span>{item.total}</span>
+              </td>
+              <td className={style.Table_Column}>
                 <label
                   className={style.label}
                   onClick={() => {
