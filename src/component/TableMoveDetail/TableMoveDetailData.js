@@ -1,5 +1,6 @@
 import React from "react";
 import style from "../TableConfirmDetail/TableConfirmDetail.module.css";
+import { FormatDate, FormatInput } from "../../Helper/Date";
 
 const TableMoveDetailData = ({ data }) => {
 
@@ -12,10 +13,10 @@ const TableMoveDetailData = ({ data }) => {
               <span>{index + 1}</span>
             </td>
             <td className={style.Table_Column}>
-              <span>{item.NgayCap}</span>
+              <span>{FormatInput(item.NgayCap)}</span>
             </td>
             <td className={style.Table_Column}>
-              <span>{item.NgayHH}</span>
+              <span>{FormatInput(item.NgayHH)}</span>
             </td>
             <td className={style.Table_Column}>
               <span>{item.NoiChuyenVe}</span>

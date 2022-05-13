@@ -7,7 +7,7 @@ const FormatDate = (date) => {
 
 const FormatInput = (date) => {
   const data = date.split("-");
-  console.log(data);
+  //console.log(data);
   return data[2] + "-" + data[1] + "-" + data[0];
 };
 export { FormatDate, FormatInput };

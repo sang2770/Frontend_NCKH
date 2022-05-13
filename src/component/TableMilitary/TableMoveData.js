@@ -6,6 +6,7 @@ import TableMoveDetail from "../TableMoveDetail/TableMoveDetail";
 import TableMoveDetailData from "../TableMoveDetail/TableMoveDetailData";
 import useAxios from "../../Helper/API";
 import clsx from "clsx";
+import { FormatDate, FormatInput } from "../../Helper/Date";
 
 const TableMoveData = ({ data, changeData, setChangeData }) => {
   const { Client } = useAxios();
@@ -103,7 +104,7 @@ const TableMoveData = ({ data, changeData, setChangeData }) => {
                 <span>{item.MaSinhVien}</span>
               </td>
               <td className={style.Table_Column}>
-                <span>{item.NgaySinh}</span>
+                <span>{FormatInput(item.NgaySinh)}</span>
               </td>
               <td className={style.Table_Column}>
                 <span>{item.TenLop}</span>
@@ -121,7 +122,7 @@ const TableMoveData = ({ data, changeData, setChangeData }) => {
                 <span>{item.SoQuyetDinh}</span>
               </td>
               <td className={style.Table_Column}>
-                <span>{item.NgayQuyetDinh}</span>
+                <span>{FormatInput(item.NgayQuyetDinh)}</span>
               </td>
               <td className={style.Table_Column}>
                 <label

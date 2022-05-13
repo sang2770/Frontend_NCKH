@@ -5,6 +5,7 @@ import TableConfirmDetail from "../TableConfirmDetail/TableConfirmDetail";
 import TableConfirmDetailData from "../TableConfirmDetail/TableConfirmDetailData";
 import useAxios from "../../Helper/API";
 import clsx from "clsx";
+import { FormatDate, FormatInput } from "../../Helper/Date";
 
 const TableConfirmData = ({ data, changeData, setChangeData }) => {
   const [DropDown, setDropDown] = useState(-1);
@@ -96,7 +97,7 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
               <span>{item.MaSinhVien}</span>
             </td>
             <td className={style.Table_Column}>
-              <span>{item.NgaySinh}</span>
+              <span>{FormatInput(item.NgaySinh)}</span>
             </td>
             <td className={style.Table_Column}>
               <span>{item.TenLop}</span>
@@ -106,6 +107,9 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
             </td>
             <td className={style.Table_Column}>
               <span>{item.Khoas}</span>
+            </td>
+            <td className={style.Table_Column}>
+              <span>{item.total}</span>
             </td>
             <td className={style.Table_Column}>
               <label
