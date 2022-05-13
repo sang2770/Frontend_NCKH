@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./TableConfirmDetail.module.css";
+import { FormatDate, FormatInput } from "../../Helper/Date";
 
 const TableConfirmDetailData = ({ data }) => {
 
@@ -12,7 +13,7 @@ const TableConfirmDetailData = ({ data }) => {
               <span>{index + 1}</span>
             </td>
             <td className={style.Table_Column}>
-              <span>{item.NgayCap}</span>
+              <span>{FormatInput(item.NgayCap)}</span>
             </td>
           </tr>
         </React.Fragment>

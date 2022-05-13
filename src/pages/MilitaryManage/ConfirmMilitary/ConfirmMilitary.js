@@ -22,7 +22,7 @@ const tableHeaders = [
   "Lớp",
   "Khoa",
   "Khóa",
-  "SL",
+  "Số lần cấp",
   "Xác nhận",
 ];
 

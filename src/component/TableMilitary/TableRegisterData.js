@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import style from "./TableMilitary.module.css";
 import FormUpdateRegister from "../FormUpdateRegister/FormUpdateRegister";
+import { FormatDate, FormatInput } from "../../Helper/Date";
 
 const TableRegisterData = ({ data, titles, subtitles }) => {
   // show hide
@@ -40,7 +41,7 @@ const TableRegisterData = ({ data, titles, subtitles }) => {
                 <span>{item.MaSinhVien}</span>
               </td>
               <td className={style.Table_Column}>
-                <span>{item.NgaySinh}</span>
+                <span>{FormatInput(item.NgaySinh)}</span>
               </td>
               <td className={style.Table_Column}>
                 <span>{item.TenLop}</span>
