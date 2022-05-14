@@ -16,6 +16,7 @@ function AddStudent() {
   const Submit = async (form, ResetForm) => {
     form.set("NgaySinh", FormatInput(form.get("NgaySinh")));
     form.set("NgayCapCMTND", FormatInput(form.get("NgayCapCMTND")));
+    // console.log(form.get("NgaySinh"));
     try {
       const result = await Client.post("/student-management/user", form, {
         headers: {

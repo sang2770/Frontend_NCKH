@@ -17,12 +17,21 @@ const TableContent = ({
   MSV,
   ExportPape,
 }) => {
+  const { Client } = useAxios();
   const [DropDown, setDropDown] = useState(-1);
+  const [itemActive, setitemActive] = useState();
   const ChangeDropDown = (id) => {
     if (id === DropDown) {
       setDropDown(-1);
     } else {
       setDropDown(id);
+      Client.get("/student-management/user/" + id)
+        .then((response) => {
+          if (response.data.status === "Success") {
+            setitemActive(response.data.data);
+          }
+        })
+        .catch((err) => {});
     }
   };
   useEffect(() => {
@@ -30,7 +39,7 @@ const TableContent = ({
   }, [data]);
 
   // Request Student
-  const { Client } = useAxios();
+
   const ConfirmSingle = (id, MaYeuCau) => {
     // console.log(MaYeuCau);
     Client.post("/request-management/confirm/" + id, {
@@ -67,7 +76,7 @@ const TableContent = ({
                       onDoubleClick={() => {
                         setDropDown(-1);
                       }}
-                      onClick={() => ChangeDropDown(index)}
+                      onClick={() => ChangeDropDown(item.MaSinhVien)}
                     >
                       <IoIosArrowDown />
                     </p>
@@ -120,14 +129,13 @@ const TableContent = ({
                 <div
                   className={clsx(
                     style.FormData,
-                    DropDown === index && style.Active_Form
+                    DropDown === item.MaSinhVien && style.Active_Form
                   )}
                 >
                   <div className={style.InfoDetail_title}>Thông tin thêm</div>
-                  {/* <div className="">{item.MaSinhVien}</div> */}
                   <FormStudent
                     Read={ReadForm}
-                    data={item}
+                    data={itemActive}
                     contentBtn={contentBtn}
                     Submit={Submit}
                   />
