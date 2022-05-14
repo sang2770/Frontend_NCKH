@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useState } from "react";
+import React, { useRef, useContext, useState, useEffect } from "react";
 import TextBox from "../TextBox/TextBox";
 import ComboBox from "../ComboBox/ComboBox";
 import style from "./FormStudent.module.css";
@@ -9,6 +9,10 @@ import Input from "../InputSQD/Input";
 function FormStudent({ Read, data, contentBtn, Submit }) {
   const Form = useRef();
   const Status = useRef();
+  const [item, setitem] = useState({});
+  useEffect(() => {
+    setitem(data);
+  }, [data]);
   const [OpenSKQ, setOpenSKQ] = useState(false);
   const SubmitForm = (e) => {
     e.preventDefault();
@@ -22,13 +26,14 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
         alert("Sinh viên này đã không còn quản lý");
         return;
       }
-      if (FormInput.get("TinhTrangSinhVien") !== "Đang học") {
-        setOpenSKQ(true);
-      } else if (
+      if (
         data.TinhTrangSinhVien === "Bảo lưu" &&
         FormInput.get("TinhTrangSinhVien") === "Đang học"
       ) {
         Status.current = true;
+        setOpenSKQ(true);
+      } else if (FormInput.get("TinhTrangSinhVien") !== "Đang học") {
+        Status.current = false;
         setOpenSKQ(true);
       }
     } else {
@@ -67,7 +72,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
         <div className={style.InputGroup}>
           <div className={style.Infor_Group}>
             <TextBox
-              data={data}
+              data={item}
               Read={Read}
               title="Mã sinh viên"
               subtitle="MaSinhVien"
@@ -75,26 +80,26 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
-              data={data}
+              data={item}
               Read={Read}
               title="Họ và tên"
               subtitle="HoTen"
             />
           </div>
           <div className={style.Infor_Group}>
-            <TextBox data={data} Read={Read} title="Email" subtitle="Email" />
+            <TextBox data={item} Read={Read} title="Email" subtitle="Email" />
           </div>
           <div className={style.Infor_Group}>
             {Read ? (
               <TextBox
-                data={data}
+                data={item}
                 Read={Read}
                 title="Giới tính"
                 subtitle="GioiTinh"
               />
             ) : (
               <ComboBox
-                data={data}
+                data={item}
                 title="Giới tính"
                 id="GioiTinh"
                 items={["Nữ", "Nam"]}
@@ -103,7 +108,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
-              data={data}
+              data={item}
               Read={Read}
               date={true}
               title="Ngày sinh"
@@ -112,7 +117,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
-              data={data}
+              data={item}
               Read={Read}
               title="Nơi sinh"
               subtitle="NoiSinh"
@@ -120,7 +125,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
-              data={data}
+              data={item}
               Read={Read}
               title="Dân tộc"
               subtitle="DanToc"
@@ -128,7 +133,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
-              data={data}
+              data={item}
               Read={Read}
               title="Số điện thoại"
               subtitle="SDT"
@@ -136,7 +141,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
-              data={data}
+              data={item}
               Read={Read}
               title="Địa chỉ báo tin"
               subtitle="DiaChiBaoTin"
@@ -145,14 +150,14 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           <div className={style.Infor_Group}>
             {Read ? (
               <TextBox
-                data={data}
+                data={item}
                 Read={Read}
                 title="Hệ đào tạo"
                 subtitle="HeDaoTao"
               />
             ) : (
               <ComboBox
-                data={data}
+                data={item}
                 title="Hệ đào tạo"
                 id="HeDaoTao"
                 items={["Chính quy", "Sau đại học"]}
@@ -161,7 +166,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <ComboBox
-              data={data}
+              data={item}
               title="Tình trạng sinh viên"
               id="TinhTrangSinhVien"
               items={["Đang học", "Đã tốt nghiệp", "Thôi học", "Bảo lưu"]}
@@ -169,7 +174,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
-              data={data}
+              data={item}
               Read={Read}
               title="Nơi sinh"
               subtitle="NoiSinh"
@@ -177,7 +182,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
-              data={data}
+              data={item}
               Read={Read}
               title="Hộ khẩu tỉnh"
               subtitle="HoKhauTinh"
@@ -185,7 +190,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
-              data={data}
+              data={item}
               Read={Read}
               title="Hộ khẩu huyện"
               subtitle="HoKhauHuyen"
@@ -193,7 +198,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
-              data={data}
+              data={item}
               Read={Read}
               title="Hộ khẩu xã phường"
               subtitle="HoKhauXaPhuong"
@@ -201,7 +206,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
-              data={data}
+              data={item}
               Read={Read}
               title="Tôn giáo"
               subtitle="TonGiao"
@@ -209,7 +214,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
-              data={data}
+              data={item}
               Read={Read}
               title="Quốc tịch"
               subtitle="QuocTich"
@@ -217,7 +222,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
-              data={data}
+              data={item}
               Read={Read}
               title="Số CMTND"
               subtitle="SoCMTND"
@@ -225,7 +230,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
-              data={data}
+              data={item}
               Read={Read}
               date={true}
               title="Ngày Cấp CMTND"
@@ -234,7 +239,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
-              data={data}
+              data={item}
               Read={Read}
               title="Nơi cấp CMTND"
               subtitle="NoiCapCMTND"
@@ -243,13 +248,13 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           <div className={style.Infor_Group}>
             {Read ? (
               <TextBox
-                data={data}
+                data={item}
                 Read={Read}
                 title="Tên lớp"
                 subtitle="TenLop"
               />
             ) : (
-              <ComboBox data={data} title="Tên lớp" id="TenLop" items={Lop} />
+              <ComboBox data={item} title="Tên lớp" id="TenLop" items={Lop} />
             )}
           </div>
         </div>

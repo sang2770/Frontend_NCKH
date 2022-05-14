@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./Table.module.css";
 import { IoIosArrowDown } from "react-icons/io";
 import FormStudent from "../FormStudent/FormStudent";
@@ -25,6 +25,10 @@ const TableContent = ({
       setDropDown(id);
     }
   };
+  useEffect(() => {
+    setDropDown(-1);
+  }, [data]);
+
   // Request Student
   const { Client } = useAxios();
   const ConfirmSingle = (id, MaYeuCau) => {
@@ -120,6 +124,7 @@ const TableContent = ({
                   )}
                 >
                   <div className={style.InfoDetail_title}>Thông tin thêm</div>
+                  {/* <div className="">{item.MaSinhVien}</div> */}
                   <FormStudent
                     Read={ReadForm}
                     data={item}
