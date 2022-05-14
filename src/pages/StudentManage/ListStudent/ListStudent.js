@@ -33,7 +33,6 @@ function ListStudent() {
     Client.get("/student-management/users?" + params)
       .then((response) => {
         const List = response.data;
-        // console.log(List);
         if (List.status === "Success") {
           setPaginations(List.pagination);
           setStudentList(List.data);
@@ -70,7 +69,6 @@ function ListStudent() {
     Time.current = setTimeout(() => {
       const input = e.target;
       const name = input.name;
-      // console.log(input.name);
 
       setfilter({
         ...filter,
