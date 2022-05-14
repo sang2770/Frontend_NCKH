@@ -117,18 +117,26 @@ function ConfirmMilitary() {
       }
     )
     .then((response) => {
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "DanhSachGiayXacNhanNVQS.docx");
-      document.body.appendChild(link);
-      link.click();
-      alert("Đã xuất file");
-      setChangeData(!changeData);
+      const blob = new Blob([response.data]);
+      console.log(blob);
+      console.log(blob.size);
+      if(blob.size > 100 ){
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "DanhSachGiayXacNhanNVQS.docx");
+        document.body.appendChild(link);
+        link.click();
+        alert("Đã xuất file");
+        setChangeData(!changeData);
+      }else{
+        alert("Vui lòng thêm thông tin chỉ huy trưởng trước khi cấp giấy!");
+        setChangeData(!changeData);
+      }
     })
     .catch((err) => {
       setErr(true);
-      alert("Vui lòng thêm thông tin Chỉ huy trưởng!");
+      alert("Có lỗi!");
     });
   };
 
