@@ -16,7 +16,7 @@ import { FormatDate, FormatInput } from "../../../Helper/Date";
 const tableHeaders = ["Mã sinh viên", "Họ và tên", "Lớp", "Khoa"];
 function ListStudent() {
   const { Client, Loading } = useAxios();
-  const [ListStudent, setListStudent] = useState([]);
+  const [StudentList, setStudentList] = useState([]);
   const [paginations, setPaginations] = useState({
     limit: 10,
     page: 1,
@@ -29,15 +29,13 @@ function ListStudent() {
   const [Err, setErr] = useState(null);
   const { Lop, Khoa, Khoas } = useContext(DataContext);
   const CallAPI = () => {
-    // console.log(filter);
     const params = queryString.stringify(filter);
     Client.get("/student-management/users?" + params)
       .then((response) => {
         const List = response.data;
-        // console.log(List);
         if (List.status === "Success") {
           setPaginations(List.pagination);
-          setListStudent(List.data);
+          setStudentList(List.data);
         }
       })
       .catch((err) => {
@@ -53,8 +51,6 @@ function ListStudent() {
       clearTimeout(Load);
     };
   }, [filter]);
-  console.log(paginations);
-
   const Time = useRef(null);
   const ChangeLimit = (e) => {
     const input = e.target;
@@ -73,7 +69,6 @@ function ListStudent() {
     Time.current = setTimeout(() => {
       const input = e.target;
       const name = input.name;
-      // console.log(input.name);
 
       setfilter({
         ...filter,
@@ -102,7 +97,6 @@ function ListStudent() {
         setErr(true);
       });
   };
-  // console.log(ListStudent);
   return (
     <div className={style.List_Header_container}>
       <HeaderTitle Title="Danh sách sinh viên" Icon={<BsFillPeopleFill />} />
@@ -167,7 +161,7 @@ function ListStudent() {
 
         <Table
           headers={tableHeaders}
-          Content={<TableContent data={ListStudent} ReadForm={true} />}
+          Content={<TableContent data={StudentList} ReadForm={true} />}
         />
       </div>
       <Pagination

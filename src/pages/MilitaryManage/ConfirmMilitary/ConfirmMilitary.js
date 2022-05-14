@@ -118,8 +118,8 @@ function ConfirmMilitary() {
     )
     .then((response) => {
       const blob = new Blob([response.data]);
-      console.log(blob);
-      console.log(blob.size);
+      //console.log(blob);
+      //console.log(blob.size);
       if(blob.size > 100 ){
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement("a");
@@ -187,9 +187,9 @@ function ConfirmMilitary() {
                     Change={ChangeFilter}
                   />
                 </div>
-                <ComponentSearch 
-                  subtitle="MaSinhVien" 
-                  Change={ChangeFilter} 
+                <ComponentSearch
+                  subtitle="MaSinhVien"
+                  Change={ChangeFilter}
                   title="Mã sinh viên"
                 />
               </div>
