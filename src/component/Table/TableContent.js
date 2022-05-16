@@ -25,17 +25,17 @@ const TableContent = ({
       setDropDown(-1);
     } else {
       setDropDown(id);
-      Client.get("/student-management/user/" + id)
-        .then((response) => {
-          if (response.data.status === "Success") {
-            setitemActive(response.data.data);
-          }
-        })
-        .catch((err) => {});
+      // Client.get("/student-management/user/" + id)
+      //   .then((response) => {
+      //     if (response.data.status === "Success") {
+      //       setitemActive(response.data.data);
+      //     }
+      //   })
+      //   .catch((err) => {});
     }
   };
   useEffect(() => {
-    setDropDown(-1);
+    console.log(data);
   }, [data]);
 
   // Request Student
@@ -135,7 +135,7 @@ const TableContent = ({
                   <div className={style.InfoDetail_title}>Thông tin thêm</div>
                   <FormStudent
                     Read={ReadForm}
-                    data={itemActive}
+                    data={item}
                     contentBtn={contentBtn}
                     Submit={Submit}
                   />
