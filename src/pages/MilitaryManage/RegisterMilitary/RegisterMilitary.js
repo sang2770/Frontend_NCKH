@@ -14,9 +14,11 @@ import style from "../../StudentManage/ListStudent/ListStudent";
 import Button from "../../../component/ButtonMiliNoti/Button";
 import clsx from "clsx";
 import FormMilitary from "../../../component/FormMilitary/FormMilitary";
+import FormMilitaryMoveLocal from "../../../component/FormMilitary/FormMilitaryMoveLocal";
 import ErrorImport from "../../../component/ErrImport/ErrorImport";
 import LoadingEffect from "../../../component/Loading/Loading";
 import ComponentSearch from "../../../component/Search/Search";
+
 
 const tableHeaders = [
   "Họ và tên",
@@ -27,6 +29,7 @@ const tableHeaders = [
   "Khóa",
   "Chọn",
 ];
+
 const titleForm = [
   "Họ và tên",
   "Mã sinh viên",
@@ -42,6 +45,32 @@ const titleForm = [
   "Nơi ở hiện tại",
   "Nơi chuyển đến",
 ];
+
+const titleFormRegister = [
+  "Họ và tên",
+  "Mã sinh viên",
+  "Ngày sinh",
+  "Ngày đăng ký",
+  "Số đăng ký",
+  "Nơi đăng ký",
+  "Địa chỉ thường trú",
+  "Ngày nộp",
+  "Số giới thiệu",
+  "Ban chỉ huy",
+  "Ngày cấp",
+  "Nơi ở hiện tại",
+  "Nơi chuyển đến",
+];
+
+const titleFormMoveLocal = [
+  "Mã sinh viên",
+  "Số giới thiệu",
+  "Ban chỉ huy",
+  "Ngày cấp",
+  "Nơi ở hiện tại",
+  "Nơi chuyển đến",
+];
+
 const subtitles = [
   "HoTen",
   "MaSinhVien",
@@ -51,6 +80,25 @@ const subtitles = [
   "NoiDangKy",
   "DiaChiThuongTru",
   "NgayNop",
+  "SoGioiThieu",
+  "BanChiHuy",
+  "NgayCap",
+  "NoiOHienTai",
+  "NoiChuyenDen",
+];
+
+const subtitlesRegister = [
+  "HoTen",
+  "MaSinhVien",
+  "NgaySinh",
+  "NgayDangKy",
+  "SoDangKy",
+  "NoiDangKy",
+  "DiaChiThuongTru",
+  "NgayNop",
+];
+const subtitlesMoveLocal = [
+  "MaSinhVien",
   "SoGioiThieu",
   "BanChiHuy",
   "NgayCap",
@@ -168,13 +216,43 @@ function RegisterMilitary() {
         alert("Bạn đã thêm thành công!");
         setErrAdd(null);
         ResetForm();
+        CallAPI();
       } else {
-        alert("Có lỗi");
+        alert("Mã sinh viên không tồn tại!\nVui lòng kiểm tra lại!");
         setErrAdd([result.data.Err_Message]);
         // console.log(result.data.Err_Message);
       }
     } catch (error) {
-      alert("Mã sinh viên không tồn tại!\nVui lòng kiểm tra lại!");
+      alert("Sinh viên này đã có thông tin giấy chứng nhận đăng ký!");
+      console.log(error);
+      // setErrAdd(Object.values(error.data.Err_Message));
+    }
+  };
+
+  const SubmitMove = async (form, ResetForm) => {
+    try {
+      const result = await Client.post(
+        "/move-military-local-management/store-move-military-local?",
+        form,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      // console.log(result);
+      if (result.data.status !== "Failed") {
+        alert("Bạn đã thêm thành công!");
+        setErrAdd(null);
+        ResetForm();
+        CallAPI();
+      } else {
+        alert("Mã sinh viên không tồn tại!\nVui lòng kiểm tra lại!");
+        setErrAdd(["Mã sinh viên: " + result.data.Err_Message + " không tồn tại!"]);
+        // console.log(result.data.Err_Message);
+      }
+    } catch (error) {
+      alert("Sinh viên này đã có thông tin giấy giới thiệu di chuyển từ địa phương!");
       console.log(error);
       // setErrAdd(Object.values(error.data.Err_Message));
     }
@@ -358,8 +436,19 @@ function RegisterMilitary() {
             <div className={Style.Register} id="Register">
               <div className={Style.Form_register}>
                 <FormMilitary
-                  titles={titleForm}
-                  subtitles={subtitles}
+                  maintitles={"Giấy xác nhận đăng ký Nghĩa Vụ Quân Sự"}
+                  titles={titleFormRegister}
+                  subtitles={subtitlesRegister}
+                  onClickSave={function () {
+                    document.getElementById("ErrAdd").style.display = "block";
+                  }}
+                  Submit={Submit}
+                />
+                <hr/>
+                <FormMilitaryMoveLocal
+                  maintitles={"Giấy giới thiệu di chuyển Nghĩa Vụ Quân Sự"}
+                  titles={titleFormMoveLocal}
+                  subtitles={subtitlesMoveLocal}
                   onClickSave={function () {
                     document.getElementById("ErrAdd").style.display = "block";
                   }}
@@ -367,7 +456,7 @@ function RegisterMilitary() {
                     onClickNewBack();
                     document.getElementById("ErrAdd").style.display = "none";
                   }}
-                  Submit={Submit}
+                  Submit={SubmitMove}
                 />
               </div>
             </div>

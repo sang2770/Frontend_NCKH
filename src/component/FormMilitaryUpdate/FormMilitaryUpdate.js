@@ -3,6 +3,7 @@ import style from "./FormMilitaryUpdate.module.css";
 import ElementForm from "../ElementMiliFrom/ElementForm";
 import Button from "../ButtonMiliNoti/Button";
 import useAxios from "../../Helper/API";
+import ElementForm2 from "../ElementMiliFrom/ElementForm2";
 
 function FormMilitaryUpdate({ titles, subtitles, data, MSV }) {
   const { Client } = useAxios();
@@ -68,6 +69,7 @@ function FormMilitaryUpdate({ titles, subtitles, data, MSV }) {
     Form.current = e.target;
     const form = new FormData(e.target);
     updateRegister(form, ResetFormUp);
+    
   };
   const ResetFormUp = () => {
     Form.current.reset();
@@ -132,7 +134,7 @@ function FormMilitaryUpdate({ titles, subtitles, data, MSV }) {
           />
         </div>
         <div className={style.FormItem}>
-          <ElementForm
+          <ElementForm2
             data={data}
             title={titles[5]}
             subtitle={subtitles[5]}
@@ -162,7 +164,7 @@ function FormMilitaryUpdate({ titles, subtitles, data, MSV }) {
       </h1>
       <div className={style.Form_ContainerMove}>
         <div className={style.FormItemMove}>
-          <ElementForm
+          <ElementForm2
             data={data}
             title={titles[8]}
             subtitle={subtitles[8]}
