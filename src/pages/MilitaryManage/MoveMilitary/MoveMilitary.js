@@ -85,6 +85,7 @@ function MoveMilitary() {
       .then((response) => {
         const List = response.data;
         if (List.status === "Success") {
+          console.log(List.data);
           setPaginations(List.pagination);
           setMoveMilitary(List.data);
         }
