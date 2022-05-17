@@ -14,6 +14,7 @@ import TableConfirmData from "../../../component/TableMilitary/TableConfirmData"
 import LoadingEffect from "../../../component/Loading/Loading";
 import Style from "../RegisterMilitary/RegisterMilitary.module.css";
 import ComponentSearch from "../../../component/Search/Search";
+import FormExportConfirm from "../../../component/FormExportMove/FormExportConfirm";
 
 const tableHeaders = [
   "Họ và tên",
@@ -140,8 +141,26 @@ function ConfirmMilitary() {
     });
   };
 
+  const params = queryString.stringify(filter); 
+  const url = "/confirm-military-management/confirm-military-off?" + params;
+
+  const [DropDown, setDropDown] = useState(-1);
+  const ChangeDropDown = (id) => {
+    setDropDown(id);
+  };
+
   return (
     <React.Fragment>
+      {DropDown > -1 && (
+        <FormExportConfirm
+          url = {url}
+          changeData={changeData}
+          setChangeData={setChangeData}
+          exit={() => {
+            ChangeDropDown(-1);
+          }}
+        />
+      )}
       <div className={style.load}>
         {Loading && <LoadingEffect />}
         <div className={style.Confirm_header}>
@@ -219,7 +238,7 @@ function ConfirmMilitary() {
           </div>
           {/* button cập giấy */}
           <div className={style.btn}>
-            <Button content="Cấp giấy" onClick={Export} />
+            <Button content="Cấp giấy" onClick={() => {ChangeDropDown(0)}} />
           </div>
         </div>
       </div>

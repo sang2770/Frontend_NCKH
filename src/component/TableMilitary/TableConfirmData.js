@@ -6,16 +6,24 @@ import TableConfirmDetailData from "../TableConfirmDetail/TableConfirmDetailData
 import useAxios from "../../Helper/API";
 import clsx from "clsx";
 import { FormatDate, FormatInput } from "../../Helper/Date";
+import FormExportConfirm from "../FormExportMove/FormExportConfirm";
 
 const TableConfirmData = ({ data, changeData, setChangeData }) => {
-  const [DropDown, setDropDown] = useState(-1);
 
+  const [DropDown, setDropDown] = useState(-1);
   const ChangeDropDown = (id) => {
     setDropDown(id);
   };
 
+  ///hien thi danh sach cac lan cap giay
+  const [DropDownShow, setDropDownShow] = useState(-3);
+
+  const ChangeDropDownShow = (id) => {
+    setDropDownShow(id);
+  };
+
   const ChangeDropDownHide = () => {
-    setDropDown(-1);
+    setDropDownShow(-3);
   };
 
   const { Client } = useAxios();
@@ -43,44 +51,20 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
     MaSinhVien: null,
     HoTen: null,
   });
-  // Export
-  const Export = async () => {
-    Info.current.MaSinhVien &&
-      Client.get(
-        "/confirm-military-management/confirm-military-off?MaSinhVien=" +
-          Info.current.MaSinhVien,
-        {
-          responseType: "blob",
-        }
-      )
-        .then((response) => {
-          const blob = new Blob([response.data]);
-          //console.log(blob);
-          //console.log(blob.size);
-          if(blob.size > 100 ){
-            const url = window.URL.createObjectURL(blob);
-            const link = document.createElement("a");
-            link.href = url;
-            link.setAttribute(
-              "download",
-              Info.current.HoTen + "_" + Info.current.MaSinhVien + ".docx"
-            );
-            document.body.appendChild(link);
-            link.click();
-            alert("Đã xuất file");
-            setChangeData(!changeData);
-          }else{
-            alert("Vui lòng thêm thông tin chỉ huy trưởng trước khi cấp giấy!");
-            setChangeData(!changeData);
-          }
-        })
-        .catch((err) => {
-          setErr(true);
-          alert("Có lỗi!");
-        });
-  };
+
   return (
     <tbody>
+      {DropDown > -1 && (
+        <FormExportConfirm
+          nameSV={Info.current.HoTen}
+          msv={Info.current.MaSinhVien}
+          changeData={changeData}
+          setChangeData={setChangeData}
+          exit={() => {
+            ChangeDropDown(-1);
+          }}
+        />
+      )}
       {data.map((item, index) => (
         <React.Fragment key={index}>
           <tr className={style.Table_Row}>
@@ -89,7 +73,7 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
                 <p
                   className={style.IconDropDown}
                   onClick={() => {
-                    ChangeDropDown(index);
+                    ChangeDropDownShow(index);
                     list(item.MaSinhVien);
                   }}
                 >
@@ -125,7 +109,7 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
                 onClick={() => {
                   Info.current.MaSinhVien = item.MaSinhVien;
                   Info.current.HoTen = item.HoTen;
-                  Export();
+                  ChangeDropDown(index);
                 }}
               >
                 Cấp giấy
@@ -138,7 +122,7 @@ const TableConfirmData = ({ data, changeData, setChangeData }) => {
               <div
                 className={clsx(
                   style.FormData,
-                  DropDown === index && style.Active_Form
+                  DropDownShow === index && style.Active_Form
                 )}
               >
                 <div className={style.InfoDetail_title}>
