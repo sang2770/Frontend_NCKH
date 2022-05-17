@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import style from "./TextBox.module.css";
+import clsx from "clsx";
 import { FormatDate } from "../../Helper/Date";
-function TextBox({ title, subtitle, Read, Change, data, date, Ref }) {
+function TextBox({ search, title, subtitle, Read, Change, data, date, Ref }) {
   return (
     <div className={style.TextBox_Group}>
       <label htmlFor={subtitle} className={style.LabelFilter}>
@@ -9,15 +10,16 @@ function TextBox({ title, subtitle, Read, Change, data, date, Ref }) {
       </label>
       <input
         key={
-          data
+          !search &&
+          (data
             ? data[subtitle]
-            : "OKAYG_" + (10000 + Math.random() * (1000000 - 10000))
+            : "OKAYG_" + (10000 + Math.random() * (1000000 - 10000)))
         }
         ref={Ref}
         readOnly={Read}
         id={subtitle}
         type="text"
-        className={style.TextBox}
+        className={clsx(style.TextBox)}
         placeholder={date ? "dd-mm-yy" : title}
         name={subtitle}
         onChange={Change}

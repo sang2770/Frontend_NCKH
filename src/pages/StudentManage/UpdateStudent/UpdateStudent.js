@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import HeaderTitle from "../../../component/HeaderTitle/HeaderTitle";
 import { RiUserSettingsFill } from "react-icons/ri";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -11,6 +11,9 @@ import LoadingEffect from "../../../component/Loading/Loading";
 import clsx from "clsx";
 import { BsFillPeopleFill } from "react-icons/bs";
 import FileTemplate from "../../../component/FileTemplate/FileTemplate";
+import { DataContext } from "../../../DataContext/DataContext";
+import ComboBox from "../../../component/ComboBox/ComboBox";
+import { FormatInput } from "../../../Helper/Date";
 function UpdateStudent() {
   const [data, setData] = useState();
   const { Client, Loading } = useAxios();
@@ -28,15 +31,16 @@ function UpdateStudent() {
     setErrImport(false);
   };
   const Search = () => {
-    // console.log(Filter.current);
     Client.get("/student-management/user/" + Filter.current.value)
       .then((res) => {
-        // console.log(res);
+        console.log(Filter.current.value);
+
         if (res.data.status === "Success") {
-          // console.log("ok");
           if (!res.data.data.TinhTrangSinhVien.includes("Đang học")) {
             res.data.data.TenLop = "";
           }
+          console.log(Filter.current.value);
+
           setData(res.data.data);
           setErr(false);
         } else {
@@ -49,6 +53,7 @@ function UpdateStudent() {
       });
   };
   const FindHistory = () => {
+    console.log(Filter.current.value);
     Client.get("student-management/user-history/" + Filter.current.value)
       .then((res) => {
         // console.log(res);
@@ -57,8 +62,8 @@ function UpdateStudent() {
         }
       })
       .catch((err) => {
-        alert("Có lỗi");
-        // console.log(err);
+        // alert("Có lỗi");
+        console.log(err);
       });
   };
   const OpenForm = () => {
@@ -68,6 +73,7 @@ function UpdateStudent() {
     e.preventDefault();
     const MyData = new FormData(e.target);
     MyData.append("_method", "put");
+    MyData.set("NgayQuyetDinh", FormatInput(MyData.get("NgayQuyetDinh")));
     try {
       const Result = await Client.post(path, MyData, {
         headers: {
@@ -78,6 +84,7 @@ function UpdateStudent() {
       if (Result.data.status === "Success") {
         alert("Bạn đã cập nhật thành công");
         setErrImport();
+        e.target.reset();
       } else {
         alert(Result.data.Err_Message);
         setErrImport(Result.data.infor);
@@ -85,11 +92,11 @@ function UpdateStudent() {
     } catch (error) {
       alert("Có lỗi");
     }
-    e.target.reset();
   };
   const ImportFile = async (e) => {
     ImportTemplate(e, "/student-management/users");
   };
+  const { Khoa } = useContext(DataContext);
   return (
     <div className={style.UpdateStudent_container}>
       {openFileTemplate && (
@@ -143,6 +150,7 @@ function UpdateStudent() {
               <div className={style.Update_Filter}>
                 <div className={style.Update_Filter_Item}>
                   <TextBox
+                    search={true}
                     title="Mã sinh viên"
                     subtitle="MaSinhVien"
                     Ref={Filter}
@@ -207,17 +215,49 @@ function UpdateStudent() {
                   </div>
                 </div>
 
-                <h3 style={{ margin: "10px 0px" }}>Chọn File mẫu</h3>
                 <Button
                   content="Chọn File"
-                  styles={{ marginLeft: "10px", backgroundColor: "#2980b9" }}
+                  styles={{ backgroundColor: "#2980b9" }}
                   onClick={() => {
                     setOpenFileTemplate(!openFileTemplate);
                   }}
                 />
               </div>
+              <hr />
               <form className={style.FormImport} onSubmit={ImportFile}>
+                <div className={style.FormImport_Group}>
+                  <div className={style.Infor_Group}>
+                    <TextBox
+                      search={true}
+                      title="Số quyết định"
+                      subtitle="SoQuyetDinh"
+                    />
+                  </div>
+                  <div className={style.Infor_Group}>
+                    <TextBox
+                      search={true}
+                      title="Ngày quyết định"
+                      subtitle="NgayQuyetDinh"
+                    />
+                  </div>
+                  <div className={style.Infor_Group}>
+                    <ComboBox title="Khoa" id="Khoa" items={Khoa} />
+                  </div>
+                  <div className={style.Infor_Group}>
+                    <ComboBox
+                      title="Tình trạng sinh viên"
+                      id="TinhTrangSinhVien"
+                      items={[
+                        "Đã tốt nghiệp",
+                        "Thôi học",
+                        "Bảo lưu",
+                        "Đang học",
+                      ]}
+                    />
+                  </div>
+                </div>
                 <input type="file" name="file" required />
+
                 <Button content="Import" styles={{ marginTop: "10px" }} />
               </form>
               {ErrImport && (

@@ -84,7 +84,7 @@ const TableContent = ({
                   <span>{index + 1}</span>
                 </div>
               </td>
-              <td className={style.Table_Column}>
+              <td className={clsx(style.Table_Column, style.text_center)}>
                 <span>{item.MaSinhVien}</span>
               </td>
               <td className={style.Table_Column}>

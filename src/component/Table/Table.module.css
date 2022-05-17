@@ -86,3 +86,6 @@ thead .Table_Header {
   cursor: pointer;
   color: var(--Main-color);
 }
+.text_center {
+  text-align: center;
+}

@@ -110,6 +110,15 @@
   display: flex;
   flex-direction: column;
   padding: 5px 10px;
+  margin-top: 10px;
+}
+.FormImport_Group {
+  display: flex;
+  margin-bottom: 10px;
+}
+.Infor_Group {
+  width: 23%;
+  margin-right: 10px;
 }
 
 .Err_container {
@@ -132,8 +141,9 @@
 .FileTemplate {
   font-size: 1.6rem;
   padding: 10px;
-  /* display: flex;
-  align-items: center; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .Title_Import {
   font-size: 1.6rem;
