@@ -4,6 +4,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import FormStudent from "../FormStudent/FormStudent";
 import clsx from "clsx";
 import useAxios from "../../Helper/API";
+import FormExportConfirm from "../FormExportMove/FormExportConfirm";
 // Check--Kiểm tra xem có phải là bảng yêu cầu k
 const TableContent = ({
   data,
@@ -15,7 +16,6 @@ const TableContent = ({
   setConfirm,
   Confirmed,
   MSV,
-  ExportPape,
 }) => {
   const { Client } = useAxios();
   const [DropDown, setDropDown] = useState(-1);
@@ -56,14 +56,26 @@ const TableContent = ({
         // console.log(err);
       });
   };
-  const Export = (id, Hoten, idYC) => {
-    MSV.current.MaSinhVien = id;
-    MSV.current.MaYeuCau = idYC;
-    MSV.current.HoTen = Hoten;
-    ExportPape();
+  
+  const [DropDownShow, setDropDownShow] = useState(-3);
+  const ChangeDropDownShow = (id) => {
+    setDropDownShow(id);
   };
+
   return (
     <tbody>
+      {DropDownShow > -3 && (
+        <FormExportConfirm
+          nameSV={MSV.current.HoTen}
+          msv={MSV.current.MaSinhVien}
+          mYC = {MSV.current.MaYeuCau}
+          changeData={Confirm}
+          setChangeData={setConfirm}
+          exit={() => {
+            ChangeDropDownShow(-3);
+          }}
+        />
+      )}
       {data &&
         data.map((item, index) => (
           <React.Fragment key={index}>
@@ -115,8 +127,10 @@ const TableContent = ({
                 <td
                   className={clsx(style.Confirm, style.Table_Column)}
                   onClick={() => {
-                    // console.log(item.MaSinhVien);
-                    Export(item.MaSinhVien, item.HoTen, item.MaYeuCau);
+                    MSV.current.MaSinhVien = item.MaSinhVien;
+                    MSV.current.MaYeuCau = item.MaYeuCau;
+                    MSV.current.HoTen = item.HoTen;
+                    ChangeDropDownShow(index);
                   }}
                 >
                   Cấp Giấy

@@ -5,7 +5,7 @@ import ComboBox from "../../component/ComboBox/ComboBox";
 import useAxios from "../../Helper/API";
 import Button from "../ButtonMiliNoti/Button";
 
-function FormExportConfirm({ nameSV, msv, changeData, setChangeData, exit, url }) {
+function FormExportConfirm({ nameSV, msv, changeData, setChangeData, exit, url, mYC }) {
     const { Client } = useAxios();
     const [Err, setErr] = useState(null);
 
@@ -62,7 +62,11 @@ function FormExportConfirm({ nameSV, msv, changeData, setChangeData, exit, url }
             alert("Vui lòng chọn người ký giấy!");
         }
         else{
-            if(msv){
+            if(msv && mYC){
+                nameSV = nameSV + "_" + msv;
+                url =  "/confirm-military-management/confirm-military?MaSinhVien=" + msv + "&HoVaTen=" + filter.HoVaTen;
+            }
+            else if(msv){
                 nameSV = nameSV + "_" + msv;
                 url =  "/confirm-military-management/confirm-military-off?MaSinhVien=" + msv + "&HoVaTen=" + filter.HoVaTen;
             }else if(url){

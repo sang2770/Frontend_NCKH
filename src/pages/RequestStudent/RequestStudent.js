@@ -16,6 +16,7 @@ import useAxios from "../../Helper/API";
 import LoadingEffect from "../../component/Loading/Loading";
 import queryString from "query-string";
 import clsx from "clsx";
+import FormExportConfirm from "../../component/FormExportMove/FormExportConfirm";
 const tableHeaders = [
   "Mã sinh viên",
   "Họ và tên",
@@ -69,199 +70,184 @@ function RequestStudent() {
       alert("Có lỗi! Vui lòng kiểm tra lại!");
     }
   };
-  const ExportPape = () => {
-    const HoTen = MSV.current.HoTen;
-    delete MSV.current.HoTen;
-    const stringify = queryString.stringify(MSV.current);
 
-    Client.get("confirm-military-management/confirm-military?" + stringify, {
-      responseType: "blob",
-    })
-      .then((response) => {
-        if (!response.data.status) {
-          const blob = new Blob([response.data]);
-          if(blob.size > 100 ){
-            const url = window.URL.createObjectURL(new Blob([response.data]));
-            const link = document.createElement("a");
-            link.href = url;
-            link.setAttribute(
-              "download",
-              `Giấy xác nhận_${HoTen}_${MSV.current.MaSinhVien}.docx`
-            ); //or any other extension
-            document.body.appendChild(link);
-            link.click();
-            alert("Xuất thành công");
-            setPageExport(!PageExport);
-          }else{
-            alert("Vui lòng thêm thông tin chỉ huy trưởng trước khi cấp giấy!");
-          }
-        }
-      })
-      .catch((err) => {
-        // console.log(err);
-        alert("Có lỗi vui lòng thử lại");
-      });
-  };
-  const ExportAll = () => {
-    MSV.current = useConfirmed.filter;
-    ExportPape();
-  };
   const [ScaleHeight, setScaleHeight] = useState(false);
   const ScaleForm = () => {
     setScaleHeight(!ScaleHeight);
   };
+
+  const stringify = queryString.stringify(MSV.current);
+  const url = "/confirm-military-management/confirm-military?" + stringify;
+
+  const [DropDown, setDropDown] = useState(-1);
+  const ChangeDropDown = (id) => {
+    MSV.current = useConfirmed.filter;
+    setDropDown(id);
+  };
+
   return (
-    <div className={style.Request_Student_Container}>
-      <HeaderTitle Title="Yêu cầu của sinh viên" Icon={<AiOutlineMessage />} />
+    <React.Fragment>
+      {DropDown > -1 && (
+        <FormExportConfirm
+          url = {url}
+          changeData={PageExport}
+          setChangeData={setPageExport}
+          exit={() => {
+            ChangeDropDown(-1);
+          }}
+        />
+      )}
+      <div className={style.Request_Student_Container}>
+        <HeaderTitle Title="Yêu cầu của sinh viên" Icon={<AiOutlineMessage />} />
 
-      <div className={style.ListConfirmed}>
-        <div className={style.ListHeader}>
-          <HiOutlineClipboardList />
-          <p className={style.ListHeader_content}>Danh sách chờ xác nhận</p>
-        </div>
-        <div className={style.Filter}>
-          <div className={style.Filter_Item}>
-            <TextBox
-              title="Mã sinh viên"
-              subtitle="MaSinhVien"
-              Change={ChangeFilter}
-            />
+        <div className={style.ListConfirmed}>
+          <div className={style.ListHeader}>
+            <HiOutlineClipboardList />
+            <p className={style.ListHeader_content}>Danh sách chờ xác nhận</p>
           </div>
-          <div className={style.Filter_Item}>
-            <TextBox title="Họ và tên" subtitle="HoTen" Change={ChangeFilter} />
-          </div>
-          <div className={style.Filter_Item}>
-            <ComboBox id="Lop" title="Lớp" items={Lop} Change={ChangeFilter} />
-          </div>
-          <div className={style.Filter_Item}>
-            <ComboBox
-              title="Khoa"
-              id="Khoa"
-              items={Khoa}
-              Change={ChangeFilter}
-            />
-          </div>
-          <div className={style.Filter_Item}>
-            <ComboBox
-              title="Khóa"
-              id="Khoas"
-              items={Khoas}
-              Change={ChangeFilter}
-            />
-          </div>
-        </div>
-        <div className={clsx(style.DataList)}>
-          {Loading && <LoadingEffect />}
-          <Table
-            headers={tableHeaders}
-            ScaleHeight={ScaleHeight}
-            Content={
-              <TableContent
-                TabelConfirm={true}
-                data={ListRequest}
-                Confirm={Confirm}
-                setConfirm={setConfirm}
+          <div className={style.Filter}>
+            <div className={style.Filter_Item}>
+              <TextBox
+                title="Mã sinh viên"
+                subtitle="MaSinhVien"
+                Change={ChangeFilter}
               />
-            }
+            </div>
+            <div className={style.Filter_Item}>
+              <TextBox title="Họ và tên" subtitle="HoTen" Change={ChangeFilter} />
+            </div>
+            <div className={style.Filter_Item}>
+              <ComboBox id="Lop" title="Lớp" items={Lop} Change={ChangeFilter} />
+            </div>
+            <div className={style.Filter_Item}>
+              <ComboBox
+                title="Khoa"
+                id="Khoa"
+                items={Khoa}
+                Change={ChangeFilter}
+              />
+            </div>
+            <div className={style.Filter_Item}>
+              <ComboBox
+                title="Khóa"
+                id="Khoas"
+                items={Khoas}
+                Change={ChangeFilter}
+              />
+            </div>
+          </div>
+          <div className={clsx(style.DataList)}>
+            {Loading && <LoadingEffect />}
+            <Table
+              headers={tableHeaders}
+              ScaleHeight={ScaleHeight}
+              Content={
+                <TableContent
+                  TabelConfirm={true}
+                  data={ListRequest}
+                  Confirm={Confirm}
+                  setConfirm={setConfirm}
+                />
+              }
+            />
+          </div>
+          <div className={style.ArrowShow}>
+            {!ScaleHeight ? (
+              <span onClick={ScaleForm}>
+                <RiArrowUpSLine />
+              </span>
+            ) : (
+              <span onClick={ScaleForm}>
+                <RiArrowDownSLine />
+              </span>
+            )}
+          </div>
+          <div className={style.GroupOption}>
+            <Button content="Xác nhận tất cả" onClick={ConfirmAll} />
+          </div>
+          <Pagination
+            title="Số sinh viên"
+            paginations={paginations}
+            filter={filter}
+            setfilter={setfilter}
+            ChangeLimit={ChangeLimit}
           />
         </div>
-        <div className={style.ArrowShow}>
-          {!ScaleHeight ? (
-            <span onClick={ScaleForm}>
-              <RiArrowUpSLine />
-            </span>
-          ) : (
-            <span onClick={ScaleForm}>
-              <RiArrowDownSLine />
-            </span>
-          )}
-        </div>
-        <div className={style.GroupOption}>
-          <Button content="Xác nhận tất cả" onClick={ConfirmAll} />
-        </div>
-        <Pagination
-          title="Số sinh viên"
-          paginations={paginations}
-          filter={filter}
-          setfilter={setfilter}
-          ChangeLimit={ChangeLimit}
-        />
-      </div>
-      <div className={style.ListConfirmed}>
-        <div className={style.ListHeader}>
-          <HiOutlineClipboardList />
-          <p className={style.ListHeader_content}>Danh sách chờ cấp</p>
-        </div>
-        <div className={style.Filter}>
-          <div className={style.Filter_Item}>
-            <TextBox
-              title="Mã sinh viên"
-              subtitle="MaSinhVien"
-              Change={useConfirmed.ChangeFilter}
-            />
+        <div className={style.ListConfirmed}>
+          <div className={style.ListHeader}>
+            <HiOutlineClipboardList />
+            <p className={style.ListHeader_content}>Danh sách chờ cấp</p>
           </div>
-          <div className={style.Filter_Item}>
-            <TextBox
-              title="Họ và tên"
-              subtitle="HoTen"
-              Change={useConfirmed.ChangeFilter}
-            />
-          </div>
-          <div className={style.Filter_Item}>
-            <ComboBox
-              id="Lop"
-              title="Lớp"
-              items={Lop}
-              Change={useConfirmed.ChangeFilter}
-            />
-          </div>
-          <div className={style.Filter_Item}>
-            <ComboBox
-              title="Khoa"
-              id="Khoa"
-              items={Khoa}
-              Change={useConfirmed.ChangeFilter}
-            />
-          </div>
-          <div className={style.Filter_Item}>
-            <ComboBox
-              title="Khóa"
-              id="Khoas"
-              items={Khoas}
-              Change={useConfirmed.ChangeFilter}
-            />
-          </div>
-        </div>
-        <div className={style.DataList}>
-          {useConfirmed.Loading && <LoadingEffect />}
-          <Table
-            headers={tableHeaders}
-            Content={
-              <TableContent
-                data={useConfirmed.ListRequest}
-                TabelConfirm={true}
-                Confirmed={true}
-                Confirm={Confirm}
-                setConfirm={setConfirm}
-                MSV={MSV}
-                ExportPape={ExportPape}
+          <div className={style.Filter}>
+            <div className={style.Filter_Item}>
+              <TextBox
+                title="Mã sinh viên"
+                subtitle="MaSinhVien"
+                Change={useConfirmed.ChangeFilter}
               />
-            }
+            </div>
+            <div className={style.Filter_Item}>
+              <TextBox
+                title="Họ và tên"
+                subtitle="HoTen"
+                Change={useConfirmed.ChangeFilter}
+              />
+            </div>
+            <div className={style.Filter_Item}>
+              <ComboBox
+                id="Lop"
+                title="Lớp"
+                items={Lop}
+                Change={useConfirmed.ChangeFilter}
+              />
+            </div>
+            <div className={style.Filter_Item}>
+              <ComboBox
+                title="Khoa"
+                id="Khoa"
+                items={Khoa}
+                Change={useConfirmed.ChangeFilter}
+              />
+            </div>
+            <div className={style.Filter_Item}>
+              <ComboBox
+                title="Khóa"
+                id="Khoas"
+                items={Khoas}
+                Change={useConfirmed.ChangeFilter}
+              />
+            </div>
+          </div>
+          <div className={style.DataList}>
+            {useConfirmed.Loading && <LoadingEffect />}
+            <Table
+              headers={tableHeaders}
+              Content={
+                <TableContent
+                  data={useConfirmed.ListRequest}
+                  TabelConfirm={true}
+                  Confirmed={true}
+                  Confirm={Confirm}
+                  setConfirm={setConfirm}
+                  MSV={MSV}
+                />
+              }
+            />
+          </div>
+
+          <div className={style.GroupOption}>
+            <Button content="Xuất giấy" onClick={() => {ChangeDropDown(0)}} />
+          </div>
+          <Pagination
+            title="Số sinh viên"
+            paginations={useConfirmed.paginations}
+            filter={useConfirmed.filter}
+            setfilter={useConfirmed.setfilter}
+            ChangeLimit={useConfirmed.ChangeLimit}
           />
         </div>
-
-        <div className={style.GroupOption}>
-          <Button content="Xuất giấy" onClick={ExportAll} />
-        </div>
-        <Pagination
-          title="Số sinh viên"
-          paginations={useConfirmed.paginations}
-          filter={useConfirmed.filter}
-          setfilter={useConfirmed.setfilter}
-          ChangeLimit={useConfirmed.ChangeLimit}
-        />
       </div>
-    </div>
+    </React.Fragment>
   );
 }
 
