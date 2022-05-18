@@ -35,7 +35,7 @@ const TableContent = ({
     }
   };
   useEffect(() => {
-    console.log(data);
+    // console.log(data);
   }, [data]);
 
   // Request Student
