@@ -108,38 +108,6 @@ function ConfirmMilitary() {
       setfilter({ ...filter, [name]: input.value, page: 1 });
     }, 300);
   };
-  // Export
-  const Export = async () => {
-    const params = queryString.stringify(filter);
-    Client.get(
-      "/confirm-military-management/confirm-military-off?" + params,
-      {
-        responseType: "blob",
-      }
-    )
-    .then((response) => {
-      const blob = new Blob([response.data]);
-      //console.log(blob);
-      //console.log(blob.size);
-      if(blob.size > 100 ){
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "DanhSachGiayXacNhanNVQS.docx");
-        document.body.appendChild(link);
-        link.click();
-        alert("Đã xuất file");
-        setChangeData(!changeData);
-      }else{
-        alert("Vui lòng thêm thông tin chỉ huy trưởng trước khi cấp giấy!");
-        setChangeData(!changeData);
-      }
-    })
-    .catch((err) => {
-      setErr(true);
-      alert("Có lỗi!");
-    });
-  };
 
   const params = queryString.stringify(filter); 
   const url = "/confirm-military-management/confirm-military-off?" + params;
