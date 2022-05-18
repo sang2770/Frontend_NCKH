@@ -14,6 +14,7 @@ import TableConfirmData from "../../../component/TableMilitary/TableConfirmData"
 import LoadingEffect from "../../../component/Loading/Loading";
 import Style from "../RegisterMilitary/RegisterMilitary.module.css";
 import ComponentSearch from "../../../component/Search/Search";
+import FormExportConfirm from "../../../component/FormExportMove/FormExportConfirm";
 
 const tableHeaders = [
   "Họ và tên",
@@ -107,41 +108,27 @@ function ConfirmMilitary() {
       setfilter({ ...filter, [name]: input.value, page: 1 });
     }, 300);
   };
-  // Export
-  const Export = async () => {
-    const params = queryString.stringify(filter);
-    Client.get(
-      "/confirm-military-management/confirm-military-off?" + params,
-      {
-        responseType: "blob",
-      }
-    )
-    .then((response) => {
-      const blob = new Blob([response.data]);
-      //console.log(blob);
-      //console.log(blob.size);
-      if(blob.size > 100 ){
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "DanhSachGiayXacNhanNVQS.docx");
-        document.body.appendChild(link);
-        link.click();
-        alert("Đã xuất file");
-        setChangeData(!changeData);
-      }else{
-        alert("Vui lòng thêm thông tin chỉ huy trưởng trước khi cấp giấy!");
-        setChangeData(!changeData);
-      }
-    })
-    .catch((err) => {
-      setErr(true);
-      alert("Có lỗi!");
-    });
+
+  const params = queryString.stringify(filter); 
+  const url = "/confirm-military-management/confirm-military-off?" + params;
+
+  const [DropDown, setDropDown] = useState(-1);
+  const ChangeDropDown = (id) => {
+    setDropDown(id);
   };
 
   return (
     <React.Fragment>
+      {DropDown > -1 && (
+        <FormExportConfirm
+          url = {url}
+          changeData={changeData}
+          setChangeData={setChangeData}
+          exit={() => {
+            ChangeDropDown(-1);
+          }}
+        />
+      )}
       <div className={style.load}>
         {Loading && <LoadingEffect />}
         <div className={style.Confirm_header}>
@@ -219,7 +206,7 @@ function ConfirmMilitary() {
           </div>
           {/* button cập giấy */}
           <div className={style.btn}>
-            <Button content="Cấp giấy" onClick={Export} />
+            <Button content="Cấp giấy" onClick={() => {ChangeDropDown(0)}} />
           </div>
         </div>
       </div>

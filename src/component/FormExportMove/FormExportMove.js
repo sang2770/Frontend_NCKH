@@ -58,11 +58,46 @@ function FormExportMove({ nameSV, msv, changeData, setChangeData, exit, url }) {
       setDate({ ...DateFilter, Day: day });
     }
   }, [filter]);
+  // chi huy truong
+  const [commander, setCommander] = useState([]); // phó
+  const [commanderCaptain, setCommanderCaptain] = useState([]); // trưởng
+  useEffect(() => {
+    Client.get("/commander-management/GetListCommanderName")
+      .then((response) => {
+        const List = response.data;
+        if (List.status === "Success") {
+          setCommander(List.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [filter]);
+
+  useEffect(() => {
+    Client.get("/commander-management/GetListCommanderNameCaptain")
+      .then((response) => {
+        const List = response.data;
+        if (List.status === "Success") {
+          setCommanderCaptain(List.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [filter]);
 
   // Export
   const Export = async () => {
-    if (filter.NgayHH == undefined || filter.ThangHH == undefined) {
+    if (
+      filter.NgayHH == undefined ||
+      filter.ThangHH == undefined ||
+      filter.NgayHH == "" ||
+      filter.ThangHH == ""
+    ) {
       alert("Vui lòng chọn thời gian hết hạn!");
+    } else if (filter.HoVaTen == undefined || filter.HoVaTen == "") {
+      alert("Vui lòng chọn người ký giấy!");
     } else {
       if (msv) {
         nameSV = nameSV + "_" + msv;
@@ -74,7 +109,9 @@ function FormExportMove({ nameSV, msv, changeData, setChangeData, exit, url }) {
           "&NamHH=" +
           filter.NamHH +
           "&ThangHH=" +
-          filter.ThangHH;
+          filter.ThangHH +
+          "&HoVaTen=" +
+          filter.HoVaTen;
       } else if (url) {
         url =
           url +
@@ -83,7 +120,9 @@ function FormExportMove({ nameSV, msv, changeData, setChangeData, exit, url }) {
           "&NamHH=" +
           filter.NamHH +
           "&ThangHH=" +
-          filter.ThangHH;
+          filter.ThangHH +
+          "&HoVaTen=" +
+          filter.HoVaTen;
         nameSV = "DanhSachGiayDiChuyenNVQS";
       }
       Client.get(url, {
@@ -91,21 +130,14 @@ function FormExportMove({ nameSV, msv, changeData, setChangeData, exit, url }) {
       })
         .then((response) => {
           const blob = new Blob([response.data]);
-          // console.log(blob);
-          //   console.log(blob.size);
-          if (blob.size > 100) {
-            const url = window.URL.createObjectURL(blob);
-            const link = document.createElement("a");
-            link.href = url;
-            link.setAttribute("download", nameSV + ".docx");
-            document.body.appendChild(link);
-            link.click();
-            alert("Đã xuất file");
-            setChangeData(!changeData);
-          } else {
-            alert("Vui lòng thêm thông tin chỉ huy trưởng trước khi cấp giấy!");
-            setChangeData(!changeData);
-          }
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", nameSV + ".docx");
+          document.body.appendChild(link);
+          link.click();
+          alert("Đã xuất file");
+          setChangeData(!changeData);
         })
         .catch((err) => {
           setErr(true);
@@ -146,6 +178,27 @@ function FormExportMove({ nameSV, msv, changeData, setChangeData, exit, url }) {
               title="Ngày"
               id="NgayHH"
               items={DateFilter.Day}
+              Change={ChangeFilter}
+            />
+          </div>
+        </div>
+        <div className={style.text}>
+          <p>Chọn người ký giấy (Chỉ chọn một trong hai):</p>
+        </div>
+        <div className={style.Update_Filter}>
+          <div className={style.Update_Filter_Item}>
+            <ComboBox
+              title="Chỉ huy trưởng"
+              id="HoVaTen"
+              items={commanderCaptain}
+              Change={ChangeFilter}
+            />
+          </div>
+          <div className={style.Update_Filter_Item}>
+            <ComboBox
+              title="Chỉ huy phó"
+              id="HoVaTen"
+              items={commander}
               Change={ChangeFilter}
             />
           </div>
