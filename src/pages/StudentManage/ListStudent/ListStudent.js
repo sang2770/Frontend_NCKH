@@ -106,6 +106,7 @@ function ListStudent() {
             title="Mã sinh viên"
             subtitle="MaSinhVien"
             Change={ChangeFilter}
+            search={true}
           />
         </div>
         <div className={style.ListStudent_Filter_Item}>
@@ -113,6 +114,7 @@ function ListStudent() {
             title="Số đăng ký"
             subtitle="SoDangKy"
             Change={ChangeFilter}
+            search={true}
           />
         </div>
         <div className={style.ListStudent_Filter_Item}>
@@ -120,10 +122,16 @@ function ListStudent() {
             title="Ngày sinh (dd-mm-yy)"
             subtitle="NgaySinh"
             Change={ChangeFilter}
+            search={true}
           />
         </div>
         <div className={style.ListStudent_Filter_Item}>
-          <TextBox title="Họ và tên" subtitle="HoTen" Change={ChangeFilter} />
+          <TextBox
+            title="Họ và tên"
+            subtitle="HoTen"
+            Change={ChangeFilter}
+            search={true}
+          />
         </div>
         <div className={style.ListStudent_Filter_Item}>
           <ComboBox id="Lop" title="Lớp" items={Lop} Change={ChangeFilter} />

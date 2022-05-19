@@ -6,7 +6,7 @@ import Button from "../Button/Button";
 import { DataContext } from "../../DataContext/DataContext";
 import Input from "../InputSQD/Input";
 
-function FormStudent({ Read, data, contentBtn, Submit }) {
+function FormStudent({ Read, data, contentBtn, Submit, search }) {
   const Form = useRef();
   const Status = useRef();
   const [OpenSKQ, setOpenSKQ] = useState(false);
@@ -68,6 +68,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
         <div className={style.InputGroup}>
           <div className={style.Infor_Group}>
             <TextBox
+              search={search}
               data={data}
               Read={Read}
               title="Mã sinh viên"
@@ -76,6 +77,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
+              search={search}
               data={data}
               Read={Read}
               title="Họ và tên"
@@ -83,11 +85,18 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
             />
           </div>
           <div className={style.Infor_Group}>
-            <TextBox data={data} Read={Read} title="Email" subtitle="Email" />
+            <TextBox
+              search={search}
+              data={data}
+              Read={Read}
+              title="Email"
+              subtitle="Email"
+            />
           </div>
           <div className={style.Infor_Group}>
             {Read ? (
               <TextBox
+                search={search}
                 data={data}
                 Read={Read}
                 title="Giới tính"
@@ -104,6 +113,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
+              search={search}
               data={data}
               Read={Read}
               date={true}
@@ -113,6 +123,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
+              search={search}
               data={data}
               Read={Read}
               title="Nơi sinh"
@@ -121,6 +132,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
+              search={search}
               data={data}
               Read={Read}
               title="Dân tộc"
@@ -129,6 +141,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
+              search={search}
               data={data}
               Read={Read}
               title="Số điện thoại"
@@ -137,6 +150,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
+              search={search}
               data={data}
               Read={Read}
               title="Địa chỉ báo tin"
@@ -146,6 +160,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           <div className={style.Infor_Group}>
             {Read ? (
               <TextBox
+                search={search}
                 data={data}
                 Read={Read}
                 title="Hệ đào tạo"
@@ -170,6 +185,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
+              search={search}
               data={data}
               Read={Read}
               title="Nơi sinh"
@@ -178,6 +194,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
+              search={search}
               data={data}
               Read={Read}
               title="Hộ khẩu tỉnh"
@@ -186,6 +203,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
+              search={search}
               data={data}
               Read={Read}
               title="Hộ khẩu huyện"
@@ -194,6 +212,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
+              search={search}
               data={data}
               Read={Read}
               title="Hộ khẩu xã phường"
@@ -202,6 +221,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
+              search={search}
               data={data}
               Read={Read}
               title="Tôn giáo"
@@ -210,6 +230,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
+              search={search}
               data={data}
               Read={Read}
               title="Quốc tịch"
@@ -218,6 +239,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
+              search={search}
               data={data}
               Read={Read}
               title="Số CMTND"
@@ -226,6 +248,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
+              search={search}
               data={data}
               Read={Read}
               date={true}
@@ -235,6 +258,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           </div>
           <div className={style.Infor_Group}>
             <TextBox
+              search={search}
               data={data}
               Read={Read}
               title="Nơi cấp CMTND"
@@ -244,6 +268,7 @@ function FormStudent({ Read, data, contentBtn, Submit }) {
           <div className={style.Infor_Group}>
             {Read ? (
               <TextBox
+                search={search}
                 data={data}
                 Read={Read}
                 title="Tên lớp"

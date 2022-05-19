@@ -11,6 +11,7 @@ import { IoAddSharp } from "react-icons/io5";
 import clsx from "clsx";
 import queryString from "query-string";
 import Pagination from "../../component/Pagination/Pagination";
+import { FormatDate, FormatInput } from "../../Helper/Date";
 function AddInfomationCommander() {
   const { Client, Loading } = useAxios();
   const [ListUser, setListUser] = useState([]);
@@ -79,6 +80,9 @@ function AddInfomationCommander() {
   const AddUser = (e) => {
     e.preventDefault();
     let form = new FormData(e.target);
+    form.set("ThoiGianBatDau", FormatInput(form.get("ThoiGianBatDau")));
+    form.set("ThoiGianKetThuc", FormatInput(form.get("ThoiGianKetThuc")));
+
     Client.post("commander-management/CreateCommander", form, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -96,6 +100,7 @@ function AddInfomationCommander() {
         }
       })
       .catch((err) => {
+        console.log(err);
         setErr(true);
         alert("Bạn đã thao tác thất bại");
       });
@@ -114,6 +119,9 @@ function AddInfomationCommander() {
     e.preventDefault();
     let form = new FormData(e.target);
     form.append("_method", "PUT");
+    form.set("ThoiGianBatDau", FormatInput(form.get("ThoiGianBatDau")));
+    form.set("ThoiGianKetThuc", FormatInput(form.get("ThoiGianKetThuc")));
+
     Client.post("commander-management/UpdateCommander", form, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -222,7 +230,7 @@ function AddInfomationCommander() {
                   <input
                     name="ThoiGianBatDau"
                     type="text"
-                    defaultValue={GetDate(item.ThoiGianBatDau)}
+                    defaultValue={FormatDate(item.ThoiGianBatDau)}
                     className={style.Input}
                   />
                 </div>
@@ -232,7 +240,7 @@ function AddInfomationCommander() {
                     name="ThoiGianKetThuc"
                     defaultValue={
                       item.ThoiGianKetThuc
-                        ? GetDate(item.ThoiGianKetThuc)
+                        ? FormatDate(item.ThoiGianKetThuc)
                         : "Chưa có"
                     }
                     className={style.Input}
@@ -310,7 +318,7 @@ function AddInfomationCommander() {
                 </div>
                 <div className={style.td}>
                   <input
-                    placeholder="yy-mm-dd"
+                    placeholder="dd-mm-yy"
                     type="text"
                     name="ThoiGianBatDau"
                     className={style.Input}
@@ -318,7 +326,7 @@ function AddInfomationCommander() {
                 </div>
                 <div className={style.td}>
                   <input
-                    placeholder="yy-mm-dd"
+                    placeholder="dd-mm-yy"
                     type="text"
                     name="ThoiGianKetThuc"
                     className={style.Input}

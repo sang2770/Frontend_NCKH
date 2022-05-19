@@ -106,7 +106,7 @@ function AddStudent() {
       <div className={style.Tab_Content}>
         {Tab === 1 ? (
           <React.Fragment>
-            <FormStudent contentBtn="Thêm" Submit={Submit} />
+            <FormStudent contentBtn="Thêm" Submit={Submit} search={true} />
             {ErrAdd && (
               <div className={style.Err_container}>
                 <h2 className={style.ErrTitle}>Có Lỗi!!!</h2>
