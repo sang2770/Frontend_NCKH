@@ -4,8 +4,9 @@ import ElementForm from "../ElementMiliFrom/ElementForm";
 import Button from "../ButtonMiliNoti/Button";
 import useAxios from "../../Helper/API";
 import ElementForm2 from "../ElementMiliFrom/ElementForm2";
+import { FormatDate } from "../../Helper/Date";
 
-function FormMilitaryUpdate({ titles, subtitles, data, MSV }) {
+function FormMilitaryUpdate({ titles, subtitles, data, MSV, loaddata, setLoaddata }) {
   const { Client } = useAxios();
   //update
   // Update register
@@ -52,6 +53,7 @@ function FormMilitaryUpdate({ titles, subtitles, data, MSV }) {
         .then((response) => {
           if (response.data.status === "Success updated") {
             alert("Bạn đã cập nhật thành công!!!");
+            setLoaddata(!loaddata);
           } else {
             alert("Not Found!");
           }
@@ -112,18 +114,22 @@ function FormMilitaryUpdate({ titles, subtitles, data, MSV }) {
               id={subtitles[2]}
               type="text"
               name={subtitles[2]}
-              defaultValue={data === undefined ? "" : data[subtitles[2]]}
+              defaultValue={data === undefined ? "" : FormatDate(data[subtitles[2]])}
               readOnly
             />
           </div>
         </div>
         <div className={style.FormItem}>
-          <ElementForm
-            data={data}
-            title={titles[3]}
-            subtitle={subtitles[3]}
-            Ref={FilterNgayDK}
-          />
+          <div className={style.Element_form}>
+            <label htmlFor={subtitles[3]}>{titles[3]}:</label>
+            <input
+              id={subtitles[3]}
+              type="text"
+              name={subtitles[3]}
+              defaultValue={data === undefined ? "" : FormatDate(data[subtitles[3]])}
+              ref = {FilterNgayDK}
+            />
+          </div>
         </div>
         <div className={style.FormItem}>
           <ElementForm
@@ -150,12 +156,16 @@ function FormMilitaryUpdate({ titles, subtitles, data, MSV }) {
           />
         </div>
         <div className={style.FormItem}>
-          <ElementForm
-            data={data}
-            title={titles[7]}
-            subtitle={subtitles[7]}
-            Ref={FilterNgayNop}
-          />
+          <div className={style.Element_form}>
+            <label htmlFor={subtitles[7]}>{titles[7]}:</label>
+            <input
+              id={subtitles[7]}
+              type="text"
+              name={subtitles[7]}
+              defaultValue={data === undefined ? "" : FormatDate(data[subtitles[7]])}
+              ref = {FilterNgayNop}
+            />
+          </div>
         </div>
       </div>
       <hr />
@@ -179,13 +189,17 @@ function FormMilitaryUpdate({ titles, subtitles, data, MSV }) {
             Ref={FilterBanChiHuy}
           />
         </div>
-        <div className={style.FormItemMove}>
-          <ElementForm
-            data={data}
-            title={titles[10]}
-            subtitle={subtitles[10]}
-            Ref={FilterNgayCap}
-          />
+        <div className={style.FormItem}>
+          <div className={style.Element_form}>
+            <label htmlFor={subtitles[10]}>{titles[10]}:</label>
+            <input
+              id={subtitles[10]}
+              type="text"
+              name={subtitles[10]}
+              defaultValue={data === undefined ? "" : FormatDate(data[subtitles[10]])}
+              ref = {FilterNgayCap}
+            />
+          </div>
         </div>
         <div className={style.FormItemMove}>
           <ElementForm
