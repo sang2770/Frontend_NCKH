@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../authContext/AuthContext";
 import { logout } from "../authContext/CallApi";
 // "http://127.0.0.1:8000/api"
-const baseURL = process.env.REACT_APP_HOST_NAME;
+const baseURL = process.env.REACT_APP_HOST_NAME + "/api";
 const useAxios = () => {
   const [Loading, setLoading] = useState(false);
   const { dispatch } = useContext(AuthContext);
@@ -14,6 +14,7 @@ const useAxios = () => {
       "Content-type": "application/json; charset=UTF-8",
       Authorization: user ? user.Token_type + " " + user.Token_access : "",
       "X-Requested-With": "XMLHttpRequest",
+      "Access-Control-Allow-Origin": "*",
     },
   });
   Client.interceptors.request.use(

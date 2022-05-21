@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import HeaderTitle from "../HeaderTitle/HeaderTitle";
 import style from "./FileTemplate.module.css";
 import { AiFillFileExcel } from "react-icons/ai";
@@ -9,6 +9,7 @@ import { BiExit } from "react-icons/bi";
 import LoadingEffect from "../Loading/Loading";
 function FileTemplate({ Open }) {
   const [ListNameFile, setListNameFile] = useState([]);
+  const link = useRef();
   const { Client, Loading } = useAxios();
   const CallAPI = () => {
     Client.get("/file-management/files")
@@ -32,9 +33,14 @@ function FileTemplate({ Open }) {
     };
   }, []);
   const DowFile = (Name) => {
-    Client.get("/file-management/file/" + Name, {
-      responseType: "blob",
-    })
+    link.current.href = process.env.REACT_APP_HOST_NAME + "/public/" + Name;
+    link.current.click();
+    /*     Client.get(
+      process.env.REACT_APP_HOST_NAME + "/public/FileStudent/" + Name,
+      {
+        responseType: "blob",
+      }
+    )
       .then((res) => {
         // console.log(res.data);
         if (res.data.status) {
@@ -52,10 +58,11 @@ function FileTemplate({ Open }) {
       .catch((err) => {
         alert("Có lỗi");
         // console.log(err);
-      });
+      }); */
   };
   return (
     <div className={style.FileTemplate_Container}>
+      <a href="" ref={link} download></a>
       <div className={style.File_Content}>
         <HeaderTitle Title="Danh sách file mẫu" Icon={<AiFillFileExcel />} />
         <div className={style.Btn_Exit} onClick={Open}>
