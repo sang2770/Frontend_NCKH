@@ -3,7 +3,7 @@ import FormMilitaryUpdate from "../FormMilitaryUpdate/FormMilitaryUpdate";
 import style from "./FormUpdateRegister.module.css";
 import { BiExit } from "react-icons/bi";
 
-function FormUpdateRegister({ data, titles, subtitles, exit }) {
+function FormUpdateRegister({ data, titles, subtitles, exit, loaddata, setLoaddata }) {
   return (
     <div className={style.FormUpdate}>
       <div className={style.InfoUpdate}>
@@ -12,6 +12,8 @@ function FormUpdateRegister({ data, titles, subtitles, exit }) {
             <BiExit />
           </div>
           <FormMilitaryUpdate
+            loaddata = {loaddata}
+            setLoaddata = {setLoaddata}
             titles={titles}
             subtitles={subtitles}
             data={data}

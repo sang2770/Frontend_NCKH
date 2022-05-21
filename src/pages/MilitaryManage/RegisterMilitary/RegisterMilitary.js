@@ -151,6 +151,7 @@ function RegisterMilitary() {
 
   const [RegisterMilitary, setRegisterMilitary] = useState([]);
 
+  const [loaddata, setLoaddata] = useState(false);
   const CallAPI = () => {
     const params = queryString.stringify(filter);
     Client.get("/register-military-management/filter-info-register?" + params)
@@ -174,7 +175,7 @@ function RegisterMilitary() {
     return () => {
       clearTimeout(Load);
     };
-  }, [filter]);
+  }, [filter, loaddata]);
 
   const Time = useRef(null);
   const ChangeLimit = (e) => {
@@ -216,7 +217,7 @@ function RegisterMilitary() {
         alert("Bạn đã thêm thành công!");
         setErrAdd(null);
         ResetForm();
-        CallAPI();
+        setLoaddata(!loaddata);
       } else {
         alert("Mã sinh viên không tồn tại!\nVui lòng kiểm tra lại!");
         setErrAdd([result.data.Err_Message]);
@@ -245,7 +246,7 @@ function RegisterMilitary() {
         alert("Bạn đã thêm thành công!");
         setErrAdd(null);
         ResetForm();
-        CallAPI();
+        setLoaddata(!loaddata);
       } else {
         alert("Mã sinh viên không tồn tại!\nVui lòng kiểm tra lại!");
         setErrAdd(["Mã sinh viên: " + result.data.Err_Message + " không tồn tại!"]);
@@ -535,6 +536,8 @@ function RegisterMilitary() {
                 headers={tableHeaders}
                 Content={
                   <TableRegisterData
+                    loaddata={loaddata}
+                    setLoaddata = {setLoaddata}
                     data={RegisterMilitary}
                     titles={titleForm}
                     subtitles={subtitles}

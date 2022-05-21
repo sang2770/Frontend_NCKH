@@ -3,7 +3,7 @@ import style from "./TableMilitary.module.css";
 import FormUpdateRegister from "../FormUpdateRegister/FormUpdateRegister";
 import { FormatDate, FormatInput } from "../../Helper/Date";
 
-const TableRegisterData = ({ data, titles, subtitles }) => {
+const TableRegisterData = ({ data, titles, subtitles, loaddata, setLoaddata }) => {
   // show hide
   const [DropDown, setDropDown] = useState(-1);
 
@@ -22,6 +22,8 @@ const TableRegisterData = ({ data, titles, subtitles }) => {
           data={data[DropDown]}
           titles={titles}
           subtitles={subtitles}
+          loaddata = {loaddata}
+          setLoaddata = {setLoaddata}
           exit={() => {
             ChangeDropDown(-1);
           }}
