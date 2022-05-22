@@ -33,14 +33,11 @@ function FileTemplate({ Open }) {
     };
   }, []);
   const DowFile = (Name) => {
-    link.current.href = process.env.REACT_APP_HOST_NAME + "/public/" + Name;
-    link.current.click();
-    /*     Client.get(
-      process.env.REACT_APP_HOST_NAME + "/public/FileStudent/" + Name,
-      {
-        responseType: "blob",
-      }
-    )
+    // link.current.href = process.env.REACT_APP_HOST_NAME + "/public/" + Name;
+    // link.current.click();
+    Client.get(process.env.REACT_APP_HOST_NAME + "/public/" + Name, {
+      responseType: "blob",
+    })
       .then((res) => {
         // console.log(res.data);
         if (res.data.status) {
@@ -58,7 +55,7 @@ function FileTemplate({ Open }) {
       .catch((err) => {
         alert("Có lỗi");
         // console.log(err);
-      }); */
+      });
   };
   return (
     <div className={style.FileTemplate_Container}>
