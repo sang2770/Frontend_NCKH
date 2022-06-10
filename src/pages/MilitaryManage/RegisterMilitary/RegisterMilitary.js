@@ -137,7 +137,7 @@ function RegisterMilitary() {
     setDate({ ...DateFilter, Year: year });
   }, []);
 
-  const [radioRegister, setRadioRegister] = useState(true);
+  const [radioRegister, setRadioRegister] = useState(false);
   const [radioMoveLocal, setRadioMoveLocal] = useState(false);
 
   const changeRadioRe = () => {
@@ -148,7 +148,10 @@ function RegisterMilitary() {
     setRadioRegister(false);
     setRadioMoveLocal(true);
   };
-
+  const changeRadioAll = () => {
+    setRadioRegister(false);
+    setRadioMoveLocal(false);
+  };
   const [RegisterMilitary, setRegisterMilitary] = useState([]);
 
   const [loaddata, setLoaddata] = useState(false);
@@ -264,6 +267,12 @@ function RegisterMilitary() {
   const [ErrImportMSV, setErrImportMSV] = useState([]);
   const [ErrImportMaDK, setErrImportMaDK] = useState([]);
 
+  const changeErrAll = () => {
+    setErrImport([]);
+    setErrImportMaDK([]);
+    setErrImportMSV([]);
+  }
+
   const ImportFile = async (e) => {
     e.preventDefault();
     const MyData = new FormData(e.target);
@@ -313,6 +322,10 @@ function RegisterMilitary() {
       } catch (error) {
         // console.log(error);
       }
+    }else{
+      alert("Vui lòng chọn loại giấy cần import thông tin!");
+      changeErrAll();
+      changeRadioAll();
     }
   };
 
@@ -401,6 +414,8 @@ function RegisterMilitary() {
                   content="Trở về"
                   onClick={function () {
                     onClickBackImport();
+                    changeRadioAll();
+                    changeErrAll();
                     document.getElementById("Error").style.display = "none";
                   }}
                 />
