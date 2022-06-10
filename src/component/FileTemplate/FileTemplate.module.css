@@ -34,6 +34,7 @@
   min-height: 200px;
 }
 .ItemFile {
+  width: 32%;
 }
 .FileImage {
   width: 200px;
@@ -45,11 +46,17 @@
   cursor: pointer;
 }
 .FileHeader {
-  width: 100%;
+  padding: 10px 0px;
+  text-decoration: underline;
+  color: var(--Main-color);
+
   text-align: center;
   padding: 10px 0px;
   text-decoration: underline;
   color: var(--Main-color);
+  word-break: break-word;
+  width: 80%;
+  text-align: center;
 }
 .File_Add {
   margin: 20px 10px;

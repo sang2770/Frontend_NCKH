@@ -31,6 +31,8 @@ function FormStudent({ Read, data, contentBtn, Submit, search }) {
       } else if (FormInput.get("TinhTrangSinhVien") !== "Đang học") {
         Status.current = false;
         setOpenSKQ(true);
+      } else {
+        Submit(FormInput, ResetForm);
       }
     } else {
       Submit(FormInput, ResetForm);

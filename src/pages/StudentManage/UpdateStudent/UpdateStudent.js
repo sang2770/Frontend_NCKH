@@ -33,13 +33,13 @@ function UpdateStudent() {
   const Search = () => {
     Client.get("/student-management/user/" + Filter.current.value)
       .then((res) => {
-        console.log(Filter.current.value);
+        // console.log(Filter.current.value);
 
         if (res.data.status === "Success") {
           if (!res.data.data.TinhTrangSinhVien.includes("Đang học")) {
             res.data.data.TenLop = "";
           }
-          console.log(Filter.current.value);
+          // console.log(Filter.current.value);
 
           setData(res.data.data);
           setErr(false);
@@ -53,7 +53,7 @@ function UpdateStudent() {
       });
   };
   const FindHistory = () => {
-    console.log(Filter.current.value);
+    // console.log(Filter.current.value);
     Client.get("student-management/user-history/" + Filter.current.value)
       .then((res) => {
         // console.log(res);

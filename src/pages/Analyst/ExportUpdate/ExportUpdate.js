@@ -77,7 +77,7 @@ function ExportUpdate() {
     const params = queryString.stringify(filter);
     Client.get("/export-report/student-update?" + params)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         if (response.data.status === "Success") {
           setResult(response.data.data);
           setPaginations(response.data.pagination);
@@ -179,6 +179,7 @@ function ExportUpdate() {
             title="Mã sinh viên"
             subtitle="MaSinhVien"
             Change={ChangeFilter}
+            search={true}
           />
         </div>
       </div>
